@@ -29,7 +29,7 @@ class UserController extends Controller
     }
 
     public function editUser(User $user)
-    {dd($user);
+    {
         return view('users.edit', [
             'user' => $user,
             'roles' => Role::get(),

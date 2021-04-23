@@ -38,7 +38,8 @@
         </button>
         <!-- Brand -->
         <a class="navbar-brand pt-0" href="{{ route('home') }}">
-            <img src="{{ asset('argon') }}/img/brand/blue.png" class="navbar-brand-img" alt="...">
+            <img src="{{ asset('assets') }}/img/brand/logo-perapera-blue.jpg" class="navbar-brand-img" alt="..."
+                style="max-height: 4.5rem;">
         </a>
         <!-- User -->
         <ul class="nav align-items-center d-md-none">
@@ -81,7 +82,7 @@
                 <div class="row">
                     <div class="col-6 collapse-brand">
                         <a href="{{ route('home') }}">
-                            <img src="{{ asset('argon') }}/img/brand/blue.png">
+                            <img src="{{ asset('assets') }}/img/brand/logo-perapera-blue.jpg">
                         </a>
                     </div>
                     <div class="col-6 collapse-close">
@@ -102,6 +103,152 @@
                         <i class="ni ni-tv-2 text-primary"></i> {{ __('Dashboard') }}
                     </a>
                 </li>
+@can('create role')
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#navbar-master" data-toggle="collapse" role="button"
+                        aria-expanded="true" aria-controls="navbar-master">
+                        <i class="ni ni-archive-2" style="color: #5d1eb1;"></i>
+                        <span class="nav-link-text">Master</span>
+                    </a>
+
+                    <div class="collapse" id="navbar-master">
+                        <ul class="nav nav-sm flex-column">
+                            <li class="nav-item ">
+                                <a class="nav-link" href="{{ route('users.index') }}">
+                                    Users
+                                </a>
+                            </li>
+                            <li class="nav-item ">
+                                <a class="nav-link" href="{{ route('roles.index') }}">
+                                    Roles
+                                </a>
+                            </li>
+                            <li class="nav-item ">
+                                <a class="nav-link" href="{{ route('permissions.index') }}">
+                                    Permissions
+                                </a>
+                            </li>
+                            <li class="nav-item ">
+                                <a class="nav-link" href="{{ route('assign.create') }}">
+                                    Assign
+                                </a>
+                            </li>
+                            <li class="nav-item ">
+                                <a class="nav-link" href="{{ route('assign.user.create') }}">
+                                    Assign User
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                @endcan
+
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#room1" data-toggle="collapse" role="button"
+                        aria-expanded="true" aria-controls="room1">
+                        <i class="ni ni-archive-2" style=""></i>
+                        <span class="nav-link-text">Room 1</span>
+                    </a>
+
+                    <div class="collapse" id="room1">
+                        <ul class="nav nav-sm flex-column">
+                            <li class="nav-item ">
+                                <a class="nav-link" href="{{ route('letters.categories.index') }}">
+                                    Letter Categories
+                                </a>
+                            </li>
+                            <li class="nav-item ">
+                                <a class="nav-link" href="{{ route('letters.letters.index') }}">
+                                    Letter
+                                </a>
+                            </li>
+                            <li class="nav-item ">
+                                <a class="nav-link" href="{{ route('letters.courses.index') }}">
+                                    Letter Course
+                                </a>
+                            </li>
+                            <li class="nav-item ">
+                                <a class="nav-link" href="{{ route('letters.questions.index') }}">
+                                    Question
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#room2" data-toggle="collapse" role="button"
+                        aria-expanded="true" aria-controls="room2">
+                        <i class="ni ni-archive-2" style="color: #5d1eb1;"></i>
+                        <span class="nav-link-text">Room 2</span>
+                    </a>
+
+                    <div class="collapse" id="room2">
+                        <ul class="nav nav-sm flex-column">
+                            <li class="nav-item ">
+                                <a class="nav-link" href="{{ route('verbs.levels.index') }}">
+                                    Verb Level
+                                </a>
+                            </li>
+                            <li class="nav-item ">
+                                <a class="nav-link" href="{{ route('verbs.groups.index') }}">
+                                    Verb Groups
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#room3" data-toggle="collapse" role="button"
+                        aria-expanded="true" aria-controls="room3">
+                        <i class="ni ni-archive-2" style="color: #5d1eb1;"></i>
+                        <span class="nav-link-text">Room 3</span>
+                    </a>
+
+                    <div class="collapse" id="room3">
+                        <ul class="nav nav-sm flex-column">
+                            <li class="nav-item ">
+                                <a class="nav-link" href="#">
+                                    User3
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#room4" data-toggle="collapse" role="button"
+                        aria-expanded="true" aria-controls="room4">
+                        <i class="ni ni-archive-2" style="color: #5d1eb1;"></i>
+                        <span class="nav-link-text">Room 4</span>
+                    </a>
+
+                    <div class="collapse" id="room4">
+                        <ul class="nav nav-sm flex-column">
+                            <li class="nav-item ">
+                                <a class="nav-link" href="#">
+                                    User
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#room5" data-toggle="collapse" role="button"
+                        aria-expanded="true" aria-controls="room5">
+                        <i class="ni ni-archive-2" style="color: #5d1eb1;"></i>
+                        <span class="nav-link-text">Room 5</span>
+                    </a>
+
+                    <div class="collapse" id="room5">
+                        <ul class="nav nav-sm flex-column">
+                            <li class="nav-item ">
+                                <a class="nav-link" href="#">
+                                    User
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
                 @foreach ($navigations as $key => $navigation)
                     @can($navigation->permission_name)
                         <li class="nav-item">

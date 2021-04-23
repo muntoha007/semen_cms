@@ -7,6 +7,7 @@ use App\Models\Role;
 use App\User;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role as ModelsRole;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -40,7 +41,21 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        request()->validate([
+            'name' => 'required',
+            'email' => 'required', 'string', 'email', 'max:255', 'unique:users',
+        ]);
+
+        User::create([
+            'name' => request('name'),
+            'email' => request('email') ?? 'web',
+            'password' => Hash::make('password123'),
+        ]);
+
+        $user = User::where('email', request('email'))->first();
+        $user->assignRole(request('role'));
+
+        return redirect()->route('users.index');
     }
 
     /**
@@ -51,7 +66,8 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        //  $user = User::where('id', $id)->first();
+
     }
 
     /**
@@ -62,8 +78,13 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('users.edit', [
+            'user' => User::where('id', $id)->first(),
+            'submit' => 'Update',
+            'roles' => ModelsRole::get(),
+        ]);
     }
+
 
     /**
      * Update the specified resource in storage.
@@ -74,8 +95,16 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user = User::find($id);
+        $user->email = $request['email'];
+        $user->name = $request['name'];
+
+        $user->update();
+
+        $user->syncRoles(request('roles'));
+        return redirect()->route('users.index');
     }
+
 
     /**
      * Remove the specified resource from storage.

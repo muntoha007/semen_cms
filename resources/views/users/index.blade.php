@@ -16,12 +16,12 @@
 @endpush
 
 @section('content')
-    {{-- @if (session('success'))
+    @if (session('success'))
         <div class="alert alert-success">
             {{ session('success') }}
         </div>
     @endif
-    <div class="container-fluid mt--6">
+    {{-- <div class="container-fluid mt--6">
         <div class="row">
             <div class="col">
                 <div class="card mb-3">
@@ -55,6 +55,7 @@
                             <tr>
                                 <th>#</th>
                                 <th>Name</th>
+                                <th>Email</th>
                                 <th>The Roles</th>
                                 <th>Action</th>
                             </tr>
@@ -63,6 +64,7 @@
                                 <tr>
                                     <td>{{ $index + 1 }}</td>
                                     <td>{{ $user->name }}</td>
+                                    <td>{{ $user->email }}</td>
                                     <td>{{ implode(', ', $user->getRoleNames()->toArray()) }}</td>
                                     <td><a href="{{ route('users.edit', $user) }}">Edit</a></td>
                                 </tr>

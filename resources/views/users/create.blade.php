@@ -8,7 +8,7 @@
     <script>
         $(document).ready(function() {
             $('.select2').select2({
-                placeholder: "Select permissions"
+                placeholder: "Select Role"
             });
         });
 
@@ -27,7 +27,7 @@
                 <div class="card mb-3">
                     <div class="card-header">Create User</div>
                     <div class="card-body">
-                        <form action="{{ route('assign.create') }}" method="post">
+                        <form action="{{ route('users.create') }}" method="post">
                             @csrf
                             @include('users.partials.form-control')
                             <button type="submit" class="btn btn-secondary">Create</button>

@@ -22,6 +22,7 @@
     <!-- Icons -->
     <link href="{{ asset('argon') }}/vendor/nucleo/css/nucleo.css" rel="stylesheet">
     <link href="{{ asset('argon') }}/vendor/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('assets') }}/vendor/quill/dist/quill.core.css">
     <!-- Argon CSS -->
     <link type="text/css" href="{{ asset('argon') }}/css/argon.css?v=1.0.0" rel="stylesheet">
     @yield('styles')
@@ -32,13 +33,14 @@
         @yield('body')
     </div>
 
-    <script src="{{ asset('argon') }}/vendor/jquery/dist/jquery.min.js"></script>
-    <script src="{{ asset('argon') }}/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ asset('assets') }}/vendor/jquery/dist/jquery.min.js"></script>
+    <script src="{{ asset('assets') }}/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ asset('assets') }}/vendor/js-cookie/js.cookie.js"></script>
 
     @stack('js')
 
     <!-- Argon JS -->
-    <script src="{{ asset('argon') }}/js/argon.js?v=1.0.0"></script>
+    <script src="{{ asset('assets') }}/js/argon.js?v=1.1.0"></script>
     @stack('scripts')
 </body>
 
