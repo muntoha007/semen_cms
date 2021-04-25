@@ -44,7 +44,7 @@
             <div class="col">
                 <div class="card">
                     <div class="card-header">
-                        <span class="mb-0">Table Verb Word</span>
+                        <span class="mb-0">Table Verb Change</span>
                         <span class="float-right">
                             <button class="btn btn-icon btn-primary btn-sm" type="button" data-toggle="modal"
                                 data-target="#modal-default">
@@ -57,16 +57,16 @@
                                     <div class="modal-content">
 
                                         <div class="modal-header">
-                                            <h3 class="modal-title" id="modal-title-default">Add New Word</h3>
+                                            <h3 class="modal-title" id="modal-title-default">Add New Change</h3>
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">X</span>
                                             </button>
                                         </div>
 
                                         <div class="modal-body">
-                                            <form action="{{ route('verbs.words.create') }}" method="post">
+                                            <form action="{{ route('verbs.changes.create') }}" method="post">
                                                 @csrf
-                                                @include('verb.words.form-control', ['submit' => 'Create'])
+                                                @include('verb.changes.form-control', ['submit' => 'Create'])
                                             </form>
                                         </div>
                                     </div>
@@ -92,16 +92,16 @@
                                 <th>Action</th>
                             </tr>
 
-                            @foreach ($words as $index => $word)
+                            @foreach ($changes as $index => $change)
                                 <tr>
                                     <td>{{ $index + 1 }}</td>
-                                    <td>{{ $word->code }}</td>
-                                    <td>{{ $word->name }}</td>
-                                    <td>{{ $word->word_japan }}</td>
-                                    <td>{{ $word->word_romanji }}</td>
-                                    <td>{{ $word->word_idn }}</td>
-                                    <td>{{ $word->is_active ? 'active' : 'inactive' }}</td>
-                                    <td><a href="{{ route('verbs.words.edit', $word) }}" class="btn btn-primary btn-sm">Edit</a></td>
+                                    <td>{{ $change->code }}</td>
+                                    <td>{{ $change->name }}</td>
+                                    <td>{{ $change->word_jpn }}</td>
+                                    <td>{{ $change->word_romanji }}</td>
+                                    <td>{{ $change->word_idn }}</td>
+                                    <td>{{ $change->is_active ? 'active' : 'inactive' }}</td>
+                                    <td><a href="{{ route('verbs.changes.edit', $change) }}" class="btn btn-primary btn-sm">Edit</a></td>
                                 </tr>
                             @endforeach
                         </table>

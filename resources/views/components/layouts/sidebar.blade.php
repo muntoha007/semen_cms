@@ -199,6 +199,21 @@
                                     Verb Words
                                 </a>
                             </li>
+                            <li class="nav-item ">
+                                <a class="nav-link" href="{{ route('verbs.changes.index') }}">
+                                    Verb Change
+                                </a>
+                            </li>
+                            <li class="nav-item ">
+                                <a class="nav-link" href="{{ route('verbs.courses.index') }}">
+                                    Verbs Course
+                                </a>
+                            </li>
+                            <li class="nav-item ">
+                                <a class="nav-link" href="{{ route('verbs.questions.index') }}">
+                                    Question
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </li>

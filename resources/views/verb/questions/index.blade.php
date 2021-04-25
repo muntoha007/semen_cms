@@ -47,7 +47,7 @@
                     <div class="card-header">
                         <span class="mb-0">Table Course Question</span>
                         <span class="float-right">
-                            <a href="{{ route('courses.questions.create') }}" class="btn btn-icon btn-primary btn-sm"
+                            <a href="{{ route('verbs.questions.create') }}" class="btn btn-icon btn-primary btn-sm"
                                 type="button">
                                 <span class="btn-inner--icon"><i class="ni ni-fat-add"></i>Add</span>
                             </a>
@@ -60,7 +60,6 @@
                                 <th>#</th>
                                 <th>Code</th>
                                 <th>Title</th>
-                                <th>Total Question</th>
                                 <th>Status</th>
                                 <th>Action</th>
                             </tr>
@@ -69,10 +68,9 @@
                                 <tr>
                                     <td>{{ $index + 1 }}</td>
                                     <td>{{ $que->code }}</td>
-                                    <td>{{ $que->title }}</td>
-                                    <td>{{ $que->course_question_count }}</td>
+                                    <td>{{ $que->question }}</td>
                                     <td>{{ $que->is_active ? 'active' : 'inactive' }}</td>
-                                    <td><a href="{{ route('courses.questions.edit', $que) }}">Edit</a></td>
+                                    <td><a href="{{ route('verbs.questions.edit', $que) }}">Edit</a></td>
                                 </tr>
                             @endforeach
                         </table>

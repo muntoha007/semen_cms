@@ -47,7 +47,7 @@
                                             <div class="input-group-prepend">
                                                 <div class="input-group-text">
                                                     <input type="checkbox" data-toggle="tooltip" data-placement="top"
-                                                        title="Choose as answer" name="answer[0][is_true]" value="1">
+                                                        title="Choose as answer" name="answer[0][is_true]" value="1" checked>
                                                 </div>
                                             </div>
                                             <input type="text" class="form-control" name="answer[0][answer]"

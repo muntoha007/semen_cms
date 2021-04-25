@@ -13,7 +13,7 @@ class MasterVerbGroupController extends Controller
     public function index()
     {
         $groups = MasterVerbGroup::get();
-        $levels = MasterVerbLevel::get();
+        $levels = MasterVerbLevel::where('is_active', 1)->get();
         return view('verb.groups.index', compact('groups', 'levels'));
     }
 
@@ -43,10 +43,9 @@ class MasterVerbGroupController extends Controller
 
     public function edit($id)
     {
-        // dd(Letter::where('id', $id)->first());
         return view('verb.groups.edit', [
             'group' => MasterVerbGroup::where('id', $id)->first(),
-            'levels' => MasterVerbLevel::get(),
+            'levels' => MasterVerbLevel::where('is_active', 1)->get(),
             'submit' => 'Update',
         ]);
     }

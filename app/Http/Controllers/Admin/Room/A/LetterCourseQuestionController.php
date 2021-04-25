@@ -34,6 +34,8 @@ class LetterCourseQuestionController extends Controller
             "answer" => 'required',
         ]);
 
+
+
         $question = LetterCourseQuestion::create([
             'code' => Str::random(10),
             'question' => request('question'),
@@ -51,6 +53,11 @@ class LetterCourseQuestionController extends Controller
             $answer->is_true = isset($value["is_true"]) ? 1 : 0;
             $answer->save();
         }
+
+        $course = LetterCourse::where('id', request('letter'))->first();
+        $course->question_count = $course->question_count+1;
+
+        $course->update();
 
         return redirect()->route('letters.questions.index');
     }

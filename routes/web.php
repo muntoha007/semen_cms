@@ -89,6 +89,30 @@ Route::middleware(['auth', 'has.role'])->group(function () {
         Route::post('/words/create', 'MasterVerbWordController@store');
         Route::get('/words/{id}/edit', 'MasterVerbWordController@edit')->name('verbs.words.edit');
         Route::put('/words/{id}/edit', 'MasterVerbWordController@update');
+
+        Route::get('/changes/index', 'VerbChangeController@index')->name('verbs.changes.index');
+        Route::get('/changes/create', 'VerbChangeController@create')->name('verbs.changes.create');
+        Route::post('/changes/create', 'VerbChangeController@store');
+        Route::get('/changes/{id}/edit', 'VerbChangeController@edit')->name('verbs.changes.edit');
+        Route::put('/changes/{id}/edit', 'VerbChangeController@update');
+
+        Route::get('/courses/index', 'VerbCourseController@index')->name('verbs.courses.index');
+        Route::get('/courses/create', 'VerbCourseController@create')->name('verbs.courses.create');
+        Route::post('/courses/create', 'VerbCourseController@store');
+        Route::get('/courses/{id}/edit', 'VerbCourseController@edit')->name('verbs.courses.edit');
+        Route::put('/courses/{id}/edit', 'VerbCourseController@update');
+
+        Route::get('/questions/index', 'VerbCourseQuestionController@index')->name('verbs.questions.index');
+        Route::get('/questions/create', 'VerbCourseQuestionController@create')->name('verbs.questions.create');
+        Route::post('/questions/create', 'VerbCourseQuestionController@store');
+        Route::get('/questions/{id}/edit', 'VerbCourseQuestionController@edit')->name('verbs.questions.edit');
+        Route::put('/questions/{id}/edit', 'VerbCourseQuestionController@update');
+
+        Route::get('/answers/index', 'LetterCourseAnswerController@index')->name('verbs.answers.index');
+        Route::get('/answers/create', 'LetterCourseAnswerController@create')->name('verbs.answers.create');
+        Route::post('/answers/create', 'LetterCourseAnswerController@store');
+        Route::get('/answers/{id}/edit', 'LetterCourseAnswerController@edit')->name('verbs.answers.edit');
+        Route::put('/answers/{id}/edit', 'LetterCourseAnswerController@update');
     });
 
     Route::prefix('role-and-permission')->namespace('Permissions')->middleware('permission:assign permission')->group(function () {

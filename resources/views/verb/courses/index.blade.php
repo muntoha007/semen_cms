@@ -45,7 +45,7 @@
             <div class="col">
                 <div class="card">
                     <div class="card-header">
-                        <span class="mb-0">Table Verb Course</span>
+                        <span class="mb-0">Table Verbs Course</span>
                         <span class="float-right">
                             <a href="{{ route('verbs.courses.create') }}" class="btn btn-icon btn-primary btn-sm"
                                 type="button">
@@ -65,14 +65,14 @@
                                 <th>Action</th>
                             </tr>
 
-                            @foreach ($courses as $index => $course)
+                            @foreach ($courses as $index => $lcat)
                                 <tr>
                                     <td>{{ $index + 1 }}</td>
-                                    <td>{{ $course->code }}</td>
-                                    <td>{{ $course->title }}</td>
-                                    <td>{{ $course->question_count }}</td>
-                                    <td>{{ $course->is_active ? 'active' : 'inactive' }}</td>
-                                    <td><a href="{{ route('verbs.courses.edit', $course) }}">Edit</a></td>
+                                    <td>{{ $lcat->code }}</td>
+                                    <td>{{ $lcat->title }}</td>
+                                    <td>{{ $lcat->question_count }}</td>
+                                    <td>{{ $lcat->is_active ? 'active' : 'inactive' }}</td>
+                                    <td><a href="{{ route('verbs.courses.edit', $lcat) }}">Edit</a></td>
                                 </tr>
                             @endforeach
                         </table>
