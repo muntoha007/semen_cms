@@ -194,6 +194,11 @@
                                     Verb Groups
                                 </a>
                             </li>
+                            <li class="nav-item ">
+                                <a class="nav-link" href="{{ route('verbs.words.index') }}">
+                                    Verb Words
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </li>

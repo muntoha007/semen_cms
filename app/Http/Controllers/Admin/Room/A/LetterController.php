@@ -59,11 +59,11 @@ class LetterController extends Controller
         $request->validate([
             "letter" => 'required',
             "romanji" => 'required',
-            "image_url" => 'required',
             "category" => 'required',
         ]);
 
         $param = $request->all();
+
         $updateData = $this->repository->updateLetter($param, $id);
 
      	if (!empty($updateData)) {

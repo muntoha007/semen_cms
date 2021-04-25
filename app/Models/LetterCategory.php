@@ -10,7 +10,7 @@ class LetterCategory extends Model
     protected $table = 'letter_categories';
     protected $guarded = ['id'];
 
-    // public function LetterCategory() {
-    //     return $this->belongsToMany('App\Models\LetterCategory','letters','letter_category_id');
-    // }
+     public function category() {
+        return $this->belongsTo(Letter::class, 'letter_category_id');
+    }
 }

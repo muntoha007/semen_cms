@@ -62,7 +62,7 @@
                             {{ session('success') }}
                         </div>
                     @endif
-                    <div class="card-body">
+                    {{-- <div class="card-body">
                         <table class="table table-hover">
                             <tr>
                                 <th>#</th>
@@ -83,13 +83,14 @@
                                     <td>{{ $lcat->romanji }}</td>
                                     <td>
                                         <span class="avatar avatar-sm rounded-circle">
-                                            <img alt="Image placeholder" src="{{ $lcat->image_url }}">
+                                            <img alt="Image placeholder"
+                                                src="{{ env('CLOUD_S3_URL') . $lcat->image_url }}">
                                         </span>
                                     </td>
                                     <td>
                                         <span class="avatar avatar-sm rounded-circle">
                                             <img alt="Image placeholder"
-                                                src="{{ $lcat->color_image_url ? $lcat->color_image_url : url('/assets/img/brand/no-img.png') }}">
+                                                src="{{ $lcat->color_image_url ? env('CLOUD_S3_URL') . $lcat->color_image_url : url('/assets/img/brand/no-img.jpeg') }}">
                                         </span>
                                     </td>
                                     <td>{{ $lcat->is_active ? 'active' : 'inactive' }}</td>
@@ -97,6 +98,49 @@
                                 </tr>
                             @endforeach
                         </table>
+                    </div> --}}
+
+
+                    <div class="card-body">
+                        <div class="row">
+                            @foreach ($letters as $index => $lcat)
+                                <div class="col-md-3">
+                                    <div class="card card-stats mt-2 mb-2">
+                                        <!-- Card body -->
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <h5 class="card-title text-uppercase text-muted mb-0">
+                                                        {{ $lcat->romanji }}
+                                                    </h5>
+                                                    <span class="h2 font-weight-bold mb-0">{{ $lcat->letter }}</span>
+                                                </div>
+                                                <div class="col-auto">
+                                                    <span class="avatar avatar-sm rounded-circle">
+                                                        <img alt="img" src="{{ env('CLOUD_S3_URL') . $lcat->image_url }}">
+                                                    </span>
+                                                    <span class="avatar avatar-sm rounded-circle">
+                                                        <img alt="Image placeholder"
+                                                            src="{{ $lcat->color_image_url ? env('CLOUD_S3_URL') . $lcat->color_image_url : url('/assets/img/brand/no-img.jpeg') }}">
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="row mt-2 mb-0">
+                                                <div class="col">
+                                                    <span
+                                                        class="text-nowrap text-sm">{{ $lcat->is_active ? 'Active' : 'Inactive' }}</span>
+                                                </div>
+                                                <div class="col">
+                                                    <span class="text-success float-right text-sm">
+                                                        <a href="{{ route('letters.letters.edit', $lcat) }}"> <i
+                                                                class="fa fa-edit"></i> Edit</span> </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
                     </div>
                 </div>
             </div>

@@ -25,6 +25,7 @@
     <link rel="stylesheet" href="{{ asset('assets') }}/vendor/quill/dist/quill.core.css">
     <!-- Argon CSS -->
     <link type="text/css" href="{{ asset('argon') }}/css/argon.css?v=1.0.0" rel="stylesheet">
+    <link type="text/css" href="{{ asset('argon') }}/css/argon.min.css?v=1.0.0" rel="stylesheet">
     @yield('styles')
 </head>
 

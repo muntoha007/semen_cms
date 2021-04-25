@@ -83,6 +83,12 @@ Route::middleware(['auth', 'has.role'])->group(function () {
         Route::post('/groups/create', 'MasterVerbGroupController@store');
         Route::get('/groups/{id}/edit', 'MasterVerbGroupController@edit')->name('verbs.groups.edit');
         Route::put('/groups/{id}/edit', 'MasterVerbGroupController@update');
+
+        Route::get('/words/index', 'MasterVerbWordController@index')->name('verbs.words.index');
+        Route::get('/words/create', 'MasterVerbWordController@create')->name('verbs.words.create');
+        Route::post('/words/create', 'MasterVerbWordController@store');
+        Route::get('/words/{id}/edit', 'MasterVerbWordController@edit')->name('verbs.words.edit');
+        Route::put('/words/{id}/edit', 'MasterVerbWordController@update');
     });
 
     Route::prefix('role-and-permission')->namespace('Permissions')->middleware('permission:assign permission')->group(function () {
