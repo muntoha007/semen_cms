@@ -60,6 +60,7 @@
                 <div class="text-danger mt-2 d-block">{{ $message }}</div>
             @enderror
         </div>
+
     </div>
 
     <div class="col-md-6">
@@ -77,6 +78,7 @@
                 <div class="text-danger mt-2 d-block">{{ $message }}</div>
             @enderror
         </div>
+
     </div>
 </div>
 

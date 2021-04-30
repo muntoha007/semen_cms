@@ -45,9 +45,9 @@
             <div class="col">
                 <div class="card">
                     <div class="card-header">
-                        <span class="mb-0">Table Verb Course</span>
+                        <span class="mb-0">Table Particle Course</span>
                         <span class="float-right">
-                            <a href="{{ route('letters.courses.create') }}" class="btn btn-icon btn-primary btn-sm"
+                            <a href="{{ route('particles.courses.create') }}" class="btn btn-icon btn-primary btn-sm"
                                 type="button">
                                 <span class="btn-inner--icon"><i class="ni ni-fat-add"></i>Add</span>
                             </a>
@@ -72,7 +72,7 @@
                                     <td>{{ $course->title }}</td>
                                     <td>{{ $course->question_count }}</td>
                                     <td>{{ $course->is_active ? 'active' : 'inactive' }}</td>
-                                    <td><a href="{{ route('letters.courses.edit', $course) }}">Edit</a></td>
+                                    <td><a href="{{ route('particles.courses.edit', $course) }}" class="btn btn-primary btn-sm">Edit</a></td>
                                 </tr>
                             @endforeach
                         </table>

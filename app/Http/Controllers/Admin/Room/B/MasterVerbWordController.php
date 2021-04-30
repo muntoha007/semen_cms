@@ -28,6 +28,7 @@ class MasterVerbWordController extends Controller
     public function store(Request $request)
     {
 
+        dd($request);
         request()->validate([
             "name" => 'required',
             "word_japan" => 'required',

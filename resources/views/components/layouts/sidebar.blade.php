@@ -205,6 +205,11 @@
                                 </a>
                             </li>
                             <li class="nav-item ">
+                                <a class="nav-link" href="{{ route('verbs.sentences.index') }}">
+                                    Verb Sentence
+                                </a>
+                            </li>
+                            <li class="nav-item ">
                                 <a class="nav-link" href="{{ route('verbs.courses.index') }}">
                                     Verbs Course
                                 </a>
@@ -227,8 +232,23 @@
                     <div class="collapse" id="room3">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item ">
-                                <a class="nav-link" href="#">
-                                    User3
+                                <a class="nav-link" href="{{ route('particles.educations.index') }}">
+                                    Particle Educations
+                                </a>
+                            </li>
+                            <li class="nav-item ">
+                                <a class="nav-link" href="{{ route('particles.educations.details.index') }}">
+                                    Particle Educations Details
+                                </a>
+                            </li>
+                            <li class="nav-item ">
+                                <a class="nav-link" href="{{ route('particles.courses.index') }}">
+                                    Particle Course
+                                </a>
+                            </li>
+                            <li class="nav-item ">
+                                <a class="nav-link" href="{{ route('particles.questions.index') }}">
+                                    Course Question
                                 </a>
                             </li>
                         </ul>
@@ -244,14 +264,31 @@
                     <div class="collapse" id="room4">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item ">
-                                <a class="nav-link" href="#">
-                                    User
-                                </a>
+                                <li class="nav-item ">
+                                    <a class="nav-link" href="{{ route('patterns.chapters.index') }}">
+                                        Pattern Chapter
+                                    </a>
+                                </li>
+                                <li class="nav-item ">
+                                    <a class="nav-link" href="{{ route('patterns.lessons.index') }}">
+                                        Pattern Lesson
+                                    </a>
+                                </li>
+                                <li class="nav-item ">
+                                    <a class="nav-link" href="{{ route('patterns.courses.index') }}">
+                                        Pattern Course
+                                    </a>
+                                </li>
+                                <li class="nav-item ">
+                                    <a class="nav-link" href="{{ route('patterns.questions.index') }}">
+                                        Course Question
+                                    </a>
+                                </li>
                             </li>
                         </ul>
                     </div>
                 </li>
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                     <a class="nav-link collapsed" href="#room5" data-toggle="collapse" role="button"
                         aria-expanded="true" aria-controls="room5">
                         <i class="ni ni-archive-2" style="color: #5d1eb1;"></i>
@@ -267,7 +304,7 @@
                             </li>
                         </ul>
                     </div>
-                </li>
+                </li> --}}
 
                 @foreach ($navigations as $key => $navigation)
                     @can($navigation->permission_name)

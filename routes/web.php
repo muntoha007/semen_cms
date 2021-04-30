@@ -62,12 +62,6 @@ Route::middleware(['auth', 'has.role'])->group(function () {
         Route::post('/questions/create', 'LetterCourseQuestionController@store');
         Route::get('/questions/{id}/edit', 'LetterCourseQuestionController@edit')->name('letters.questions.edit');
         Route::put('/questions/{id}/edit', 'LetterCourseQuestionController@update');
-
-        Route::get('/answers/index', 'LetterCourseAnswerController@index')->name('letters.answers.index');
-        Route::get('/answers/create', 'LetterCourseAnswerController@create')->name('letters.answers.create');
-        Route::post('/answers/create', 'LetterCourseAnswerController@store');
-        Route::get('/answers/{id}/edit', 'LetterCourseAnswerController@edit')->name('letters.answers.edit');
-        Route::put('/answers/{id}/edit', 'LetterCourseAnswerController@update');
     });
 
     // ROOM B / Room 2
@@ -96,6 +90,12 @@ Route::middleware(['auth', 'has.role'])->group(function () {
         Route::get('/changes/{id}/edit', 'VerbChangeController@edit')->name('verbs.changes.edit');
         Route::put('/changes/{id}/edit', 'VerbChangeController@update');
 
+        Route::get('/sentences/index', 'MasterVerbSentenceController@index')->name('verbs.sentences.index');
+        Route::get('/sentences/create', 'MasterVerbSentenceController@create')->name('verbs.sentences.create');
+        Route::post('/sentences/create', 'MasterVerbSentenceController@store');
+        Route::get('/sentences/{id}/edit', 'MasterVerbSentenceController@edit')->name('verbs.sentences.edit');
+        Route::put('/sentences/{id}/edit', 'MasterVerbSentenceController@update');
+
         Route::get('/courses/index', 'VerbCourseController@index')->name('verbs.courses.index');
         Route::get('/courses/create', 'VerbCourseController@create')->name('verbs.courses.create');
         Route::post('/courses/create', 'VerbCourseController@store');
@@ -107,12 +107,60 @@ Route::middleware(['auth', 'has.role'])->group(function () {
         Route::post('/questions/create', 'VerbCourseQuestionController@store');
         Route::get('/questions/{id}/edit', 'VerbCourseQuestionController@edit')->name('verbs.questions.edit');
         Route::put('/questions/{id}/edit', 'VerbCourseQuestionController@update');
+    });
 
-        Route::get('/answers/index', 'LetterCourseAnswerController@index')->name('verbs.answers.index');
-        Route::get('/answers/create', 'LetterCourseAnswerController@create')->name('verbs.answers.create');
-        Route::post('/answers/create', 'LetterCourseAnswerController@store');
-        Route::get('/answers/{id}/edit', 'LetterCourseAnswerController@edit')->name('verbs.answers.edit');
-        Route::put('/answers/{id}/edit', 'LetterCourseAnswerController@update');
+    // ROOM C / Room 3
+    Route::prefix('particle')->namespace('Admin\Room\C')->middleware('permission:assign permission')->group(function () {
+        Route::get('/educations/index', 'ParticleEducationController@index')->name('particles.educations.index');
+        Route::get('/educations/create', 'ParticleEducationController@create')->name('particles.educations.create');
+        Route::post('/educations/create', 'ParticleEducationController@store');
+        Route::get('/educations/{id}/edit', 'ParticleEducationController@edit')->name('particles.educations.edit');
+        Route::put('/educations/{id}/edit', 'ParticleEducationController@update');
+
+        Route::get('/educations/details/index', 'ParticleEducationDetailController@index')->name('particles.educations.details.index');
+        Route::get('/educations/details/create', 'ParticleEducationDetailController@create')->name('particles.educations.details.create');
+        Route::post('/educations/details/create', 'ParticleEducationDetailController@store');
+        Route::get('/educations/details/{id}/edit', 'ParticleEducationDetailController@edit')->name('particles.educations.details.edit');
+        Route::put('/educations/details/{id}/edit', 'ParticleEducationDetailController@update');
+
+        Route::get('/courses/index', 'ParticleCourseController@index')->name('particles.courses.index');
+        Route::get('/courses/create', 'ParticleCourseController@create')->name('particles.courses.create');
+        Route::post('/courses/create', 'ParticleCourseController@store');
+        Route::get('/courses/{id}/edit', 'ParticleCourseController@edit')->name('particles.courses.edit');
+        Route::put('/courses/{id}/edit', 'ParticleCourseController@update');
+
+        Route::get('/questions/index', 'ParticleCourseQuestionController@index')->name('particles.questions.index');
+        Route::get('/questions/create', 'ParticleCourseQuestionController@create')->name('particles.questions.create');
+        Route::post('/questions/create', 'ParticleCourseQuestionController@store');
+        Route::get('/questions/{id}/edit', 'ParticleCourseQuestionController@edit')->name('particles.questions.edit');
+        Route::put('/questions/{id}/edit', 'ParticleCourseQuestionController@update');
+    });
+
+    // ROOM D / Room 4
+    Route::prefix('pattern')->namespace('Admin\Room\D')->middleware('permission:assign permission')->group(function () {
+        Route::get('/chapters/index', 'PatternChapterController@index')->name('patterns.chapters.index');
+        Route::get('/chapters/create', 'PatternChapterController@create')->name('patterns.chapters.create');
+        Route::post('/chapters/create', 'PatternChapterController@store');
+        Route::get('/chapters/{id}/edit', 'PatternChapterController@edit')->name('patterns.chapters.edit');
+        Route::put('/chapters/{id}/edit', 'PatternChapterController@update');
+
+        Route::get('/lessons/index', 'PatternLessonController@index')->name('patterns.lessons.index');
+        Route::get('/lessons/create', 'PatternLessonController@create')->name('patterns.lessons.create');
+        Route::post('/lessons/create', 'PatternLessonController@store');
+        Route::get('/lessons/{id}/edit', 'PatternLessonController@edit')->name('patterns.lessons.edit');
+        Route::put('/lessons/{id}/edit', 'PatternLessonController@update');
+
+        Route::get('/courses/index', 'PatternCourseController@index')->name('patterns.courses.index');
+        Route::get('/courses/create', 'PatternCourseController@create')->name('patterns.courses.create');
+        Route::post('/courses/create', 'PatternCourseController@store');
+        Route::get('/courses/{id}/edit', 'PatternCourseController@edit')->name('patterns.courses.edit');
+        Route::put('/courses/{id}/edit', 'PatternCourseController@update');
+
+        Route::get('/questions/index', 'PatternCourseQuestionController@index')->name('patterns.questions.index');
+        Route::get('/questions/create', 'PatternCourseQuestionController@create')->name('patterns.questions.create');
+        Route::post('/questions/create', 'PatternCourseQuestionController@store');
+        Route::get('/questions/{id}/edit', 'PatternCourseQuestionController@edit')->name('patterns.questions.edit');
+        Route::put('/questions/{id}/edit', 'PatternCourseQuestionController@update');
     });
 
     Route::prefix('role-and-permission')->namespace('Permissions')->middleware('permission:assign permission')->group(function () {

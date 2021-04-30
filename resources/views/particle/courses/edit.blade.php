@@ -25,9 +25,9 @@
         <div class="row">
             <div class="col">
                 <div class="card mb-3">
-                    <div class="card-header">Edit Letter Course</div>
+                    <div class="card-header">Edit Particle Course</div>
                     <div class="card-body">
-                        <form action="{{ route('letters.courses.edit', $course->id) }}" method="post">
+                        <form action="{{ route('particles.courses.edit', $course->id) }}" method="post">
                             @method("PUT")
                             @csrf
                             <div class="form-group">
@@ -58,16 +58,16 @@
 
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="category">Pick Category</label>
-                                        <select name="category" id="category" class="form-control">
-                                            <option value="">Select Category</option>
-                                            @foreach ($categories as $cat)
-                                                <option value="{{ $cat->id }}"
-                                                    {{ $cat->id == $course->letter_category_id ? 'selected' : '' }}>
-                                                    {{ $cat->name }}</option>
+                                        <label for="particle_education_id">Pick Particle Education</label>
+                                        <select name="particle_education_id" id="particle_education_id" class="form-control">
+                                            <option value="">Select Particle Education</option>
+                                            @foreach ($educations as $edu)
+                                                <option value="{{ $edu->id }}"
+                                                    {{ $edu->id == $course->particle_education_id ? 'selected' : '' }}>
+                                                    {{ $edu->title }}</option>
                                             @endforeach
                                         </select>
-                                        @error('category')
+                                        @error('particle_education_id')
                                             <div class="text-danger mt-2 d-block">{{ $message }}</div>
                                         @enderror
                                     </div>

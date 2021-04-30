@@ -5,9 +5,9 @@
         <div class="row">
             <div class="col">
                 <div class="card">
-                    <div class="card-header">Create new Course</div>
+                    <div class="card-header">Create New Particle Course</div>
                     <div class="card-body">
-                        <form action="{{ route('letters.courses.create') }}" method="post">
+                        <form action="{{ route('particles.courses.create') }}" method="post">
                             @csrf
                             <div class="form-group">
                                 <label for="title">Title</label>
@@ -35,14 +35,14 @@
 
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="category">Pick Category</label>
-                                        <select name="category" id="category" class="form-control">
-                                            <option value="">Select Category</option>
-                                            @foreach ($categories as $cat)
-                                                <option value="{{ $cat->id }}">{{ $cat->name }}</option>
+                                        <label for="particle_education_id">Particle Education</label>
+                                        <select name="particle_education_id" id="particle_education_id" class="form-control">
+                                            <option value="">Select Particle Education</option>
+                                            @foreach ($educations as $edu)
+                                                <option value="{{ $edu->id }}">{{ $edu->title }}</option>
                                             @endforeach
                                         </select>
-                                        @error('category')
+                                        @error('particle_education_id')
                                             <div class="text-danger mt-2 d-block">{{ $message }}</div>
                                         @enderror
                                     </div>

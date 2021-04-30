@@ -18,8 +18,8 @@ class LetterCourseController extends Controller
 
     public function create()
     {
-        $courseCats = LetterCategory::get();
-        return view('letters.courses.create', compact('courseCats'));
+        $categories = LetterCategory::get();
+        return view('letters.courses.create', compact('categories'));
     }
 
     public function store(Request $request)
@@ -33,7 +33,7 @@ class LetterCourseController extends Controller
         LetterCourse::create([
             'code' => Str::random(10),
             'title' => request('title'),
-            'course_category_id' => request('category'),
+            'letter_category_id' => request('category'),
             'is_active' => 1,
         ]);
 
@@ -45,7 +45,7 @@ class LetterCourseController extends Controller
         // dd(Letter::where('id', $id)->first());
         return view('letters.courses.edit', [
             'course' => LetterCourse::where('id', $id)->first(),
-            'courseCats' => LetterCategory::get(),
+            'categories' => LetterCategory::get(),
             'submit' => 'Update',
         ]);
     }
@@ -60,7 +60,7 @@ class LetterCourseController extends Controller
 
         $letter = LetterCourse::find($id);
         $letter->title = request('title');
-        $letter->course_category_id = request('category');
+        $letter->letter_category_id = request('category');
         $letter->is_active = request('is_active');
 
         $letter->update();

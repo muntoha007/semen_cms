@@ -1,76 +1,76 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Room\B;
+namespace App\Http\Controllers\Admin\Room\C;
 
 use App\Http\Controllers\Controller;
-use App\Models\VerbCourseQuestion;
-use App\Models\LetterCategory;
-use App\Models\VerbCourse;
-use App\Models\VerbCourseAnswer;
+use App\Models\ParticleCourseQuestion;
+use App\Models\ParticleCourse;
+use App\Models\ParticleCourseAnswer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
-class VerbCourseQuestionController extends Controller
+class ParticleCourseQuestionController extends Controller
 {
     public function index()
     {
-        $questions = VerbCourseQuestion::get();
-        return view('verb.questions.index', compact('questions'));
+        $questions = ParticleCourseQuestion::get();
+        return view('particle.questions.index', compact('questions'));
     }
 
     public function create()
     {
-        $verbs = VerbCourse::get();
-        return view('verb.questions.create', compact('verbs'));
+        $partCourses = ParticleCourse::where('is_active', 1)->get();
+        return view('particle.questions.create', compact('partCourses'));
     }
 
     public function store(Request $request)
     {
         $data = $request->all();
-
+// dd($data);
         request()->validate([
             "question_jpn" => 'required',
             "question_romanji" => 'required',
             "question_idn" => 'required',
-            "verb_course_id" => 'required',
+            "particle_course_id" => 'required',
             "answer" => 'required',
         ]);
 
-        $question = VerbCourseQuestion::create([
+        $question = ParticleCourseQuestion::create([
             'code' => Str::random(20),
             'question_jpn' => request('question_jpn'),
             'question_romanji' => request('question_romanji'),
             'question_idn' => request('question_idn'),
-            'verb_course_id' => request('verb_course_id'),
-            'is_active' => 1,
+            'particle_course_id' => request('particle_course_id'),
+            'is_active' => 0,
         ]);
 
         $qid = $question->id;
 
         foreach ($data['answer'] as $value) {
-            $answer = new VerbCourseAnswer;
+            $answer = new ParticleCourseAnswer;
             $answer->code = Str::random(20);
-            $answer->verb_course_question_id = $qid;
             $answer->answer_jpn = $value["answer_jpn"];
             $answer->answer_idn = $value["answer_idn"];
+            $answer->answer_romanji = $value["answer_romanji"];
+            $answer->particle_course_question_id = $qid;
             $answer->is_true = isset($value["is_true"]) ? 1 : 0;
             $answer->save();
         }
 
-        $course = VerbCourse::where('id', request('verb_course_id'))->first();
+        $course = ParticleCourse::where('id', request('particle_course_id'))->first();
         $course->question_count = $course->question_count+1;
 
         $course->update();
 
-        return redirect()->route('verbs.questions.index');
+        return redirect()->route('particles.questions.index');
     }
 
     public function edit($id)
     {
-        return view('verb.questions.edit', [
-            'question' => VerbCourseQuestion::where('id', $id)->first(),
-            'verbs' => VerbCourse::get(),
-            'answers' => VerbCourseAnswer::where('verb_course_question_id', $id)->get(),
+        return view('particle.questions.edit', [
+            'question' => ParticleCourseQuestion::where('id', $id)->first(),
+            'partCourses' => ParticleCourse::where('is_active', 1)->get(),
+            'answers' => ParticleCourseAnswer::where('particle_course_question_id', $id)->get(),
             'submit' => 'Update',
         ]);
     }
@@ -83,28 +83,29 @@ class VerbCourseQuestionController extends Controller
             "question_jpn" => 'required',
             "question_romanji" => 'required',
             "question_idn" => 'required',
-            "verb_course_id" => 'required',
+            "particle_course_id" => 'required',
             "answer" => 'required',
         ]);
 
-        $question = VerbCourseQuestion::find($id);
+        $question = ParticleCourseQuestion::find($id);
         $question->question_jpn = $data['question_jpn'];
         $question->question_romanji = $data['question_romanji'];
         $question->question_idn = $data['question_idn'];
-        $question->verb_course_id = $data['verb_course_id'];
+        $question->particle_course_id = $data['particle_course_id'];
         $question->is_active = $data['is_active'];
 
         $question->update();
 
         foreach ($data['answer'] as $value) {
-            $answer = VerbCourseAnswer::find($value["id"]);
+            $answer = ParticleCourseAnswer::find($value["id"]);
             $answer->answer_jpn = $value["answer_jpn"];
             $answer->answer_idn = $value["answer_idn"];
+            $answer->answer_romanji = $value["answer_romanji"];
             $answer->is_true = isset($value["is_true"]) ? 1 : 0;
 
             $answer->update();
         }
 
-        return redirect()->route('verbs.questions.index');
+        return redirect()->route('particles.questions.index');
     }
 }
