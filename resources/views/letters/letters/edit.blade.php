@@ -84,7 +84,18 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="total_stroke">Total Stoke</label>
+                                        <input type="number" name="total_stroke" id="total_stroke" class="form-control"
+                                            value="{{ old('total_stroke') ?? $letter->romanji }}" required>
+
+                                        @error('total_stroke')
+                                            <div class="text-danger mt-2 d-block">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="category">Category</label>
                                         <select name="category" id="category" class="form-control">
@@ -100,7 +111,7 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="is_active">Status</label>
                                         <select name="is_active" id="status" class="form-control">
