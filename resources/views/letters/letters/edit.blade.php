@@ -88,7 +88,7 @@
                                     <div class="form-group">
                                         <label for="total_stroke">Total Stoke</label>
                                         <input type="number" name="total_stroke" id="total_stroke" class="form-control"
-                                            value="{{ old('total_stroke') ?? $letter->romanji }}" required>
+                                            value="{{ old('total_stroke') ?? $letter->total_stroke }}" required>
 
                                         @error('total_stroke')
                                             <div class="text-danger mt-2 d-block">{{ $message }}</div>
