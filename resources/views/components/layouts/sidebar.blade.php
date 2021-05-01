@@ -105,15 +105,15 @@
                 </li>
 @can('create role')
                 <li class="nav-item">
-                    <a class="nav-link {{ (request()->is('master/')) ? 'collapsed':''  }}" href="#navbar-master" data-toggle="collapse" role="button"
-                        aria-expanded="{{ (request()->is('master/')) ? 'true':'false'  }}" aria-controls="navbar-master">
+                    <a class="nav-link collapsed" href="#navbar-master" data-toggle="collapse" role="button"
+                        aria-expanded="true" aria-controls="navbar-master">
                         <i class="ni ni-archive-2" style="color: #5d1eb1;"></i>
                         <span class="nav-link-text">Master</span>
                     </a>
 
-                    <div class="collapse {{ (request()->is('master/')) ? '':'show'  }}" id="navbar-master">
+                    <div class="collapse" id="navbar-master">
                         <ul class="nav nav-sm flex-column">
-                            <li class="nav-item {{Request::path() ==  'master/users/index' ? 'active' : ''  }}">
+                            <li class="nav-item ">
                                 <a class="nav-link" href="{{ route('users.index') }}">
                                     Users
                                 </a>
