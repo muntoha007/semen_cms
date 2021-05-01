@@ -54,8 +54,7 @@
                                             <div class="text-danger mt-2 d-block">{{ $message }}</div>
                                         @enderror
                                     </div>
-                                </div>
-                                <div class="col-md-6">
+
                                     <div class="form-group">
                                         <label for="romanji">Romanji</label>
                                         <input type="text" name="romanji" id="romanji" class="form-control"
@@ -65,11 +64,17 @@
                                             <div class="text-danger mt-2 d-block">{{ $message }}</div>
                                         @enderror
                                     </div>
-                                </div>
-                            </div>
 
-                            <div class="row">
-                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="total_stroke">Total Stoke</label>
+                                        <input type="number" name="total_stroke" id="total_stroke" class="form-control"
+                                            value="{{ old('total_stroke') }}" required>
+
+                                        @error('total_stroke')
+                                            <div class="text-danger mt-2 d-block">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+
                                     <div class="form-group">
                                         <label for="category">Pick Category</label>
                                         <select name="category" id="category" class="form-control" required>
@@ -82,21 +87,10 @@
                                             <div class="text-danger mt-2 d-block">{{ $message }}</div>
                                         @enderror
                                     </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="total_stroke">Total Stoke</label>
-                                        <input type="number" name="total_stroke" id="total_stroke" class="form-control"
-                                            value="{{ old('total_stroke') }}" required>
 
-                                        @error('total_stroke')
-                                            <div class="text-danger mt-2 d-block">{{ $message }}</div>
-                                        @enderror
-                                    </div>
-                                </div>
-                            </div>
 
-                            <div class="row">
+                                </div>
+
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="image_url">Image</label>
@@ -110,14 +104,14 @@
                                             <div class="text-danger mt-2 d-block">{{ $message }}</div>
                                         @enderror
                                     </div>
-                                </div>
-                                <div class="col-md-6">
+
                                     <div class="form-group">
                                         <label for="image_url">Color Image</label>
                                         <span class="custom-file">
                                             <input type="file" name="color_image_url" id="color_image_url" lang="en"
                                                 class="custom-file-input" accept="image/jpg, image/png, image/gif ">
-                                            <label class="custom-file-label" for="color_image_url" id="lbl2">Choose file</label>
+                                            <label class="custom-file-label" for="color_image_url" id="lbl2">Choose
+                                                file</label>
                                         </span>
                                         <div id="frames2"></div>
                                     </div>

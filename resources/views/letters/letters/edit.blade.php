@@ -55,7 +55,8 @@
                 <div class="card mb-3">
                     <div class="card-header">Edit Letter</div>
                     <div class="card-body">
-                        <form action="{{ route('letters.letters.edit', $letter->id, ['files' => true]) }}" method="post" enctype="multipart/form-data">
+                        <form action="{{ route('letters.letters.edit', $letter->id, ['files' => true]) }}" method="post"
+                            enctype="multipart/form-data">
                             @method("PUT")
                             @csrf
                             <div class="row">
@@ -69,8 +70,7 @@
                                             <div class="text-danger mt-2 d-block">{{ $message }}</div>
                                         @enderror
                                     </div>
-                                </div>
-                                <div class="col-md-6">
+
                                     <div class="form-group">
                                         <label for="romanji">Romanji</label>
                                         <input type="text" name="romanji" id="romanji" class="form-control"
@@ -80,11 +80,7 @@
                                             <div class="text-danger mt-2 d-block">{{ $message }}</div>
                                         @enderror
                                     </div>
-                                </div>
-                            </div>
 
-                            <div class="row">
-                                <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="total_stroke">Total Stoke</label>
                                         <input type="number" name="total_stroke" id="total_stroke" class="form-control"
@@ -94,8 +90,7 @@
                                             <div class="text-danger mt-2 d-block">{{ $message }}</div>
                                         @enderror
                                     </div>
-                                </div>
-                                <div class="col-md-4">
+
                                     <div class="form-group">
                                         <label for="category">Category</label>
                                         <select name="category" id="category" class="form-control">
@@ -110,8 +105,7 @@
                                             <div class="text-danger mt-2 d-block">{{ $message }}</div>
                                         @enderror
                                     </div>
-                                </div>
-                                <div class="col-md-4">
+
                                     <div class="form-group">
                                         <label for="is_active">Status</label>
                                         <select name="is_active" id="status" class="form-control">
@@ -122,9 +116,6 @@
                                         </select>
                                     </div>
                                 </div>
-                            </div>
-
-                            <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="image_url">Image</label>
@@ -135,16 +126,14 @@
                                                 id="lbl1">{{ $letter->image_url }}</label>
                                         </span>
                                         <div id="frames">
-                                            <img
-                                                src="{{ $letter->image_url ? env('CLOUD_S3_URL') . $letter->image_url : url('/assets/img/brand/no-img.jpeg') }}"
+                                            <img src="{{ $letter->image_url ? env('CLOUD_S3_URL') . $letter->image_url : url('/assets/img/brand/no-img.jpeg') }}"
                                                 style="padding-top: 10px; max-width: 150px; max-height: 150px" />
-                                            </div>
+                                        </div>
                                         @error('image_url')
                                             <div class="text-danger mt-2 d-block">{{ $message }}</div>
                                         @enderror
                                     </div>
-                                </div>
-                                <div class="col-md-6">
+
                                     <div class="form-group">
                                         <label for="image_url">Color Image</label>
                                         <span class="custom-file">
@@ -160,7 +149,7 @@
                                 </div>
                             </div>
 
-                            <button type="submit" class="btn btn-success">Update</button>
+                            <button type="submit" class="btn btn-success">{{$submit}}</button>
                         </form>
                     </div>
                 </div>

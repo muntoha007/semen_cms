@@ -30,18 +30,25 @@ class LetterController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate([
+            "letter" => 'required',
+            "romanji" => 'required',
+            "category" => 'required',
+            "image_url" => 'required|image|max:5000',
+            "color_image_url" => 'image|max:1024'
+        ]);
+
         $param = $request->all();
         // dd($param);
         $saveData = $this->repository->createNew($param);
 
-     	if (!empty($saveData)) {
+        if (!empty($saveData)) {
             $request->session()->flash('success', 'Data Letter berhasil di masukan!');
             return redirect()->route('letters.letters.index');
         } else {
             $request->session()->flash('error', 'Gagal menyimpan data Letter!');
             return redirect()->route('letters.letters.index');
         }
-
     }
 
     public function edit($id)
@@ -60,13 +67,15 @@ class LetterController extends Controller
             "letter" => 'required',
             "romanji" => 'required',
             "category" => 'required',
+            "image_url" => 'image|max:5000',
+            "color_image_url" => 'image|max:5000'
         ]);
 
         $param = $request->all();
 
         $updateData = $this->repository->updateLetter($param, $id);
 
-     	if (!empty($updateData)) {
+        if (!empty($updateData)) {
             $request->session()->flash('success', 'Data Letter berhasil di update!');
             return redirect()->route('letters.letters.index');
         } else {
