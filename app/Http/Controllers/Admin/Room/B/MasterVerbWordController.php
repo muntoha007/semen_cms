@@ -28,7 +28,6 @@ class MasterVerbWordController extends Controller
     public function store(Request $request)
     {
 
-        dd($request);
         request()->validate([
             "name" => 'required',
             "word_japan" => 'required',
@@ -36,6 +35,7 @@ class MasterVerbWordController extends Controller
             "word_idn" => 'required',
             "master_verb_level_id" => 'required',
             "master_verb_group_id" => 'required',
+            "word_romanji_highlight" => 'required',
         ]);
 
         MasterVerbWord::create([
@@ -47,6 +47,7 @@ class MasterVerbWordController extends Controller
             'master_verb_level_id' => request('master_verb_level_id'),
             'master_verb_group_id' => request('master_verb_group_id'),
             'is_active' => request('is_active'),
+            'word_romanji_highlight' => request('word_romanji_highlight'),
         ]);
 
         return redirect()->route('verbs.words.index');
@@ -70,6 +71,7 @@ class MasterVerbWordController extends Controller
             "word_romanji" => 'required',
             "word_idn" => 'required',
             "is_active" => 'required',
+            "word_romanji_highlight" => 'required',
         ]);
 
         $word = MasterVerbWord::find($id);
@@ -79,6 +81,7 @@ class MasterVerbWordController extends Controller
         $word->word_idn = request('word_idn');
         $word->master_verb_level_id = request('master_verb_level_id');
         $word->master_verb_group_id = request('master_verb_group_id');
+        $word->word_romanji_highlight = request('word_romanji_highlight');
         $word->is_active = request('is_active');
 
         $word->update();

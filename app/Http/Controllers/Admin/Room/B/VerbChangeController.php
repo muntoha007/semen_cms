@@ -33,6 +33,8 @@ class VerbChangeController extends Controller
             "word_romanji" => 'required',
             "word_idn" => 'required',
             "master_verb_word_id" => 'required',
+            "sentence_jpn_highlight" => 'required',
+            "word_romanji_highlight" => 'required',
         ]);
 
         VerbChange::create([
@@ -44,6 +46,8 @@ class VerbChangeController extends Controller
             'type_jpn' => request('type_jpn'),
             'type_idn' => request('type_idn'),
             'master_verb_word_id' => request('master_verb_word_id'),
+            'word_romanji_highlight' => request('word_romanji_highlight'),
+            'sentence_jpn_highlight' => request('sentence_jpn_highlight'),
             'is_active' =>  request('is_active'),
         ]);
 
@@ -69,6 +73,8 @@ class VerbChangeController extends Controller
             "word_idn" => 'required',
             "master_verb_word_id" => 'required',
             "is_active" => 'required',
+            "sentence_jpn_highlight" => 'required',
+            "word_romanji_highlight" => 'required',
         ]);
 
         $change = VerbChange::find($id);
@@ -79,6 +85,8 @@ class VerbChangeController extends Controller
         $change->type_jpn = request('type_jpn');
         $change->type_idn = request('type_idn');
         $change->master_verb_word_id = request('master_verb_word_id');
+        $change->sentence_jpn_highlight = request('sentence_jpn_highlight');
+        $change->word_romanji_highlight = request('word_romanji_highlight');
         $change->is_active = request('is_active');
 
         $change->update();

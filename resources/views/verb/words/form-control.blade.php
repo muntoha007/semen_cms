@@ -47,6 +47,19 @@
 <div class="row">
     <div class="col-md-6">
         <div class="form-group">
+            <label for="word_romanji_highlight">Word Romanji Highlight</label>
+            <input type="text" name="word_romanji_highlight" id="word_romanji_highlight"
+                class="form-control"
+                value="{{ old('word_romanji_highlight') ?? @$word->word_romanji_highlight }}"
+                required>
+            @error('word_romanji_highlight')
+                <div class="text-danger d-block"><small>{{ $message }}</small></div>
+            @enderror
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="form-group">
             <label for="category">Pick Verb Level</label>
             <select name="master_verb_level_id" id="master_verb_level_id" class="form-control" required>
                 <option value="">Select Verb Level</option>
@@ -62,6 +75,9 @@
         </div>
 
     </div>
+</div>
+
+<div class="row">
 
     <div class="col-md-6">
         <div class="form-group">
@@ -78,11 +94,7 @@
                 <div class="text-danger mt-2 d-block">{{ $message }}</div>
             @enderror
         </div>
-
     </div>
-</div>
-
-<div class="row">
     <div class="col-md-6">
         <div class="form-group">
             <label for="is_active">Status</label>
@@ -95,8 +107,5 @@
         </div>
     </div>
 </div>
-
-
-
 
 <button type="submit" class="btn btn-primary">{{ $submit }}</button>

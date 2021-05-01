@@ -70,6 +70,33 @@
 <div class="row">
     <div class="col-md-6">
         <div class="form-group">
+            <label for="sentence_jpn_highlight">Sentence Japan Highlight</label>
+            <input type="text" name="sentence_jpn_highlight" id="sentence_jpn_highlight"
+                class="form-control"
+                value="{{ old('sentence_jpn_highlight') ?? @$change->sentence_jpn_highlight }}"
+                required>
+            @error('sentence_jpn_highlight')
+                <div class="text-danger d-block"><small>{{ $message }}</small></div>
+            @enderror
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="word_romanji_highlight">Word Romanji Highlight</label>
+            <input type="text" name="word_romanji_highlight" id="word_romanji_highlight"
+                class="form-control"
+                value="{{ old('word_romanji_highlight') ?? @$change->word_romanji_highlight }}"
+                required>
+            @error('word_romanji_highlight')
+                <div class="text-danger d-block"><small>{{ $message }}</small></div>
+            @enderror
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="form-group">
             <label for="master_verb_word_id">Pick Verb Word</label>
             <select name="master_verb_word_id" id="master_verb_word_id" class="form-control" required>
                 <option value="">Select Verb Word</option>
