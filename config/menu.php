@@ -93,23 +93,23 @@ return [
         'icon' => 'mdi mdi-comment-text-outline menu-icon',
         'sub_menu' => [
             'particle-education' => [
-                'title' => 'Particle Education',
+                'title' => 'Partikel Edukasi',
                 'routeName' => 'particle-educations.index',
                 'icon' => 'mdi mdi-flag menu-icon',
             ],
             'particle-education-detail' => [
-                'title' => 'Particle Education Detail',
+                'title' => 'Partikel Edukasi Detail',
                 'routeName' => 'particle-education-details.index',
                 'icon' => 'mdi mdi-flag menu-icon',
             ],
             'particle-course' => [
-                'title' => 'Particle Course',
+                'title' => 'Partikel Kursus',
                 'routeName' => 'particle-courses.index',
                 'additional_query' => '',
                 'icon' => 'mdi mdi-flag menu-icon',
             ],
             'particle-question' => [
-                'title' => 'Questions',
+                'title' => 'Test / Pertanyaan',
                 'routeName' => 'particle-course-questions.index',
                 'additional_query' => '',
                 'icon' => 'mdi mdi-flag menu-icon',
@@ -123,23 +123,23 @@ return [
         'icon' => 'mdi mdi-comment-text-outline menu-icon',
         'sub_menu' => [
             'particle-education' => [
-                'title' => 'Pattern Chapter',
+                'title' => 'Pola Chapter',
                 'routeName' => 'pattern-chapters.index',
                 'icon' => 'mdi mdi-flag menu-icon',
             ],
             'pattern-lesson' => [
-                'title' => 'Pattern Lesson',
+                'title' => 'Pola Lesson',
                 'routeName' => 'pattern-lessons.index',
                 'icon' => 'mdi mdi-flag menu-icon',
             ],
             'pattern-course' => [
-                'title' => 'Pattern Course',
+                'title' => 'Pola Course',
                 'routeName' => 'pattern-courses.index',
                 'additional_query' => '',
                 'icon' => 'mdi mdi-flag menu-icon',
             ],
             'pattern-question' => [
-                'title' => 'Questions',
+                'title' => 'Test / Pertanyaan',
                 'routeName' => 'pattern-course-questions.index',
                 'additional_query' => '',
                 'icon' => 'mdi mdi-flag menu-icon',
@@ -169,7 +169,7 @@ return [
                 'icon' => 'mdi mdi-flag menu-icon',
             ],
             'pattern-question' => [
-                'title' => 'Questions',
+                'title' => 'Test / Pertanyaan',
                 'routeName' => 'pattern-course-questions.index',
                 'additional_query' => '',
                 'icon' => 'mdi mdi-flag menu-icon',
