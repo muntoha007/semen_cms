@@ -2,24 +2,37 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
+use App\Http\Requests\UserRequest;
 use App\Models\Role;
-use App\User;
-use Illuminate\Http\Request;
-use Spatie\Permission\Models\Role as ModelsRole;
-use Illuminate\Support\Facades\Hash;
+use App\Models\User;
+use App\Repositories\UserRepository;
+use App\Http\Controllers\Controller;
+use App\DataTables\UserDatatable;
+use Sentinel;
 
 class UserController extends Controller
 {
+
+    protected $model, $repository;
+
+    public function __construct()
+    {
+        $this->model = new User();
+        $this->repository = new UserRepository();
+        $this->role = new Role();
+    }
+
+    protected $redirectAfterSave = 'user.index';
+    protected $moduleName = 'User';
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(UserDatatable $dataTable)
     {
-        $users = User::has('roles')->get();
-        return view('users.index', compact('users'));
+        return $dataTable->render('backend.user.index');
     }
 
     /**
@@ -29,8 +42,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        $roles = ModelsRole::get();
-        return view('users.create', compact('roles'));
+        $roles = $this->role->getRoles();
+        return view('backend.user.form',compact('roles'));
     }
 
     /**
@@ -39,23 +52,14 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
-        request()->validate([
-            'name' => 'required',
-            'email' => 'required', 'string', 'email', 'max:255', 'unique:users',
-        ]);
+        $param = $request->all();
+        $saveData = $this->repository->createNewUser($param);
+        flashDataAfterSave($saveData,$this->moduleName);
 
-        User::create([
-            'name' => request('name'),
-            'email' => request('email') ?? 'web',
-            'password' => Hash::make('password123'),
-        ]);
+        return redirect()->route($this->redirectAfterSave);
 
-        $user = User::where('email', request('email'))->first();
-        $user->assignRole(request('role'));
-
-        return redirect()->route('users.index');
     }
 
     /**
@@ -66,8 +70,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //  $user = User::where('id', $id)->first();
-
+        //
     }
 
     /**
@@ -78,13 +81,17 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        return view('users.edit', [
-            'user' => User::where('id', $id)->first(),
-            'submit' => 'Update',
-            'roles' => ModelsRole::get(),
-        ]);
-    }
+        $roles = $this->role->getRoles();
+        if(isOnlyDataOwned()){
+            $data = $this->model->getUserRole($id)
+                ->where('users.created_by','=',user_info('id'))
+                ->firstOrFail();
+        } else {
+            $data = $this->model->getUserRole($id)->firstOrFail();
+        }
 
+        return view('backend.user.form', compact('data','roles'));
+    }
 
     /**
      * Update the specified resource in storage.
@@ -93,18 +100,14 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UserRequest $request, $id)
     {
-        $user = User::find($id);
-        $user->email = $request['email'];
-        $user->name = $request['name'];
+        $param = $request->all();
+        $saveData = $this->repository->updateUser($param, $id);
+        flashDataAfterSave($saveData,$this->moduleName);
 
-        $user->update();
-
-        $user->syncRoles(request('roles'));
-        return redirect()->route('users.index');
+        return redirect()->route($this->redirectAfterSave);
     }
-
 
     /**
      * Remove the specified resource from storage.
@@ -114,6 +117,6 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $this->repository->deleteUser($id);
     }
 }

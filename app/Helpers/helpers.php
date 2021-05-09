@@ -6,7 +6,11 @@
 | @author Andre Siantana <andre.anson@rebelworks.co>
 */
 use App\Models\Agent;
-
+use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
+use Yajra\DataTables\Facades\DataTables;
 
 if (! function_exists('user_info')) {
     /**
@@ -17,8 +21,7 @@ if (! function_exists('user_info')) {
      */
     function user_info($column = null)
     {
-        if ($user = Sentinel::check()) {
-            // dd($user);
+        if ($user =Sentinel::check()) {
             if (is_null($column)) {
                 return $user;
             }
@@ -28,13 +31,54 @@ if (! function_exists('user_info')) {
             }
 
             if ('role' == $column) {
-                return user_info()->roles[0];
+                return user_info()->roles()->first()->name;
             }
 
             return $user->{$column};
         }
 
         return null;
+    }
+}
+
+if (! function_exists('set_currency')) {
+    function set_currency($text = '') {
+        return str_replace('.', '', $text);
+    }
+}
+
+if (! function_exists('str_replace_first')) {
+    function str_replace_first($from, $to, $content) {
+        $from = '/'.preg_quote($from, '/').'/';
+
+        return preg_replace($from, $to, $content, 1);
+    }
+}
+
+if (! function_exists('get_currency')) {
+    function get_currency($amount = '') {
+        return number_format($amount, 0, ',', '.');
+    }
+}
+
+if (! function_exists('create_date_from_format')) {
+    function create_date_from_format($text = '',$format = 'd-m-Y H:i') {
+        $date = \Carbon\Carbon::createFromFormat($format,$text);
+
+        return $date;
+    }
+}
+
+if (! function_exists('randomString')) {
+    function randomString($number = 8,$prefix = null)
+    {
+        $prefixCode = '';
+
+        if($prefix){
+            $prefixCode = $prefix.'_';
+        }
+
+        return strtoupper($prefixCode.''.Str::random($number));
     }
 }
 
@@ -45,6 +89,514 @@ if (! function_exists('sessionFlash')) {
             'message' => $message,
             'alert-type' => $type,
         ]);
+    }
+}
+
+if (! function_exists('getSettings')) {
+    function getSettings()
+    {
+        return \App\Models\Setting::first();
+    }
+}
+
+if (! function_exists('delimiterToCamelCase')) {
+    function delimiterToCamelCase($string, $capitalizeFirstCharacter = false,$delimiter = '.')
+    {
+
+        $str = str_replace($delimiter, '', ucwords($string, $delimiter));
+
+        if (!$capitalizeFirstCharacter) {
+            $str = lcfirst($str);
+        }
+
+        return $str;
+    }
+}
+
+if (! function_exists('isAdminGroup')) {
+    function isAdminGroup()
+    {
+        $userLoggedIn = Sentinel::getUser();
+        $inRoleSuperAdmin = $userLoggedIn->inRole('super-admin');
+        $inRoleAdmin = $userLoggedIn->inRole('administrator');
+        $inRoleAccountDirector = $userLoggedIn->inRole('account-director');
+        if($inRoleSuperAdmin){
+            return true;
+        }else if($inRoleAdmin){
+            return true;
+        }else if($inRoleAccountDirector){
+            return true;
+        }
+
+        return false;
+    }
+}
+
+if (! function_exists('isRoleNotIn')) {
+    function isRoleNotIn($slugName)
+    {
+        $userLoggedIn = Sentinel::getUser();
+        $isRoleNot = $userLoggedIn->inRole($slugName);
+        if(!$isRoleNot){
+            return true;
+        }
+
+        return false;
+    }
+}
+
+if (! function_exists('isRoleIn')) {
+    function isRoleIn($slugName)
+    {
+        $userLoggedIn = Sentinel::getUser();
+        $isRoleNot = $userLoggedIn->inRole($slugName);
+        if($isRoleNot){
+            return true;
+        }
+
+        return false;
+    }
+}
+
+if (! function_exists('hasErrorField')) {
+    function hasErrorField($errors,$field)
+    {
+        if($errors->has($field)){
+            return 'form-control-danger';
+        }
+    }
+}
+
+if (! function_exists('getImageUserLogin')) {
+    function getImageUserLogin()
+    {
+        $url = url('/images/avatar.png');
+        if(user_info('user_image') != null){
+            $dbUrl = get_file(user_info('user_image'), 'thumbnail');
+            $baseUrl = url('');
+            $geLocalDbtUrl = str_replace($baseUrl.'/','',$dbUrl);
+            if($dbUrl && file_exists($geLocalDbtUrl)){
+                $url = $dbUrl;
+            }
+        }
+        return $url;
+    }
+}
+
+if (! function_exists('setMenuActive')) {
+    function setMenuActive($routeName)
+    {
+        $className = '';
+        $baseUrl = url('');
+        $uri = str_replace($baseUrl.'/','',route($routeName));
+        if(request()->is($uri)){
+            $className = 'active';
+        }else if(request()->is($uri.'/*')){
+            $className = 'active';
+        }
+
+        return $className;
+    }
+}
+
+if (! function_exists('flashDataAfterSave')) {
+    function flashDataAfterSave($savedData,$name)
+    {
+        $message = 'insert new';
+        if(request()->isMethod('PUT')){
+            $message = 'update';
+        }
+        if (!empty($savedData)) {
+            request()->session()->flash('success', 'Success '.$message.' data '.$name.'!');
+        } else {
+            request()->session()->flash('error', 'Failed '.$message.' data '.$name.'!');
+        }
+    }
+}
+
+if (! function_exists('createSlug')) {
+    function createSlug($word)
+    {
+        return Str::slug($word, '-');
+    }
+}
+
+if (! function_exists('camelCaseToSpace')) {
+    function camelCaseToSpace($word)
+    {
+        return preg_replace( '/([a-z0-9])([A-Z])/', "$1 $2", $word );
+    }
+}
+
+if (! function_exists('delimiterToSpace')) {
+    function delimiterToSpace($word)
+    {
+        $arrDelimiter = ['-','.','_'];
+        $wordReplaced = '';
+        $i = 0;
+        foreach ($arrDelimiter as $delimiter){
+            if($wordReplaced != ''){
+                $wordReplaced = ucwords(str_replace($delimiter,' ',$wordReplaced));
+            }else{
+                $wordReplaced = ucwords(str_replace($delimiter,' ',$word));
+            }
+            $i++;
+        }
+
+        return $wordReplaced;
+    }
+}
+
+if (! function_exists('getFirstModelByIdentifier')) {
+    function getFirstModelByIdentifier(\Illuminate\Database\Eloquent\Model $modelsParam,$param){
+        $identifier = (int)$param;
+        if($identifier != 0){
+            return $modelsParam->findOrFail($param);
+        }else{
+            return $modelsParam->where('code','=',$param)->firstOrFail();
+        }
+    }
+}
+
+if (! function_exists('getCollectionModelByIdentifier')) {
+    function getCollectionModelByIdentifier(\Illuminate\Database\Eloquent\Model $modelsParam,$param){
+        $identifier = (int)$param;
+        if($identifier != 0){
+            return $modelsParam->get($param);
+        }else{
+            return $modelsParam->where('code','=',$param)->get();
+        }
+    }
+}
+
+if (! function_exists('getRouteNameByUrl')) {
+    function getRouteNameByUrl($url,$method = null)
+    {
+        if($method == null){
+            $routeObj = app('router')
+                ->getRoutes()
+                ->match(app('request')
+                ->create($url))
+                ->getName();
+        }else{
+            $routeObj = app('router')
+                ->getRoutes()
+                ->match(app('request')
+                ->create($url,$method))
+                ->getName();
+        }
+
+        return $routeObj;
+    }
+}
+
+if (! function_exists('isHasAnyActionColumn')) {
+    function isHasAnyActionColumn($paramRouteName = null)
+    {
+        $arrayMethodAction = [
+            'show',
+            'edit',
+            'destroy',
+        ];
+
+        $routeName = null;
+
+        if($paramRouteName){
+            $routeName = $paramRouteName;
+        }else{
+            $routeName = request()->route()->getName();
+        }
+
+        $parentRouteName = explodeByLastDelimiter($routeName);
+
+        $hasAny = [];
+
+        foreach ($arrayMethodAction as $method){
+            $hasAny[] = checkPermissionAccess($parentRouteName.'.'.$method);
+        }
+
+        return in_array(true, $hasAny);
+    }
+}
+
+if (! function_exists('isOnlyDataOwned')) {
+    function isOnlyDataOwned()
+    {
+        if(isAdminGroup()){
+            return false;
+        }
+
+        $userLoggedIn = Sentinel::getUser();
+
+        $routeName = request()->route()->getName();
+
+        $parentRouteName = explodeByLastDelimiter($routeName);
+
+        if ($userLoggedIn->hasAccess($parentRouteName.'.owned')){
+            return true;
+        }
+
+        return false;
+    }
+}
+
+if (! function_exists('checkPermissionAccess')) {
+    function checkPermissionAccess($routeName = null)
+    {
+        $userLoggedIn = Sentinel::getUser();
+        $roles = Sentinel::findById($userLoggedIn->id)->roles->first();
+
+        if(!$userLoggedIn){
+            return false;
+        }
+
+        if($routeName == null){
+            $getRequestName = request()->route()->getName();
+        } else {
+            $getRequestName = $routeName;
+        }
+
+        if ($userLoggedIn->hasAccess($getRequestName)){
+           return true;
+        }
+
+        $inRoleSuperAdmin = $userLoggedIn->inRole('super-admin');
+        if($inRoleSuperAdmin){
+            return true;
+        }
+
+        return false;
+    }
+}
+
+if (! function_exists('allowNotDefinedRoutePermission')) {
+    function allowNotDefinedRoutePermission($routeName = null)
+    {
+        $userLoggedIn = Sentinel::getUser();
+        $roles = Sentinel::findById($userLoggedIn->id)->roles->first();
+
+        $inRoleSuperAdmin = $userLoggedIn->inRole('super-admin');
+        if($inRoleSuperAdmin){
+            return true;
+        }
+
+        if(!$userLoggedIn){
+            return false;
+        }
+
+        if($routeName == null){
+            $getRequestName = request()->route()->getName();
+        } else {
+            $getRequestName = $routeName;
+        }
+
+        if($roles){
+            $arrPermission = $roles->permissions;
+            if(!isset($arrPermission[$getRequestName])){
+                return true;
+            }
+        }
+
+        if ($userLoggedIn->hasAccess($getRequestName)){
+            return true;
+        }
+
+        return false;
+    }
+}
+
+
+if (! function_exists('checkPermissionAccessByUrl')) {
+    function checkPermissionAccessByUrl($url,$method = null)
+    {
+        $getRequestName = getRouteNameByUrl($url,$method);
+        return checkPermissionAccess($getRequestName);
+    }
+}
+
+if (! function_exists('explodeByLastDelimiter')) {
+    function explodeByLastDelimiter($feed,$delimiter = '.')
+    {
+        $explodeArr = '';
+        $parts = explode($delimiter, $feed);
+        $countExploded = count($parts);
+        if($countExploded > 1){
+            $last = array_pop($parts);
+            $parts = array(implode($delimiter, $parts), $last);
+            $explodeArr =  $parts[0];
+        } else {
+            $explodeArr =  $feed;
+        }
+
+        return $explodeArr;
+    }
+}
+
+if (! function_exists('explodeByLastDelimiterGetChild')) {
+    function explodeByLastDelimiterGetChild($feed,$delimiter = '.')
+    {
+        $parts = explode($delimiter, $feed);
+        $countExploded = count($parts);
+        if($countExploded > 1){
+            $last = array_pop($parts);
+            $parts = array(implode($delimiter, $parts), $last);
+            $explodeArr =  $parts[1];
+        } else {
+            $explodeArr =  $feed;
+        }
+
+        return $explodeArr;
+    }
+}
+
+if (! function_exists('inArrayContains')) {
+    function inArrayContains($str, array $arr)
+    {
+        foreach($arr as $a) {
+            if (stripos($str,$a) !== false) return true;
+        }
+        return false;
+    }
+}
+
+if (! function_exists('stringContains')) {
+    function stringContains($string,$contains)
+    {
+        return Str::contains(strtolower($string), $contains);
+    }
+}
+
+if (! function_exists('permissionAlias')) {
+    function permissionAlias($permissionName)
+    {
+        switch(strtolower($permissionName)) {
+            case stringContains($permissionName,'index') :
+                $alias = 'Menu';
+                break;
+            case stringContains($permissionName,'create') :
+                $alias = 'Create';
+                break;
+            case stringContains($permissionName,'store') :
+                $alias = 'Save';
+                break;
+            case stringContains($permissionName,'edit') :
+                $alias = 'Edit';
+                break;
+            case stringContains($permissionName,'update') :
+                $alias = 'Update';
+                break;
+            case stringContains($permissionName,'destroy') :
+                $alias = 'Delete';
+                break;
+            case stringContains($permissionName,'show') :
+                $alias = 'Detail';
+                break;
+            case 'changepassword':
+                $alias = 'Change Password';
+                break;
+            default:
+                $alias = $permissionName;
+        }
+
+        return ucfirst($alias);
+
+    }
+}
+
+if (! function_exists('checkPermissionAccessRouteName')) {
+    function checkPermissionAccessRouteName($middlewareName = 'checkAccess',$method = 'crud')
+    {
+        $collection = Route::getRoutes();
+
+        $routes = [];
+
+        $arrayMethod = ['create','update','destroy','show','edit','store'];
+
+        foreach($collection as $route) {
+            $action = $route->getActionName();
+            $uri = $route->uri;
+            $routeName = $route->getName();
+            $middlewareRouteName = @$route->getAction()['middleware'];
+            $routeActionMethod = $route->getActionMethod();
+            $isInMiddlewareCheckAccess = in_array($middlewareName, @$middlewareRouteName);
+            $parentRouteName = explodeByLastDelimiter($routeName);
+            $methodsList = $route->methods;
+            $defaultList = $route->defaults;
+
+            $routeChildName = explodeByLastDelimiterGetChild($routeName,'.');
+            $inRouteActionMethod = in_array($routeChildName,$arrayMethod);
+            $isInMiddlewareHiddenPermission = in_array('hiddenPermission', @$middlewareRouteName);
+
+            if($isInMiddlewareCheckAccess && $method == 'crud'){
+                if(in_array('GET',$methodsList) || in_array('DELETE',$methodsList)){
+                    $data = [
+                        'routeName' => $routeName,
+                        'routeUri' => $uri,
+                        'methodAction' => $routeActionMethod,
+                        'methods' => $methodsList,
+                        'defaults' => $defaultList,
+                        'middleware' => $middlewareRouteName,
+                        'parentRoute' =>$parentRouteName,
+                        'actionName' =>$action,
+                    ];
+
+                    if($isInMiddlewareHiddenPermission){
+                        $data = array_merge($data,['hidden' => 'true']);
+                    } else {
+                        $data = array_merge($data,['hidden' => 'false']);
+                    }
+
+                    $routes[$parentRouteName][$routeActionMethod] = $data;
+                }
+                if(!$inRouteActionMethod){
+                    $data = [
+                        'routeName' => $routeName,
+                        'routeUri' => $uri,
+                        'methodAction' => $routeActionMethod,
+                        'methods' => $methodsList,
+                        'defaults' => $defaultList,
+                        'middleware' => $middlewareRouteName,
+                        'parentRoute' =>$parentRouteName,
+                        'actionName' =>$action,
+                    ];
+
+                    if($isInMiddlewareHiddenPermission){
+                        $data = array_merge($data,['hidden' => 'true']);
+                    } else {
+                        $data = array_merge($data,['hidden' => 'false']);
+                    }
+
+                    $routes[$parentRouteName][$routeActionMethod] = $data;
+                }
+            }
+
+            if($isInMiddlewareCheckAccess && $method == 'all'){
+                if($routeName == null){
+                    continue;
+                }
+
+                $data = [
+                    'routeName' => $routeName,
+                    'routeUri' => $uri,
+                    'methodAction' => $routeActionMethod,
+                    'methods' => $methodsList,
+                    'middleware' => $middlewareRouteName,
+                    'parentRoute' =>$parentRouteName,
+                    'actionName' =>$action,
+                ];
+
+                if($isInMiddlewareHiddenPermission){
+                    $data = array_merge($data,['hidden' => 'true']);
+                } else {
+                    $data = array_merge($data,['hidden' => 'false']);
+                }
+
+                $routes[$parentRouteName][$routeActionMethod] = $data;
+
+            }
+        }
+
+        return $routes;
     }
 }
 
@@ -112,7 +664,7 @@ if (! function_exists('datatables')) {
      */
     function datatables($builder)
     {
-        return Datatables::of($builder);
+        return DataTables::of($builder);
     }
 }
 
@@ -121,7 +673,7 @@ if (! function_exists('upload_file')) {
     {
         if (!empty($data) && $data->isValid()) {
             $fileExtension = strtolower($data->getClientOriginalExtension());
-            $newFilename = Str::random(20) . '.' . $fileExtension;
+            $newFilename = str_random(20) . '.' . $fileExtension;
 
             if (!File::exists($filepath)) {
                 File::makeDirectory($filepath, $mode = 0777, true, true);
@@ -130,14 +682,14 @@ if (! function_exists('upload_file')) {
             if ($filetype == 'image' ){
                 $file = Image::make($data);
                 $file->save($filepath . $newFilename);
-                // $compressedImage = compress_image($filepath.$newFilename);
-                // $imageThumbnail = image_thumbnail($filepath.$newFilename);
+                 $compressedImage = compress_image($filepath.$newFilename);
+                 $imageThumbnail = image_thumbnail($filepath.$newFilename);
             } else {
                 $file = $data->move($filepath, $newFilename);
             }
             $result['original'] = $filepath.$newFilename;
-            // $result['original'] = $compressedImage;
-            // $result['thumbnail'] = $imageThumbnail;
+             $result['compressed'] = $compressedImage;
+             $result['thumbnail'] = $imageThumbnail;
 
             return  $result;
         }
@@ -149,11 +701,6 @@ if (! function_exists('upload_file')) {
 if (! function_exists('get_file')) {
     function get_file($path, $preview = 'compressed', $type = 'public')
     {
-        // $path_default = 'assets/frontend/images/yamaha_default.jpg';
-        // if(! File::exists($path)) {
-        //     return URL::to($path_default);
-        // }
-
         if ($type == 'public' && !empty($path) ){
             if ($preview == 'thumbnail'){
                 return URL::to(dirname($path).'/thumb/'.basename($path));
@@ -311,10 +858,23 @@ if (! function_exists('getDateIndo')) {
             case 'September':   $nmb="September";   break;
             case 'October':     $nmb="Oktober";     break;
             case 'November':    $nmb="November";    break;
-            case 'Desember':    $nmb="Desember";    break;
+            case 'December':    $nmb="Desember";    break;
         }
 
         return date("d",strtotime($date))." "."$nmb"." ".date("Y",strtotime($date));
+    }
+}
+
+if (! function_exists('getDateIndoWithTime')) {
+    /**
+     * Generate new datetime from configured format datetime.
+     *
+     * @param  string $datetime
+     * @return string
+     */
+    function getDateIndoWithTime($date)
+    {
+        return getDateIndo($date) .' '. date("H:i",strtotime($date));;
     }
 }
 
