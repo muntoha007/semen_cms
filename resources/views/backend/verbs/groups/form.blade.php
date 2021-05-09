@@ -59,7 +59,7 @@ $title = @$data ? 'Edit' : 'Add New';
                             </div>
 
                             <button type="submit" class="btn btn-info btn-fw btn-lg mr-2">Submit</button>
-                            <a href="{{ route('letter-courses.index') }}"
+                            <a href="{{ route('verb-groups.index') }}"
                                 class="btn btn-secondary btn-fw btn-lg">Cancel</a>
                         </form>
                     </div>

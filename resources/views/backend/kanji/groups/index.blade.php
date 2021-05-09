@@ -1,15 +1,15 @@
 @extends('layouts.master')
-@section('title', 'Project List')
+@section('title', 'Master Groups List')
 @section('content')
     <div class="content-wrapper">
         <div class="row">
             <div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title text-center table-title">List Task</h4>
-                        @isPermitted('task.create')
+                        <h4 class="card-title text-center table-title">List Verb Groups</h4>
+                        @isPermitted('master-groups.create')
                         <div class="form-group">
-                            <a href="{{ route('task.create') }}" type="button" class="btn btn-outline-info btn-rounded btn-fw btn-sm">
+                            <a href="{{ route('master-groups.create') }}" type="button" class="btn btn-outline-info btn-rounded btn-fw btn-sm">
                                 <i class="mdi mdi-plus-circle btn-icon-prepend"></i> Create new
                             </a>
                         </div>

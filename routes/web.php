@@ -76,4 +76,9 @@ Route::group(['middleware' => ['sentinelAuth','checkAccess'],'namespace' => 'Adm
     Route::resource('pattern-courses', 'D\PatternCourseController')->except('show');
     Route::resource('pattern-course-questions', 'D\PatternCourseQuestionController')->except('show');
 
+    Route::resource('master-groups', 'E\MasterGroupController')->except('show');
+    Route::resource('kanji-chapters', 'E\KanjiChapterController')->except('show');
+    Route::resource('kanji-educations', 'E\KanjiEducationController')->except('show');
+
+
 });

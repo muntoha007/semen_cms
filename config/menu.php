@@ -146,6 +146,36 @@ return [
             ]
         ]
     ],
+    'room-5' => [
+        'title' => 'Room 5',
+        'routeName' => 'master-groups.index',
+        'additional_query' => '',
+        'icon' => 'mdi mdi-comment-text-outline menu-icon',
+        'sub_menu' => [
+            'kanji-group' => [
+                'title' => 'Master Group',
+                'routeName' => 'master-groups.index',
+                'icon' => 'mdi mdi-flag menu-icon',
+            ],
+            'kanji-chapter' => [
+                'title' => 'Chapter',
+                'routeName' => 'kanji-chapters.index',
+                'icon' => 'mdi mdi-flag menu-icon',
+            ],
+            'kanji-education' => [
+                'title' => 'Kanji Edukasi',
+                'routeName' => 'kanji-educations.index',
+                'additional_query' => '',
+                'icon' => 'mdi mdi-flag menu-icon',
+            ],
+            'pattern-question' => [
+                'title' => 'Questions',
+                'routeName' => 'pattern-course-questions.index',
+                'additional_query' => '',
+                'icon' => 'mdi mdi-flag menu-icon',
+            ]
+        ]
+    ],
     'master-setting' => [
         'title' => 'Master Setting',
         'routeName' => 'user.index',

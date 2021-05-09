@@ -2,17 +2,17 @@
 @php
 $title = @$data ? 'Edit' : 'Add New';
 @endphp
-@section('title', 'Master Verb Level ' . $title)
+@section('title', 'Master Group ' . $title)
 @section('content')
     <div class="content-wrapper">
         <div class="row">
             <div class="col-12 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">{{ $title }} Master Verb Level</h4>
+                        <h4 class="card-title">{{ $title }} Master Group</h4>
                         <br>
                         <form class="forms-sample"
-                            action="{{ @$data ? route('verb-levels.update', $data->id) : route('verb-levels.store') }}"
+                            action="{{ @$data ? route('master-groups.update', $data->id) : route('master-groups.store') }}"
                             method="POST" enctype="multipart/form-data">
                             @csrf
                             @if (@$data)
@@ -21,7 +21,7 @@ $title = @$data ? 'Edit' : 'Add New';
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="first_name">Name</label>
+                                        <label for="name">Name</label>
                                         <input type="text" class="form-control {{ hasErrorField($errors, 'name') }}"
                                             id="name" name="name" value="{{ old('name', @$data->name) }}"
                                             placeholder="Name">
@@ -43,7 +43,7 @@ $title = @$data ? 'Edit' : 'Add New';
                             </div>
 
                             <button type="submit" class="btn btn-info btn-fw btn-lg mr-2">Submit</button>
-                            <a href="{{ route('verb-levels.index') }}"
+                            <a href="{{ route('master-groups.index') }}"
                                 class="btn btn-secondary btn-fw btn-lg">Cancel</a>
                         </form>
                     </div>
