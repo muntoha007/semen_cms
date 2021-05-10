@@ -168,6 +168,12 @@ return [
                 'additional_query' => '',
                 'icon' => 'mdi mdi-flag menu-icon',
             ],
+            'kanji-sample' => [
+                'title' => 'Contoh Kanji',
+                'routeName' => 'kanji-samples.index',
+                'additional_query' => '',
+                'icon' => 'mdi mdi-flag menu-icon',
+            ],
             'pattern-question' => [
                 'title' => 'Test / Pertanyaan',
                 'routeName' => 'pattern-course-questions.index',
