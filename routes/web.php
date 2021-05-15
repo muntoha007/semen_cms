@@ -77,9 +77,20 @@ Route::group(['middleware' => ['sentinelAuth','checkAccess'],'namespace' => 'Adm
     Route::resource('pattern-course-questions', 'D\PatternCourseQuestionController')->except('show');
 
     Route::resource('master-groups', 'E\MasterGroupController')->except('show');
+
     Route::resource('kanji-chapters', 'E\KanjiChapterController')->except('show');
     Route::resource('kanji-educations', 'E\KanjiEducationController')->except('show');
     Route::resource('kanji-samples', 'E\KanjiSampleController')->except('show');
+    Route::resource('kanji-courses', 'E\KanjiCourseController')->except('show');
+    Route::resource('kanji-course-questions', 'E\KanjiCourseQuestionController')->except('show');
 
+    Route::resource('vocabularies', 'F\VocabularyController')->except('show');
+    Route::resource('vocabulary-courses', 'F\VocabularyCourseController')->except('show');
+    Route::resource('vocabulary-course-questions', 'F\VocabularyCourseQuestionController')->except('show');
 
+    Route::resource('master-ability-courses', 'G\MasterAbilityCourseController')->except('show');
+    Route::resource('master-ability-course-levels', 'G\MasterAbilityCourseLevelController')->except('show');
+
+    Route::resource('ability-courses', 'G\AbilityCourseController')->except('show');
+    Route::resource('ability-course-questions', 'G\AbilityCourseQuestionController')->except('show');
 });

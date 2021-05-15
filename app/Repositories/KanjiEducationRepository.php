@@ -78,7 +78,7 @@ class KanjiEducationRepository
             $image = base64_encode(file_get_contents($data['img_writing']));
             $response_img = $client->request('POST', '/api/v1/cdn', [
                 'json' => [
-                    'bucket' => 'room1',
+                    'bucket' => 'kanji',
                     'image' => $image
                 ]
             ]);
@@ -94,7 +94,7 @@ class KanjiEducationRepository
             $img_illustration = base64_encode(file_get_contents($data['img_illustration']));
             $response_img_color = $client->request('POST', '/api/v1/cdn', [
                 'json' => [
-                    'bucket' => 'room1',
+                    'bucket' => 'kanji',
                     'image' => $img_illustration
                 ]
             ]);

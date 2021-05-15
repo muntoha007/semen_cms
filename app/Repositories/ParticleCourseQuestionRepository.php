@@ -32,7 +32,7 @@ class ParticleCourseQuestionRepository
             $answer->answer_jpn = $value["answer_jpn"];
             $answer->answer_romanji = $value["answer_romanji"];
             $answer->answer_idn = $value["answer_idn"];
-            $answer->is_true = isset($value["is_true"]) ? 1 : 0;
+            $answer->is_true = isset($value["is_active"]) ? 1 : 0;
             $answer->save();
         }
 

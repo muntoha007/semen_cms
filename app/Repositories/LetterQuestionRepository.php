@@ -19,7 +19,7 @@ class LetterQuestionRepository
         $question->code = Str::random(15);
         $question->question = $data['question'];
         $question->letter_course_id = $data['letter_course_id'];
-        $question->is_active = isset($value["is_true"]) ? 1 : 0;
+        $question->is_active = isset($value["is_active"]);
         $question->save();
 
         $qid = $question->id;

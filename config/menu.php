@@ -174,9 +174,70 @@ return [
                 'additional_query' => '',
                 'icon' => 'mdi mdi-flag menu-icon',
             ],
-            'pattern-question' => [
+            'kanji-course' => [
+                'title' => 'Kursus Kanji',
+                'routeName' => 'kanji-courses.index',
+                'additional_query' => '',
+                'icon' => 'mdi mdi-flag menu-icon',
+            ],
+            'kanji-question' => [
                 'title' => 'Test / Pertanyaan',
-                'routeName' => 'pattern-course-questions.index',
+                'routeName' => 'kanji-course-questions.index',
+                'additional_query' => '',
+                'icon' => 'mdi mdi-flag menu-icon',
+            ]
+        ]
+    ],
+    'room-6' => [
+        'title' => 'Room 6',
+        'routeName' => 'vocabularies.index',
+        'additional_query' => '',
+        'icon' => 'mdi mdi-comment-text-outline menu-icon',
+        'sub_menu' => [
+            'vocabularies' => [
+                'title' => 'Vocabularies/Kosa kata',
+                'routeName' => 'vocabularies.index',
+                'icon' => 'mdi mdi-flag menu-icon',
+            ],
+            'vocabulary-course' => [
+                'title' => 'Kursus Vocabulary',
+                'routeName' => 'vocabulary-courses.index',
+                'additional_query' => '',
+                'icon' => 'mdi mdi-flag menu-icon',
+            ],
+            'vocabulary-question' => [
+                'title' => 'Test / Pertanyaan',
+                'routeName' => 'vocabulary-course-questions.index',
+                'additional_query' => '',
+                'icon' => 'mdi mdi-flag menu-icon',
+            ]
+        ]
+    ],
+    'room-7' => [
+        'title' => 'Room 7',
+        'routeName' => 'master-ability-courses.index',
+        'additional_query' => '',
+        'icon' => 'mdi mdi-comment-text-outline menu-icon',
+        'sub_menu' => [
+            'ability-master-course' => [
+                'title' => 'Master Ability Course',
+                'routeName' => 'master-ability-courses.index',
+                'icon' => 'mdi mdi-flag menu-icon',
+            ],
+            'ability-master-course-level' => [
+                'title' => 'Master Ability Level',
+                'routeName' => 'master-ability-course-levels.index',
+                'icon' => 'mdi mdi-flag menu-icon',
+            ],
+            'ability-course' => [
+                'title' => 'Kursus Ability',
+                'routeName' => 'ability-courses.index',
+                'additional_query' => '',
+                'icon' => 'mdi mdi-flag menu-icon',
+            ],
+            'ability-question' => [
+                'title' => 'Test / Pertanyaan',
+                'routeName' => 'ability-course-questions.index',
                 'additional_query' => '',
                 'icon' => 'mdi mdi-flag menu-icon',
             ]
