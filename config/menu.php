@@ -6,6 +6,41 @@ return [
         'routeName' => 'dashboard',
         'icon' => 'mdi mdi-home menu-icon',
     ],
+    'master' => [
+        'title' => 'Master',
+        'routeName' => 'master-groups.index',
+        'additional_query' => '',
+        'icon' => 'mdi mdi-comment-text-outline menu-icon',
+        'sub_menu' => [
+            'master-group' => [
+                'title' => 'Master Group',
+                'routeName' => 'master-groups.index',
+                'icon' => 'mdi mdi-flag menu-icon',
+            ],
+            'ability-master-course' => [
+                'title' => 'Master Ability Course',
+                'routeName' => 'master-ability-courses.index',
+                'icon' => 'mdi mdi-flag menu-icon',
+            ],
+            'ability-master-course-level' => [
+                'title' => 'Master Ability Level',
+                'routeName' => 'master-ability-course-levels.index',
+                'icon' => 'mdi mdi-flag menu-icon',
+            ],
+            'ability-course' => [
+                'title' => 'Kursus Ability',
+                'routeName' => 'ability-courses.index',
+                'additional_query' => '',
+                'icon' => 'mdi mdi-flag menu-icon',
+            ],
+            'ability-question' => [
+                'title' => 'Test / Pertanyaan',
+                'routeName' => 'ability-course-questions.index',
+                'additional_query' => '',
+                'icon' => 'mdi mdi-flag menu-icon',
+            ]
+        ]
+    ],
     'room-1' => [
         'title' => 'Room 1',
         'routeName' => 'letters.index',
@@ -21,6 +56,20 @@ return [
                 'title' => 'Daftar Kata',
                 'routeName' => 'letters.index',
                 'additional_query' => '',
+                'icon' => 'mdi mdi-flag menu-icon',
+            ],
+            'letter-hiragana' => [
+                'title' => 'Hiragana',
+                'routeName' => 'letter-hiragana-list',
+                'additional_query' => 'hiragana',
+                'cid' => 1,
+                'icon' => 'mdi mdi-flag menu-icon',
+            ],
+            'letter-katakana' => [
+                'title' => 'Katakana',
+                'routeName' => 'letter-katakana-list',
+                'additional_query' => 'katakana',
+                'cid' => 2,
                 'icon' => 'mdi mdi-flag menu-icon',
             ],
             'letter-course' => [

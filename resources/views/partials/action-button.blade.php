@@ -47,6 +47,12 @@
     </a>
 @endif
 
+@if( isset( $add_url ) && checkPermissionAccessByUrl($add_url) )
+    <a href="{!! empty( $add_url ) ? 'javascript:void(0)' : $add_url !!}" class="btn btn-success btn-xs {!! empty( $add_url ) ? 'disabled' : '' !!}" title="Add" data-button="add">
+        <i class="material-icons">add</i>
+    </a>
+@endif
+
 @if( isset( $translate_url ) )
     <a href="{!! empty( $translate_url ) ? 'javascript:void(0)' : $translate_url !!}" class="btn btn-primary btn-xs {!! empty( $translate_url ) ? 'disabled' : '' !!}" title="Translate" data-button="Transalate">
         <i class="material-icons">translate</i>
@@ -64,12 +70,12 @@
     </a>
 @endif
 @if( !empty( $cancel_order ) )
-    <a 
-        href="javascript:void(0)" 
-        id="cancel_order" 
+    <a
+        href="javascript:void(0)"
+        id="cancel_order"
         class="btn btn-danger btn-xs {!! empty( $cancel_order ) ? 'disabled' : '' !!}"
-        title="Cancel Order" 
-        data-order-id="{!! empty( $order_id ) ? '0' : $order_id !!}" 
+        title="Cancel Order"
+        data-order-id="{!! empty( $order_id ) ? '0' : $order_id !!}"
         data-comment="{!! empty( $comment ) ? '' : $comment !!}"
         data-button="delete"
     >

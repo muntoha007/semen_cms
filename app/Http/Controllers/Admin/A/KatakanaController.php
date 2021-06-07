@@ -11,7 +11,6 @@ use App\Models\LetterCategory;
 use App\Repositories\LetterCategoryRepository;
 use App\Repositories\LetterRepository;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
 
 class LetterController extends Controller
 {
@@ -40,17 +39,9 @@ class LetterController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function categoryindex(LetterCategoryTypeDatatable $datatable)
+    public function categoryindex(LetterCategoryTypeDatatable $datatable, $cid)
     {
-        $route = Route::currentRouteName();
-        // dd($route);
-        if ($route == "letter-hiragana-list"){
-            $cid = 1;
-        } else {
-            $cid = 2;
-        }
-        // dd($cid);
-        return $datatable->with('cid', $cid)->render('backend.letters.new-letters.index', compact('cid'));
+        return $datatable->with('cid', $cid)->render('backend.letters.new-letters.index');
     }
 
 
@@ -72,14 +63,7 @@ class LetterController extends Controller
      */
     public function newcreate()
     {
-        $route = Route::currentRouteName();
-        // dd($route);
-        if ($route == "letter-hiragana-list"){
-            $cid = 1;
-        } else {
-            $cid = 2;
-        }
-        return view('backend.letters.new-letters.form', compact('cid'));
+        return view('backend.letters.new-letters.form');
     }
 
     /**

@@ -2,7 +2,7 @@
 
 namespace App\DataTables;
 
-use App\Models\PatternLesson;
+use App\Models\Letter;
 use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
@@ -11,7 +11,7 @@ use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Html\Editor\Editor;
 // use DB;
 
-class PatternLessonDatatable extends DataTable
+class LetterCategoryTypeDatatable extends DataTable
 {
     /**
      * Build DataTable class.
@@ -31,25 +31,16 @@ class PatternLessonDatatable extends DataTable
                 }
             })
             ->editColumn('created_at', function ($data) {
-                return $data->created_at == "" ? "" : $data->created_at->format('Y-m-d'); // human readable format
+                return $data->created_at->format('Y-m-d'); // human readable format
             })
             ->editColumn('updated_at', function ($data) {
-                return $data->updated_at == "" ? "" : $data->updated_at->format('Y-m-d'); // human readable format
+                return $data->updated_at->format('Y-m-d'); // human readable format
             })
             ->addColumn('action', function ($data) {
-                $edit_url = route('pattern-lessons.edit', $data->id);
-                // $add_url = route('lesson-detail-add', $data->id);
+                $edit_url = route('letter-cat-edit', [$data->letter_category_id, $data->id]);
 
                 return view('partials.action-button')->with(
                     compact('edit_url')
-                );
-            })
-            ->addColumn('detail', function ($data) {
-                // $edit_url = route('pattern-lessons.edit', $data->id);
-                $add_url = route('lesson-detail-index', $data->id);
-
-                return view('partials.action-button')->with(
-                    compact('add_url')
                 );
             });
     }
@@ -60,20 +51,21 @@ class PatternLessonDatatable extends DataTable
      * @param \App\Role $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(PatternLesson $model)
+    public function query(Letter $model)
     {
         // DB::statement(DB::raw('set @rownum=0'));
         return $model->newQuery()
             // ->where('slug','!=','super-admin')
             ->select([
-                'pattern_lessons.id',
-                'pattern_lessons.code',
-                'pattern_lessons.name',
-                'pattern_lessons.is_active',
-                'pattern_lessons.created_at',
-                'pattern_lessons.updated_at',
+                'letters.id',
+                'letters.code',
+                'letters.letter',
+                'letters.is_active',
+                'letters.letter_category_id',
+                'letters.created_at',
+                'letters.updated_at',
                 DB::raw('row_number() over () AS rownum'),
-            ]);
+            ])->where('letters.letter_category_id', '=', $this->cid);
     }
 
     /**
@@ -84,7 +76,7 @@ class PatternLessonDatatable extends DataTable
     public function html()
     {
         return $this->builder()
-            ->setTableId('verb-group-table')
+            ->setTableId('letter-category-table')
             ->columns($this->getColumns())
             ->minifiedAjax()
             ->dom('<"row"<"col-sm-6"l><"col-sm-6"f>> <"row"<"col-sm-12"tr>> <"row"<"col-sm-5"i><"col-sm-7"p>>')
@@ -116,17 +108,11 @@ class PatternLessonDatatable extends DataTable
                 ->title('#')
                 ->searchable(false),
             Column::make('code'),
-            Column::make('name'),
-            Column::make('is_active')->title('Status'),
+            Column::make('letter'),
+            Column::computed('is_active')->title('Status'),
             Column::make('created_at'),
             Column::make('updated_at'),
             Column::computed('action')
-                ->visible($hasAction)
-                ->exportable(false)
-                ->printable(true)
-                ->width(100)
-                ->addClass('text-center'),
-            Column::computed('detail')
                 ->visible($hasAction)
                 ->exportable(false)
                 ->printable(true)
@@ -142,6 +128,6 @@ class PatternLessonDatatable extends DataTable
      */
     protected function filename()
     {
-        return 'PatternLesson_' . date('YmdHis');
+        return 'Letter_' . date('YmdHis');
     }
 }

@@ -67,7 +67,8 @@
                         @foreach($menu['sub_menu'] as $subKey => $subMenu)
                             @isPermitted($subMenu['routeName'])
                             <li class="nav-item {{ setMenuActive($menu['routeName']) }}">
-                                <a class="nav-link {{ setMenuActive($subMenu['routeName']) }}" href="{{ route($subMenu['routeName']) }}{{ (@$subMenu['param'] ? '/'.@$subMenu['param'] : '') }}">
+                                {{-- {{dump(@$subMenu['cid'] ? route($subMenu['routeName'],$subMenu['cid']) : route($subMenu['routeName']))}} --}}
+                                <a class="nav-link {{ setMenuActive($subMenu['routeName']) }}" href="{{ @$subMenu['cid'] ? route($subMenu['routeName'],$subMenu['cid']) : route($subMenu['routeName']) }}{{ (@$subMenu['param'] ? '/'.@$subMenu['param'] : '') }}">
                                     {{ $subMenu['title'] }}
                                     {{--@if(@$subMenu['icon'] != null)--}}
                                         {{--<i class="{{ $subMenu['icon'] }}"></i>--}}
@@ -75,6 +76,7 @@
                                 </a>
                             </li>
                             @endisPermitted
+                            {{-- {{dump(@$subMenu['cid'] ? route($subMenu['routeName'],$subMenu['cid']) : route($subMenu['routeName']))}} --}}
                         @endforeach
                     </ul>
                     </div>

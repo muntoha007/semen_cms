@@ -50,7 +50,7 @@ class PatternLessonController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(PatternLessonRequest $request)
-    {
+    {dd($request);
         $param = $request->all();
         $saveData = $this->repository->create($param);
         flashDataAfterSave($saveData,$this->moduleName);

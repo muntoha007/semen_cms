@@ -2,7 +2,7 @@
 
 namespace App\DataTables;
 
-use App\Models\PatternLesson;
+use App\Models\PatternLessonDetail;
 use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
@@ -11,7 +11,7 @@ use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Html\Editor\Editor;
 // use DB;
 
-class PatternLessonDatatable extends DataTable
+class PatternLessonDetailDatatable extends DataTable
 {
     /**
      * Build DataTable class.
@@ -37,16 +37,16 @@ class PatternLessonDatatable extends DataTable
                 return $data->updated_at == "" ? "" : $data->updated_at->format('Y-m-d'); // human readable format
             })
             ->addColumn('action', function ($data) {
-                $edit_url = route('pattern-lessons.edit', $data->id);
+                $edit_url = route('lesson-detail-edit', [$data->pattern_lesson_id, $data->id]);
                 // $add_url = route('lesson-detail-add', $data->id);
 
                 return view('partials.action-button')->with(
                     compact('edit_url')
                 );
             })
-            ->addColumn('detail', function ($data) {
-                // $edit_url = route('pattern-lessons.edit', $data->id);
-                $add_url = route('lesson-detail-index', $data->id);
+            ->addColumn('example', function ($data) {
+                $add_url = route('lesson-detail-example-index', [$data->pattern_lesson_id, $data->id]);
+                // $add_url = route('lesson-detail-add', $data->id);
 
                 return view('partials.action-button')->with(
                     compact('add_url')
@@ -60,20 +60,20 @@ class PatternLessonDatatable extends DataTable
      * @param \App\Role $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(PatternLesson $model)
+    public function query(PatternLessonDetail $model)
     {
         // DB::statement(DB::raw('set @rownum=0'));
         return $model->newQuery()
             // ->where('slug','!=','super-admin')
             ->select([
-                'pattern_lessons.id',
-                'pattern_lessons.code',
-                'pattern_lessons.name',
-                'pattern_lessons.is_active',
-                'pattern_lessons.created_at',
-                'pattern_lessons.updated_at',
+                'pattern_lesson_details.id',
+                'pattern_lesson_details.code',
+                'pattern_lesson_details.lesson_title',
+                'pattern_lesson_details.pattern_lesson_id',
+                'pattern_lesson_details.created_at',
+                'pattern_lesson_details.updated_at',
                 DB::raw('row_number() over () AS rownum'),
-            ]);
+            ])->where('pattern_lesson_details.pattern_lesson_id', '=', $this->id);
     }
 
     /**
@@ -116,8 +116,7 @@ class PatternLessonDatatable extends DataTable
                 ->title('#')
                 ->searchable(false),
             Column::make('code'),
-            Column::make('name'),
-            Column::make('is_active')->title('Status'),
+            Column::make('lesson_title'),
             Column::make('created_at'),
             Column::make('updated_at'),
             Column::computed('action')
@@ -126,7 +125,7 @@ class PatternLessonDatatable extends DataTable
                 ->printable(true)
                 ->width(100)
                 ->addClass('text-center'),
-            Column::computed('detail')
+            Column::computed('example')
                 ->visible($hasAction)
                 ->exportable(false)
                 ->printable(true)
@@ -142,6 +141,6 @@ class PatternLessonDatatable extends DataTable
      */
     protected function filename()
     {
-        return 'PatternLesson_' . date('YmdHis');
+        return 'PatternLessonDetail_' . date('YmdHis');
     }
 }

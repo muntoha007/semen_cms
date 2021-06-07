@@ -58,6 +58,16 @@ Route::group(['middleware' => ['sentinelAuth','checkAccess'],'namespace' => 'Adm
     Route::resource('letter-courses', 'A\LetterCourseController')->except('show');
     Route::resource('letter-questions', 'A\LetterCourseQuestionController')->except('show');
 
+    Route::get('letters/1/index', 'A\LetterController@categoryindex')->name('letter-hiragana-list');
+    Route::get('letters/2/index', 'A\LetterController@categoryindex')->name('letter-katakana-list');
+    Route::get('letters/{cid}/add', 'A\LetterController@newcreate')->name('letter-cat-get-add');
+    Route::post('letters/{cid}/add', 'A\LetterController@categorystore')->name('letter-cat-add');
+    Route::get('letters/{letter_category_id}/edit/{id}', 'A\LetterController@categoryedit')->name('letter-cat-edit');
+    Route::put('letters/{letter_category_id}/edit/{id}', 'A\LetterController@categoryupdate')->name('letter-cat-update');
+
+    Route::resource('letters/hiragana', 'A\LetterController')->except('show');
+    Route::resource('letters/katakana', 'A\LetterController')->except('show');
+
     Route::resource('verb-levels', 'B\MasterVerbLevelController')->except('show');
     Route::resource('verb-groups', 'B\MasterVerbGroupController')->except('show');
     Route::resource('verb-words', 'B\MasterVerbWordController')->except('show');
@@ -73,8 +83,21 @@ Route::group(['middleware' => ['sentinelAuth','checkAccess'],'namespace' => 'Adm
 
     Route::resource('pattern-chapters', 'D\PatternChapterController')->except('show');
     Route::resource('pattern-lessons', 'D\PatternLessonController')->except('show');
+    Route::resource('pattern-lesson-details', 'D\PatternLessonDetailController')->except('show');
     Route::resource('pattern-courses', 'D\PatternCourseController')->except('show');
     Route::resource('pattern-course-questions', 'D\PatternCourseQuestionController')->except('show');
+
+    Route::get('pattern-lessons/{id}/detail-index', 'D\PatternLessonDetailController@index')->name('lesson-detail-index');
+    Route::get('pattern-lessons/{id}/details', 'D\PatternLessonDetailController@create')->name('lesson-detail-add');
+    Route::post('pattern-lessons/{id}/details', 'D\PatternLessonDetailController@store')->name('lesson-detail-post');
+    Route::get('pattern-lessons/{id}/detail-edit/{did}', 'D\PatternLessonDetailController@edit')->name('lesson-detail-edit');
+    Route::put('pattern-lessons/{id}/detail-edit/{did}', 'D\PatternLessonDetailController@update')->name('lesson-detail-update');
+
+    Route::get('pattern-lessons/{id}/details/{did}/index', 'D\PatternLessonDetailExampleController@index')->name('lesson-detail-example-index');
+    Route::get('pattern-lessons/{id}/details/{did}', 'D\PatternLessonDetailExampleController@create')->name('lesson-detail-example-add');
+    Route::post('pattern-lessons/{id}/details/{did}', 'D\PatternLessonDetailExampleController@store')->name('lesson-detail-example-post');
+    Route::get('pattern-lessons/{id}/details/{did}/example/{eid}', 'D\PatternLessonDetailExampleController@edit')->name('lesson-detail-example-edit');
+    Route::put('pattern-lessons/{id}/details/{did}/example/{eid}', 'D\PatternLessonDetailExampleController@update')->name('lesson-detail-example-update');
 
     Route::resource('master-groups', 'E\MasterGroupController')->except('show');
 

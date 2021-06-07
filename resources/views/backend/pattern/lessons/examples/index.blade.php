@@ -1,15 +1,15 @@
 @extends('layouts.master')
-@section('title', 'Master Groups List')
+@section('title', 'Pattern Lessons Detail List')
 @section('content')
     <div class="content-wrapper">
         <div class="row">
             <div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title text-center table-title">List Master Groups</h4>
-                        @isPermitted('master-groups.create')
+                        <h4 class="card-title text-center table-title">List Pattern Lesson Details</h4>
+                        @isPermitted('lesson-detail-example-add', [request()->route('id'), request()->route('did')])
                         <div class="form-group">
-                            <a href="{{ route('master-groups.create') }}" type="button" class="btn btn-outline-info btn-rounded btn-fw btn-sm">
+                            <a href="{{ route('lesson-detail-example-add', [request()->route('id'), request()->route('did')]) }}" type="button" class="btn btn-outline-info btn-rounded btn-fw btn-sm">
                                 <i class="mdi mdi-plus-circle btn-icon-prepend"></i> Create new
                             </a>
                         </div>
