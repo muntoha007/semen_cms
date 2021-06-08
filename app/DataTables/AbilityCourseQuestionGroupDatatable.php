@@ -2,7 +2,7 @@
 
 namespace App\DataTables;
 
-use App\Models\AbilityCourseQuestion;
+use App\Models\AbilityCourseQuestionGroup;
 use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
@@ -11,7 +11,7 @@ use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Html\Editor\Editor;
 // use DB;
 
-class AbilityCourseQuestionDatatable extends DataTable
+class AbilityCourseQuestionGroupDatatable extends DataTable
 {
     /**
      * Build DataTable class.
@@ -37,10 +37,16 @@ class AbilityCourseQuestionDatatable extends DataTable
                 return $data->updated_at->format('Y-m-d'); // human readable format
             })
             ->addColumn('action', function ($data) {
-                $edit_url = route('ability-questions.edit', [$data->ability_course_question_group_id, $data->id]);
+                $edit_url = route('ability-course-question-groups.edit', $data->id);
 
                 return view('partials.action-button')->with(
                     compact('edit_url')
+                );
+            })->addColumn('questions', function ($data) {
+                $add_url = route('ability-questions.index', [$data->id]);
+
+                return view('partials.action-button')->with(
+                    compact('add_url')
                 );
             });
     }
@@ -51,21 +57,20 @@ class AbilityCourseQuestionDatatable extends DataTable
      * @param \App\Role $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(AbilityCourseQuestion $model)
+    public function query(AbilityCourseQuestionGroup $model)
     {
         // DB::statement(DB::raw('set @rownum=0'));
         return $model->newQuery()
             // ->where('slug','!=','super-admin')
             ->select([
-                'ability_course_questions.id',
-                'ability_course_questions.code',
-                'ability_course_questions.question_jpn',
-                'ability_course_questions.is_active',
-                'ability_course_questions.ability_course_question_group_id',
-                'ability_course_questions.created_at',
-                'ability_course_questions.updated_at',
+                'ability_course_question_groups.id',
+                'ability_course_question_groups.code',
+                'ability_course_question_groups.question_jpn',
+                'ability_course_question_groups.is_active',
+                'ability_course_question_groups.created_at',
+                'ability_course_question_groups.updated_at',
                 DB::raw('row_number() over () AS rownum'),
-            ])->where('ability_course_questions.ability_course_question_group_id', '=', $this->id);
+            ]);
     }
 
     /**
@@ -117,6 +122,12 @@ class AbilityCourseQuestionDatatable extends DataTable
                 ->exportable(false)
                 ->printable(true)
                 ->width(100)
+                ->addClass('text-center'),
+            Column::computed('questions')
+                ->visible($hasAction)
+                ->exportable(false)
+                ->printable(true)
+                ->width(100)
                 ->addClass('text-center')
         ];
     }
@@ -128,6 +139,6 @@ class AbilityCourseQuestionDatatable extends DataTable
      */
     protected function filename()
     {
-        return 'AbilityCourseQuestion_' . date('YmdHis');
+        return 'AbilityCourseQuestionGroup_' . date('YmdHis');
     }
 }

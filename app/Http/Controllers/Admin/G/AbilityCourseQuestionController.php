@@ -20,7 +20,7 @@ class AbilityCourseQuestionController extends Controller
         $this->repository = new AbilityCourseQuestionRepository();
     }
 
-    protected $redirectAfterSave = 'ability-course-questions.index';
+    protected $redirectAfterSave = 'ability-questions.index';
     protected $moduleName = 'ability Courses Questions';
 
     /**
@@ -28,9 +28,10 @@ class AbilityCourseQuestionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(AbilityCourseQuestionDatatable $datatable)
+    public function index(AbilityCourseQuestionDatatable $datatable, $id)
     {
-        return $datatable->render('backend.ability.questions.index');
+        // dd($id);
+        return $datatable->with('id', $id)->render('backend.ability.questions.index');
     }
 
     /**
@@ -42,7 +43,7 @@ class AbilityCourseQuestionController extends Controller
     {
         $courses = AbilityCourse::get();
         $type = "new";
-        return view('backend.ability.questions.form', compact('courses','type'));
+        return view('backend.ability.questions.form', compact('courses', 'type'));
     }
 
     /**
@@ -53,12 +54,12 @@ class AbilityCourseQuestionController extends Controller
      */
     public function store(AbilityCourseQuestionRequest $request)
     {
-        // dd($request);
+        // dd($request['ability_course_question_group_id']);
         $param = $request->all();
         $saveData = $this->repository->createNew($param);
         flashDataAfterSave($saveData, $this->moduleName);
 
-        return redirect()->route($this->redirectAfterSave);
+        return redirect()->route($this->redirectAfterSave, $request['ability_course_question_group_id']);
     }
 
     /**
@@ -91,7 +92,7 @@ class AbilityCourseQuestionController extends Controller
         $courses = AbilityCourse::where('is_active', 1)->get();
         $answers = AbilityCourseAnswer::where('ability_course_question_id', $id)->get();
         $type = "edit";
-        return view('backend.ability.questions.form', compact('data', 'courses','answers', 'type'));
+        return view('backend.ability.questions.form', compact('data', 'courses', 'answers', 'type'));
     }
 
     /**
@@ -107,7 +108,7 @@ class AbilityCourseQuestionController extends Controller
         $saveData = $this->repository->update($param, $id);
         flashDataAfterSave($saveData, $this->moduleName);
 
-        return redirect()->route($this->redirectAfterSave);
+        return redirect()->route($this->redirectAfterSave, $param['ability_course_question_group_id']);
     }
 
     /**

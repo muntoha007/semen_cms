@@ -25,9 +25,8 @@ class AbilityCourseRequest extends FormRequest
     public function rules()
     {
         return [
-            // 'name' => 'required|unique:ability_courses,name',
-            'master_ability_course_id' => 'required',
-            'master_ability_course_level_id' => 'required',
+            'title' => 'required|unique:ability_courses,title',
+            'ability_course_chapter_id' => 'required',
         ];
     }
 

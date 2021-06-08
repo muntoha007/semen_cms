@@ -115,5 +115,15 @@ Route::group(['middleware' => ['sentinelAuth','checkAccess'],'namespace' => 'Adm
     Route::resource('master-ability-course-levels', 'G\MasterAbilityCourseLevelController')->except('show');
 
     Route::resource('ability-courses', 'G\AbilityCourseController')->except('show');
+    Route::resource('ability-course-question-groups', 'G\AbilityCourseQuestionGroupController')->except('show');
+    Route::resource('ability-course-question-groups/{id}/ability-questions', 'G\AbilityCourseQuestionController')->except('show');
     Route::resource('ability-course-questions', 'G\AbilityCourseQuestionController')->except('show');
+    Route::resource('ability-course-chapters', 'G\AbilityCourseChapterController')->except('show');
+
+    // Route::get('pattern-lessons/{id}/details/{did}/index', 'D\PatternLessonDetailExampleController@index')->name('lesson-detail-example-index');
+    // Route::get('pattern-lessons/{id}/details/{did}', 'D\PatternLessonDetailExampleController@create')->name('lesson-detail-example-add');
+    // Route::post('pattern-lessons/{id}/details/{did}', 'D\PatternLessonDetailExampleController@store')->name('lesson-detail-example-post');
+    // Route::get('pattern-lessons/{id}/details/{did}/example/{eid}', 'D\PatternLessonDetailExampleController@edit')->name('lesson-detail-example-edit');
+    // Route::put('pattern-lessons/{id}/details/{did}/example/{eid}', 'D\PatternLessonDetailExampleController@update')->name('lesson-detail-example-update');
+
 });

@@ -18,37 +18,6 @@ $title = @$data ? 'Edit' : 'Add New';
                             @if (@$data)
                                 <input type="hidden" name="_method" value="put">
                             @endif
-                            {{-- <div class="row"> --}}
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="ability_course_id">Pick Ability Course</label>
-                                        <select name="ability_course_id" id="ability_course_id" class="form-control" required>
-                                            <option value="">Select Ability Course</option>
-                                            @foreach ($courses as $course)
-                                                <option value="{{ $course->id }}"
-                                                    {{ $course->id == @$data->ability_course_id ? 'selected' : '' }}>
-                                                    {{ $course->code }}</option>
-                                            @endforeach
-                                        </select>
-                                        {!! $errors->first('ability_course_id', '<label class="help-block error-validation">:message</label>') !!}
-                                    </div>
-                                </div>
-
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="is_active">Status</label>
-                                        <select name="is_active" id="status" class="form-control">
-                                            <option {{ @$data->is_active == 1 ? 'selected' : '' }} value="1">
-                                                active
-                                            </option>
-                                            <option {{ @$data->is_active == 0 ? 'selected' : '' }} value="0">
-                                                inactive
-                                            </option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
 
                             <div class="row">
                                 <div class="col-md-6">
@@ -76,7 +45,54 @@ $title = @$data ? 'Edit' : 'Add New';
                                 </div>
                             </div>
 
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Sound</label>
+                                        <input type="file" name="question_sound" class="file-upload-default"
+                                            data-max-file-size="5M"
+                                            data-default-file="{{ env('CLOUD_S3_URL') . @$data->question_sound }}">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control file-upload-info" disabled=""
+                                                placeholder="{{ @$data->question_sound ? @$data->question_sound : 'Upload Sound' }}"
+                                                data-max-file-size="5M"
+                                                data-default-file="{{ env('CLOUD_S3_URL') . @$data->question_sound }}">
+                                            <span class="input-group-append">
+                                                <button class="file-upload-browse btn btn-gradient-primary"
+                                                    type="button">Choose</button>
+                                            </span>
+                                        </div>
+                                        {!! $errors->first('question_sound', '<label class="help-block error-validation">:message</label>') !!}
+                                    </div>
 
+                                    @if (@$data->question_sound)
+                                        <div class="form-group">
+                                            <label>Listen here</label>
+                                            <br>
+                                            <audio controls>
+                                                <source src="{{ env('CLOUD_S3_URL') . @$data->question_sound }}"
+                                                    type="audio/mpeg">
+                                            </audio>
+                                        </div>
+                                    @endif
+                                </div>
+                                <input type="hidden" name="ability_course_question_group_id" value="{{ request()->route('id') }}">
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="is_active">Status</label>
+                                        <select name="is_active" id="status" class="form-control">
+                                            <option {{ @$data->is_active == 1 ? 'selected' : '' }} value="1">
+                                                active
+                                            </option>
+                                            <option {{ @$data->is_active == 0 ? 'selected' : '' }} value="0">
+                                                inactive
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr>
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">

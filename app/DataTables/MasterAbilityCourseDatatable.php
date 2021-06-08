@@ -57,13 +57,13 @@ class MasterAbilityCourseDatatable extends DataTable
         return $model->newQuery()
             // ->where('slug','!=','super-admin')
             ->select([
-                'master_ability_courses.id',
-                'master_ability_courses.code',
-                'master_ability_courses.name',
-                'master_ability_courses.learning_time',
-                'master_ability_courses.is_active',
-                'master_ability_courses.created_at',
-                'master_ability_courses.updated_at',
+                'ability_courses.id',
+                'ability_courses.code',
+                'ability_courses.title',
+                'ability_courses.learning_time',
+                'ability_courses.is_active',
+                'ability_courses.created_at',
+                'ability_courses.updated_at',
                 DB::raw('row_number() over () AS rownum'),
             ]);
     }
@@ -108,7 +108,7 @@ class MasterAbilityCourseDatatable extends DataTable
                 ->title('#')
                 ->searchable(false),
             Column::make('code'),
-            Column::make('name'),
+            Column::make('title'),
             Column::make('learning_time'),
             Column::computed('is_active')->title('Status'),
             Column::make('created_at'),

@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 
-class AbilityCourseQuestionRequest extends FormRequest
+class AbilityCourseQuestionGroupRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,7 +26,9 @@ class AbilityCourseQuestionRequest extends FormRequest
     {
         return [
             "question_jpn" => 'required',
-            "answer" => 'required',
+            'ability_course_id' => 'required',
+            "question_sound" => 'nullable|file|mimes:audio/mpeg,mpga,mp3,wav,aac',
+            "question_img" => 'nullable|file|mimes:jpeg,jpg,png,gif|max:5048',
         ];
     }
 

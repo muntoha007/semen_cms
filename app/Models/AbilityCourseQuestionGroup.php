@@ -4,10 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class MasterAbilityCourse extends Model
+class AbilityCourseQuestionGroup extends Model
 {
 
-    protected $table = 'ability_courses';
+    protected $table = 'ability_course_question_groups';
     protected $guarded = ['id'];
 
 }

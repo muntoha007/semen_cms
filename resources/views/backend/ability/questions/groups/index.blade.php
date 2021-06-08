@@ -1,15 +1,15 @@
 @extends('layouts.master')
-@section('title', 'Question List')
+@section('title', 'Question Group List')
 @section('content')
     <div class="content-wrapper">
         <div class="row">
             <div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title text-center table-title">List Questions</h4>
-                        @isPermitted('ability-questions.create')
+                        <h4 class="card-title text-center table-title">List Questions Group</h4>
+                        @isPermitted('ability-course-question-groups.create')
                         <div class="form-group">
-                            <a href="{{ route('ability-questions.create', request()->route('id')) }}" type="button" class="btn btn-outline-info btn-rounded btn-fw btn-sm">
+                            <a href="{{ route('ability-course-question-groups.create') }}" type="button" class="btn btn-outline-info btn-rounded btn-fw btn-sm">
                                 <i class="mdi mdi-plus-circle btn-icon-prepend"></i> Create new
                             </a>
                         </div>

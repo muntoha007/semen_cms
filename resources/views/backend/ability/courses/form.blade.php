@@ -19,7 +19,7 @@ $title = @$data ? 'Edit' : 'Add New';
                                 <input type="hidden" name="_method" value="put">
                             @endif
                             <div class="row">
-                                {{-- <div class="col-md-4">
+                                <div class="col-md-8">
                                     <div class="form-group">
                                         <label for="title">Title</label>
                                         <input type="text" class="form-control {{ hasErrorField($errors, 'title') }}"
@@ -27,40 +27,34 @@ $title = @$data ? 'Edit' : 'Add New';
                                             placeholder="Title">
                                         {!! $errors->first('title', '<label class="help-block error-validation">:message</label>') !!}
                                     </div>
-                                </div> --}}
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="master_ability_course_id">Ability Course</label>
-                                        <select name="master_ability_course_id" id="master_ability_course_id" class="form-control"
-                                            required>
-                                            <option value="">Select Ability Course</option>
-                                            @foreach (@$courses as $course)
-                                                <option value="{{ $course->id }}"
-                                                    {{ $course->id == @$data->master_ability_course_id ? 'selected' : '' }}>
-                                                    {{ $course->name }}</option>
-                                            @endforeach
-                                        </select>
-                                        {!! $errors->first('master_ability_course_id', '<label class="help-block error-validation">:message</label>') !!}
 
+                                    <div class="form-group input-group">
+                                        <label for="exampleInputFile2">Image</label>
+                                        <input type="file"
+                                            class="form-control {{ hasErrorField($errors, 'img') }} dropify"
+                                            data-errors-position="outside" name="img"
+                                            data-default-file="{{ env('CLOUD_S3_URL') . @$data->img }}"
+                                            data-height="100" data-max-file-size="2M"
+                                            data-allowed-file-extensions="jpg jpeg png gif">
                                     </div>
+                                    {!! $errors->first('img', '<label class="help-block error-validation">:message</label>') !!}
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="master_ability_course_level_id">Ability Course Level</label>
-                                        <select name="master_ability_course_level_id" id="master_ability_course_level_id" class="form-control"
+                                        <label for="ability_course_chapter_id">Ability Course Chapter</label>
+                                        <select name="ability_course_chapter_id" id="ability_course_chapter_id" class="form-control"
                                             required>
-                                            <option value="">Select Ability Course Level</option>
-                                            @foreach (@$levels as $level)
-                                                <option value="{{ $level->id }}"
-                                                    {{ $level->id == @$data->master_ability_course_level_id ? 'selected' : '' }}>
-                                                    {{ $level->title }}</option>
+                                            <option value="">Select Ability Course Chapter</option>
+                                            @foreach (@$chapters as $chapter)
+                                                <option value="{{ $chapter->id }}"
+                                                    {{ $chapter->id == @$data->ability_course_chapter_id ? 'selected' : '' }}>
+                                                    {{ $chapter->name }}</option>
                                             @endforeach
                                         </select>
-                                        {!! $errors->first('master_ability_course_level_id', '<label class="help-block error-validation">:message</label>') !!}
+                                        {!! $errors->first('ability_course_chapter_id', '<label class="help-block error-validation">:message</label>') !!}
 
                                     </div>
-                                </div>
-                                <div class="col-md-4">
+
                                     <div class="form-group">
                                         <label for="is_active">Status</label>
                                         <select name="is_active" id="is_active" class="form-control">
@@ -72,6 +66,7 @@ $title = @$data ? 'Edit' : 'Add New';
                                         {!! $errors->first('is_active', '<label class="help-block error-validation">:message</label>') !!}
                                     </div>
                                 </div>
+
                             </div>
 
                             <button type="submit" class="btn btn-info btn-fw btn-lg mr-2">Submit</button>

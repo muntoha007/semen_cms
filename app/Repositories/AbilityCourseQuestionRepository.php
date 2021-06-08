@@ -17,7 +17,7 @@ class AbilityCourseQuestionRepository
         $client = new Client([
             'base_uri' => env('CLOUD_S3_UPLOAD'),
             // default timeout 5 detik
-            'timeout'  => 5,
+            'timeout'  => 20,
         ]);
 
         $question = new AbilityCourseQuestion;
@@ -26,7 +26,7 @@ class AbilityCourseQuestionRepository
          $image = base64_encode(file_get_contents($data['question_img']));
          $response_img = $client->request('POST', '/api/v1/cdn', [
              'json' => [
-                 'bucket' => 'ability',
+                 'bucket' => 'question_ability_img',
                  'image' => $image
              ]
          ]);
@@ -34,10 +34,28 @@ class AbilityCourseQuestionRepository
          $body_img = $response_img->getBody();
          $img_url = json_decode($body_img);
 
+         // for sound
+        if (isset($data['question_sound'])) {
+            $sound = base64_encode(file_get_contents($data['question_sound']));
+            $response_sound = $client->request('POST', '/api/v1/cdn', [
+                'json' => [
+                    'bucket' => 'question_group_sound',
+                    'image' => $sound
+                ]
+            ]);
+
+            $body_sound = $response_sound->getBody();
+            $sound_url = json_decode($body_sound);
+
+            $question->question_sound = $sound_url->data->path;
+        }
+
+
+
         $question->code = Str::random(15);
         $question->question_jpn = $data['question_jpn'];
         $question->question_img = $img_url->data->path;
-        $question->ability_course_id = $data['ability_course_id'];
+        $question->ability_course_question_group_id = $data['ability_course_question_group_id'];
         $question->is_active = isset($value["is_active"]);
         $question->save();
 
@@ -52,7 +70,8 @@ class AbilityCourseQuestionRepository
             $answer->save();
         }
 
-        $course = AbilityCourse::where('id', request('ability_course_id'))->first();
+        $course = AbilityCourse::join('ability_course_question_groups','ability_course_question_groups.ability_course_id','=','ability_courses.id')
+        ->where('ability_course_question_groups.id', $data['ability_course_question_group_id'])->first();
         $course->question_count = $course->question_count + 1;
 
         $course->update();
@@ -66,7 +85,7 @@ class AbilityCourseQuestionRepository
         $client = new Client([
             'base_uri' => env('CLOUD_S3_UPLOAD'),
             // default timeout 5 detik
-            'timeout'  => 5,
+            'timeout'  => 10,
         ]);
 
         $question = AbilityCourseQuestion::find($id);
@@ -78,7 +97,7 @@ class AbilityCourseQuestionRepository
             $image = base64_encode(file_get_contents($data['question_img']));
             $response_img = $client->request('POST', '/api/v1/cdn', [
                 'json' => [
-                    'bucket' => 'ability',
+                    'bucket' => 'question_ability_img',
                     'image' => $image
                 ]
             ]);
@@ -87,21 +106,39 @@ class AbilityCourseQuestionRepository
             $question->question_img = $img_url->data->path;
         }
 
+         // for sound
+         if (isset($data['question_sound'])) {
+            $response_sound_del = $client->request('DELETE', '/api/v1/cdn/' . $question->question_sound);
+
+            $sound = base64_encode(file_get_contents($data['question_sound']));
+            $response_sound = $client->request('POST', '/api/v1/cdn', [
+                'json' => [
+                    'bucket' => 'question_ability_sound',
+                    'image' => $sound
+                ]
+            ]);
+
+            $body_sound = $response_sound->getBody();
+            $sound_url = json_decode($body_sound);
+
+            $question->question_sound = $sound_url->data->path;
+        }
+
         $question->question_jpn = $data['question_jpn'];
-        $question->ability_course_id = $data['ability_course_id'];
+        $question->ability_course_question_group_id = $data['ability_course_question_group_id'];
         $question->is_active = $data['is_active'];
 
-        if ($question->ability_course_id != $data['ability_course_id']) {
-            $oldcourse = AbilityCourse::where('id', $question->ability_course_id)->first();
-            $oldcourse->question_count = $oldcourse->question_count - 1;
+        // if ($question->ability_course_id != $data['ability_course_id']) {
+        //     $oldcourse = AbilityCourse::where('id', $question->ability_course_id)->first();
+        //     $oldcourse->question_count = $oldcourse->question_count - 1;
 
-            $oldcourse->update();
+        //     $oldcourse->update();
 
-            $newcourse = AbilityCourse::where('id', request('ability_course_id'))->first();
-            $newcourse->question_count = $newcourse->question_count + 1;
+        //     $newcourse = AbilityCourse::where('id', request('ability_course_id'))->first();
+        //     $newcourse->question_count = $newcourse->question_count + 1;
 
-            $newcourse->update();
-        }
+        //     $newcourse->update();
+        // }
 
         $question->update();
 

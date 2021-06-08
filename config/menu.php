@@ -16,28 +16,28 @@ return [
                 'title' => 'Master Group',
                 'routeName' => 'master-groups.index',
                 'icon' => 'mdi mdi-flag menu-icon',
-            ],
-            'ability-master-course' => [
-                'title' => 'Master Ability Course',
-                'routeName' => 'master-ability-courses.index',
-                'icon' => 'mdi mdi-flag menu-icon',
-            ],
-            'ability-master-course-level' => [
-                'title' => 'Master Ability Level',
-                'routeName' => 'master-ability-course-levels.index',
-                'icon' => 'mdi mdi-flag menu-icon',
-            ],
-            'ability-course' => [
-                'title' => 'Kursus Ability',
-                'routeName' => 'ability-courses.index',
-                'additional_query' => '',
-                'icon' => 'mdi mdi-flag menu-icon',
-            ],
-            'ability-question' => [
-                'title' => 'Test / Pertanyaan',
-                'routeName' => 'ability-course-questions.index',
-                'additional_query' => '',
-                'icon' => 'mdi mdi-flag menu-icon',
+            // ],
+            // 'ability-master-course' => [
+            //     'title' => 'Master Ability Course',
+            //     'routeName' => 'master-ability-courses.index',
+            //     'icon' => 'mdi mdi-flag menu-icon',
+            // ],
+            // 'ability-master-course-level' => [
+            //     'title' => 'Master Ability Level',
+            //     'routeName' => 'master-ability-course-levels.index',
+            //     'icon' => 'mdi mdi-flag menu-icon',
+            // ],
+            // 'ability-course' => [
+            //     'title' => 'Kursus Ability',
+            //     'routeName' => 'ability-courses.index',
+            //     'additional_query' => '',
+            //     'icon' => 'mdi mdi-flag menu-icon',
+            // ],
+            // 'ability-question' => [
+            //     'title' => 'Test / Pertanyaan',
+            //     'routeName' => 'ability-course-questions.index',
+            //     'additional_query' => '',
+            //     'icon' => 'mdi mdi-flag menu-icon',
             ]
         ]
     ],
@@ -264,29 +264,29 @@ return [
     ],
     'room-7' => [
         'title' => 'Room 7',
-        'routeName' => 'master-ability-courses.index',
+        'routeName' => 'ability-course-chapters.index',
         'additional_query' => '',
         'icon' => 'mdi mdi-comment-text-outline menu-icon',
         'sub_menu' => [
-            'ability-master-course' => [
-                'title' => 'Master Ability Course',
-                'routeName' => 'master-ability-courses.index',
+            'ability-course-chapter' => [
+                'title' => 'Ability Course Chapter',
+                'routeName' => 'ability-course-chapters.index',
                 'icon' => 'mdi mdi-flag menu-icon',
             ],
-            'ability-master-course-level' => [
-                'title' => 'Master Ability Level',
-                'routeName' => 'master-ability-course-levels.index',
-                'icon' => 'mdi mdi-flag menu-icon',
-            ],
+            // 'ability-master-course-level' => [
+            //     'title' => 'Master Ability Level',
+            //     'routeName' => 'master-ability-course-levels.index',
+            //     'icon' => 'mdi mdi-flag menu-icon',
+            // ],
             'ability-course' => [
                 'title' => 'Kursus Ability',
                 'routeName' => 'ability-courses.index',
                 'additional_query' => '',
                 'icon' => 'mdi mdi-flag menu-icon',
             ],
-            'ability-question' => [
-                'title' => 'Test / Pertanyaan',
-                'routeName' => 'ability-course-questions.index',
+            'ability-question-group' => [
+                'title' => 'Group Test / Pertanyaan',
+                'routeName' => 'ability-course-question-groups.index',
                 'additional_query' => '',
                 'icon' => 'mdi mdi-flag menu-icon',
             ]

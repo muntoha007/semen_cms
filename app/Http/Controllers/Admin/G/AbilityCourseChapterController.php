@@ -2,34 +2,36 @@
 
 namespace App\Http\Controllers\Admin\G;
 
-use App\DataTables\AbilityCourseDatatable;
+use App\DataTables\AbilityCourseChapterDatatable;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\AbilityCourseRequest;
-use App\Models\AbilityCourse;
+use App\Http\Requests\AbilityCourseChapterRequest;
 use App\Models\AbilityCourseChapter;
-use App\Repositories\AbilityCourseRepository;
+use App\Models\MasterAbilityCourseChapter;
+use App\Models\MasterAbilityCourseChapterLevel;
+use App\Models\MasterGroup;
+use App\Repositories\AbilityCourseChapterRepository;
 use Illuminate\Http\Request;
 
-class AbilityCourseController extends Controller
+class AbilityCourseChapterController extends Controller
 {
     protected $model, $repository;
     public function __construct()
     {
-        $this->model = new AbilityCourse();
-        $this->repository = new AbilityCourseRepository();
+        $this->model = new AbilityCourseChapter();
+        $this->repository = new AbilityCourseChapterRepository();
     }
 
-    protected $redirectAfterSave = 'ability-courses.index';
-    protected $moduleName = 'ability courses';
+    protected $redirectAfterSave = 'ability-course-chapters.index';
+    protected $moduleName = 'ability courses chapter';
 
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(AbilityCourseDatatable $datatable)
+    public function index(AbilityCourseChapterDatatable $datatable)
     {
-        return $datatable->render('backend.ability.courses.index');
+        return $datatable->render('backend.ability.chapters.index');
     }
 
     /**
@@ -39,8 +41,8 @@ class AbilityCourseController extends Controller
      */
     public function create()
     {
-        $chapters = AbilityCourseChapter::where('is_active', 1)->get();
-        return view('backend.ability.courses.form', compact('chapters'));
+        $groups = MasterGroup::where('is_active', 1)->get();
+        return view('backend.ability.chapters.form', compact('groups'));
     }
 
     /**
@@ -49,7 +51,7 @@ class AbilityCourseController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(AbilityCourseRequest $request)
+    public function store(AbilityCourseChapterRequest $request)
     {
         // dd($request);
         $param = $request->all();
@@ -87,9 +89,9 @@ class AbilityCourseController extends Controller
             $data = $this->model->findOrFail($id);
         }
 
-        $chapters = AbilityCourseChapter::where('is_active', 1)->get();
+        $groups = MasterGroup::where('is_active', 1)->get();
 
-        return view('backend.ability.courses.form', compact('data', 'chapters'));
+        return view('backend.ability.chapters.form', compact('data', 'groups'));
     }
 
     /**

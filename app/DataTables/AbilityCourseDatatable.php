@@ -59,7 +59,7 @@ class AbilityCourseDatatable extends DataTable
             ->select([
                 'ability_courses.id',
                 'ability_courses.code',
-                // 'ability_courses.title',
+                'ability_courses.title',
                 'ability_courses.is_active',
                 'ability_courses.created_at',
                 'ability_courses.updated_at',
@@ -107,7 +107,7 @@ class AbilityCourseDatatable extends DataTable
                 ->title('#')
                 ->searchable(false),
             Column::make('code'),
-            // Column::make('title'),
+            Column::make('title'),
             Column::computed('is_active')->title('Status'),
             Column::make('created_at'),
             Column::make('updated_at'),

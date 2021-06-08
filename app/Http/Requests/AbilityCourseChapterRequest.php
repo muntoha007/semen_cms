@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 
-class AbilityCourseQuestionRequest extends FormRequest
+class AbilityCourseChapterRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,8 +25,9 @@ class AbilityCourseQuestionRequest extends FormRequest
     public function rules()
     {
         return [
-            "question_jpn" => 'required',
-            "answer" => 'required',
+            'name' => 'required|unique:ability_course_chapters,name',
+            'master_group_id' => 'required',
+            // 'master_ability_course_level_id' => 'required',
         ];
     }
 
