@@ -4,6 +4,7 @@ namespace App\DataTables;
 
 use App\Models\AbilityCourseQuestion;
 use Illuminate\Support\Facades\DB;
+use Symfony\Component\Console\Question\Question;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Services\DataTable;
@@ -107,8 +108,8 @@ class AbilityCourseQuestionDatatable extends DataTable
             Column::make('rownum')
                 ->title('#')
                 ->searchable(false),
-            Column::make('code'),
-            Column::make('question_jpn'),
+            // Column::make('code'),
+            Column::make('question_jpn')->title('Question Japan'),
             Column::computed('is_active')->title('Status'),
             Column::make('created_at'),
             Column::make('updated_at'),

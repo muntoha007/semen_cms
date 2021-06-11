@@ -107,7 +107,7 @@ class VocabularyCourseQuestionDatatable extends DataTable
             Column::make('rownum')
                 ->title('#')
                 ->searchable(false),
-            Column::make('code'),
+            // Column::make('code'),
             Column::make('question_jpn')->title('Question Japan'),
             Column::make('question_romanji')->title('Question Romanji'),
             Column::computed('is_active')->title('Status'),

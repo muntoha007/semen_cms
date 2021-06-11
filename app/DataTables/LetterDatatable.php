@@ -59,6 +59,7 @@ class LetterDatatable extends DataTable
                 'letters.id',
                 'letters.code',
                 'letters.letter',
+                'letters.romanji',
                 'letters.is_active',
                 'letters.created_at',
                 'letters.updated_at',
@@ -105,8 +106,8 @@ class LetterDatatable extends DataTable
             Column::make('rownum')
                 ->title('#')
                 ->searchable(false),
-            Column::make('code'),
             Column::make('letter'),
+            Column::make('romanji'),
             Column::computed('is_active')->title('Status'),
             Column::make('created_at'),
             Column::make('updated_at'),

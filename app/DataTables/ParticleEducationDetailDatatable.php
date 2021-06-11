@@ -109,7 +109,7 @@ class ParticleEducationDetailDatatable extends DataTable
             Column::make('rownum')
                 ->title('#')
                 ->searchable(false),
-            Column::make('code'),
+            // Column::make('code'),
             Column::make('sentence_jpn'),
             Column::make('sentence_romanji'),
             Column::computed('is_active')->title('Status'),

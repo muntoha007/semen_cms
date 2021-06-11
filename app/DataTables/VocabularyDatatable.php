@@ -108,7 +108,7 @@ class VocabularyDatatable extends DataTable
             Column::make('rownum')
                 ->title('#')
                 ->searchable(false),
-            Column::make('code'),
+            // Column::make('code'),
             Column::make('word_jpn')->title('Word Japan'),
             Column::make('word_romaji')->title('Word Romanji'),
             Column::make('is_active')->title('Status'),

@@ -58,7 +58,7 @@ class AbilityCourseDatatable extends DataTable
             // ->where('slug','!=','super-admin')
             ->select([
                 'ability_courses.id',
-                'ability_courses.code',
+                // 'ability_courses.code',
                 'ability_courses.title',
                 'ability_courses.is_active',
                 'ability_courses.created_at',

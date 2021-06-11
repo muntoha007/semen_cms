@@ -110,8 +110,8 @@ class PatternLessonExampleDatatable extends DataTable
             Column::make('rownum')
                 ->title('#')
                 ->searchable(false),
-            Column::make('code'),
-            Column::make('img'),
+            // Column::make('code'),
+            // Column::make('img'),
             Column::make('text_idn'),
             Column::make('created_at'),
             Column::make('updated_at'),

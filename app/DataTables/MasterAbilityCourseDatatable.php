@@ -107,7 +107,7 @@ class MasterAbilityCourseDatatable extends DataTable
             Column::make('rownum')
                 ->title('#')
                 ->searchable(false),
-            Column::make('code'),
+            // Column::make('code'),
             Column::make('title'),
             Column::make('learning_time'),
             Column::computed('is_active')->title('Status'),

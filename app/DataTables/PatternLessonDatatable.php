@@ -115,7 +115,7 @@ class PatternLessonDatatable extends DataTable
             Column::make('rownum')
                 ->title('#')
                 ->searchable(false),
-            Column::make('code'),
+            // Column::make('code'),
             Column::make('name'),
             Column::make('is_active')->title('Status'),
             Column::make('created_at'),

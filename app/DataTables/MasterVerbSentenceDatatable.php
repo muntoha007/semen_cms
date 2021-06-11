@@ -112,7 +112,7 @@ class MasterVerbSentenceDatatable extends DataTable
             Column::make('rownum')
                 ->title('#')
                 ->searchable(false),
-            Column::make('code'),
+            // Column::make('code'),
             Column::make('sentence_romanji'),
             Column::make('is_active')->title('Status'),
             Column::make('created_at'),

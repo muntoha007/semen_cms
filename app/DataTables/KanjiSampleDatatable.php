@@ -108,7 +108,7 @@ class KanjiSampleDatatable extends DataTable
             Column::make('rownum')
                 ->title('#')
                 ->searchable(false),
-            Column::make('code'),
+            // Column::make('code'),
             Column::make('sample_kanji'),
             Column::make('sample_hiragana'),
             Column::make('sample_idn'),

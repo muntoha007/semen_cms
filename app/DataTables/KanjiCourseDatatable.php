@@ -106,7 +106,7 @@ class KanjiCourseDatatable extends DataTable
             Column::make('rownum')
                 ->title('#')
                 ->searchable(false),
-            Column::make('code'),
+            // Column::make('code'),
             Column::make('title'),
             Column::computed('is_active')->title('Status'),
             Column::make('created_at'),
