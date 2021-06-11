@@ -39,7 +39,7 @@ class AbilityCourseQuestionRepository
             $sound = base64_encode(file_get_contents($data['question_sound']));
             $response_sound = $client->request('POST', '/api/v1/cdn', [
                 'json' => [
-                    'bucket' => 'question_group_sound',
+                    'bucket' => 'question_ability_sound',
                     'image' => $sound
                 ]
             ]);

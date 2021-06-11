@@ -6,11 +6,14 @@
             <div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title text-center table-title">List Questions</h4>
+                        <h4 class="card-title text-center table-title">Daftar Pertanyaan</h4>
                         @isPermitted('ability-questions.create')
                         <div class="form-group">
                             <a href="{{ route('ability-questions.create', request()->route('id')) }}" type="button" class="btn btn-outline-info btn-rounded btn-fw btn-sm">
-                                <i class="mdi mdi-plus-circle btn-icon-prepend"></i> Create new
+                                <i class="mdi mdi-plus-circle btn-icon-prepend"></i> Create New
+                            </a>
+                            <a href="{{ route('ability-course-question-groups.index') }}" type="button" class="btn btn-outline-info btn-rounded btn-fw btn-sm pull-right">
+                                <i class="mdi mdi mdi-arrow-left"></i> Back
                             </a>
                         </div>
                         @endisPermitted

@@ -79,18 +79,19 @@ class AbilityCourseQuestionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($id, $ability_question)
     {
         if (isOnlyDataOwned()) {
             $data = $this->model
                 ->where('created_by', '=', user_info('id'))
-                ->where('id', '=', $id)
+                ->where('id', '=', $ability_question)
                 ->firstOrFail();
         } else {
-            $data = $this->model->findOrFail($id);
+            $data = $this->model->findOrFail($ability_question);
         }
+
         $courses = AbilityCourse::where('is_active', 1)->get();
-        $answers = AbilityCourseAnswer::where('ability_course_question_id', $id)->get();
+        $answers = AbilityCourseAnswer::where('ability_course_question_id', $ability_question)->get();
         $type = "edit";
         return view('backend.ability.questions.form', compact('data', 'courses', 'answers', 'type'));
     }

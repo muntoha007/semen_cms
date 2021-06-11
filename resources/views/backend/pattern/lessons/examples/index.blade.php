@@ -6,11 +6,14 @@
             <div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title text-center table-title">List Pattern Lesson Details</h4>
+                        <h4 class="card-title text-center table-title">Daftar Contoh Detail Pola</h4>
                         @isPermitted('lesson-detail-example-add', [request()->route('id'), request()->route('did')])
                         <div class="form-group">
                             <a href="{{ route('lesson-detail-example-add', [request()->route('id'), request()->route('did')]) }}" type="button" class="btn btn-outline-info btn-rounded btn-fw btn-sm">
                                 <i class="mdi mdi-plus-circle btn-icon-prepend"></i> Create new
+                            </a>
+                            <a href="{{ route('lesson-detail-index',request()->route('id')) }}" type="button" class="btn btn-outline-info btn-rounded btn-fw btn-sm float-right">
+                                <i class="mdi mdi-arrow-left-bold-circle-outline"></i> Back
                             </a>
                         </div>
                         @endisPermitted
