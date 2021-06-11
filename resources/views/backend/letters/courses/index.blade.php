@@ -6,7 +6,7 @@
             <div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title text-center table-title">List Letter Courses</h4>
+                        <h4 class="card-title text-center table-title">Daftar Edukasi Huruf</h4>
                         @isPermitted('letter-courses.create')
                         <div class="form-group">
                             <a href="{{ route('letter-courses.create') }}" type="button" class="btn btn-outline-info btn-rounded btn-fw btn-sm">

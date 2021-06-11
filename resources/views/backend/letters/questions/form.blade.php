@@ -1,15 +1,15 @@
 @extends('layouts.master')
 @php
-$title = @$data ? 'Edit' : 'Add New';
+$title = @$data ? 'Edit' : 'Tambah';
 @endphp
-@section('title', 'Letter ' . $title)
+@section('title', 'Pertanyaan ' . $title)
 @section('content')
     <div class="content-wrapper">
         <div class="row">
             <div class="col-12 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">{{ $title }} Letter Question</h4>
+                        <h4 class="card-title">{{ $title }}Pertanyaan</h4>
                         <br>
                         <form class="forms-sample"
                             action="{{ @$data ? route('letter-questions.update', $data->id) : route('letter-questions.store') }}"

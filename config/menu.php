@@ -47,17 +47,17 @@ return [
         'additional_query' => '',
         'icon' => 'mdi mdi-comment-text-outline menu-icon',
         'sub_menu' => [
-            'letter_category' => [
-                'title' => 'Kategori Kata',
-                'routeName' => 'letter-categories.index',
-                'icon' => 'mdi mdi-flag menu-icon',
-            ],
-            'letter' => [
-                'title' => 'Daftar Kata',
-                'routeName' => 'letters.index',
-                'additional_query' => '',
-                'icon' => 'mdi mdi-flag menu-icon',
-            ],
+            // 'letter_category' => [
+            //     'title' => 'Kategori Kata',
+            //     'routeName' => 'letter-categories.index',
+            //     'icon' => 'mdi mdi-flag menu-icon',
+            // ],
+            // 'letter' => [
+            //     'title' => 'Daftar Kata',
+            //     'routeName' => 'letters.index',
+            //     'additional_query' => '',
+            //     'icon' => 'mdi mdi-flag menu-icon',
+            // ],
             'letter-hiragana' => [
                 'title' => 'Hiragana',
                 'routeName' => 'letter-hiragana-list',
@@ -93,42 +93,42 @@ return [
         'icon' => 'mdi mdi-comment-text-outline menu-icon',
         'sub_menu' => [
             'verb-level' => [
-                'title' => 'Verb Levels',
+                'title' => 'Level Kata Kerja',
                 'routeName' => 'verb-levels.index',
                 'icon' => 'mdi mdi-flag menu-icon',
             ],
             'verb-group' => [
-                'title' => 'Verb Groups',
+                'title' => 'Grup Kata Kerja',
                 'routeName' => 'verb-groups.index',
                 'additional_query' => '',
                 'icon' => 'mdi mdi-flag menu-icon',
             ],
             'verb-word' => [
-                'title' => 'Verb Words',
+                'title' => 'Kata Kerja',
                 'routeName' => 'verb-words.index',
                 'additional_query' => '',
                 'icon' => 'mdi mdi-flag menu-icon',
             ],
             'verb-change' => [
-                'title' => 'Verb Changes',
+                'title' => 'Perubahan Kata Kerja',
                 'routeName' => 'verb-changes.index',
                 'additional_query' => '',
                 'icon' => 'mdi mdi-flag menu-icon',
             ],
             'verb-sentence' => [
-                'title' => 'Verb Sentence',
+                'title' => 'Kalimat Kata Kerja',
                 'routeName' => 'verb-sentences.index',
                 'additional_query' => '',
                 'icon' => 'mdi mdi-flag menu-icon',
             ],
-            'verb-course' => [
-                'title' => 'Verb Course',
-                'routeName' => 'verb-courses.index',
-                'additional_query' => '',
-                'icon' => 'mdi mdi-flag menu-icon',
-            ],
+            // 'verb-course' => [
+            //     'title' => 'Test Kata Kerja',
+            //     'routeName' => 'verb-courses.index',
+            //     'additional_query' => '',
+            //     'icon' => 'mdi mdi-flag menu-icon',
+            // ],
             'verb-question' => [
-                'title' => 'Questions',
+                'title' => 'Daftar Pertanyaan',
                 'routeName' => 'verb-questions.index',
                 'additional_query' => '',
                 'icon' => 'mdi mdi-flag menu-icon',
@@ -152,13 +152,13 @@ return [
                 'icon' => 'mdi mdi-flag menu-icon',
             ],
             'particle-course' => [
-                'title' => 'Partikel Kursus',
+                'title' => 'Partikel Test',
                 'routeName' => 'particle-courses.index',
                 'additional_query' => '',
                 'icon' => 'mdi mdi-flag menu-icon',
             ],
             'particle-question' => [
-                'title' => 'Test / Pertanyaan',
+                'title' => 'Daftar Pertanyaan',
                 'routeName' => 'particle-course-questions.index',
                 'additional_query' => '',
                 'icon' => 'mdi mdi-flag menu-icon',
@@ -172,23 +172,23 @@ return [
         'icon' => 'mdi mdi-comment-text-outline menu-icon',
         'sub_menu' => [
             'particle-education' => [
-                'title' => 'Pola Chapter',
+                'title' => 'Pola Bab',
                 'routeName' => 'pattern-chapters.index',
                 'icon' => 'mdi mdi-flag menu-icon',
             ],
             'pattern-lesson' => [
-                'title' => 'Pola Lesson',
+                'title' => 'Pola Master',
                 'routeName' => 'pattern-lessons.index',
                 'icon' => 'mdi mdi-flag menu-icon',
             ],
             'pattern-course' => [
-                'title' => 'Pola Course',
+                'title' => 'Pola Test',
                 'routeName' => 'pattern-courses.index',
                 'additional_query' => '',
                 'icon' => 'mdi mdi-flag menu-icon',
             ],
             'pattern-question' => [
-                'title' => 'Test / Pertanyaan',
+                'title' => 'Daftar Pertanyaan',
                 'routeName' => 'pattern-course-questions.index',
                 'additional_query' => '',
                 'icon' => 'mdi mdi-flag menu-icon',
@@ -197,22 +197,22 @@ return [
     ],
     'room-5' => [
         'title' => 'Room 5',
-        'routeName' => 'master-groups.index',
+        'routeName' => 'kanji-chapters.index',
         'additional_query' => '',
         'icon' => 'mdi mdi-comment-text-outline menu-icon',
         'sub_menu' => [
-            'kanji-group' => [
-                'title' => 'Master Group',
-                'routeName' => 'master-groups.index',
-                'icon' => 'mdi mdi-flag menu-icon',
-            ],
+            // 'kanji-group' => [
+            //     'title' => 'Master Group',
+            //     'routeName' => 'master-groups.index',
+            //     'icon' => 'mdi mdi-flag menu-icon',
+            // ],
             'kanji-chapter' => [
-                'title' => 'Chapter',
+                'title' => 'Bab',
                 'routeName' => 'kanji-chapters.index',
                 'icon' => 'mdi mdi-flag menu-icon',
             ],
             'kanji-education' => [
-                'title' => 'Kanji Edukasi',
+                'title' => 'Edukasi Kanji',
                 'routeName' => 'kanji-educations.index',
                 'additional_query' => '',
                 'icon' => 'mdi mdi-flag menu-icon',
@@ -224,13 +224,13 @@ return [
                 'icon' => 'mdi mdi-flag menu-icon',
             ],
             'kanji-course' => [
-                'title' => 'Kursus Kanji',
+                'title' => 'Level Kanji',
                 'routeName' => 'kanji-courses.index',
                 'additional_query' => '',
                 'icon' => 'mdi mdi-flag menu-icon',
             ],
             'kanji-question' => [
-                'title' => 'Test / Pertanyaan',
+                'title' => 'Daftar Pertanyaan',
                 'routeName' => 'kanji-course-questions.index',
                 'additional_query' => '',
                 'icon' => 'mdi mdi-flag menu-icon',
@@ -244,18 +244,18 @@ return [
         'icon' => 'mdi mdi-comment-text-outline menu-icon',
         'sub_menu' => [
             'vocabularies' => [
-                'title' => 'Vocabularies/Kosa kata',
+                'title' => 'Kosa kata',
                 'routeName' => 'vocabularies.index',
                 'icon' => 'mdi mdi-flag menu-icon',
             ],
             'vocabulary-course' => [
-                'title' => 'Kursus Vocabulary',
+                'title' => 'Level Kosa Kata',
                 'routeName' => 'vocabulary-courses.index',
                 'additional_query' => '',
                 'icon' => 'mdi mdi-flag menu-icon',
             ],
             'vocabulary-question' => [
-                'title' => 'Test / Pertanyaan',
+                'title' => 'Daftar Pertanyaan',
                 'routeName' => 'vocabulary-course-questions.index',
                 'additional_query' => '',
                 'icon' => 'mdi mdi-flag menu-icon',
@@ -269,7 +269,7 @@ return [
         'icon' => 'mdi mdi-comment-text-outline menu-icon',
         'sub_menu' => [
             'ability-course-chapter' => [
-                'title' => 'Ability Course Chapter',
+                'title' => 'Bab',
                 'routeName' => 'ability-course-chapters.index',
                 'icon' => 'mdi mdi-flag menu-icon',
             ],
@@ -279,13 +279,13 @@ return [
             //     'icon' => 'mdi mdi-flag menu-icon',
             // ],
             'ability-course' => [
-                'title' => 'Kursus Ability',
+                'title' => 'Level Kemampuan',
                 'routeName' => 'ability-courses.index',
                 'additional_query' => '',
                 'icon' => 'mdi mdi-flag menu-icon',
             ],
             'ability-question-group' => [
-                'title' => 'Group Test / Pertanyaan',
+                'title' => 'Daftar Pertanyaan',
                 'routeName' => 'ability-course-question-groups.index',
                 'additional_query' => '',
                 'icon' => 'mdi mdi-flag menu-icon',
