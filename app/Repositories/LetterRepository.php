@@ -71,7 +71,9 @@ class LetterRepository
         $letter = Letter::find($id);
 
         if (isset($data['image_url'])) {
-            $response_img_del = $client->request('DELETE', '/api/v1/cdn/' . $letter->image_url);
+            if ($letter->image_url != "" || $letter->image_url != "") {
+                $response_img_del = $client->request('DELETE', '/api/v1/cdn/' . $letter->image_url);
+            }
 
             // for image
             $image = base64_encode(file_get_contents($data['image_url']));
@@ -87,7 +89,9 @@ class LetterRepository
         }
 
         if (isset($data['color_image_url'])) {
-            $response_img_col = $client->request('DELETE', '/api/v1/cdn/' . $letter->color_image_url);
+            if ($letter->color_image_url != "" || $letter->color_image_url != "") {
+                $response_img_col = $client->request('DELETE', '/api/v1/cdn/' . $letter->color_image_url);
+            }
 
             // for image color
             $image_color = base64_encode(file_get_contents($data['color_image_url']));
