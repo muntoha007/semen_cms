@@ -92,7 +92,9 @@ class AbilityCourseQuestionGroupRepository
 
         // for sound
         if (isset($data['question_sound'])) {
-            $response_sound_del = $client->request('DELETE', '/api/v1/cdn/' . $question->question_sound);
+            if ($question->question_sound != "") {
+                $response_sound_del = $client->request('DELETE', '/api/v1/cdn/' . $question->question_sound);
+            }
 
             $sound = base64_encode(file_get_contents($data['question_sound']));
             $response_sound = $client->request('POST', '/api/v1/cdn', [
