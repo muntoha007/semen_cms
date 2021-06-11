@@ -75,7 +75,9 @@ class AbilityCourseQuestionGroupRepository
         $question = AbilityCourseQuestionGroup::find($id);
 
         if (isset($data['question_img'])) {
-            $response_img_del = $client->request('DELETE', '/api/v1/cdn/' . $question->question_img);
+            if ($question->question_img != "") {
+                $response_img_del = $client->request('DELETE', '/api/v1/cdn/' . $question->question_img);
+            }
 
             // for image
             $image = base64_encode(file_get_contents($data['question_img']));
