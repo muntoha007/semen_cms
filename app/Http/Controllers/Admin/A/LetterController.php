@@ -106,7 +106,7 @@ class LetterController extends Controller
      */
     public function categorystore(LetterRequest $request)
     {
-        dd($request);
+        // dd($request);
         $param = $request->all();
         $saveData = $this->repository->createNew($param);
         flashDataAfterSave($saveData, $this->moduleName);
