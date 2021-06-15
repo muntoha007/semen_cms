@@ -49,7 +49,7 @@
 
 @if( isset( $add_url ) && checkPermissionAccessByUrl($add_url) )
     <a href="{!! empty( $add_url ) ? 'javascript:void(0)' : $add_url !!}" class="btn btn-success btn-xs {!! empty( $add_url ) ? 'disabled' : '' !!}" title="Add" data-button="add">
-        <i class="material-icons">add</i>
+        <i class="mdi mdi-arrow-right-bold-circle"></i>
     </a>
 @endif
 

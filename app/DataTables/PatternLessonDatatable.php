@@ -44,7 +44,7 @@ class PatternLessonDatatable extends DataTable
                     compact('edit_url')
                 );
             })
-            ->addColumn('detail', function ($data) {
+            ->addColumn('add detail', function ($data) {
                 // $edit_url = route('pattern-lessons.edit', $data->id);
                 $add_url = route('lesson-detail-index', $data->id);
 
@@ -126,7 +126,7 @@ class PatternLessonDatatable extends DataTable
                 ->printable(true)
                 ->width(100)
                 ->addClass('text-center'),
-            Column::computed('detail')
+            Column::computed('add detail')
                 ->visible($hasAction)
                 ->exportable(false)
                 ->printable(true)
