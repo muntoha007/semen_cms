@@ -64,10 +64,12 @@ class ParticleEducationDetailDatatable extends DataTable
                 'particle_education_details.sentence_idn',
                 'particle_education_details.sentence_description',
                 'particle_education_details.is_active',
+                'particle_education_details.particle_education_id',
+                'particle_educations.title as particle_education_title',
                 'particle_education_details.created_at',
                 'particle_education_details.updated_at',
                 DB::raw('row_number() over () AS rownum'),
-            ]);
+            ])->join('particle_educations', 'particle_educations.id', '=', 'particle_education_details.particle_education_id');
     }
 
     /**
@@ -112,6 +114,7 @@ class ParticleEducationDetailDatatable extends DataTable
             // Column::make('code'),
             Column::make('sentence_jpn'),
             Column::make('sentence_romanji'),
+            Column::make('particle_education_title')->title('Particle Education'),
             Column::computed('is_active')->title('Status'),
             Column::make('created_at'),
             Column::make('updated_at'),
