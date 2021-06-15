@@ -143,7 +143,7 @@ $title = @$data ? 'Edit' : 'Add New';
                             <span class="form-group">
                                 <br>
                                 <button type="submit" class="btn btn-info btn-fw btn-lg mr-2">Submit</button>
-                                <a href="{{ route('pattern-lesson-details.index') }}"
+                                <a href="{{ route('lesson-detail-example-index',[$data->pattern_lesson_id, $data->pattern_lesson_detail_id]) }}"
                                     class="btn btn-secondary btn-fw btn-lg">Cancel</a>
                             </span>
                         </form>
