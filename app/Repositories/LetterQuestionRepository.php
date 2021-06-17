@@ -49,6 +49,18 @@ class LetterQuestionRepository
         $question->letter_course_id = $data['letter_course_id'];
         $question->is_active = $data['is_active'];
 
+        if ($question->letter_course_id != $data['letter_course_id']) {
+            $oldcourse = LetterCourse::where('id', $question->letter_course_id)->first();
+            $oldcourse->question_count = $oldcourse->question_count - 1;
+
+            $oldcourse->update();
+
+            $newcourse = LetterCourse::where('id', request('letter_course_id'))->first();
+            $newcourse->question_count = $newcourse->question_count + 1;
+
+            $newcourse->update();
+        }
+
         $question->update();
 
         foreach ($data['answer'] as $value) {

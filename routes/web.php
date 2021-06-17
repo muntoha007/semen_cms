@@ -75,17 +75,23 @@ Route::group(['middleware' => ['sentinelAuth','checkAccess'],'namespace' => 'Adm
     Route::resource('verb-sentences', 'B\MasterVerbSentenceController')->except('show');
     Route::resource('verb-courses', 'B\VerbCourseController')->except('show');
     Route::resource('verb-questions', 'B\VerbCourseQuestionController')->except('show');
+    Route::resource('verb-mini-courses', 'B\VerbMiniCourseController')->except('show');
+    Route::resource('verb-mini-questions', 'B\VerbMiniCourseQuestionController')->except('show');
 
     Route::resource('particle-educations', 'C\ParticleEducationController')->except('show');
     Route::resource('particle-education-details', 'C\ParticleEducationDetailController')->except('show');
     Route::resource('particle-courses', 'C\ParticleCourseController')->except('show');
     Route::resource('particle-course-questions', 'C\ParticleCourseQuestionController')->except('show');
+    Route::resource('particle-mini-courses', 'C\ParticleMiniCourseController')->except('show');
+    Route::resource('particle-mini-course-questions', 'C\ParticleMiniCourseQuestionController')->except('show');
 
     Route::resource('pattern-chapters', 'D\PatternChapterController')->except('show');
     Route::resource('pattern-lessons', 'D\PatternLessonController')->except('show');
     Route::resource('pattern-lesson-details', 'D\PatternLessonDetailController')->except('show');
     Route::resource('pattern-courses', 'D\PatternCourseController')->except('show');
     Route::resource('pattern-course-questions', 'D\PatternCourseQuestionController')->except('show');
+    Route::resource('pattern-mini-courses', 'D\PatternMiniCourseController')->except('show');
+    Route::resource('pattern-mini-course-questions', 'D\PatternMiniCourseQuestionController')->except('show');
 
     Route::get('pattern-lessons/{id}/detail-index', 'D\PatternLessonDetailController@index')->name('lesson-detail-index');
     Route::get('pattern-lessons/{id}/details', 'D\PatternLessonDetailController@create')->name('lesson-detail-add');
@@ -106,6 +112,8 @@ Route::group(['middleware' => ['sentinelAuth','checkAccess'],'namespace' => 'Adm
     Route::resource('kanji-samples', 'E\KanjiSampleController')->except('show');
     Route::resource('kanji-courses', 'E\KanjiCourseController')->except('show');
     Route::resource('kanji-course-questions', 'E\KanjiCourseQuestionController')->except('show');
+    Route::resource('kanji-mini-courses', 'E\KanjiMiniCourseController')->except('show');
+    Route::resource('kanji-mini-course-questions', 'E\KanjiMiniCourseQuestionController')->except('show');
 
     Route::resource('vocabularies', 'F\VocabularyController')->except('show');
     Route::resource('vocabulary-courses', 'F\VocabularyCourseController')->except('show');

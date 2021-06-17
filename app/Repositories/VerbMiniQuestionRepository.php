@@ -2,40 +2,40 @@
 
 namespace App\Repositories;
 
-use App\Models\VerbCourseQuestion;
-use App\Models\VerbCourse;
-use App\Models\VerbCourseAnswer;
+use App\Models\VerbMiniCourseQuestion;
+use App\Models\VerbMiniCourse;
+use App\Models\VerbMiniCourseAnswer;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
-class VerbQuestionRepository
+class VerbMiniQuestionRepository
 {
     public function createNew($data)
     {
 
-        $question = new VerbCourseQuestion;
+        $question = new VerbMiniCourseQuestion;
 
         $question->code = Str::random(15);
         $question->question_jpn = $data['question_jpn'];
         $question->question_romanji = $data['question_romanji'];
         $question->question_idn = $data['question_idn'];
-        $question->verb_course_id = $data['verb_course_id'];
+        $question->verb_mini_course_id = $data['verb_mini_course_id'];
         $question->is_active = isset($value["is_true"]) ? 1 : 0;
         $question->save();
 
         $qid = $question->id;
 
         foreach ($data['answer'] as $value) {
-            $answer = new VerbCourseAnswer;
+            $answer = new VerbMiniCourseAnswer;
             $answer->code = Str::random(15);
-            $answer->verb_course_question_id = $qid;
+            $answer->verb_mini_course_question_id = $qid;
             $answer->answer_jpn = $value["answer_jpn"];
             $answer->answer_idn = $value["answer_idn"];
             $answer->is_true = isset($value["is_true"]) ? 1 : 0;
             $answer->save();
         }
 
-        $course = VerbCourse::where('id', request('verb_course_id'))->first();
+        $course = VerbMiniCourse::where('id', request('verb_mini_course_id'))->first();
         $course->question_count = $course->question_count+1;
 
         $course->update();
@@ -46,20 +46,20 @@ class VerbQuestionRepository
     public function updateLetter($data, $id)
     {
 
-        $question = VerbCourseQuestion::find($id);
+        $question = VerbMiniCourseQuestion::find($id);
         $question->question_jpn = $data['question_jpn'];
         $question->question_romanji = $data['question_romanji'];
         $question->question_idn = $data['question_idn'];
-        $question->verb_course_id = $data['verb_course_id'];
+        $question->verb_mini_course_id = $data['verb_mini_course_id'];
         $question->is_active = $data['is_active'];
 
-        if ($question->verb_course_id != $data['verb_course_id']) {
-            $oldcourse = VerbCourse::where('id', $question->verb_course_id)->first();
+        if ($question->verb_mini_course_id != $data['verb_mini_course_id']) {
+            $oldcourse = VerbMiniCourse::where('id', $question->verb_mini_course_id)->first();
             $oldcourse->question_count = $oldcourse->question_count - 1;
 
             $oldcourse->update();
 
-            $newcourse = VerbCourse::where('id', request('verb_course_id'))->first();
+            $newcourse = VerbMiniCourse::where('id', request('verb_mini_course_id'))->first();
             $newcourse->question_count = $newcourse->question_count + 1;
 
             $newcourse->update();
@@ -68,7 +68,7 @@ class VerbQuestionRepository
         $question->update();
 
         foreach ($data['answer'] as $value) {
-            $answer = VerbCourseAnswer::find($value["id"]);
+            $answer = VerbMiniCourseAnswer::find($value["id"]);
             $answer->answer_jpn = $value["answer_jpn"];
             $answer->answer_idn = $value["answer_idn"];
             $answer->is_true = isset($value["is_true"]) ? 1 : 0;

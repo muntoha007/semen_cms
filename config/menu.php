@@ -132,6 +132,18 @@ return [
                 'routeName' => 'verb-questions.index',
                 'additional_query' => '',
                 'icon' => 'mdi mdi-flag menu-icon',
+            ],
+            'verb-course-mini' => [
+                'title' => 'Test Kata Kerja Mini',
+                'routeName' => 'verb-mini-courses.index',
+                'additional_query' => '',
+                'icon' => 'mdi mdi-flag menu-icon',
+            ],
+            'verb-question-mini' => [
+                'title' => 'Daftar Mini Pertanyaan',
+                'routeName' => 'verb-mini-questions.index',
+                'additional_query' => '',
+                'icon' => 'mdi mdi-flag menu-icon',
             ]
         ]
     ],
@@ -162,6 +174,18 @@ return [
                 'routeName' => 'particle-course-questions.index',
                 'additional_query' => '',
                 'icon' => 'mdi mdi-flag menu-icon',
+            ],
+            'particle-course-mini' => [
+                'title' => 'Partikel Mini Test',
+                'routeName' => 'particle-mini-courses.index',
+                'additional_query' => '',
+                'icon' => 'mdi mdi-flag menu-icon',
+            ],
+            'particle-question-mini' => [
+                'title' => 'Daftar Mini Pertanyaan',
+                'routeName' => 'particle-mini-course-questions.index',
+                'additional_query' => '',
+                'icon' => 'mdi mdi-flag menu-icon',
             ]
         ]
     ],
@@ -190,6 +214,18 @@ return [
             'pattern-question' => [
                 'title' => 'Daftar Pertanyaan',
                 'routeName' => 'pattern-course-questions.index',
+                'additional_query' => '',
+                'icon' => 'mdi mdi-flag menu-icon',
+            ],
+            'pattern-course-mini' => [
+                'title' => 'Pola Mini Test',
+                'routeName' => 'pattern-mini-courses.index',
+                'additional_query' => '',
+                'icon' => 'mdi mdi-flag menu-icon',
+            ],
+            'pattern-question-mini' => [
+                'title' => 'Daftar Mini Pertanyaan',
+                'routeName' => 'pattern-mini-course-questions.index',
                 'additional_query' => '',
                 'icon' => 'mdi mdi-flag menu-icon',
             ]
@@ -232,6 +268,18 @@ return [
             'kanji-question' => [
                 'title' => 'Daftar Pertanyaan',
                 'routeName' => 'kanji-course-questions.index',
+                'additional_query' => '',
+                'icon' => 'mdi mdi-flag menu-icon',
+            ],
+            'kanji-course-mini' => [
+                'title' => 'Level Mini Kanji',
+                'routeName' => 'kanji-mini-courses.index',
+                'additional_query' => '',
+                'icon' => 'mdi mdi-flag menu-icon',
+            ],
+            'kanji-question-mini' => [
+                'title' => 'Daftar Mini Pertanyaan',
+                'routeName' => 'kanji-mini-course-questions.index',
                 'additional_query' => '',
                 'icon' => 'mdi mdi-flag menu-icon',
             ]

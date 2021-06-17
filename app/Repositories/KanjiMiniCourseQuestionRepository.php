@@ -2,64 +2,64 @@
 
 namespace App\Repositories;
 
-use App\Models\VerbCourseQuestion;
-use App\Models\VerbCourse;
-use App\Models\VerbCourseAnswer;
+use App\Models\KanjiMiniCourseQuestion;
+use App\Models\KanjiMiniCourse;
+use App\Models\KanjiMiniCourseAnswer;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
-class VerbQuestionRepository
+class KanjiMiniCourseQuestionRepository
 {
     public function createNew($data)
     {
 
-        $question = new VerbCourseQuestion;
+        $question = new KanjiMiniCourseQuestion;
 
         $question->code = Str::random(15);
         $question->question_jpn = $data['question_jpn'];
         $question->question_romanji = $data['question_romanji'];
         $question->question_idn = $data['question_idn'];
-        $question->verb_course_id = $data['verb_course_id'];
-        $question->is_active = isset($value["is_true"]) ? 1 : 0;
+        $question->kanji_mini_course_id = $data['kanji_mini_course_id'];
+        $question->is_active = isset($value["is_active"]);
         $question->save();
 
         $qid = $question->id;
 
         foreach ($data['answer'] as $value) {
-            $answer = new VerbCourseAnswer;
+            $answer = new KanjiMiniCourseAnswer;
             $answer->code = Str::random(15);
-            $answer->verb_course_question_id = $qid;
+            $answer->kanji_mini_course_question_id = $qid;
             $answer->answer_jpn = $value["answer_jpn"];
             $answer->answer_idn = $value["answer_idn"];
             $answer->is_true = isset($value["is_true"]) ? 1 : 0;
             $answer->save();
         }
 
-        $course = VerbCourse::where('id', request('verb_course_id'))->first();
-        $course->question_count = $course->question_count+1;
+        $course = KanjiMiniCourse::where('id', request('kanji_mini_course_id'))->first();
+        $course->question_count = $course->question_count + 1;
 
         $course->update();
 
         return $question;
     }
 
-    public function updateLetter($data, $id)
+    public function update($data, $id)
     {
 
-        $question = VerbCourseQuestion::find($id);
+        $question = KanjiMiniCourseQuestion::find($id);
         $question->question_jpn = $data['question_jpn'];
         $question->question_romanji = $data['question_romanji'];
         $question->question_idn = $data['question_idn'];
-        $question->verb_course_id = $data['verb_course_id'];
+        $question->kanji_mini_course_id = $data['kanji_mini_course_id'];
         $question->is_active = $data['is_active'];
 
-        if ($question->verb_course_id != $data['verb_course_id']) {
-            $oldcourse = VerbCourse::where('id', $question->verb_course_id)->first();
+        if ($question->kanji_mini_course_id != $data['kanji_mini_course_id']) {
+            $oldcourse = KanjiMiniCourse::where('id', $question->kanji_mini_course_id)->first();
             $oldcourse->question_count = $oldcourse->question_count - 1;
 
             $oldcourse->update();
 
-            $newcourse = VerbCourse::where('id', request('verb_course_id'))->first();
+            $newcourse = KanjiMiniCourse::where('id', request('kanji_mini_course_id'))->first();
             $newcourse->question_count = $newcourse->question_count + 1;
 
             $newcourse->update();
@@ -68,7 +68,7 @@ class VerbQuestionRepository
         $question->update();
 
         foreach ($data['answer'] as $value) {
-            $answer = VerbCourseAnswer::find($value["id"]);
+            $answer = KanjiMiniCourseAnswer::find($value["id"]);
             $answer->answer_jpn = $value["answer_jpn"];
             $answer->answer_idn = $value["answer_idn"];
             $answer->is_true = isset($value["is_true"]) ? 1 : 0;
