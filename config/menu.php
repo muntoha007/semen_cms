@@ -351,6 +351,11 @@ return [
                 'routeName' => 'user.index',
                 'icon' => 'mdi mdi-account-multiple menu-icon',
             ],
+            'member-list' => [
+                'title' => 'Member',
+                'routeName' => 'member.index',
+                'icon' => 'mdi mdi-account-multiple menu-icon',
+            ],
             'role-list' => [
                 'title' => 'Role',
                 'routeName' => 'role.index',

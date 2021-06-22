@@ -52,6 +52,7 @@ Route::group(['middleware' => ['sentinelAuth','checkAccess'],'namespace' => 'Adm
     Route::resource('permission', 'PermissionController')->only(['index','edit','update']);
     Route::resource('user', 'UserController')->except('show');
     Route::resource('settings', 'SettingController')->only(['index','edit','update']);
+    Route::resource('member', 'MemberController')->only(['index','edit','update']);
 
     Route::resource('letter-categories', 'A\LetterCategoryController')->except('show');
     Route::resource('letters', 'A\LetterController')->except('show');
