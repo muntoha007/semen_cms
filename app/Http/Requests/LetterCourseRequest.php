@@ -26,7 +26,7 @@ class LetterCourseRequest extends FormRequest
     {
         return [
             'title' => 'required|unique:letter_courses,title',
-            'master_verb_level_id' => 'required',
+            'letter_category_id' => 'required',
         ];
     }
 
