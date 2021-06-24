@@ -28,7 +28,7 @@ $title = @$data ? 'Edit' : 'Add New';
                                         {!! $errors->first('kun_yomi', '<label class="help-block error-validation">:message</label>') !!}
                                     </div>
                                     <div class="form-group">
-                                        <label for="on_yomi">Kun Yomi</label>
+                                        <label for="on_yomi">On Yomi</label>
                                         <input type="text" class="form-control {{ hasErrorField($errors, 'on_yomi') }}"
                                             id="on_yomi" name="on_yomi" value="{{ old('on_yomi', @$data->on_yomi) }}"
                                             placeholder="on yomi" required>
