@@ -9,10 +9,11 @@ $title = @$data ? 'Edit' : 'Tambah';
             <div class="col-12 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">{{ $title }} Huruf {{@$cid = 1 ? "Hiragana" : "Katakana"}}</h4>
+                        <h4 class="card-title">{{ $title }} Huruf
+                            {{ request()->route('cid') == 1 ? 'Hiragana' : 'Katakana' }}</h4>
                         <br>
                         <form class="forms-sample"
-                            action="{{ @$data ? route('letter-cat-update', [$data->letter_category_id, $data->id]) : route('letter-cat-add', $cid) }}"
+                            action="{{ @$data ? route('letter-cat-update', [$data->letter_category_id, $data->id]) : route('letter-cat-add', request()->route('cid')) }}"
                             method="POST" enctype="multipart/form-data">
                             @csrf
                             @if (@$data)
@@ -20,15 +21,8 @@ $title = @$data ? 'Edit' : 'Tambah';
                             @endif
                             <div class="row">
                                 <div class="col-md-6">
-                                    {{-- <div class="form-group">
-                                        <label for="first_name">Name</label>
-                                        <input type="text" class="form-control {{ hasErrorField($errors, 'name') }}"
-                                            id="name" name="name" value="{{ old('name', @$data->name) }}"
-                                            placeholder="Name">
-                                        {!! $errors->first('name', '<label class="help-block error-validation">:message</label>') !!}
-                                    </div> --}}
                                     <div class="form-group">
-                                        <label for="letter">Huruf {{@$cid = 1 ? "Hiragana" : "Katakana"}}</label>
+                                        <label for="letter">Huruf {{ request()->route('cid') == 1 ? 'Hiragana' : 'Katakana' }}</label>
                                         <input type="text" name="letter" id="letter" class="form-control"
                                             value="{{ old('letter') ?? @$data->letter }}" required>
 
@@ -51,20 +45,6 @@ $title = @$data ? 'Edit' : 'Tambah';
 
                                         {!! $errors->first('total_stroke', '<label class="help-block error-validation">:message</label>') !!}
                                     </div>
-
-                                    {{-- <div class="form-group">
-                                        <label for="category">Category</label>
-                                        <select name="category" id="category" class="form-control" required>
-                                            <option value="">Select Category</option>
-                                            @foreach (@$letterCats as $cat)
-                                                <option value="{{ $cat->id }}"
-                                                    {{ $cat->id == @$data->letter_category_id ? 'selected' : '' }}>
-                                                    {{ $cat->name }}</option>
-                                            @endforeach
-                                        </select>
-                                        {!! $errors->first('category', '<label class="help-block error-validation">:message</label>') !!}
-
-                                    </div> --}}
 
                                     <input type="hidden" name="category" value="{{ request()->route('cid') }}">
 
@@ -105,7 +85,7 @@ $title = @$data ? 'Edit' : 'Tambah';
                             </div>
 
                             <button type="submit" class="btn btn-info btn-fw btn-lg mr-2">Submit</button>
-                            <a href="{{ route('letter-categories.index') }}"
+                            <a href="{{ request()->route('cid') == 1 ? route('letter-hiragana-list')  : route('letter-katakana-list')  }}"
                                 class="btn btn-secondary btn-fw btn-lg">Cancel</a>
                         </form>
                     </div>

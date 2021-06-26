@@ -23,7 +23,9 @@ class LetterController extends Controller
     }
 
     protected $redirectAfterSave = 'letters.index';
-    protected $moduleName = 'letters';
+    protected $redirectAfterSave1 = 'letter-hiragana-list';
+    protected $redirectAfterSave2 = 'letter-katakana-list';
+    protected $moduleName = 'Huruf';
 
     /**
      * Display a listing of the resource.
@@ -35,7 +37,7 @@ class LetterController extends Controller
         return $datatable->render('backend.letters.letters.index');
     }
 
-     /**
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -44,7 +46,7 @@ class LetterController extends Controller
     {
         $route = Route::currentRouteName();
         // dd($route);
-        if ($route == "letter-hiragana-list"){
+        if ($route == "letter-hiragana-list") {
             $cid = 1;
         } else {
             $cid = 2;
@@ -74,7 +76,7 @@ class LetterController extends Controller
     {
         $route = Route::currentRouteName();
         // dd($route);
-        if ($route == "letter-hiragana-list"){
+        if ($route == "letter-hiragana-list") {
             $cid = 1;
         } else {
             $cid = 2;
@@ -90,7 +92,7 @@ class LetterController extends Controller
      */
     public function store(LetterRequest $request)
     {
-        // dd($request);
+
         $param = $request->all();
         $saveData = $this->repository->createNew($param);
         flashDataAfterSave($saveData, $this->moduleName);
@@ -111,7 +113,13 @@ class LetterController extends Controller
         $saveData = $this->repository->createNew($param);
         flashDataAfterSave($saveData, $this->moduleName);
 
-        return redirect()->route($this->redirectAfterSave);
+        if ($param['category'] == 1) {
+            return redirect()->route($this->redirectAfterSave1);
+        } elseif ($param['category'] == 2) {
+            return redirect()->route($this->redirectAfterSave2);
+        } else {
+            return redirect()->route($this->redirectAfterSave);
+        }
     }
 
     /**
@@ -151,7 +159,7 @@ class LetterController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function categoryedit($letter_category_id,$id)
+    public function categoryedit($letter_category_id, $id)
     {
         if (isOnlyDataOwned()) {
             $data = $this->model

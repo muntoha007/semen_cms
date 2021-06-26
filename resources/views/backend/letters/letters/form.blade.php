@@ -20,13 +20,7 @@ $title = @$data ? 'Edit' : 'Tambah';
                             @endif
                             <div class="row">
                                 <div class="col-md-6">
-                                    {{-- <div class="form-group">
-                                        <label for="first_name">Name</label>
-                                        <input type="text" class="form-control {{ hasErrorField($errors, 'name') }}"
-                                            id="name" name="name" value="{{ old('name', @$data->name) }}"
-                                            placeholder="Name">
-                                        {!! $errors->first('name', '<label class="help-block error-validation">:message</label>') !!}
-                                    </div> --}}
+
                                     <div class="form-group">
                                         <label for="letter">Letter</label>
                                         <input type="text" name="letter" id="letter" class="form-control"
