@@ -29,8 +29,7 @@ $title = @$data ? 'Edit' : 'Add New';
 
                                         {!! $errors->first('word_jpn', '<label class="help-block error-validation">:message</label>') !!}
                                     </div>
-                                </div>
-                                 <div class="col-md-6">
+
                                     <div class="form-group">
                                         <label for="word_romaji">Word Romanji</label>
                                         <input type="text" name="word_romaji" id="word_romaji" class="form-control"
@@ -38,12 +37,6 @@ $title = @$data ? 'Edit' : 'Add New';
 
                                         {!! $errors->first('word_romaji', '<label class="help-block error-validation">:message</label>') !!}
                                     </div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-
-                                <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="word_idn">Word Indonesia</label>
                                         <input type="text" name="word_idn" id="word_idn" class="form-control"
@@ -52,26 +45,22 @@ $title = @$data ? 'Edit' : 'Add New';
                                         {!! $errors->first('word_idn', '<label class="help-block error-validation">:message</label>') !!}
                                     </div>
                                 </div>
-                            </div>
-
-                            <div class="row">
 
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="category">Pick Group</label>
-                                        <select name="master_group_id" id="master_group_id" class="form-control"
+                                        <label for="category">Pilih Chapter</label>
+                                        <select name="vocabulary_chapter_id" id="vocabulary_chapter_id" class="form-control"
                                             required>
-                                            <option value="">Select Group</option>
-                                            @foreach ($groups as $group)
-                                                <option value="{{ $group->id }}"
-                                                    {{ @$group->id == @$data->master_group_id ? 'selected' : '' }}>
-                                                    {{ $group->name }}</option>
+                                            <option value="">Pilih Chapter</option>
+                                            @foreach ($chapters as $chapter)
+                                                <option value="{{ $chapter->id }}"
+                                                    {{ @$chapter->id == @$data->vocabulary_chapter_id ? 'selected' : '' }}>
+                                                    {{ $chapter->name }}</option>
                                             @endforeach
                                         </select>
-                                        {!! $errors->first('master_group_id', '<label class="help-block error-validation">:message</label>') !!}
+                                        {!! $errors->first('vocabulary_chapter_id', '<label class="help-block error-validation">:message</label>') !!}
                                     </div>
-                                </div>
-                                <div class="col-md-6">
+
                                     <div class="form-group">
                                         <label for="is_active">Status</label>
                                         <select name="is_active" id="status" class="form-control">
@@ -80,11 +69,10 @@ $title = @$data ? 'Edit' : 'Add New';
                                             <option {{ @$data->is_active == 0 ? 'selected' : '' }} value="0"> inactive
                                             </option>
                                         </select>
+                                        {!! $errors->first('is_active', '<label class="help-block error-validation">:message</label>') !!}
                                     </div>
-                                    {!! $errors->first('is_active', '<label class="help-block error-validation">:message</label>') !!}
                                 </div>
                             </div>
-                            {{-- </div> --}}
 
                             <button type="submit" class="btn btn-info btn-fw btn-lg mr-2">Submit</button>
                             <a href="{{ route('vocabularies.index') }}" class="btn btn-secondary btn-fw btn-lg">Cancel</a>

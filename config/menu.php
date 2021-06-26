@@ -73,7 +73,7 @@ return [
                 'icon' => 'mdi mdi-flag menu-icon',
             ],
             'letter-course' => [
-                'title' => 'Edukasi Huruf',
+                'title' => 'Versi Test',
                 'routeName' => 'letter-courses.index',
                 'additional_query' => '',
                 'icon' => 'mdi mdi-flag menu-icon',
@@ -88,6 +88,79 @@ return [
     ],
     'room-2' => [
         'title' => 'Room 2',
+        'routeName' => 'vocabularies.index',
+        'additional_query' => '',
+        'icon' => 'mdi mdi-comment-text-outline menu-icon',
+        'sub_menu' => [
+            'vocabulary-chapter' => [
+                'title' => 'Vocabulary Chapter',
+                'routeName' => 'vocabulary-chapters.index',
+                'icon' => 'mdi mdi-flag menu-icon',
+            ],
+            'vocabularies' => [
+                'title' => 'Kosa kata',
+                'routeName' => 'vocabularies.index',
+                'icon' => 'mdi mdi-flag menu-icon',
+            ],
+            'vocabulary-course' => [
+                'title' => 'Level Kosa Kata',
+                'routeName' => 'vocabulary-courses.index',
+                'additional_query' => '',
+                'icon' => 'mdi mdi-flag menu-icon',
+            ],
+            'vocabulary-question' => [
+                'title' => 'Daftar Pertanyaan',
+                'routeName' => 'vocabulary-course-questions.index',
+                'additional_query' => '',
+                'icon' => 'mdi mdi-flag menu-icon',
+            ]
+        ]
+    ],
+    'room-3' => [
+        'title' => 'Room 3',
+        'routeName' => 'particle-educations.index',
+        'additional_query' => '',
+        'icon' => 'mdi mdi-comment-text-outline menu-icon',
+        'sub_menu' => [
+            'particle-education' => [
+                'title' => 'Partikel Edukasi',
+                'routeName' => 'particle-educations.index',
+                'icon' => 'mdi mdi-flag menu-icon',
+            ],
+            'particle-education-detail' => [
+                'title' => 'Partikel Edukasi Detail',
+                'routeName' => 'particle-education-details.index',
+                'icon' => 'mdi mdi-flag menu-icon',
+            ],
+            'particle-course' => [
+                'title' => 'Partikel Test',
+                'routeName' => 'particle-courses.index',
+                'additional_query' => '',
+                'icon' => 'mdi mdi-flag menu-icon',
+            ],
+            'particle-question' => [
+                'title' => 'Daftar Pertanyaan',
+                'routeName' => 'particle-course-questions.index',
+                'additional_query' => '',
+                'icon' => 'mdi mdi-flag menu-icon',
+            ],
+            'particle-course-mini' => [
+                'title' => 'Partikel Mini Test',
+                'routeName' => 'particle-mini-courses.index',
+                'additional_query' => '',
+                'icon' => 'mdi mdi-flag menu-icon',
+            ],
+            'particle-question-mini' => [
+                'title' => 'Daftar Mini Pertanyaan',
+                'routeName' => 'particle-mini-course-questions.index',
+                'additional_query' => '',
+                'icon' => 'mdi mdi-flag menu-icon',
+            ]
+        ]
+    ],
+
+    'room-4' => [
+        'title' => 'Room 4',
         'routeName' => 'verb-levels.index',
         'additional_query' => '',
         'icon' => 'mdi mdi-comment-text-outline menu-icon',
@@ -147,50 +220,8 @@ return [
             ]
         ]
     ],
-    'room-3' => [
-        'title' => 'Room 3',
-        'routeName' => 'particle-educations.index',
-        'additional_query' => '',
-        'icon' => 'mdi mdi-comment-text-outline menu-icon',
-        'sub_menu' => [
-            'particle-education' => [
-                'title' => 'Partikel Edukasi',
-                'routeName' => 'particle-educations.index',
-                'icon' => 'mdi mdi-flag menu-icon',
-            ],
-            'particle-education-detail' => [
-                'title' => 'Partikel Edukasi Detail',
-                'routeName' => 'particle-education-details.index',
-                'icon' => 'mdi mdi-flag menu-icon',
-            ],
-            'particle-course' => [
-                'title' => 'Partikel Test',
-                'routeName' => 'particle-courses.index',
-                'additional_query' => '',
-                'icon' => 'mdi mdi-flag menu-icon',
-            ],
-            'particle-question' => [
-                'title' => 'Daftar Pertanyaan',
-                'routeName' => 'particle-course-questions.index',
-                'additional_query' => '',
-                'icon' => 'mdi mdi-flag menu-icon',
-            ],
-            'particle-course-mini' => [
-                'title' => 'Partikel Mini Test',
-                'routeName' => 'particle-mini-courses.index',
-                'additional_query' => '',
-                'icon' => 'mdi mdi-flag menu-icon',
-            ],
-            'particle-question-mini' => [
-                'title' => 'Daftar Mini Pertanyaan',
-                'routeName' => 'particle-mini-course-questions.index',
-                'additional_query' => '',
-                'icon' => 'mdi mdi-flag menu-icon',
-            ]
-        ]
-    ],
-    'room-4' => [
-        'title' => 'Room 4',
+    'room-5' => [
+        'title' => 'Room 5',
         'routeName' => 'pattern-chapters.index',
         'additional_query' => '',
         'icon' => 'mdi mdi-comment-text-outline menu-icon',
@@ -231,8 +262,8 @@ return [
             ]
         ]
     ],
-    'room-5' => [
-        'title' => 'Room 5',
+    'room-6' => [
+        'title' => 'Room 6',
         'routeName' => 'kanji-chapters.index',
         'additional_query' => '',
         'icon' => 'mdi mdi-comment-text-outline menu-icon',
@@ -280,31 +311,6 @@ return [
             'kanji-question-mini' => [
                 'title' => 'Daftar Mini Pertanyaan',
                 'routeName' => 'kanji-mini-course-questions.index',
-                'additional_query' => '',
-                'icon' => 'mdi mdi-flag menu-icon',
-            ]
-        ]
-    ],
-    'room-6' => [
-        'title' => 'Room 6',
-        'routeName' => 'vocabularies.index',
-        'additional_query' => '',
-        'icon' => 'mdi mdi-comment-text-outline menu-icon',
-        'sub_menu' => [
-            'vocabularies' => [
-                'title' => 'Kosa kata',
-                'routeName' => 'vocabularies.index',
-                'icon' => 'mdi mdi-flag menu-icon',
-            ],
-            'vocabulary-course' => [
-                'title' => 'Level Kosa Kata',
-                'routeName' => 'vocabulary-courses.index',
-                'additional_query' => '',
-                'icon' => 'mdi mdi-flag menu-icon',
-            ],
-            'vocabulary-question' => [
-                'title' => 'Daftar Pertanyaan',
-                'routeName' => 'vocabulary-course-questions.index',
                 'additional_query' => '',
                 'icon' => 'mdi mdi-flag menu-icon',
             ]

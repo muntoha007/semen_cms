@@ -22,9 +22,9 @@ $title = @$data ? 'Edit' : 'Tambah';
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="letter_course_id">Pick Letter Course</label>
+                                        <label for="letter_course_id">Versi Test</label>
                                         <select name="letter_course_id" id="letter" class="form-control" required>
-                                            <option value="">Select Letter Course</option>
+                                            <option value="">Pilih Versi Test</option>
                                             @foreach ($courses as $let)
                                                 <option value="{{ $let->id }}"
                                                     {{ $let->id == @$data->letter_course_id ? 'selected' : '' }}>

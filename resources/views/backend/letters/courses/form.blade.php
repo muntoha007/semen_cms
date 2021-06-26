@@ -9,7 +9,7 @@ $title = @$data ? 'Edit' : 'Tambah';
             <div class="col-12 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">{{ $title }} Edukasi Huruf</h4>
+                        <h4 class="card-title">{{ $title }} Versi Test</h4>
                         <br>
                         <form class="forms-sample"
                             action="{{ @$data ? route('letter-courses.update', $data->id) : route('letter-courses.store') }}"
@@ -19,18 +19,18 @@ $title = @$data ? 'Edit' : 'Tambah';
                                 <input type="hidden" name="_method" value="put">
                             @endif
                             <div class="row">
-                                <div class="col-md-4">
+                                <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="title">Title</label>
+                                        <label for="title">Nama</label>
                                         <input type="text" class="form-control {{ hasErrorField($errors, 'title') }}"
                                             id="title" name="title" value="{{ old('title', @$data->title) }}"
-                                            placeholder="Title">
+                                            placeholder="Nama">
                                         {!! $errors->first('title', '<label class="help-block error-validation">:message</label>') !!}
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="letter_category_id">Category</label>
+                                        <label for="letter_category_id">Kategory</label>
                                         <select name="letter_category_id" id="letter_category_id" class="form-control"
                                             required>
                                             <option value="">Select Category</option>
@@ -44,7 +44,19 @@ $title = @$data ? 'Edit' : 'Tambah';
 
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="letter_type">Tipe Huruf</label>
+                                        <select name="letter_type" id="letter_type" class="form-control">
+                                            <option {{ @$data->letter_type == "hiragana" ? 'selected' : '' }} value="1"> Hiragana
+                                            </option>
+                                            <option {{ @$data->letter_type == "katakana" ? 'selected' : '' }} value="0"> Katakana
+                                            </option>
+                                        </select>
+                                        {!! $errors->first('letter_type', '<label class="help-block error-validation">:message</label>') !!}
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="is_active">Status</label>
                                         <select name="is_active" id="is_active" class="form-control">
@@ -56,6 +68,8 @@ $title = @$data ? 'Edit' : 'Tambah';
                                         {!! $errors->first('is_active', '<label class="help-block error-validation">:message</label>') !!}
                                     </div>
                                 </div>
+
+
                             </div>
 
                             <button type="submit" class="btn btn-info btn-fw btn-lg mr-2">Submit</button>

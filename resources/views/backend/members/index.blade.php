@@ -9,7 +9,7 @@
                         {{-- @isPermitted('member.edit')
                         <div class="form-group">
                             <a href="{{ route('member.edit') }}" type="button" class="btn btn-outline-info btn-rounded btn-fw btn-sm">
-                                <i class="mdi mdi-plus-circle btn-icon-prepend"></i> Create new
+                                <i class="mdi mdi-plus-circle btn-icon-prepend"></i> Tambah
                             </a>
                         </div>
                         @endisPermitted --}}

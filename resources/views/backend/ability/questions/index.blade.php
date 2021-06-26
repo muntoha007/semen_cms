@@ -10,7 +10,7 @@
                         @isPermitted('ability-questions.create')
                         <div class="form-group">
                             <a href="{{ route('ability-questions.create', request()->route('id')) }}" type="button" class="btn btn-outline-info btn-rounded btn-fw btn-sm">
-                                <i class="mdi mdi-plus-circle btn-icon-prepend"></i> Create New
+                                <i class="mdi mdi-plus-circle btn-icon-prepend"></i> Tambah
                             </a>
                             <a href="{{ route('ability-course-question-groups.index') }}" type="button" class="btn btn-outline-info btn-rounded btn-fw btn-sm pull-right">
                                 <i class="mdi mdi mdi-arrow-left"></i> Back

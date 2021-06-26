@@ -10,7 +10,7 @@
                         @isPermitted('lesson-detail-add', request()->route('id'))
                         <div class="form-group">
                             <a href="{{ route('lesson-detail-add', request()->route('id')) }}" type="button" class="btn btn-outline-info btn-rounded btn-fw btn-sm">
-                                <i class="mdi mdi-plus-circle btn-icon-prepend"></i> Create new
+                                <i class="mdi mdi-plus-circle btn-icon-prepend"></i> Tambah
                             </a>
                             <a href="{{ route('pattern-lessons.index') }}" type="button" class="btn btn-outline-info btn-rounded btn-fw btn-sm float-right">
                                 <i class="mdi mdi-arrow-left-bold-circle-outline"></i> Back

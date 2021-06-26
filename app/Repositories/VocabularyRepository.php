@@ -17,7 +17,7 @@ class VocabularyRepository
         $word->word_jpn = $data['word_jpn'];
         $word->word_romaji = $data['word_romaji'];
         $word->word_idn = $data['word_idn'];
-        $word->master_group_id = $data['master_group_id'];
+        $word->vocabulary_chapter_id = $data['vocabulary_chapter_id'];
         $word->is_active = $data["is_active"];
         $word->save();
 
@@ -31,7 +31,7 @@ class VocabularyRepository
         $word->word_jpn = $data['word_jpn'];
         $word->word_romaji = $data['word_romaji'];
         $word->word_idn = $data['word_idn'];
-        $word->master_group_id = $data['master_group_id'];
+        $word->vocabulary_chapter_id = $data['vocabulary_chapter_id'];
         $word->is_active = $data['is_active'];
         $word->update();
 

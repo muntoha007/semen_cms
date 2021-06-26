@@ -10,7 +10,7 @@
                         @isPermitted('vocabulary-course-questions.create')
                         <div class="form-group">
                             <a href="{{ route('vocabulary-course-questions.create') }}" type="button" class="btn btn-outline-info btn-rounded btn-fw btn-sm">
-                                <i class="mdi mdi-plus-circle btn-icon-prepend"></i> Create new
+                                <i class="mdi mdi-plus-circle btn-icon-prepend"></i> Tambah
                             </a>
                         </div>
                         @endisPermitted

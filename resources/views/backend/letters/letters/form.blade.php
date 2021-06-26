@@ -1,6 +1,6 @@
 @extends('layouts.master')
 @php
-$title = @$data ? 'Edit' : 'Add New';
+$title = @$data ? 'Edit' : 'Tambah';
 @endphp
 @section('title', 'Letter ' . $title)
 @section('content')
@@ -9,7 +9,7 @@ $title = @$data ? 'Edit' : 'Add New';
             <div class="col-12 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">{{ $title }} Letter</h4>
+                        <h4 class="card-title">{{ $title }} Huruf</h4>
                         <br>
                         <form class="forms-sample"
                             action="{{ @$data ? route('letters.update', $data->id) : route('letters.store') }}"

@@ -14,7 +14,7 @@
                                     </a>
 
                                     <a href="{{ route('user-availability-date.create') }}" type="button" class="btn btn-outline-info btn-rounded btn-fw btn-sm">
-                                        <i class="mdi mdi-plus-circle btn-icon-prepend"></i> Create new
+                                        <i class="mdi mdi-plus-circle btn-icon-prepend"></i> Tambah
                                     </a>
                                 </div>
                             @endif

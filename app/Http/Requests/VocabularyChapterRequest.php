@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 
-class VocabularyRequest extends FormRequest
+class VocabularyChapterRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,11 +25,8 @@ class VocabularyRequest extends FormRequest
     public function rules()
     {
         return [
-            "word_jpn" => 'required',
-            "word_romaji" => 'required',
-            "word_idn" => 'required',
-            "is_active" => 'required',
-            "vocabulary_chapter_id" => 'required',
+            "name" => 'required|unique:vocabulary_chapters,name',
+            "master_group_id" => 'required',
         ];
     }
 

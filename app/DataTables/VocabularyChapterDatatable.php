@@ -2,7 +2,7 @@
 
 namespace App\DataTables;
 
-use App\Models\LetterCourse;
+use App\Models\VocabularyChapter;
 use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
@@ -11,7 +11,7 @@ use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Html\Editor\Editor;
 // use DB;
 
-class LetterCourseDatatable extends DataTable
+class VocabularyChapterDatatable extends DataTable
 {
     /**
      * Build DataTable class.
@@ -31,13 +31,13 @@ class LetterCourseDatatable extends DataTable
                 }
             })
             ->editColumn('created_at', function ($data) {
-                return $data->created_at->format('Y-m-d'); // human readable format
+                return $data->created_at == "" ? "" : $data->created_at->format('Y-m-d'); // human readable format
             })
             ->editColumn('updated_at', function ($data) {
-                return $data->updated_at->format('Y-m-d'); // human readable format
+                return $data->updated_at == "" ? "" : $data->updated_at->format('Y-m-d'); // human readable format
             })
             ->addColumn('action', function ($data) {
-                $edit_url = route('letter-courses.edit', $data->id);
+                $edit_url = route('vocabulary-chapters.edit', $data->id);
 
                 return view('partials.action-button')->with(
                     compact('edit_url')
@@ -51,21 +51,21 @@ class LetterCourseDatatable extends DataTable
      * @param \App\Role $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(LetterCourse $model)
+    public function query(VocabularyChapter $model)
     {
         // DB::statement(DB::raw('set @rownum=0'));
         return $model->newQuery()
             // ->where('slug','!=','super-admin')
             ->select([
-                'letter_courses.id',
-                'letter_courses.code',
-                'letter_courses.title',
-                'letter_courses.is_active',
-                'letter_courses.created_at',
-                'letter_courses.updated_at',
-                'letter_categories.name',
+                'vocabulary_chapters.id',
+                'vocabulary_chapters.code',
+                'vocabulary_chapters.name',
+                'vocabulary_chapters.is_active',
+                'vocabulary_chapters.created_at',
+                'vocabulary_chapters.updated_at',
+                'master_groups.name as group_name',
                 DB::raw('row_number() over () AS rownum'),
-            ])->join('letter_categories', 'letter_categories.id', '=', 'letter_courses.letter_category_id');
+            ])->join('master_groups', 'master_groups.id', '=', 'vocabulary_chapters.master_group_id');
     }
 
     /**
@@ -76,7 +76,7 @@ class LetterCourseDatatable extends DataTable
     public function html()
     {
         return $this->builder()
-            ->setTableId('letter-course-table')
+            ->setTableId('vocabulary_chapter-table')
             ->columns($this->getColumns())
             ->minifiedAjax()
             ->dom('<"row"<"col-sm-6"l><"col-sm-6"f>> <"row"<"col-sm-12"tr>> <"row"<"col-sm-5"i><"col-sm-7"p>>')
@@ -108,11 +108,11 @@ class LetterCourseDatatable extends DataTable
                 ->title('#')
                 ->searchable(false),
             // Column::make('code'),
-            Column::make('title'),
-            Column::computed('name')->title('Kategori'),
-            Column::computed('is_active')->title('Status'),
-            // Column::make('created_at'),
-            // Column::make('updated_at'),
+            Column::make('name')->title('Nama'),
+            Column::make('group_name'),
+            Column::make('is_active')->title('Status'),
+            Column::make('created_at'),
+            Column::make('updated_at'),
             Column::computed('action')
                 ->visible($hasAction)
                 ->exportable(false)
@@ -129,6 +129,6 @@ class LetterCourseDatatable extends DataTable
      */
     protected function filename()
     {
-        return 'LetterCourse_' . date('YmdHis');
+        return 'VocabularyChapter_' . date('YmdHis');
     }
 }

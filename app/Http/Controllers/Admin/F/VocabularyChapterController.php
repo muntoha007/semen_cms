@@ -2,34 +2,35 @@
 
 namespace App\Http\Controllers\Admin\F;
 
-use App\DataTables\VocabularyDatatable;
+use App\DataTables\VocabularyChapterDatatable;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\VocabularyRequest;
-use App\Models\VocabularyChapter;
+use App\Http\Requests\VocabularyChapterRequest;
+use App\Models\MasterGroup;
 use App\Models\Vocabulary;
-use App\Repositories\VocabularyRepository;
+use App\Models\VocabularyChapter;
+use App\Repositories\VocabularyChapterRepository;
 use Illuminate\Http\Request;
 
-class VocabularyController extends Controller
+class VocabularyChapterController extends Controller
 {
     protected $model, $repository;
     public function __construct()
     {
-        $this->model = new Vocabulary();
-        $this->repository = new VocabularyRepository();
+        $this->model = new VocabularyChapter();
+        $this->repository = new VocabularyChapterRepository();
     }
 
-    protected $redirectAfterSave = 'vocabularies.index';
-    protected $moduleName = 'Vocabularies / Kosa Kata';
+    protected $redirectAfterSave = 'vocabulary-chapters.index';
+    protected $moduleName = 'Vocabulary Chapters';
 
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(VocabularyDatatable $datatable)
+    public function index(VocabularyChapterDatatable $datatable)
     {
-        return $datatable->render('backend.vocabulary.vocabularies.index');
+        return $datatable->render('backend.vocabulary.chapters.index');
     }
 
     /**
@@ -39,8 +40,8 @@ class VocabularyController extends Controller
      */
     public function create()
     {
-        $chapters = VocabularyChapter::where('is_active', 1)->get();
-        return view('backend.vocabulary.vocabularies.form', compact('chapters'));
+        $groups = MasterGroup::where('is_active', 1)->get();
+        return view('backend.vocabulary.chapters.form', compact('groups'));
     }
 
     /**
@@ -49,7 +50,7 @@ class VocabularyController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(VocabularyRequest $request)
+    public function store(VocabularyChapterRequest $request)
     {
         $param = $request->all();
         $saveData = $this->repository->create($param);
@@ -85,8 +86,8 @@ class VocabularyController extends Controller
         } else {
             $data = $this->model->findOrFail($id);
         }
-        $chapters = VocabularyChapter::where('is_active', 1)->get();
-        return view('backend.vocabulary.vocabularies.form',compact('data','chapters'));
+        $groups = MasterGroup::where('is_active', 1)->get();
+        return view('backend.vocabulary.chapters.form',compact('data','groups'));
     }
 
     /**

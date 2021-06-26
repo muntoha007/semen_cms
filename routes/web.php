@@ -116,6 +116,7 @@ Route::group(['middleware' => ['sentinelAuth','checkAccess'],'namespace' => 'Adm
     Route::resource('kanji-mini-courses', 'E\KanjiMiniCourseController')->except('show');
     Route::resource('kanji-mini-course-questions', 'E\KanjiMiniCourseQuestionController')->except('show');
 
+    Route::resource('vocabulary-chapters', 'F\VocabularyChapterController')->except('show');
     Route::resource('vocabularies', 'F\VocabularyController')->except('show');
     Route::resource('vocabulary-courses', 'F\VocabularyCourseController')->except('show');
     Route::resource('vocabulary-course-questions', 'F\VocabularyCourseQuestionController')->except('show');

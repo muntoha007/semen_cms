@@ -10,7 +10,7 @@
                         @isPermitted('kanji-mini-courses.create')
                         <div class="form-group">
                             <a href="{{ route('kanji-mini-courses.create') }}" type="button" class="btn btn-outline-info btn-rounded btn-fw btn-sm">
-                                <i class="mdi mdi-plus-circle btn-icon-prepend"></i> Create new
+                                <i class="mdi mdi-plus-circle btn-icon-prepend"></i> Tambah
                             </a>
                         </div>
                         @endisPermitted

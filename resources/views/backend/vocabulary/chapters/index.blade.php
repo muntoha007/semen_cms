@@ -1,15 +1,15 @@
 @extends('layouts.master')
-@section('title', 'Kanji Courses List')
+@section('title', 'Vocabulari Chapter')
 @section('content')
     <div class="content-wrapper">
         <div class="row">
             <div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title text-center table-title">List Kanji Courses</h4>
-                        @isPermitted('kanji-courses.create')
+                        <h4 class="card-title text-center table-title">Vocabularies Chapter</h4>
+                        @isPermitted('vocabulary-chapters.create')
                         <div class="form-group">
-                            <a href="{{ route('kanji-courses.create') }}" type="button" class="btn btn-outline-info btn-rounded btn-fw btn-sm">
+                            <a href="{{ route('vocabulary-chapters.create') }}" type="button" class="btn btn-outline-info btn-rounded btn-fw btn-sm">
                                 <i class="mdi mdi-plus-circle btn-icon-prepend"></i> Tambah
                             </a>
                         </div>

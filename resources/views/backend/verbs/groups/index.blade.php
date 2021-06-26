@@ -10,7 +10,7 @@
                         @isPermitted('verb-groups.create')
                         <div class="form-group">
                             <a href="{{ route('verb-groups.create') }}" type="button" class="btn btn-outline-info btn-rounded btn-fw btn-sm">
-                                <i class="mdi mdi-plus-circle btn-icon-prepend"></i> Create new
+                                <i class="mdi mdi-plus-circle btn-icon-prepend"></i> Tambah
                             </a>
                         </div>
                         @endisPermitted

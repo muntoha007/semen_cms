@@ -17,7 +17,8 @@ class LetterCourseRepository
         $letter->code = Str::random(10);
         $letter->title = $data['title'];
         $letter->letter_category_id = $data['letter_category_id'];
-        $letter->is_active = 1;
+        $letter->is_active = $data['is_active'];
+        $letter->letter_type = $data['letter_type'];
         $letter->save();
 
         return $letter;
@@ -29,6 +30,7 @@ class LetterCourseRepository
         $letter->title = $data['title'];
         $letter->letter_category_id = $data['letter_category_id'];
         $letter->is_active = $data['is_active'];
+        $letter->letter_type = $data['letter_type'];
         $letter->update();
 
         return $letter;

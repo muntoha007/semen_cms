@@ -1,6 +1,6 @@
 @extends('layouts.master')
 @php
-$title = @$data ? 'Edit' : 'Add New';
+$title = @$data ? 'Edit' : 'Tambah';
 @endphp
 @section('title', 'Letter ' . $title)
 @section('content')
@@ -9,7 +9,7 @@ $title = @$data ? 'Edit' : 'Add New';
             <div class="col-12 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">{{ $title }} Letter</h4>
+                        <h4 class="card-title">{{ $title }} Huruf {{@$cid = 1 ? "Hiragana" : "Katakana"}}</h4>
                         <br>
                         <form class="forms-sample"
                             action="{{ @$data ? route('letter-cat-update', [$data->letter_category_id, $data->id]) : route('letter-cat-add', $cid) }}"
@@ -28,7 +28,7 @@ $title = @$data ? 'Edit' : 'Add New';
                                         {!! $errors->first('name', '<label class="help-block error-validation">:message</label>') !!}
                                     </div> --}}
                                     <div class="form-group">
-                                        <label for="letter">Letter</label>
+                                        <label for="letter">Huruf {{@$cid = 1 ? "Hiragana" : "Katakana"}}</label>
                                         <input type="text" name="letter" id="letter" class="form-control"
                                             value="{{ old('letter') ?? @$data->letter }}" required>
 
@@ -36,7 +36,7 @@ $title = @$data ? 'Edit' : 'Add New';
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="romanji">Romanji</label>
+                                        <label for="romanji">Romaji</label>
                                         <input type="text" name="romanji" id="romanji" class="form-control"
                                             value="{{ old('romanji') ?? @$data->romanji }}" required>
 
@@ -44,7 +44,7 @@ $title = @$data ? 'Edit' : 'Add New';
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="total_stroke">Total Stoke</label>
+                                        <label for="total_stroke">Total Goresan</label>
                                         <input type="number" name="total_stroke" id="total_stroke" class="form-control"
                                             value="{{ old('total_stroke') ?? @$data->total_stroke }}" required>
 
@@ -81,7 +81,7 @@ $title = @$data ? 'Edit' : 'Add New';
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group input-group">
-                                        <label for="exampleInputFile">Image</label>
+                                        <label for="exampleInputFile">Animasi</label>
                                         <input type="file"
                                             class="form-control {{ hasErrorField($errors, 'image_url') }} dropify"
                                             data-errors-position="outside" name="image_url"
@@ -92,7 +92,7 @@ $title = @$data ? 'Edit' : 'Add New';
                                     {!! $errors->first('image_url', '<label class="help-block error-validation">:message</label>') !!}
 
                                     <div class="form-group input-group">
-                                        <label for="exampleInputFile2">Color Image</label>
+                                        <label for="exampleInputFile2">Animasi Berwarna</label>
                                         <input type="file"
                                             class="form-control {{ hasErrorField($errors, 'color_image_url') }} dropify"
                                             data-errors-position="outside" name="color_image_url"

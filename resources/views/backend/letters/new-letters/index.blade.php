@@ -6,11 +6,11 @@
             <div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title text-center table-title">List Letters</h4>
+                        <h4 class="card-title text-center table-title">Daftar {{$cid = 1 ? "Hiragana" : "Katakana"}}</h4>
                         @isPermitted('letter-cat-get-add', $cid )
                         <div class="form-group">
                             <a href="{{ route('letter-cat-get-add', $cid) }}" type="button" class="btn btn-outline-info btn-rounded btn-fw btn-sm">
-                                <i class="mdi mdi-plus-circle btn-icon-prepend"></i> Create new
+                                <i class="mdi mdi-plus-circle btn-icon-prepend"></i> Tambah
                             </a>
                         </div>
                         @endisPermitted
