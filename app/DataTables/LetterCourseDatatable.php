@@ -108,8 +108,8 @@ class LetterCourseDatatable extends DataTable
                 ->title('#')
                 ->searchable(false),
             // Column::make('code'),
-            Column::make('title'),
-            Column::computed('name')->title('Kategori'),
+            Column::make('title')->title('Judul'),
+            Column::computed('name')->title('Tipe Huruf'),
             Column::computed('is_active')->title('Status'),
             // Column::make('created_at'),
             // Column::make('updated_at'),

@@ -109,11 +109,11 @@ class LetterCategoryTypeDatatable extends DataTable
                 ->title('#')
                 ->searchable(false),
             // Column::make('code'),
-            Column::make('letter'),
-            Column::make('romanji'),
+            Column::make('letter')->title('Huruf'),
+            Column::make('romanji')->title('Romaji'),
             Column::computed('is_active')->title('Status'),
-            Column::make('created_at'),
-            Column::make('updated_at'),
+            // Column::make('created_at'),
+            // Column::make('updated_at'),
             Column::computed('action')
                 ->visible($hasAction)
                 ->exportable(false)

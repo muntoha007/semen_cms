@@ -18,7 +18,7 @@ class LetterCourseRepository
         $letter->title = $data['title'];
         $letter->letter_category_id = $data['letter_category_id'];
         $letter->is_active = $data['is_active'];
-        $letter->letter_type = $data['letter_type'];
+        // $letter->letter_type = $data['letter_type'];
         $letter->save();
 
         return $letter;
@@ -30,7 +30,7 @@ class LetterCourseRepository
         $letter->title = $data['title'];
         $letter->letter_category_id = $data['letter_category_id'];
         $letter->is_active = $data['is_active'];
-        $letter->letter_type = $data['letter_type'];
+        // $letter->letter_type = $data['letter_type'];
         $letter->update();
 
         return $letter;
