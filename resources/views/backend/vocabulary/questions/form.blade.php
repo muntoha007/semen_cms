@@ -31,7 +31,7 @@ $title = @$data ? 'Edit' : 'Tambah';
                                                     {{ $course->title }}</option>
                                             @endforeach
                                         </select>
-                                        {!! $errors->first('vocabulary_course_id', '<label class="help-block error-validation">:message</label>') !!}
+                                        {!! $errors->first('vocabulary_group_id', '<label class="help-block error-validation">:message</label>') !!}
                                     </div>
                                 </div>
 
@@ -51,7 +51,7 @@ $title = @$data ? 'Edit' : 'Tambah';
                             </div>
 
                             <div class="form-group">
-                                <label for="question_jpn">Pertanyaan Japan</label>
+                                <label for="question_jpn">Pertanyaan Jepang</label>
                                 <textarea class="form-control" name="question_jpn" id="question_jpn" rows="4"
                                     placeholder="question_jpn" required
                                     value="">{{ old('question_jpn') ?? @$data->question_jpn }}</textarea>

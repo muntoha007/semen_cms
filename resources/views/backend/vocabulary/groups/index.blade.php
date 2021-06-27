@@ -9,7 +9,7 @@
                         <h4 class="card-title text-center table-title"> Daftar Level Kosakata</h4>
                         @isPermitted('vocabulary-courses.create')
                         <div class="form-group">
-                            <a href="{{ route('vocabulary-courses.create') }}" type="button" class="btn btn-outline-info btn-rounded btn-fw btn-sm">
+                            <a href="{{ route('vocabulary-groups.create') }}" type="button" class="btn btn-outline-info btn-rounded btn-fw btn-sm">
                                 <i class="mdi mdi-plus-circle btn-icon-prepend"></i> Tambah
                             </a>
                         </div>

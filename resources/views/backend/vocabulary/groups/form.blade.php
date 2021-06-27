@@ -12,7 +12,7 @@ $title = @$data ? 'Edit' : 'Tambah';
                         <h4 class="card-title">{{ $title }} Level Kosakatae</h4>
                         <br>
                         <form class="forms-sample"
-                            action="{{ @$data ? route('vocabulary-courses.update', $data->id) : route('vocabulary-courses.store') }}"
+                            action="{{ @$data ? route('vocabulary-groups.update', $data->id) : route('vocabulary-groups.store') }}"
                             method="POST" enctype="multipart/form-data">
                             @csrf
                             @if (@$data)
@@ -24,7 +24,7 @@ $title = @$data ? 'Edit' : 'Tambah';
                                         <label for="title">Judul</label>
                                         <input type="text" class="form-control {{ hasErrorField($errors, 'title') }}"
                                             id="title" name="title" value="{{ old('title', @$data->title) }}"
-                                            placeholder="Title">
+                                            placeholder="Judul">
                                         {!! $errors->first('title', '<label class="help-block error-validation">:message</label>') !!}
                                     </div>
                                 </div>
@@ -43,7 +43,7 @@ $title = @$data ? 'Edit' : 'Tambah';
                             </div>
 
                             <button type="submit" class="btn btn-info btn-fw btn-lg mr-2">Submit</button>
-                            <a href="{{ route('vocabulary-courses.index') }}"
+                            <a href="{{ route('vocabulary-groups.index') }}"
                                 class="btn btn-secondary btn-fw btn-lg">Cancel</a>
                         </form>
                     </div>

@@ -2,7 +2,7 @@
 
 namespace App\DataTables;
 
-use App\Models\VocabularyCourse;
+use App\Models\VocabularyGroup;
 use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
@@ -11,7 +11,7 @@ use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Html\Editor\Editor;
 // use DB;
 
-class VocabularyCourseDatatable extends DataTable
+class VocabularyGroupDatatable extends DataTable
 {
     /**
      * Build DataTable class.
@@ -37,7 +37,7 @@ class VocabularyCourseDatatable extends DataTable
                 return $data->updated_at->format('Y-m-d'); // human readable format
             })
             ->addColumn('action', function ($data) {
-                $edit_url = route('vocabulary-courses.edit', $data->id);
+                $edit_url = route('vocabulary-groups.edit', $data->id);
 
                 return view('partials.action-button')->with(
                     compact('edit_url')
@@ -51,18 +51,18 @@ class VocabularyCourseDatatable extends DataTable
      * @param \App\Role $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(VocabularyCourse $model)
+    public function query(VocabularyGroup $model)
     {
         // DB::statement(DB::raw('set @rownum=0'));
         return $model->newQuery()
             // ->where('slug','!=','super-admin')
             ->select([
-                'vocabulary_courses.id',
-                'vocabulary_courses.code',
-                'vocabulary_courses.title',
-                'vocabulary_courses.is_active',
-                'vocabulary_courses.created_at',
-                'vocabulary_courses.updated_at',
+                'vocabulary_groups.id',
+                'vocabulary_groups.code',
+                'vocabulary_groups.title',
+                'vocabulary_groups.is_active',
+                'vocabulary_groups.created_at',
+                'vocabulary_groups.updated_at',
                 DB::raw('row_number() over () AS rownum'),
             ]);
     }
@@ -127,6 +127,6 @@ class VocabularyCourseDatatable extends DataTable
      */
     protected function filename()
     {
-        return 'VocabularyCourse_' . date('YmdHis');
+        return 'VocabularyGroup_' . date('YmdHis');
     }
 }

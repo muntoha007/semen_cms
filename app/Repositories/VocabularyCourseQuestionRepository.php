@@ -3,7 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\VocabularyCourseQuestion;
-use App\Models\VocabularyCourse;
+use App\Models\VocabularyGroup;
 use App\Models\VocabularyCourseAnswer;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -19,7 +19,7 @@ class VocabularyCourseQuestionRepository
         $question->question_jpn = $data['question_jpn'];
         $question->question_romanji = $data['question_romanji'];
         $question->question_idn = $data['question_idn'];
-        $question->vocabulary_course_id = $data['vocabulary_course_id'];
+        $question->vocabulary_group_id = $data['vocabulary_group_id'];
         $question->is_active = isset($value["is_active"]);
         $question->save();
 
@@ -35,7 +35,7 @@ class VocabularyCourseQuestionRepository
             $answer->save();
         }
 
-        $course = VocabularyCourse::where('id', request('vocabulary_course_id'))->first();
+        $course = VocabularyGroup::where('id', request('vocabulary_group_id'))->first();
         $course->question_count = $course->question_count + 1;
 
         $course->update();
@@ -50,16 +50,16 @@ class VocabularyCourseQuestionRepository
         $question->question_jpn = $data['question_jpn'];
         $question->question_romanji = $data['question_romanji'];
         $question->question_idn = $data['question_idn'];
-        $question->vocabulary_course_id = $data['vocabulary_course_id'];
+        $question->vocabulary_group_id = $data['vocabulary_group_id'];
         $question->is_active = $data['is_active'];
 
-        if ($question->vocabulary_course_id != $data['vocabulary_course_id']) {
-            $oldcourse = VocabularyCourse::where('id', $question->vocabulary_course_id)->first();
+        if ($question->vocabulary_group_id != $data['vocabulary_group_id']) {
+            $oldcourse = VocabularyGroup::where('id', $question->vocabulary_group_id)->first();
             $oldcourse->question_count = $oldcourse->question_count - 1;
 
             $oldcourse->update();
 
-            $newcourse = VocabularyCourse::where('id', request('vocabulary_course_id'))->first();
+            $newcourse = VocabularyGroup::where('id', request('vocabulary_group_id'))->first();
             $newcourse->question_count = $newcourse->question_count + 1;
 
             $newcourse->update();

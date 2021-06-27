@@ -2,14 +2,14 @@
 @php
 $title = @$data ? 'Edit' : 'Tambah';
 @endphp
-@section('title', 'Kosa Kata ' . $title)
+@section('title', 'Kosakata ' . $title)
 @section('content')
     <div class="content-wrapper">
         <div class="row">
             <div class="col-12 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">{{ $title }}  Kosa Kata</h4>
+                        <h4 class="card-title">{{ $title }}  Kosakata</h4>
                         <br>
                         <form class="forms-sample"
                             action="{{ @$data ? route('vocabularies.update', $data->id) : route('vocabularies.store') }}"

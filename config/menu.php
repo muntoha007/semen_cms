@@ -92,6 +92,12 @@ return [
         'additional_query' => '',
         'icon' => 'mdi mdi-comment-text-outline menu-icon',
         'sub_menu' => [
+            // 'vocabulary-group' => [
+            //     'title' => 'Group Kosa Kata',
+            //     'routeName' => 'vocabulary-groups.index',
+            //     'additional_query' => '',
+            //     'icon' => 'mdi mdi-flag menu-icon',
+            // ],
             'vocabulary-chapter' => [
                 'title' => 'Bab Kosakata',
                 'routeName' => 'vocabulary-chapters.index',

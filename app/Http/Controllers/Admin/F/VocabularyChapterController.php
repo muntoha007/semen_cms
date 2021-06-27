@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin\F;
 use App\DataTables\VocabularyChapterDatatable;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\VocabularyChapterRequest;
-use App\Models\MasterGroup;
+use App\Models\VocabularyGroup;
 use App\Models\Vocabulary;
 use App\Models\VocabularyChapter;
 use App\Repositories\VocabularyChapterRepository;
@@ -40,7 +40,7 @@ class VocabularyChapterController extends Controller
      */
     public function create()
     {
-        $groups = MasterGroup::where('is_active', 1)->get();
+        $groups = VocabularyGroup::where('is_active', 1)->get();
         return view('backend.vocabulary.chapters.form', compact('groups'));
     }
 
@@ -86,7 +86,7 @@ class VocabularyChapterController extends Controller
         } else {
             $data = $this->model->findOrFail($id);
         }
-        $groups = MasterGroup::where('is_active', 1)->get();
+        $groups = VocabularyGroup::where('is_active', 1)->get();
         return view('backend.vocabulary.chapters.form',compact('data','groups'));
     }
 
