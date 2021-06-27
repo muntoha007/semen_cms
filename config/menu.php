@@ -378,6 +378,11 @@ return [
                 'routeName' => 'permission.index',
                 'icon' => 'mdi mdi-account-settings menu-icon',
             ],
+            'master-group' => [
+                'title' => 'Master Group',
+                'routeName' => 'master-groups.index',
+                'icon' => 'mdi mdi-flag menu-icon',
+            ],
             'setting-list' => [
                 'title' => 'Setting',
                 'routeName' => 'settings.index',
@@ -402,23 +407,23 @@ return [
     //     'routeName' => 'permission.index',
     //     'additional_query' => '',
     //     'icon' => 'mdi mdi-account-key menu-icon',
-//        'sub_menu' => [
-//            'User' => [
-//                'title' => 'Users',
-//                'routeName' => 'user.index',
-//                'icon' => 'mdi mdi-account-multiple menu-icon',
-//            ],
-//            'roles' => [
-//                'title' => 'Role',
-//                'routeName' => 'role.index',
-//                'icon' => 'mdi mdi-account-settings menu-icon',
-//            ],
-//            'permission' => [
-//                'title' => 'Permission',
-//                'routeName' => 'permission.index',
-//                'icon' => 'mdi mdi-account-key menu-icon',
-//            ],
-//        ]
+    //        'sub_menu' => [
+    //            'User' => [
+    //                'title' => 'Users',
+    //                'routeName' => 'user.index',
+    //                'icon' => 'mdi mdi-account-multiple menu-icon',
+    //            ],
+    //            'roles' => [
+    //                'title' => 'Role',
+    //                'routeName' => 'role.index',
+    //                'icon' => 'mdi mdi-account-settings menu-icon',
+    //            ],
+    //            'permission' => [
+    //                'title' => 'Permission',
+    //                'routeName' => 'permission.index',
+    //                'icon' => 'mdi mdi-account-key menu-icon',
+    //            ],
+    //        ]
     // ],
     // 'setting' => [
     //     'title' => 'Setting',
