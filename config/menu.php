@@ -93,17 +93,17 @@ return [
         'icon' => 'mdi mdi-comment-text-outline menu-icon',
         'sub_menu' => [
             'vocabulary-chapter' => [
-                'title' => 'Vocabulary Chapter',
+                'title' => 'Bab Kosakata',
                 'routeName' => 'vocabulary-chapters.index',
                 'icon' => 'mdi mdi-flag menu-icon',
             ],
             'vocabularies' => [
-                'title' => 'Kosa kata',
+                'title' => 'Kosakata',
                 'routeName' => 'vocabularies.index',
                 'icon' => 'mdi mdi-flag menu-icon',
             ],
             'vocabulary-course' => [
-                'title' => 'Level Kosa Kata',
+                'title' => 'Level Kosakata',
                 'routeName' => 'vocabulary-courses.index',
                 'additional_query' => '',
                 'icon' => 'mdi mdi-flag menu-icon',

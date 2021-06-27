@@ -64,8 +64,9 @@ class VocabularyCourseQuestionDatatable extends DataTable
                 'vocabulary_course_questions.is_active',
                 'vocabulary_course_questions.created_at',
                 'vocabulary_course_questions.updated_at',
+                'vocabulary_courses.title',
                 DB::raw('row_number() over () AS rownum'),
-            ]);
+            ])->join('vocabulary_courses', 'vocabulary_courses.id', '=', 'vocabulary_course_questions.vocabulary_course_id');
     }
 
     /**
@@ -108,11 +109,12 @@ class VocabularyCourseQuestionDatatable extends DataTable
                 ->title('#')
                 ->searchable(false),
             // Column::make('code'),
-            Column::make('question_jpn')->title('Question Japan'),
-            Column::make('question_romanji')->title('Question Romanji'),
+            Column::make('question_jpn')->title('Pertanyaan Jepang'),
+            Column::make('question_romanji')->title('Pertanyaan Romaji'),
+            Column::make('title')->title('Level'),
             Column::computed('is_active')->title('Status'),
-            Column::make('created_at'),
-            Column::make('updated_at'),
+            // Column::make('created_at'),
+            // Column::make('updated_at'),
             Column::computed('action')
                 ->visible($hasAction)
                 ->exportable(false)

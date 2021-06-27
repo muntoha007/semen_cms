@@ -1,15 +1,15 @@
 @extends('layouts.master')
 @php
-$title = @$data ? 'Edit' : 'Add New';
+$title = @$data ? 'Edit' : 'Tambah';
 @endphp
-@section('title', 'Vocabulary ' . $title)
+@section('title', 'Pertanyaan Kosakata ' . $title)
 @section('content')
     <div class="content-wrapper">
         <div class="row">
             <div class="col-12 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">{{ $title }} Vocabulary Question</h4>
+                        <h4 class="card-title">{{ $title }} Pertanyaan Kosakata</h4>
                         <br>
                         <form class="forms-sample"
                             action="{{ @$data ? route('vocabulary-course-questions.update', $data->id) : route('vocabulary-course-questions.store') }}"
@@ -22,9 +22,9 @@ $title = @$data ? 'Edit' : 'Add New';
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="vocabulary_course_id">Pick Vocabulary Course</label>
+                                        <label for="vocabulary_course_id">Pilih Level Kosakata</label>
                                         <select name="vocabulary_course_id" id="vocabulary_course_id" class="form-control" required>
-                                            <option value="">Select Vocabulary Course</option>
+                                            <option value="">Pilih Level Kosakata</option>
                                             @foreach ($courses as $course)
                                                 <option value="{{ $course->id }}"
                                                     {{ $course->id == @$data->vocabulary_course_id ? 'selected' : '' }}>
@@ -51,7 +51,7 @@ $title = @$data ? 'Edit' : 'Add New';
                             </div>
 
                             <div class="form-group">
-                                <label for="question_jpn">Question Japan</label>
+                                <label for="question_jpn">Pertanyaan Japan</label>
                                 <textarea class="form-control" name="question_jpn" id="question_jpn" rows="4"
                                     placeholder="question_jpn" required
                                     value="">{{ old('question_jpn') ?? @$data->question_jpn }}</textarea>
@@ -60,7 +60,7 @@ $title = @$data ? 'Edit' : 'Add New';
                             </div>
 
                             <div class="form-group">
-                                <label for="question_romanji">Question Romanji</label>
+                                <label for="question_romanji">Pertanyaan Romaji</label>
                                 <textarea class="form-control" name="question_romanji" id="question_romanji" rows="3"
                                     placeholder="Question Romanji" required
                                     value="">{{ old('question_romanji') ?? @$data->question_romanji }}</textarea>
@@ -69,7 +69,7 @@ $title = @$data ? 'Edit' : 'Add New';
                             </div>
 
                             <div class="form-group">
-                                <label for="question_idn">Question Indonesia</label>
+                                <label for="question_idn">Pertanyaan Indonesia</label>
                                 <textarea class="form-control" name="question_idn" id="question_idn" rows="3"
                                     placeholder="Question Indonesia" required
                                     value="">{{ old('question_idn') ?? @$data->question_idn }}</textarea>
@@ -81,7 +81,7 @@ $title = @$data ? 'Edit' : 'Add New';
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <div class="card">
-                                            <div class="card-header info">Answer A
+                                            <div class="card-header info">Jawaban A
                                                 <span class="float-right">
                                                     <input type="checkbox" data-toggle="tooltip" data-placement="top"
                                                         title="Choose as answer" name="answer[0][is_true]" value="1"
@@ -109,7 +109,7 @@ $title = @$data ? 'Edit' : 'Add New';
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <div class="card">
-                                            <div class="card-header info">Answer B
+                                            <div class="card-header info">Jawaban B
                                                 <span class="float-right">
                                                     <input type="checkbox" data-toggle="tooltip" data-placement="top"
                                                         title="Choose as answer" name="answer[1][is_true]" value="1"
@@ -138,7 +138,7 @@ $title = @$data ? 'Edit' : 'Add New';
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <div class="card">
-                                            <div class="card-header info">Answer C
+                                            <div class="card-header info">Jawaban C
                                                 <span class="float-right">
                                                     <input type="checkbox" data-toggle="tooltip" data-placement="top"
                                                         title="Choose as answer" name="answer[2][is_true]" value="1"
@@ -165,7 +165,7 @@ $title = @$data ? 'Edit' : 'Add New';
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <div class="card">
-                                            <div class="card-header info">Answer D
+                                            <div class="card-header info">Jawaban D
                                                 <span class="float-right">
                                                     <input type="checkbox" data-toggle="tooltip" data-placement="top"
                                                         title="Choose as answer" name="answer[3][is_true]" value="1"

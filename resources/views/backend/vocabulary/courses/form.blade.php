@@ -1,15 +1,15 @@
 @extends('layouts.master')
 @php
-$title = @$data ? 'Edit' : 'Add New';
+$title = @$data ? 'Edit' : 'Tambah';
 @endphp
-@section('title', 'Vocabulary Course ' . $title)
+@section('title', 'Level KosaKata ' . $title)
 @section('content')
     <div class="content-wrapper">
         <div class="row">
             <div class="col-12 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">{{ $title }} Vocabulary Course</h4>
+                        <h4 class="card-title">{{ $title }} Level Kosakatae</h4>
                         <br>
                         <form class="forms-sample"
                             action="{{ @$data ? route('vocabulary-courses.update', $data->id) : route('vocabulary-courses.store') }}"
@@ -21,7 +21,7 @@ $title = @$data ? 'Edit' : 'Add New';
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="title">Title</label>
+                                        <label for="title">Judul</label>
                                         <input type="text" class="form-control {{ hasErrorField($errors, 'title') }}"
                                             id="title" name="title" value="{{ old('title', @$data->title) }}"
                                             placeholder="Title">

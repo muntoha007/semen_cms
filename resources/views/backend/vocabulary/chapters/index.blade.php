@@ -1,12 +1,12 @@
 @extends('layouts.master')
-@section('title', 'Vocabulari Chapter')
+@section('title', 'Daftar Bab Kosakata')
 @section('content')
     <div class="content-wrapper">
         <div class="row">
             <div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title text-center table-title">Vocabularies Chapter</h4>
+                        <h4 class="card-title text-center table-title">Daftar Bab Kosakata</h4>
                         @isPermitted('vocabulary-chapters.create')
                         <div class="form-group">
                             <a href="{{ route('vocabulary-chapters.create') }}" type="button" class="btn btn-outline-info btn-rounded btn-fw btn-sm">
