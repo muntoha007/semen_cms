@@ -63,9 +63,9 @@ class VocabularyChapterDatatable extends DataTable
                 'vocabulary_chapters.is_active',
                 'vocabulary_chapters.created_at',
                 'vocabulary_chapters.updated_at',
-                'vocabulary_groups.title as group_name',
+                'master_groups.name as group_name',
                 DB::raw('row_number() over () AS rownum'),
-            ])->join('vocabulary_groups', 'vocabulary_groups.id', '=', 'vocabulary_chapters.vocabulary_group_id');
+            ])->join('master_groups', 'master_groups.id', '=', 'vocabulary_chapters.master_group_id');
     }
 
     /**

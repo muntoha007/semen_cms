@@ -2,33 +2,33 @@
 
 namespace App\Http\Controllers\Admin\F;
 
-use App\DataTables\VocabularyGroupDatatable;
+use App\DataTables\VocabularyCourseDatatable;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\VocabularyGroupRequest;
-use App\Models\VocabularyGroup;
-use App\Repositories\VocabularyGroupRepository;
+use App\Http\Requests\VocabularyCourseRequest;
+use App\Models\VocabularyCourse;
+use App\Repositories\VocabularyCourseRepository;
 use Illuminate\Http\Request;
 
-class VocabularyGroupController extends Controller
+class VocabularyCourseController extends Controller
 {
     protected $model, $repository;
     public function __construct()
     {
-        $this->model = new VocabularyGroup();
-        $this->repository = new VocabularyGroupRepository();
+        $this->model = new VocabularyCourse();
+        $this->repository = new VocabularyCourseRepository();
     }
 
-    protected $redirectAfterSave = 'vocabulary-groups.index';
-    protected $moduleName = 'vocabulary groups';
+    protected $redirectAfterSave = 'vocabulary-courses.index';
+    protected $moduleName = 'vocabulary courses';
 
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(VocabularyGroupDatatable $datatable)
+    public function index(VocabularyCourseDatatable $datatable)
     {
-        return $datatable->render('backend.vocabulary.groups.index');
+        return $datatable->render('backend.vocabulary.courses.index');
     }
 
     /**
@@ -38,7 +38,7 @@ class VocabularyGroupController extends Controller
      */
     public function create()
     {
-        return view('backend.vocabulary.groups.form');
+        return view('backend.vocabulary.courses.form');
     }
 
     /**
@@ -47,7 +47,7 @@ class VocabularyGroupController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(VocabularyGroupRequest $request)
+    public function store(VocabularyCourseRequest $request)
     {
         // dd($request);
         $param = $request->all();
@@ -85,7 +85,7 @@ class VocabularyGroupController extends Controller
             $data = $this->model->findOrFail($id);
         }
 
-        return view('backend.vocabulary.groups.form', compact('data'));
+        return view('backend.vocabulary.courses.form', compact('data'));
     }
 
     /**

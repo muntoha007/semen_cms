@@ -35,7 +35,7 @@ class VocabularyChapterRepository
 
         $chapter->code = Str::random(15);
         $chapter->name = $data['name'];
-        $chapter->vocabulary_group_id = $data['vocabulary_group_id'];
+        $chapter->master_group_id = $data['master_group_id'];
         $chapter->is_active = $data["is_active"];
         $chapter->save();
 
@@ -69,7 +69,7 @@ class VocabularyChapterRepository
         }
 
         $chapter->name = $data['name'];
-        $chapter->vocabulary_group_id = $data['vocabulary_group_id'];
+        $chapter->master_group_id = $data['master_group_id'];
         $chapter->is_active = $data['is_active'];
         $chapter->update();
 

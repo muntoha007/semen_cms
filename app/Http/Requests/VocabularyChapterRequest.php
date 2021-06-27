@@ -26,7 +26,7 @@ class VocabularyChapterRequest extends FormRequest
     {
         return [
             "name" => 'required|unique:vocabulary_chapters,name',
-            "vocabulary_group_id" => 'required',
+            "master_group_id" => 'required',
         ];
     }
 

@@ -32,15 +32,15 @@ $title = @$data ? 'Edit' : 'Tambah';
 
                                     <div class="form-group">
                                         <label for="category">Pilih Group</label>
-                                        <select name="vocabulary_group_id" id="vocabulary_group_id" class="form-control" required>
+                                        <select name="master_group_id" id="master_group_id" class="form-control" required>
                                             <option value="">Pilih Group</option>
                                             @foreach ($groups as $group)
                                                 <option value="{{ $group->id }}"
-                                                    {{ @$group->id == @$data->vocabulary_group_id ? 'selected' : '' }}>
-                                                    {{ $group->title }}</option>
+                                                    {{ @$group->id == @$data->master_group_id ? 'selected' : '' }}>
+                                                    {{ $group->name }}</option>
                                             @endforeach
                                         </select>
-                                        {!! $errors->first('vocabulary_group_id', '<label class="help-block error-validation">:message</label>') !!}
+                                        {!! $errors->first('master_group_id', '<label class="help-block error-validation">:message</label>') !!}
                                     </div>
 
                                     <div class="form-group">
