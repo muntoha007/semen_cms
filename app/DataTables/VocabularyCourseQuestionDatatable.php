@@ -108,11 +108,11 @@ class VocabularyCourseQuestionDatatable extends DataTable
                 ->title('#')
                 ->searchable(false),
             // Column::make('code'),
-            Column::make('question_jpn')->title('Question Japan'),
-            Column::make('question_romanji')->title('Question Romanji'),
+            Column::make('question_jpn')->title('Pertanyaan Jepang'),
+            Column::make('question_romanji')->title('Pertanyaan Romaji'),
             Column::computed('is_active')->title('Status'),
-            Column::make('created_at'),
-            Column::make('updated_at'),
+            // Column::make('created_at'),
+            // Column::make('updated_at'),
             Column::computed('action')
                 ->visible($hasAction)
                 ->exportable(false)

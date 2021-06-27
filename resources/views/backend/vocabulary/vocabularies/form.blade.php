@@ -1,15 +1,15 @@
 @extends('layouts.master')
 @php
-$title = @$data ? 'Edit' : 'Add New';
+$title = @$data ? 'Edit' : 'Tambah';
 @endphp
-@section('title', 'Vocabulary / Kosa Kata ' . $title)
+@section('title', ' Kosa Kata ' . $title)
 @section('content')
     <div class="content-wrapper">
         <div class="row">
             <div class="col-12 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">{{ $title }} Vocabulary / Kosa Kata</h4>
+                        <h4 class="card-title">{{ $title }} Kosa Kata</h4>
                         <br>
                         <form class="forms-sample"
                             action="{{ @$data ? route('vocabularies.update', $data->id) : route('vocabularies.store') }}"
@@ -23,7 +23,7 @@ $title = @$data ? 'Edit' : 'Add New';
 
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="word_jpn">Word Japan</label>
+                                        <label for="word_jpn">Kata Jepang</label>
                                         <input type="text" name="word_jpn" id="word_jpn" class="form-control"
                                             value="{{ old('word_jpn') ?? @$data->word_jpn }}" required>
 
@@ -31,14 +31,14 @@ $title = @$data ? 'Edit' : 'Add New';
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="word_romaji">Word Romanji</label>
+                                        <label for="word_romaji">Kata Romaji</label>
                                         <input type="text" name="word_romaji" id="word_romaji" class="form-control"
                                             value="{{ old('word_romaji') ?? @$data->word_romaji }}" required>
 
                                         {!! $errors->first('word_romaji', '<label class="help-block error-validation">:message</label>') !!}
                                     </div>
                                     <div class="form-group">
-                                        <label for="word_idn">Word Indonesia</label>
+                                        <label for="word_idn">Kata Indonesia</label>
                                         <input type="text" name="word_idn" id="word_idn" class="form-control"
                                             value="{{ old('word_idn') ?? @$data->word_idn }}" required>
 
@@ -48,10 +48,10 @@ $title = @$data ? 'Edit' : 'Add New';
 
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="category">Pilih Chapter</label>
+                                        <label for="category">Pilih Bab</label>
                                         <select name="vocabulary_chapter_id" id="vocabulary_chapter_id" class="form-control"
                                             required>
-                                            <option value="">Pilih Chapter</option>
+                                            <option value="">Pilih Bab</option>
                                             @foreach ($chapters as $chapter)
                                                 <option value="{{ $chapter->id }}"
                                                     {{ @$chapter->id == @$data->vocabulary_chapter_id ? 'selected' : '' }}>

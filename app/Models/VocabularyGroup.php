@@ -4,10 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class VocabularyCourse extends Model
+class VocabularyGroup extends Model
 {
 
-    protected $table = 'vocabulary_courses';
+    protected $table = 'vocabulary_groups';
     protected $guarded = ['id'];
 
 }

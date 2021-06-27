@@ -109,11 +109,11 @@ class VocabularyDatatable extends DataTable
                 ->title('#')
                 ->searchable(false),
             // Column::make('code'),
-            Column::make('word_jpn')->title('Word Japan'),
-            Column::make('word_romaji')->title('Word Romanji'),
+            Column::make('word_jpn')->title('Jepang'),
+            Column::make('word_romaji')->title('Romaji'),
             Column::make('is_active')->title('Status'),
-            Column::make('created_at'),
-            Column::make('updated_at'),
+            // Column::make('created_at'),
+            // Column::make('updated_at'),
             Column::computed('action')
                 ->visible($hasAction)
                 ->exportable(false)

@@ -63,9 +63,9 @@ class VocabularyChapterDatatable extends DataTable
                 'vocabulary_chapters.is_active',
                 'vocabulary_chapters.created_at',
                 'vocabulary_chapters.updated_at',
-                'master_groups.name as group_name',
+                'vocabulary_groups.title as group_name',
                 DB::raw('row_number() over () AS rownum'),
-            ])->join('master_groups', 'master_groups.id', '=', 'vocabulary_chapters.master_group_id');
+            ])->join('vocabulary_groups', 'vocabulary_groups.id', '=', 'vocabulary_chapters.vocabulary_group_id');
     }
 
     /**
@@ -109,10 +109,10 @@ class VocabularyChapterDatatable extends DataTable
                 ->searchable(false),
             // Column::make('code'),
             Column::make('name')->title('Nama'),
-            Column::make('group_name'),
+            Column::make('group_name')->title('Group'),
             Column::make('is_active')->title('Status'),
-            Column::make('created_at'),
-            Column::make('updated_at'),
+            // Column::make('created_at'),
+            // Column::make('updated_at'),
             Column::computed('action')
                 ->visible($hasAction)
                 ->exportable(false)

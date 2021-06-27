@@ -1,15 +1,15 @@
 @extends('layouts.master')
 @php
-$title = @$data ? 'Edit' : 'Add New';
+$title = @$data ? 'Edit' : 'Tambah';
 @endphp
-@section('title', 'Vocabulary Chapter ' . $title)
+@section('title', 'Bab Kosa Kata' . $title)
 @section('content')
     <div class="content-wrapper">
         <div class="row">
             <div class="col-12 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">{{ $title }} Vocabulary / Kosa Kata</h4>
+                        <h4 class="card-title">{{ $title }} Bab Kosa Kata</h4>
                         <br>
                         <form class="forms-sample"
                             action="{{ @$data ? route('vocabulary-chapters.update', $data->id) : route('vocabulary-chapters.store') }}"
@@ -32,15 +32,15 @@ $title = @$data ? 'Edit' : 'Add New';
 
                                     <div class="form-group">
                                         <label for="category">Pilih Group</label>
-                                        <select name="master_group_id" id="master_group_id" class="form-control" required>
+                                        <select name="vocabulary_group_id" id="vocabulary_group_id" class="form-control" required>
                                             <option value="">Pilih Group</option>
                                             @foreach ($groups as $group)
                                                 <option value="{{ $group->id }}"
-                                                    {{ @$group->id == @$data->master_group_id ? 'selected' : '' }}>
-                                                    {{ $group->name }}</option>
+                                                    {{ @$group->id == @$data->vocabulary_group_id ? 'selected' : '' }}>
+                                                    {{ $group->title }}</option>
                                             @endforeach
                                         </select>
-                                        {!! $errors->first('master_group_id', '<label class="help-block error-validation">:message</label>') !!}
+                                        {!! $errors->first('vocabulary_group_id', '<label class="help-block error-validation">:message</label>') !!}
                                     </div>
 
                                     <div class="form-group">

@@ -92,20 +92,20 @@ return [
         'additional_query' => '',
         'icon' => 'mdi mdi-comment-text-outline menu-icon',
         'sub_menu' => [
+            'vocabulary-group' => [
+                'title' => 'Group Kosa Kata',
+                'routeName' => 'vocabulary-groups.index',
+                'additional_query' => '',
+                'icon' => 'mdi mdi-flag menu-icon',
+            ],
             'vocabulary-chapter' => [
-                'title' => 'Vocabulary Chapter',
+                'title' => 'Bab Kosa Kata',
                 'routeName' => 'vocabulary-chapters.index',
                 'icon' => 'mdi mdi-flag menu-icon',
             ],
             'vocabularies' => [
                 'title' => 'Kosa kata',
                 'routeName' => 'vocabularies.index',
-                'icon' => 'mdi mdi-flag menu-icon',
-            ],
-            'vocabulary-course' => [
-                'title' => 'Level Kosa Kata',
-                'routeName' => 'vocabulary-courses.index',
-                'additional_query' => '',
                 'icon' => 'mdi mdi-flag menu-icon',
             ],
             'vocabulary-question' => [

@@ -3,7 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\VocabularyCourseQuestion;
-use App\Models\VocabularyCourse;
+use App\Models\VocabularyGroup;
 use App\Models\VocabularyCourseAnswer;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -35,7 +35,7 @@ class VocabularyCourseQuestionRepository
             $answer->save();
         }
 
-        $course = VocabularyCourse::where('id', request('vocabulary_course_id'))->first();
+        $course = VocabularyGroup::where('id', request('vocabulary_course_id'))->first();
         $course->question_count = $course->question_count + 1;
 
         $course->update();
@@ -54,12 +54,12 @@ class VocabularyCourseQuestionRepository
         $question->is_active = $data['is_active'];
 
         if ($question->vocabulary_course_id != $data['vocabulary_course_id']) {
-            $oldcourse = VocabularyCourse::where('id', $question->vocabulary_course_id)->first();
+            $oldcourse = VocabularyGroup::where('id', $question->vocabulary_course_id)->first();
             $oldcourse->question_count = $oldcourse->question_count - 1;
 
             $oldcourse->update();
 
-            $newcourse = VocabularyCourse::where('id', request('vocabulary_course_id'))->first();
+            $newcourse = VocabularyGroup::where('id', request('vocabulary_course_id'))->first();
             $newcourse->question_count = $newcourse->question_count + 1;
 
             $newcourse->update();
