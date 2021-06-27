@@ -28,7 +28,7 @@ class VocabularyCourseQuestionRequest extends FormRequest
             "question_jpn" => 'required',
             "question_romanji" => 'required',
             "question_idn" => 'required',
-            'vocabulary_course_id' => 'required',
+            'vocabulary_group_id' => 'required',
             "answer" => 'required',
         ];
     }

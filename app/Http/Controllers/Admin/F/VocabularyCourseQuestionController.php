@@ -8,6 +8,7 @@ use App\Http\Requests\VocabularyCourseQuestionRequest;
 use App\Models\VocabularyCourse;
 use App\Models\VocabularyCourseAnswer;
 use App\Models\VocabularyCourseQuestion;
+use App\Models\VocabularyGroup;
 use App\Repositories\VocabularyCourseQuestionRepository;
 use Illuminate\Http\Request;
 
@@ -40,9 +41,9 @@ class VocabularyCourseQuestionController extends Controller
      */
     public function create()
     {
-        $courses = VocabularyCourse::get();
+        $groups = VocabularyGroup::get();
         $type = "new";
-        return view('backend.vocabulary.questions.form', compact('courses','type'));
+        return view('backend.vocabulary.questions.form', compact('groups','type'));
     }
 
     /**
@@ -88,10 +89,10 @@ class VocabularyCourseQuestionController extends Controller
         } else {
             $data = $this->model->findOrFail($id);
         }
-        $courses = VocabularyCourse::where('is_active', 1)->get();
+        $groups = VocabularyGroup::where('is_active', 1)->get();
         $answers = VocabularyCourseAnswer::where('vocabulary_course_question_id', $id)->get();
         $type = "edit";
-        return view('backend.vocabulary.questions.form', compact('data', 'courses','answers', 'type'));
+        return view('backend.vocabulary.questions.form', compact('data', 'groups','answers', 'type'));
     }
 
     /**
