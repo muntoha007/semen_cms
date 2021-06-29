@@ -109,13 +109,13 @@ return [
                 'icon' => 'mdi mdi-flag menu-icon',
             ],
             'vocabulary-course-chapter' => [
-                'title' => 'Chapter Kosakata',
+                'title' => 'Bab Test Kosakata',
                 'routeName' => 'vocabulary-course-chapters.index',
                 'additional_query' => '',
                 'icon' => 'mdi mdi-flag menu-icon',
             ],
             'vocabulary-course' => [
-                'title' => 'Level Kosakata',
+                'title' => 'Level Test Kosakata',
                 'routeName' => 'vocabulary-courses.index',
                 'additional_query' => '',
                 'icon' => 'mdi mdi-flag menu-icon',
@@ -145,7 +145,7 @@ return [
                 'icon' => 'mdi mdi-flag menu-icon',
             ],
             'particle-education-detail' => [
-                'title' => 'Partikel Edukasi Detail',
+                'title' => 'Partikel Detail',
                 'routeName' => 'particle-education-details.index',
                 'icon' => 'mdi mdi-flag menu-icon',
             ],
