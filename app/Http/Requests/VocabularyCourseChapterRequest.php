@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 
-class ParticleEducationRequest extends FormRequest
+class VocabularyCourseChapterRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,11 +25,7 @@ class ParticleEducationRequest extends FormRequest
     public function rules()
     {
         return [
-            'letter_jpn' => 'required',
-            'title' => 'required',
-            'description' => 'required',
-            'letter_romanji' => 'required',
-            'particle_education_chapter_id' => 'required',
+            'title' => 'required|unique:vocabulary_course_chapters,title',
         ];
     }
 

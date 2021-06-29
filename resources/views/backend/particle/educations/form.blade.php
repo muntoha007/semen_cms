@@ -55,6 +55,20 @@ $title = @$data ? 'Edit' : 'Add New';
                                     </div>
                                 </div>
                                 <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="particle_education_chapter_id">Education</label>
+                                            <select name="particle_education_chapter_id" id="particle_education_chapter_id" class="form-control"
+                                                required>
+                                                <option value="">Select Education</option>
+                                                @foreach (@$educations as $edu)
+                                                    <option value="{{ $edu->id }}"
+                                                        {{ $edu->id == @$data->particle_education_chapter_id ? 'selected' : '' }}>
+                                                        {{ $edu->title }}</option>
+                                                @endforeach
+                                            </select>
+                                            {!! $errors->first('particle_education_chapter_id', '<label class="help-block error-validation">:message</label>') !!}
+
+                                        </div>
                                     <div class="form-group">
                                         <label for="is_active">Status</label>
                                         <select name="is_active" id="is_active" class="form-control">

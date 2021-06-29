@@ -2,35 +2,34 @@
 
 namespace App\Http\Controllers\Admin\C;
 
-use App\DataTables\ParticleEducationDatatable;
+use App\DataTables\ParticleEducationChapterDatatable;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\ParticleEducationRequest;
-use App\Models\ParticleEducation;
-use App\Models\MasterVerbLevel;
+use App\Http\Requests\ParticleEducationChapterRequest;
 use App\Models\ParticleEducationChapter;
-use App\Repositories\ParticleEducationRepository;
+use App\Models\MasterVerbLevel;
+use App\Repositories\ParticleEducationChapterRepository;
 use Illuminate\Http\Request;
 
-class ParticleEducationController extends Controller
+class ParticleEducationChapterController extends Controller
 {
     protected $model, $repository;
     public function __construct()
     {
-        $this->model = new ParticleEducation();
-        $this->repository = new ParticleEducationRepository();
+        $this->model = new ParticleEducationChapter();
+        $this->repository = new ParticleEducationChapterRepository();
     }
 
-    protected $redirectAfterSave = 'particle-educations.index';
-    protected $moduleName = 'particle_educations';
+    protected $redirectAfterSave = 'particle-education-chapters.index';
+    protected $moduleName = 'particle_educations_chapters';
 
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(ParticleEducationDatatable $datatable)
+    public function index(ParticleEducationChapterDatatable $datatable)
     {
-        return $datatable->render('backend.particle.educations.index');
+        return $datatable->render('backend.particle.educations_chapters.index');
     }
 
     /**
@@ -40,8 +39,7 @@ class ParticleEducationController extends Controller
      */
     public function create()
     {
-        $educations = ParticleEducationChapter::where('is_active', 1)->get();
-        return view('backend.particle.educations.form', compact('educations'));
+        return view('backend.particle.educations_chapters.form');
     }
 
     /**
@@ -50,11 +48,11 @@ class ParticleEducationController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ParticleEducationRequest $request)
+    public function store(ParticleEducationChapterRequest $request)
     {
         $param = $request->all();
         $saveData = $this->repository->create($param);
-        flashDataAfterSave($saveData, $this->moduleName);
+        flashDataAfterSave($saveData,$this->moduleName);
 
         return redirect()->route($this->redirectAfterSave);
     }
@@ -78,17 +76,16 @@ class ParticleEducationController extends Controller
      */
     public function edit($id)
     {
-        if (isOnlyDataOwned()) {
+        if(isOnlyDataOwned()){
             $data = $this->model
-                ->where('created_by', '=', user_info('id'))
-                ->where('id', '=', $id)
+                ->where('created_by','=',user_info('id'))
+                ->where('id','=',$id)
                 ->firstOrFail();
         } else {
             $data = $this->model->findOrFail($id);
         }
 
-        $educations = ParticleEducationChapter::where('is_active', 1)->get();
-        return view('backend.particle.educations.form', compact('data', 'educations'));
+        return view('backend.particle.educations_chapters.form',compact('data'));
     }
 
     /**
@@ -101,8 +98,8 @@ class ParticleEducationController extends Controller
     public function update(Request $request, $id)
     {
         $param = $request->all();
-        $saveData = $this->repository->update($param, $id);
-        flashDataAfterSave($saveData, $this->moduleName);
+        $saveData = $this->repository->update($param,$id);
+        flashDataAfterSave($saveData,$this->moduleName);
 
         return redirect()->route($this->redirectAfterSave);
     }

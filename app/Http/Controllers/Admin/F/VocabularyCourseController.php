@@ -6,6 +6,7 @@ use App\DataTables\VocabularyCourseDatatable;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\VocabularyCourseRequest;
 use App\Models\VocabularyCourse;
+use App\Models\VocabularyCourseChapter;
 use App\Repositories\VocabularyCourseRepository;
 use Illuminate\Http\Request;
 
@@ -38,7 +39,8 @@ class VocabularyCourseController extends Controller
      */
     public function create()
     {
-        return view('backend.vocabulary.courses.form');
+        $chapters = VocabularyCourseChapter::where('is_active', 1)->get();
+        return view('backend.vocabulary.courses.form', compact('chapters'));
     }
 
     /**
@@ -85,7 +87,8 @@ class VocabularyCourseController extends Controller
             $data = $this->model->findOrFail($id);
         }
 
-        return view('backend.vocabulary.courses.form', compact('data'));
+        $chapters = VocabularyCourseChapter::where('is_active', 1)->get();
+        return view('backend.vocabulary.courses.form', compact('data','chapters'));
     }
 
     /**

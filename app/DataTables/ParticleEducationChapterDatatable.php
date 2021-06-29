@@ -2,7 +2,7 @@
 
 namespace App\DataTables;
 
-use App\Models\VocabularyCourse;
+use App\Models\ParticleEducationChapter;
 use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
@@ -11,7 +11,7 @@ use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Html\Editor\Editor;
 // use DB;
 
-class VocabularyCourseDatatable extends DataTable
+class ParticleEducationChapterDatatable extends DataTable
 {
     /**
      * Build DataTable class.
@@ -37,7 +37,7 @@ class VocabularyCourseDatatable extends DataTable
                 return $data->updated_at->format('Y-m-d'); // human readable format
             })
             ->addColumn('action', function ($data) {
-                $edit_url = route('vocabulary-courses.edit', $data->id);
+                $edit_url = route('particle-education-chapters.edit', $data->id);
 
                 return view('partials.action-button')->with(
                     compact('edit_url')
@@ -51,21 +51,20 @@ class VocabularyCourseDatatable extends DataTable
      * @param \App\Role $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(VocabularyCourse $model)
+    public function query(ParticleEducationChapter $model)
     {
         // DB::statement(DB::raw('set @rownum=0'));
         return $model->newQuery()
             // ->where('slug','!=','super-admin')
             ->select([
-                'vocabulary_courses.id',
-                'vocabulary_courses.code',
-                'vocabulary_courses.title',
-                'vocabulary_courses.is_active',
-                'vocabulary_courses.created_at',
-                'vocabulary_courses.updated_at',
-                'vocabulary_course_chapters.title as chapter',
+                'particle_education_chapters.id',
+                'particle_education_chapters.code',
+                'particle_education_chapters.title',
+                'particle_education_chapters.is_active',
+                'particle_education_chapters.created_at',
+                'particle_education_chapters.updated_at',
                 DB::raw('row_number() over () AS rownum'),
-            ])->join('vocabulary_course_chapters', 'vocabulary_course_chapters.id', '=', 'vocabulary_courses.vocabulary_course_chapter_id');
+            ]);
     }
 
     /**
@@ -76,7 +75,7 @@ class VocabularyCourseDatatable extends DataTable
     public function html()
     {
         return $this->builder()
-            ->setTableId('vocabulary-course-table')
+            ->setTableId('edu-chap-table')
             ->columns($this->getColumns())
             ->minifiedAjax()
             ->dom('<"row"<"col-sm-6"l><"col-sm-6"f>> <"row"<"col-sm-12"tr>> <"row"<"col-sm-5"i><"col-sm-7"p>>')
@@ -108,11 +107,10 @@ class VocabularyCourseDatatable extends DataTable
                 ->title('#')
                 ->searchable(false),
             // Column::make('code'),
-            Column::make('title')->title('Judul'),
+            Column::make('title'),
             Column::computed('is_active')->title('Status'),
             // Column::make('created_at'),
             // Column::make('updated_at'),
-            Column::make('chapter'),
             Column::computed('action')
                 ->visible($hasAction)
                 ->exportable(false)
@@ -129,6 +127,6 @@ class VocabularyCourseDatatable extends DataTable
      */
     protected function filename()
     {
-        return 'VocabularyCourse_' . date('YmdHis');
+        return 'ParticleEducationChapter_' . date('YmdHis');
     }
 }

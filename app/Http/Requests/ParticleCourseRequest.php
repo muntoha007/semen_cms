@@ -26,7 +26,7 @@ class ParticleCourseRequest extends FormRequest
     {
         return [
             'title' => 'required|unique:particle_courses,title',
-            'particle_education_id' => 'required',
+            'particle_education_chapter_id' => 'required',
         ];
     }
 

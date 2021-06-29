@@ -1,36 +1,34 @@
 <?php
 
-namespace App\Http\Controllers\Admin\C;
+namespace App\Http\Controllers\Admin\F;
 
-use App\DataTables\ParticleEducationDatatable;
+use App\DataTables\VocabularyCourseChapterDatatable;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\ParticleEducationRequest;
-use App\Models\ParticleEducation;
-use App\Models\MasterVerbLevel;
-use App\Models\ParticleEducationChapter;
-use App\Repositories\ParticleEducationRepository;
+use App\Http\Requests\VocabularyCourseChapterRequest;
+use App\Models\VocabularyCourseChapter;
+use App\Repositories\VocabularyCourseChapterRepository;
 use Illuminate\Http\Request;
 
-class ParticleEducationController extends Controller
+class VocabularyCourseChapterController extends Controller
 {
     protected $model, $repository;
     public function __construct()
     {
-        $this->model = new ParticleEducation();
-        $this->repository = new ParticleEducationRepository();
+        $this->model = new VocabularyCourseChapter();
+        $this->repository = new VocabularyCourseChapterRepository();
     }
 
-    protected $redirectAfterSave = 'particle-educations.index';
-    protected $moduleName = 'particle_educations';
+    protected $redirectAfterSave = 'vocabulary-course-chapters.index';
+    protected $moduleName = 'vocabulary courses Chapter';
 
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(ParticleEducationDatatable $datatable)
+    public function index(VocabularyCourseChapterDatatable $datatable)
     {
-        return $datatable->render('backend.particle.educations.index');
+        return $datatable->render('backend.vocabulary.courses_chapters.index');
     }
 
     /**
@@ -40,8 +38,7 @@ class ParticleEducationController extends Controller
      */
     public function create()
     {
-        $educations = ParticleEducationChapter::where('is_active', 1)->get();
-        return view('backend.particle.educations.form', compact('educations'));
+        return view('backend.vocabulary.courses_chapters.form');
     }
 
     /**
@@ -50,8 +47,9 @@ class ParticleEducationController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ParticleEducationRequest $request)
+    public function store(VocabularyCourseChapterRequest $request)
     {
+        // dd($request);
         $param = $request->all();
         $saveData = $this->repository->create($param);
         flashDataAfterSave($saveData, $this->moduleName);
@@ -87,8 +85,7 @@ class ParticleEducationController extends Controller
             $data = $this->model->findOrFail($id);
         }
 
-        $educations = ParticleEducationChapter::where('is_active', 1)->get();
-        return view('backend.particle.educations.form', compact('data', 'educations'));
+        return view('backend.vocabulary.courses_chapters.form', compact('data'));
     }
 
     /**

@@ -108,6 +108,12 @@ return [
                 'routeName' => 'vocabularies.index',
                 'icon' => 'mdi mdi-flag menu-icon',
             ],
+            'vocabulary-course-chapter' => [
+                'title' => 'Chapter Kosakata',
+                'routeName' => 'vocabulary-course-chapters.index',
+                'additional_query' => '',
+                'icon' => 'mdi mdi-flag menu-icon',
+            ],
             'vocabulary-course' => [
                 'title' => 'Level Kosakata',
                 'routeName' => 'vocabulary-courses.index',
@@ -128,8 +134,13 @@ return [
         'additional_query' => '',
         'icon' => 'mdi mdi-comment-text-outline menu-icon',
         'sub_menu' => [
+            'particle-education-chapter' => [
+                'title' => 'Bab Partikel',
+                'routeName' => 'particle-education-chapters.index',
+                'icon' => 'mdi mdi-flag menu-icon',
+            ],
             'particle-education' => [
-                'title' => 'Partikel Edukasi',
+                'title' => 'Partikel',
                 'routeName' => 'particle-educations.index',
                 'icon' => 'mdi mdi-flag menu-icon',
             ],

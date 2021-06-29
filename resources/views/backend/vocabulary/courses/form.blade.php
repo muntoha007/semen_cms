@@ -9,7 +9,7 @@ $title = @$data ? 'Edit' : 'Tambah';
             <div class="col-12 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">{{ $title }} Level Kosakatae</h4>
+                        <h4 class="card-title">{{ $title }} Level Kosakata</h4>
                         <br>
                         <form class="forms-sample"
                             action="{{ @$data ? route('vocabulary-courses.update', $data->id) : route('vocabulary-courses.store') }}"
@@ -19,7 +19,7 @@ $title = @$data ? 'Edit' : 'Tambah';
                                 <input type="hidden" name="_method" value="put">
                             @endif
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="title">Judul</label>
                                         <input type="text" class="form-control {{ hasErrorField($errors, 'title') }}"
@@ -28,7 +28,21 @@ $title = @$data ? 'Edit' : 'Tambah';
                                         {!! $errors->first('title', '<label class="help-block error-validation">:message</label>') !!}
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="category">Pilih Bab Kosakata</label>
+                                        <select name="vocabulary_course_chapter_id" id="vocabulary_course_chapter_id" class="form-control" required>
+                                            <option value="">Pilih Bab Kosakata</option>
+                                            @foreach ($chapters as $chapter)
+                                                <option value="{{ $chapter->id }}"
+                                                    {{ @$chapter->id == @$data->vocabulary_course_chapter_id ? 'selected' : '' }}>
+                                                    {{ $chapter->title }}</option>
+                                            @endforeach
+                                        </select>
+                                        {!! $errors->first('vocabulary_course_chapter_id', '<label class="help-block error-validation">:message</label>') !!}
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="is_active">Status</label>
                                         <select name="is_active" id="is_active" class="form-control">

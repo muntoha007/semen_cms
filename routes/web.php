@@ -79,6 +79,7 @@ Route::group(['middleware' => ['sentinelAuth','checkAccess'],'namespace' => 'Adm
     Route::resource('verb-mini-courses', 'B\VerbMiniCourseController')->except('show');
     Route::resource('verb-mini-questions', 'B\VerbMiniCourseQuestionController')->except('show');
 
+    Route::resource('particle-education-chapters', 'C\ParticleEducationChapterController')->except('show');
     Route::resource('particle-educations', 'C\ParticleEducationController')->except('show');
     Route::resource('particle-education-details', 'C\ParticleEducationDetailController')->except('show');
     Route::resource('particle-courses', 'C\ParticleCourseController')->except('show');
@@ -117,6 +118,7 @@ Route::group(['middleware' => ['sentinelAuth','checkAccess'],'namespace' => 'Adm
     Route::resource('kanji-mini-course-questions', 'E\KanjiMiniCourseQuestionController')->except('show');
 
     Route::resource('vocabulary-chapters', 'F\VocabularyChapterController')->except('show');
+    Route::resource('vocabulary-course-chapters', 'F\VocabularyCourseChapterController')->except('show');
     Route::resource('vocabularies', 'F\VocabularyController')->except('show');
     Route::resource('vocabulary-courses', 'F\VocabularyCourseController')->except('show');
     Route::resource('vocabulary-course-questions', 'F\VocabularyCourseQuestionController')->except('show');

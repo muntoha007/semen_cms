@@ -18,6 +18,7 @@ class ParticleEducationRepository
         $education->letter_jpn = $data['letter_jpn'];
         $education->letter_romanji = $data['letter_romanji'];
         $education->description = $data['description'];
+        $education->particle_education_chapter_id = $data['particle_education_chapter_id'];
         $education->is_active = $data['is_active'];
         $education->save();
 
@@ -31,6 +32,7 @@ class ParticleEducationRepository
         $education->letter_jpn = $data['letter_jpn'];
         $education->letter_romanji = $data['letter_romanji'];
         $education->description = $data['description'];
+        $education->particle_education_chapter_id = $data['particle_education_chapter_id'];
         $education->is_active = $data['is_active'];
         $education->update();
 

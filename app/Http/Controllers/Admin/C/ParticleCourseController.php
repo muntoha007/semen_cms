@@ -6,7 +6,7 @@ use App\DataTables\ParticleCourseDatatable;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ParticleCourseRequest;
 use App\Models\ParticleCourse;
-use App\Models\ParticleEducation;
+use App\Models\ParticleEducationChapter;
 use App\Repositories\ParticleCourseRepository;
 use Illuminate\Http\Request;
 
@@ -39,7 +39,7 @@ class ParticleCourseController extends Controller
      */
     public function create()
     {
-        $educations = ParticleEducation::where('is_active', 1)->get();
+        $educations = ParticleEducationChapter::where('is_active', 1)->get();
         return view('backend.particle.courses.form', compact('educations'));
     }
 
@@ -86,7 +86,7 @@ class ParticleCourseController extends Controller
         } else {
             $data = $this->model->findOrFail($id);
         }
-        $educations = ParticleEducation::where('is_active', 1)->get();
+        $educations = ParticleEducationChapter::where('is_active', 1)->get();
         return view('backend.particle.courses.form', compact('data', 'educations'));
     }
 

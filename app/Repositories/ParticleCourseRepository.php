@@ -15,7 +15,7 @@ class ParticleCourseRepository
         $course = new ParticleCourse();
         $course->code = Str::random(10);
         $course->title = $data['title'];
-        $course->particle_education_id = $data['particle_education_id'];
+        $course->particle_education_chapter_id = $data['particle_education_chapter_id'];
         $course->is_active = 1;
         $course->save();
 
@@ -26,7 +26,7 @@ class ParticleCourseRepository
     {
         $course = ParticleCourse::find($id);
         $course->title = $data['title'];
-        $course->particle_education_id = $data['particle_education_id'];
+        $course->particle_education_chapter_id = $data['particle_education_chapter_id'];
         $course->is_active = $data['is_active'];
         $course->update();
 
