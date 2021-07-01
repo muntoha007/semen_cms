@@ -28,7 +28,7 @@ $title = @$data ? 'Edit' : 'Tambah';
                                             @foreach ($courses as $let)
                                                 <option value="{{ $let->id }}"
                                                     {{ $let->id == @$data->letter_course_id ? 'selected' : '' }}>
-                                                    {{ $let->title }}</option>
+                                                    {{ $let->title }} | {{$let->name}}</option>
                                             @endforeach
                                         </select>
                                         {!! $errors->first('letter_course_id', '<label class="help-block error-validation">:message</label>') !!}

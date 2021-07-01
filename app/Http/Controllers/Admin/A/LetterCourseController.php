@@ -40,7 +40,7 @@ class LetterCourseController extends Controller
      */
     public function create()
     {
-        $letterCats = LetterCategory::where('code','!=', 'knj')->get();
+        $letterCats = LetterCategory::where('code','!=', 'kanji')->get();
         return view('backend.letters.courses.form', compact('letterCats'));
     }
 
@@ -87,7 +87,7 @@ class LetterCourseController extends Controller
         } else {
             $data = $this->model->findOrFail($id);
         }
-        $letterCats = LetterCategory::where('code','!=', 'knj')->get();
+        $letterCats = LetterCategory::where('code','!=', 'kanji')->get();
         return view('backend.letters.courses.form', compact('data', 'letterCats'));
     }
 

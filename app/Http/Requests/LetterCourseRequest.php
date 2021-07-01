@@ -25,7 +25,7 @@ class LetterCourseRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required|unique:letter_courses,title',
+            'title' => 'required',
             'letter_category_id' => 'required',
         ];
     }
