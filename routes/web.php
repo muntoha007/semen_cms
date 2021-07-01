@@ -122,6 +122,9 @@ Route::group(['middleware' => ['sentinelAuth','checkAccess'],'namespace' => 'Adm
     Route::resource('vocabularies', 'F\VocabularyController')->except('show');
     Route::resource('vocabulary-courses', 'F\VocabularyCourseController')->except('show');
     Route::resource('vocabulary-course-questions', 'F\VocabularyCourseQuestionController')->except('show');
+    Route::resource('vocabulary-mini-course-chapters', 'F\VocabularyMiniCourseChapterController')->except('show');
+    Route::resource('vocabulary-mini-courses', 'F\VocabularyMiniCourseController')->except('show');
+    Route::resource('vocabulary-mini-course-questions', 'F\VocabularyMiniCourseQuestionController')->except('show');
 
     Route::resource('master-ability-courses', 'G\MasterAbilityCourseController')->except('show');
     Route::resource('master-ability-course-levels', 'G\MasterAbilityCourseLevelController')->except('show');

@@ -2,35 +2,34 @@
 
 namespace App\Http\Controllers\Admin\F;
 
-use App\DataTables\VocabularyCourseQuestionDatatable;
+use App\DataTables\VocabularyMiniCourseChapterDatatable;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\VocabularyCourseQuestionRequest;
-use App\Models\VocabularyCourse;
-use App\Models\VocabularyCourseAnswer;
-use App\Models\VocabularyCourseQuestion;
-use App\Repositories\VocabularyCourseQuestionRepository;
+use App\Http\Requests\VocabularyMiniCourseChapterRequest;
+use App\Models\VocabularyCourseChapter;
+use App\Models\VocabularyMiniCourseChapter;
+use App\Repositories\VocabularyMiniCourseChapterRepository;
 use Illuminate\Http\Request;
 
-class VocabularyCourseQuestionController extends Controller
+class VocabularyMiniCourseChapterController extends Controller
 {
     protected $model, $repository;
     public function __construct()
     {
-        $this->model = new VocabularyCourseQuestion();
-        $this->repository = new VocabularyCourseQuestionRepository();
+        $this->model = new VocabularyMiniCourseChapter();
+        $this->repository = new VocabularyMiniCourseChapterRepository();
     }
 
-    protected $redirectAfterSave = 'vocabulary-course-questions.index';
-    protected $moduleName = 'Vocabulary Courses Questions';
+    protected $redirectAfterSave = 'vocabulary-mini-course-chapters.index';
+    protected $moduleName = 'vocabulary Mini courses Chapter';
 
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(VocabularyCourseQuestionDatatable $datatable)
+    public function index(VocabularyMiniCourseChapterDatatable $datatable)
     {
-        return $datatable->render('backend.vocabulary.questions.index');
+        return $datatable->render('backend.vocabulary.mini.courses_chapters.index');
     }
 
     /**
@@ -40,9 +39,8 @@ class VocabularyCourseQuestionController extends Controller
      */
     public function create()
     {
-        $courses = VocabularyCourse::where('is_active', 1)->get();
-        $type = "new";
-        return view('backend.vocabulary.questions.form', compact('courses','type'));
+        $chapters = VocabularyCourseChapter::where('is_active', 1)->get();
+        return view('backend.vocabulary.mini.courses_chapters.form',compact('chapters'));
     }
 
     /**
@@ -51,11 +49,11 @@ class VocabularyCourseQuestionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(VocabularyCourseQuestionRequest $request)
+    public function store(VocabularyMiniCourseChapterRequest $request)
     {
         // dd($request);
         $param = $request->all();
-        $saveData = $this->repository->createNew($param);
+        $saveData = $this->repository->create($param);
         flashDataAfterSave($saveData, $this->moduleName);
 
         return redirect()->route($this->redirectAfterSave);
@@ -88,10 +86,10 @@ class VocabularyCourseQuestionController extends Controller
         } else {
             $data = $this->model->findOrFail($id);
         }
-        $courses = VocabularyCourse::where('is_active', 1)->get();
-        $answers = VocabularyCourseAnswer::where('vocabulary_course_question_id', $id)->get();
-        $type = "edit";
-        return view('backend.vocabulary.questions.form', compact('data', 'courses','answers', 'type'));
+
+        $chapters = VocabularyCourseChapter::where('is_active', 1)->get();
+
+        return view('backend.vocabulary.mini.courses_chapters.form', compact('data','chapters'));
     }
 
     /**
