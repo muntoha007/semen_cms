@@ -63,9 +63,9 @@ class VocabularyMiniCourseDatatable extends DataTable
                 'vocabulary_mini_courses.is_active',
                 'vocabulary_mini_courses.created_at',
                 'vocabulary_mini_courses.updated_at',
-                'vocabulary_mini_course_chapters.title as chapter',
+                'vocabulary_chapters.name as chapter',
                 DB::raw('row_number() over () AS rownum'),
-            ])->join('vocabulary_mini_course_chapters', 'vocabulary_mini_course_chapters.id', '=', 'vocabulary_mini_courses.vocabulary_mini_course_chapter_id');
+            ])->join('vocabulary_chapters', 'vocabulary_chapters.id', '=', 'vocabulary_mini_courses.vocabulary_chapter_id');
     }
 
     /**

@@ -30,16 +30,16 @@ $title = @$data ? 'Edit' : 'Tambah';
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="category">Pilih Mini Bab Kosakata</label>
-                                        <select name="vocabulary_mini_course_chapter_id" id="vocabulary_mini_course_chapter_id" class="form-control" required>
-                                            <option value="">Pilih Mini Bab Kosakata</option>
+                                        <label for="category">Pilih Bab Kosakata</label>
+                                        <select name="vocabulary_chapter_id" id="vocabulary_chapter_id" class="form-control" required>
+                                            <option value="">Pilih Bab Kosakata</option>
                                             @foreach ($chapters as $chapter)
                                                 <option value="{{ $chapter->id }}"
-                                                    {{ @$chapter->id == @$data->vocabulary_mini_course_chapter_id ? 'selected' : '' }}>
-                                                    {{ $chapter->title }}</option>
+                                                    {{ @$chapter->id == @$data->vocabulary_chapter_id ? 'selected' : '' }}>
+                                                    {{ $chapter->name }}</option>
                                             @endforeach
                                         </select>
-                                        {!! $errors->first('vocabulary_mini_course_chapter_id', '<label class="help-block error-validation">:message</label>') !!}
+                                        {!! $errors->first('vocabulary_chapter_id', '<label class="help-block error-validation">:message</label>') !!}
                                     </div>
                                 </div>
                                 <div class="col-md-4">

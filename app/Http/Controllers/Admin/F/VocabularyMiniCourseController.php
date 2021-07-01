@@ -6,7 +6,7 @@ use App\DataTables\VocabularyMiniCourseDatatable;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\VocabularyMiniCourseRequest;
 use App\Models\VocabularyMiniCourse;
-use App\Models\VocabularyMiniCourseChapter;
+use App\Models\VocabularyChapter;
 use App\Repositories\VocabularyMiniCourseRepository;
 use Illuminate\Http\Request;
 
@@ -39,7 +39,7 @@ class VocabularyMiniCourseController extends Controller
      */
     public function create()
     {
-        $chapters = VocabularyMiniCourseChapter::where('is_active', 1)->get();
+        $chapters = VocabularyChapter::where('is_active', 1)->get();
         return view('backend.vocabulary.mini.courses.form', compact('chapters'));
     }
 
@@ -87,7 +87,7 @@ class VocabularyMiniCourseController extends Controller
             $data = $this->model->findOrFail($id);
         }
 
-        $chapters = VocabularyMiniCourseChapter::where('is_active', 1)->get();
+        $chapters = VocabularyChapter::where('is_active', 1)->get();
         return view('backend.vocabulary.mini.courses.form', compact('data','chapters'));
     }
 

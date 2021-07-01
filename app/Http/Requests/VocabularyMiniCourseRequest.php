@@ -26,7 +26,7 @@ class VocabularyMiniCourseRequest extends FormRequest
     {
         return [
             'title' => 'required|unique:vocabulary_mini_courses,title',
-            'vocabulary_mini_course_chapter_id' => 'required'
+            'vocabulary_chapter_id' => 'required'
         ];
     }
 

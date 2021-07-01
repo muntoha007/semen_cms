@@ -15,7 +15,7 @@ class VocabularyMiniCourseRepository
         $course = new VocabularyMiniCourse();
         $course->code = Str::random(10);
         $course->title = $data['title'];
-        $course->vocabulary_mini_course_chapter_id = $data['vocabulary_mini_course_chapter_id'];
+        $course->vocabulary_chapter_id = $data['vocabulary_chapter_id'];
         $course->is_active = $data['is_active'];
         $course->save();
 
@@ -26,7 +26,7 @@ class VocabularyMiniCourseRepository
     {
         $course = VocabularyMiniCourse::find($id);
         $course->title = $data['title'];
-        $course->vocabulary_mini_course_chapter_id = $data['vocabulary_mini_course_chapter_id'];
+        $course->vocabulary_chapter_id = $data['vocabulary_chapter_id'];
         $course->is_active = $data['is_active'];
         $course->update();
 
