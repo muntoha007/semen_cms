@@ -41,10 +41,8 @@ class LetterCourseQuestionController extends Controller
      */
     public function create()
     {
-        // $courses = LetterCourse::where('is_active', 1)->get();
-        // $courses = LetterCourse::select('letter_courses.*','letter_categories.name')->join('letter_categories', 'letter_categories.id', '=', 'letter_courses.letter_category_id')->where('letter_courses.is_active', 1)->get();
        // dd($courses);
-        $courses = LetterCourse::select('letter_courses.id', 'letter_courses.title', 'letter_categories.name')
+        $courses = LetterCourse::select('letter_courses.*', 'letter_categories.name')
             ->join('letter_categories', 'letter_categories.id', '=', 'letter_courses.letter_category_id')
             ->where('letter_courses.is_active', 1)
             ->get();
