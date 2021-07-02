@@ -42,10 +42,15 @@ class LetterCourseQuestionController extends Controller
     public function create()
     {
         // $courses = LetterCourse::where('is_active', 1)->get();
-        $courses = LetterCourse::select('letter_courses.*','letter_categories.name')->join('letter_categories', 'letter_categories.id', '=', 'letter_courses.letter_category_id')->where('letter_courses.is_active', 1)->get();
+        // $courses = LetterCourse::select('letter_courses.*','letter_categories.name')->join('letter_categories', 'letter_categories.id', '=', 'letter_courses.letter_category_id')->where('letter_courses.is_active', 1)->get();
        // dd($courses);
+        $courses = LetterCourse::select('letter_courses.id', 'letter_courses.title', 'letter_categories.name')
+            ->join('letter_categories', 'letter_categories.id', '=', 'letter_courses.letter_category_id')
+            ->where('letter_courses.is_active', 1)
+            ->get();
+
         $type = "new";
-        return view('backend.letters.questions.form', compact('courses','type'));
+        return view('backend.letters.questions.form', compact('courses', 'type'));
     }
 
     /**
@@ -91,10 +96,13 @@ class LetterCourseQuestionController extends Controller
         } else {
             $data = $this->model->findOrFail($id);
         }
-        $courses = LetterCourse::join('letter_categories', 'letter_categories.id', '=', 'letter_courses.letter_category_id')->where('is_active', 1)->get();
+        $courses = LetterCourse::select('letter_courses.id', 'letter_courses.title', 'letter_categories.name')
+            ->join('letter_categories', 'letter_categories.id', '=', 'letter_courses.letter_category_id')
+            ->where('letter_courses.is_active', 1)
+            ->get();
         $answers = LetterCourseAnswer::where('letter_course_question_id', $id)->get();
         $type = "edit";
-        return view('backend.letters.questions.form', compact('data', 'courses','answers', 'type'));
+        return view('backend.letters.questions.form', compact('data', 'courses', 'answers', 'type'));
     }
 
     /**
