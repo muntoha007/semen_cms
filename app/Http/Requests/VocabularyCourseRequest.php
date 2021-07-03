@@ -25,7 +25,7 @@ class VocabularyCourseRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required|unique:vocabulary_courses,title',
+            'title' => 'required',
             'vocabulary_course_chapter_id' => 'required'
         ];
     }
