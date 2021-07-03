@@ -45,7 +45,7 @@ class LetterCourseQuestionController extends Controller
         $courses = LetterCourse::select('letter_courses.*', 'letter_categories.id as cat_id', 'letter_categories.name')
             ->join('letter_categories', 'letter_categories.id', '=', 'letter_courses.letter_category_id')
             ->where('letter_courses.is_active', 1)
-            ->groupBy('cat_id', 'letter_courses.id')
+            ->groupBy('cat_id', 'name', 'letter_courses.id')
             ->get();
 
         $type = "new";
@@ -99,7 +99,7 @@ class LetterCourseQuestionController extends Controller
         $courses = LetterCourse::select('letter_courses.*', 'letter_categories.id as cat_id', 'letter_categories.name')
             ->join('letter_categories', 'letter_categories.id', '=', 'letter_courses.letter_category_id')
             ->where('letter_courses.is_active', 1)
-            ->groupBy('cat_id','letter_courses.id')
+            ->groupBy('cat_id','name','letter_courses.id')
             ->get();
 
         $answers = LetterCourseAnswer::where('letter_course_question_id', $id)->get();
