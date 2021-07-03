@@ -126,12 +126,12 @@ return [
                 'additional_query' => '',
                 'icon' => 'mdi mdi-flag menu-icon',
             ],
-            'vocabulary-mini-course-chapter' => [
-                'title' => 'Mini Bab Test Kosakata',
-                'routeName' => 'vocabulary-mini-course-chapters.index',
-                'additional_query' => '',
-                'icon' => 'mdi mdi-flag menu-icon',
-            ],
+            // 'vocabulary-mini-course-chapter' => [
+            //     'title' => 'Mini Bab Test Kosakata',
+            //     'routeName' => 'vocabulary-mini-course-chapters.index',
+            //     'additional_query' => '',
+            //     'icon' => 'mdi mdi-flag menu-icon',
+            // ],
             'vocabulary-course-mini' => [
                 'title' => ' Mini Level Test Kosakata',
                 'routeName' => 'vocabulary-mini-courses.index',
