@@ -34,7 +34,8 @@ class LetterQuestionRepository
         }
 
         $course = LetterCourse::where('id', request('letter_course_id'))->first();
-        $course->question_count = $course->question_count+1;
+        var_dump($data);
+	$course->question_count = $course->question_count+1;
 
         $course->update();
 
