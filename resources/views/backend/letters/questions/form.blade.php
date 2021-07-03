@@ -9,7 +9,7 @@ $title = @$data ? 'Edit' : 'Tambah';
             <div class="col-12 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">{{ $title }}Pertanyaan</h4>
+                        <h4 class="card-title">{{ $title }} Pertanyaan</h4>
                         <br>
                         <form class="forms-sample"
                             action="{{ @$data ? route('letter-questions.update', $data->id) : route('letter-questions.store') }}"

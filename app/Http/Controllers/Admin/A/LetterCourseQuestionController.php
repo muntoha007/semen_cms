@@ -41,10 +41,11 @@ class LetterCourseQuestionController extends Controller
      */
     public function create()
     {
-       // dd($courses);
-        $courses = LetterCourse::select('letter_courses.*', 'letter_categories.name')
+        // dd($courses);
+        $courses = LetterCourse::select('letter_courses.*', 'letter_categories.id as cat_id', 'letter_categories.name')
             ->join('letter_categories', 'letter_categories.id', '=', 'letter_courses.letter_category_id')
             ->where('letter_courses.is_active', 1)
+            ->groupBy('cat_id', 'letter_courses.id')
             ->get();
 
         $type = "new";
@@ -94,10 +95,13 @@ class LetterCourseQuestionController extends Controller
         } else {
             $data = $this->model->findOrFail($id);
         }
-        $courses = LetterCourse::select('letter_courses.id', 'letter_courses.title', 'letter_categories.name')
+
+        $courses = LetterCourse::select('letter_courses.*', 'letter_categories.id as cat_id', 'letter_categories.name')
             ->join('letter_categories', 'letter_categories.id', '=', 'letter_courses.letter_category_id')
             ->where('letter_courses.is_active', 1)
+            ->groupBy('cat_id','letter_courses.id')
             ->get();
+
         $answers = LetterCourseAnswer::where('letter_course_question_id', $id)->get();
         $type = "edit";
         return view('backend.letters.questions.form', compact('data', 'courses', 'answers', 'type'));

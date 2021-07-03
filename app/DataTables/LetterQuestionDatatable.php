@@ -65,8 +65,11 @@ class LetterQuestionDatatable extends DataTable
                 'letter_course_questions.created_at',
                 'letter_course_questions.updated_at',
                 'letter_courses.title as title_course',
+                'letter_categories.name as cat_name',
                 DB::raw('row_number() over () AS rownum'),
-            ])->join('letter_courses', 'letter_courses.id', '=', 'letter_course_questions.letter_course_id');
+            ])->join('letter_courses', 'letter_courses.id', '=', 'letter_course_questions.letter_course_id')
+            ->join('letter_categories', 'letter_categories.id', '=', 'letter_courses.letter_category_id');
+
     }
 
     /**
@@ -111,6 +114,7 @@ class LetterQuestionDatatable extends DataTable
             // Column::make('code'),
             Column::make('question')->title('Pertanyaan'),
             Column::make('title_course')->title('Versi Test')->searchable(false),
+            Column::make('cat_name')->title('Kategori')->searchable(false),
             Column::computed('is_active')->title('Status'),
             // Column::make('created_at'),
             // Column::make('updated_at'),
