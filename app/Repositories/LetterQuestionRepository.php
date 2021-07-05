@@ -33,15 +33,9 @@ class LetterQuestionRepository
             $answer->save();
         }
 
-<<<<<<< HEAD
-        $course = LetterCourse::where('id', request('letter_course_id'))->first();
-        var_dump($data);
-	$course->question_count = $course->question_count+1;
-=======
         if ($question->is_active = 1) {
             $course = LetterCourse::where('id', request('letter_course_id'))->first();
             $course->question_count = $course->question_count + 1;
->>>>>>> 6e2ad19cb807561dd203881d7df1509d2a2d9303
 
             $course->update();
         }
