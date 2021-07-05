@@ -65,8 +65,9 @@ class VocabularyDatatable extends DataTable
                 'vocabularies.is_active',
                 'vocabularies.created_at',
                 'vocabularies.updated_at',
+                'vocabulary_chapters.name',
                 DB::raw('row_number() over () AS rownum'),
-            ]);
+            ])->join('vocabulary_chapters', 'vocabulary_chapters.id', '=', 'vocabularies.vocabulary_chapter_id');
     }
 
     /**
@@ -111,6 +112,7 @@ class VocabularyDatatable extends DataTable
             // Column::make('code'),
             Column::make('word_jpn')->title('Kata Jepang'),
             Column::make('word_romaji')->title('Kata Romaji'),
+            Column::make('name')->title('Bab Kosakata'),
             Column::make('is_active')->title('Status'),
             // Column::make('created_at'),
             // Column::make('updated_at'),

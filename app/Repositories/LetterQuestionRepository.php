@@ -33,10 +33,12 @@ class LetterQuestionRepository
             $answer->save();
         }
 
-        $course = LetterCourse::where('id', request('letter_course_id'))->first();
-        $course->question_count = $course->question_count+1;
+        if ($question->is_active = 1) {
+            $course = LetterCourse::where('id', request('letter_course_id'))->first();
+            $course->question_count = $course->question_count + 1;
 
-        $course->update();
+            $course->update();
+        }
 
         return $question;
     }
@@ -47,7 +49,21 @@ class LetterQuestionRepository
         $question = LetterCourseQuestion::find($id);
         $question->question = $data['question'];
         $question->letter_course_id = $data['letter_course_id'];
-        $question->is_active = $data['is_active'];
+
+
+        if ($question->is_active != $data['is_active']) {
+            if ($data['is_active'] = 1) {
+                $newcourse = LetterCourse::where('id', request('letter_course_id'))->first();
+                $newcourse->question_count = $newcourse->question_count + 1;
+
+                $newcourse->update();
+            } else {
+                $oldcourse = LetterCourse::where('id', $question->letter_course_id)->first();
+                $oldcourse->question_count = $oldcourse->question_count - 1;
+
+                $oldcourse->update();
+            }
+        }
 
         if ($question->letter_course_id != $data['letter_course_id']) {
             $oldcourse = LetterCourse::where('id', $question->letter_course_id)->first();
@@ -55,11 +71,14 @@ class LetterQuestionRepository
 
             $oldcourse->update();
 
+
             $newcourse = LetterCourse::where('id', request('letter_course_id'))->first();
             $newcourse->question_count = $newcourse->question_count + 1;
 
             $newcourse->update();
         }
+
+        $question->is_active = $data['is_active'];
 
         $question->update();
 
