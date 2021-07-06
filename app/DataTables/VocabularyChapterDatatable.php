@@ -109,7 +109,7 @@ class VocabularyChapterDatatable extends DataTable
                 ->searchable(false),
             // Column::make('code'),
             Column::make('name')->title('Nama'),
-            Column::make('group_name')->title('Grup'),
+            Column::make('group_name')->title('Grup')->searchable(false),
             Column::make('is_active')->title('Status'),
             // Column::make('created_at'),
             // Column::make('updated_at'),
