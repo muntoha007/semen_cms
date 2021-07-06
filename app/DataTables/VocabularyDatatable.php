@@ -112,7 +112,7 @@ class VocabularyDatatable extends DataTable
             // Column::make('code'),
             Column::make('word_jpn')->title('Kata Jepang'),
             Column::make('word_romaji')->title('Kata Romaji'),
-            Column::make('name')->title('Bab Kosakata'),
+            Column::make('name')->title('Bab Kosakata')->searchable(false),
             Column::make('is_active')->title('Status'),
             // Column::make('created_at'),
             // Column::make('updated_at'),
