@@ -89,7 +89,7 @@ class VocabularyCourseQuestionController extends Controller
             $data = $this->model->findOrFail($id);
         }
         $courses = VocabularyCourse::where('is_active', 1)->get();
-        $answers = VocabularyCourseAnswer::where('vocabulary_course_question_id', $id)->get();
+        $answers = VocabularyCourseAnswer::where('vocabulary_course_question_id', $id)->orderBy('id','ASC')->get();
         $type = "edit";
         return view('backend.vocabulary.questions.form', compact('data', 'courses','answers', 'type'));
     }

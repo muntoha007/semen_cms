@@ -90,7 +90,7 @@ class VerbMiniCourseQuestionController extends Controller
             $data = $this->model->findOrFail($id);
         }
         $courses = VerbMiniCourse::get();
-        $answers = VerbMiniCourseAnswer::where('verb_mini_course_question_id', $id)->get();
+        $answers = VerbMiniCourseAnswer::where('verb_mini_course_question_id', $id)->orderBy('id','ASC')->get();
         $type = "edit";
         return view('backend.verbs.mini.questions.form', compact('data', 'courses','answers', 'type'));
     }

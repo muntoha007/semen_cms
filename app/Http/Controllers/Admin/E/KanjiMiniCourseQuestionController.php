@@ -89,7 +89,7 @@ class KanjiMiniCourseQuestionController extends Controller
             $data = $this->model->findOrFail($id);
         }
         $courses = KanjiMiniCourse::get();
-        $answers = KanjiMiniCourseAnswer::where('kanji_mini_course_question_id', $id)->get();
+        $answers = KanjiMiniCourseAnswer::where('kanji_mini_course_question_id', $id)->orderBy('id','ASC')->get();
         $type = "edit";
         return view('backend.kanji.mini.questions.form', compact('data', 'courses','answers', 'type'));
     }

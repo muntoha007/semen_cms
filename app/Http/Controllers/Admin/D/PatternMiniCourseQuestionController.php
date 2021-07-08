@@ -89,7 +89,7 @@ class PatternMiniCourseQuestionController extends Controller
             $data = $this->model->findOrFail($id);
         }
         $courses = PatternMiniCourse::get();
-        $answers = PatternMiniCourseAnswer::where('pattern_mini_course_question_id', $id)->get();
+        $answers = PatternMiniCourseAnswer::where('pattern_mini_course_question_id', $id)->orderBy('id','ASC')->get();
         $type = "edit";
         return view('backend.pattern.mini.questions.form', compact('data', 'courses','answers', 'type'));
     }

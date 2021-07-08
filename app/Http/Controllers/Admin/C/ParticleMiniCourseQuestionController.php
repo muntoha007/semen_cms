@@ -89,7 +89,7 @@ class ParticleMiniCourseQuestionController extends Controller
             $data = $this->model->findOrFail($id);
         }
         $courses = ParticleMiniCourse::where('is_active', 1)->get();
-        $answers = ParticleMiniCourseAnswer::where('particle_mini_course_question_id', $id)->get();
+        $answers = ParticleMiniCourseAnswer::where('particle_mini_course_question_id', $id)->orderBy('id','ASC')->get();
         $type = "edit";
         return view('backend.particle.mini.questions.form', compact('data', 'courses','answers', 'type'));
     }

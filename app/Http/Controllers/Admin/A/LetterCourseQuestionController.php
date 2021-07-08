@@ -102,7 +102,7 @@ class LetterCourseQuestionController extends Controller
             ->groupBy('cat_id','name','letter_courses.id')
             ->get();
 
-        $answers = LetterCourseAnswer::where('letter_course_question_id', $id)->get();
+        $answers = LetterCourseAnswer::where('letter_course_question_id', $id)->orderBy('id','ASC')->get();
         $type = "edit";
         return view('backend.letters.questions.form', compact('data', 'courses', 'answers', 'type'));
     }

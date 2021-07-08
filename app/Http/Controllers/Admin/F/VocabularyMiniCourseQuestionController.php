@@ -89,7 +89,7 @@ class VocabularyMiniCourseQuestionController extends Controller
             $data = $this->model->findOrFail($id);
         }
         $courses = VocabularyMiniCourse::where('is_active', 1)->get();
-        $answers = VocabularyMiniCourseAnswer::where('vocabulary_mini_course_question_id', $id)->get();
+        $answers = VocabularyMiniCourseAnswer::where('vocabulary_mini_course_question_id', $id)->orderBy('id','ASC')->get();
         $type = "edit";
         return view('backend.vocabulary.mini.questions.form', compact('data', 'courses','answers', 'type'));
     }
