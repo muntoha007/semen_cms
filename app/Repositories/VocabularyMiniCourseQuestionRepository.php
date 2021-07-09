@@ -16,11 +16,11 @@ class vocabularyMiniCourseQuestionRepository
         $question = new vocabularyMiniCourseQuestion;
 
         $question->code = Str::random(15);
-        $question->question_jpn = $data['question_jpn'];
-        $question->question_romanji = $data['question_romanji'];
+        $question->question_jpn = isset($data['question_jpn']);
+        $question->question_romanji = isset($data['question_romanji']);
         $question->question_idn = $data['question_idn'];
         $question->vocabulary_mini_course_id = $data['vocabulary_mini_course_id'];
-        $question->is_active = isset($value["is_active"]) ? 1 : 0;
+        $question->is_active = $data["is_active"];
         $question->save();
 
         $qid = $question->id;
@@ -29,16 +29,19 @@ class vocabularyMiniCourseQuestionRepository
             $answer = new VocabularyMiniCourseAnswer;
             $answer->code = Str::random(15);
             $answer->vocabulary_mini_course_question_id = $qid;
-            $answer->answer_jpn = $value["answer_jpn"];
+            $answer->answer_jpn = isset($value["answer_jpn"]);
             $answer->answer_idn = $value["answer_idn"];
             $answer->is_true = isset($value["is_true"]) ? 1 : 0;
             $answer->save();
         }
 
-        $course = VocabularyMiniCourse::where('id', request('vocabulary_mini_course_id'))->first();
-        $course->question_count = $course->question_count + 1;
+        if ($data['is_active'] = 1) {
+            $course = VocabularyMiniCourse::where('id', request('vocabulary_mini_course_id'))->first();
+            $course->question_count = $course->question_count + 1;
 
-        $course->update();
+            $course->update();
+        }
+
 
         return $question;
     }
@@ -48,10 +51,24 @@ class vocabularyMiniCourseQuestionRepository
 
         $question = vocabularyMiniCourseQuestion::find($id);
 
-        $question->question_jpn = $data['question_jpn'];
+        $question->question_jpn = isset($data['question_jpn']);
+        $question->question_romanji = isset($data['question_romanji']);
         $question->question_idn = $data['question_idn'];
         $question->vocabulary_mini_course_id = $data['vocabulary_mini_course_id'];
-        $question->is_active = $data['is_active'];
+
+        if ($question->is_active != $data['is_active']) {
+            if ($data['is_active'] = 1) {
+                $newcourse = VocabularyMiniCourse::where('id', request('vocabulary_mini_course_id'))->first();
+                $newcourse->question_count = $newcourse->question_count + 1;
+
+                $newcourse->update();
+            } else {
+                $oldcourse = VocabularyMiniCourse::where('id', $question->vocabulary_mini_course_id)->first();
+                $oldcourse->question_count = $oldcourse->question_count - 1;
+
+                $oldcourse->update();
+            }
+        }
 
         if ($question->vocabulary_mini_course_id != $data['vocabulary_mini_course_id']) {
             $oldcourse = VocabularyMiniCourse::where('id', $question->vocabulary_mini_course_id)->first();
@@ -65,11 +82,15 @@ class vocabularyMiniCourseQuestionRepository
             $newcourse->update();
         }
 
+        $question->is_active = $data['is_active'];
+
+
+
         $question->update();
 
         foreach ($data['answer'] as $value) {
             $answer = VocabularyMiniCourseAnswer::find($value["id"]);
-            $answer->answer_jpn = $value["answer_jpn"];
+            $answer->answer_jpn = isset($value["answer_jpn"]);
             $answer->answer_idn = $value["answer_idn"];
             $answer->is_true = isset($value["is_true"]) ? 1 : 0;
 

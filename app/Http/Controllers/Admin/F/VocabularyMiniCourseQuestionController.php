@@ -40,9 +40,14 @@ class VocabularyMiniCourseQuestionController extends Controller
      */
     public function create()
     {
-        $courses = VocabularyMiniCourse::where('is_active', 1)->get();
+        $courses = VocabularyMiniCourse::select('vocabulary_mini_courses.*', 'vocabulary_chapters.id as chp_id', 'vocabulary_chapters.name')
+            ->join('vocabulary_chapters', 'vocabulary_chapters.id', '=', 'vocabulary_mini_courses.vocabulary_chapter_id')
+            ->where('vocabulary_mini_courses.is_active', 1)
+            ->groupBy('chp_id','name','vocabulary_mini_courses.id')
+            ->get();
+
         $type = "new";
-        return view('backend.vocabulary.mini.questions.form', compact('courses','type'));
+        return view('backend.vocabulary.mini.questions.form', compact('courses', 'type'));
     }
 
     /**
@@ -88,10 +93,16 @@ class VocabularyMiniCourseQuestionController extends Controller
         } else {
             $data = $this->model->findOrFail($id);
         }
-        $courses = VocabularyMiniCourse::where('is_active', 1)->get();
-        $answers = VocabularyMiniCourseAnswer::where('vocabulary_mini_course_question_id', $id)->orderBy('id','ASC')->get();
+
+        $courses = VocabularyMiniCourse::select('vocabulary_mini_courses.*', 'vocabulary_chapters.id as chp_id', 'vocabulary_chapters.name')
+            ->join('vocabulary_chapters', 'vocabulary_chapters.id', '=', 'vocabulary_mini_courses.vocabulary_chapter_id')
+            ->where('vocabulary_mini_courses.is_active', 1)
+            ->groupBy('chp_id','name','vocabulary_mini_courses.id')
+            ->get();
+
+        $answers = VocabularyMiniCourseAnswer::where('vocabulary_mini_course_question_id', $id)->orderBy('id', 'ASC')->get();
         $type = "edit";
-        return view('backend.vocabulary.mini.questions.form', compact('data', 'courses','answers', 'type'));
+        return view('backend.vocabulary.mini.questions.form', compact('data', 'courses', 'answers', 'type'));
     }
 
     /**

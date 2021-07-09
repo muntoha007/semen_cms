@@ -61,6 +61,7 @@ class VocabularyCourseQuestionDatatable extends DataTable
                 'vocabulary_course_questions.code',
                 'vocabulary_course_questions.question_jpn',
                 'vocabulary_course_questions.question_romanji',
+                'vocabulary_course_questions.question_idn',
                 'vocabulary_course_questions.is_active',
                 'vocabulary_course_questions.created_at',
                 'vocabulary_course_questions.updated_at',
@@ -109,8 +110,8 @@ class VocabularyCourseQuestionDatatable extends DataTable
                 ->title('#')
                 ->searchable(false),
             // Column::make('code'),
-            Column::make('question_jpn')->title('Pertanyaan Jepang'),
-            Column::make('question_romanji')->title('Pertanyaan Romaji'),
+            Column::make('question_idn')->title('Pertanyaan'),
+            // Column::make('question_romanji')->title('Pertanyaan Romaji'),
             Column::make('title')->title('Level'),
             Column::computed('is_active')->title('Status'),
             // Column::make('created_at'),

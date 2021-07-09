@@ -25,8 +25,8 @@ class VocabularyCourseQuestionRequest extends FormRequest
     public function rules()
     {
         return [
-            "question_jpn" => 'required',
-            "question_romanji" => 'required',
+            // "question_jpn" => 'required',
+            // "question_romanji" => 'required',
             "question_idn" => 'required',
             'vocabulary_course_id' => 'required',
             "answer" => 'required',

@@ -40,9 +40,15 @@ class VocabularyCourseQuestionController extends Controller
      */
     public function create()
     {
-        $courses = VocabularyCourse::where('is_active', 1)->get();
+        $courses = VocabularyCourse::select('vocabulary_courses.*', 'vocabulary_course_chapters.id as chp_id', 'vocabulary_course_chapters.title as chapter_title')
+            ->join('vocabulary_course_chapters', 'vocabulary_course_chapters.id', '=', 'vocabulary_courses.vocabulary_course_chapter_id')
+            ->where('vocabulary_courses.is_active', 1)
+            ->groupBy('chp_id', 'chapter_title', 'vocabulary_courses.id')
+            ->get();
+
         $type = "new";
-        return view('backend.vocabulary.questions.form', compact('courses','type'));
+
+        return view('backend.vocabulary.questions.form', compact('courses', 'type'));
     }
 
     /**
@@ -88,10 +94,17 @@ class VocabularyCourseQuestionController extends Controller
         } else {
             $data = $this->model->findOrFail($id);
         }
-        $courses = VocabularyCourse::where('is_active', 1)->get();
-        $answers = VocabularyCourseAnswer::where('vocabulary_course_question_id', $id)->orderBy('id','ASC')->get();
+
+        $courses = VocabularyCourse::select('vocabulary_courses.*', 'vocabulary_course_chapters.id as chp_id', 'vocabulary_course_chapters.title as chapter_title')
+            ->join('vocabulary_course_chapters', 'vocabulary_course_chapters.id', '=', 'vocabulary_courses.vocabulary_course_chapter_id')
+            ->where('vocabulary_courses.is_active', 1)
+            ->groupBy('chp_id', 'chapter_title', 'vocabulary_courses.id')
+            ->get();
+
+        $answers = VocabularyCourseAnswer::where('vocabulary_course_question_id', $id)->orderBy('id', 'ASC')->get();
         $type = "edit";
-        return view('backend.vocabulary.questions.form', compact('data', 'courses','answers', 'type'));
+
+        return view('backend.vocabulary.questions.form', compact('data', 'courses', 'answers', 'type'));
     }
 
     /**

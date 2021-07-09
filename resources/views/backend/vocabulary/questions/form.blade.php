@@ -28,7 +28,7 @@ $title = @$data ? 'Edit' : 'Tambah';
                                             @foreach ($courses as $course)
                                                 <option value="{{ $course->id }}"
                                                     {{ $course->id == @$data->vocabulary_course_id ? 'selected' : '' }}>
-                                                    {{ $course->title }}</option>
+                                                    {{ $course->title }} | {{$course->chapter_title}}</option>
                                             @endforeach
                                         </select>
                                         {!! $errors->first('vocabulary_course_id', '<label class="help-block error-validation">:message</label>') !!}
@@ -50,28 +50,28 @@ $title = @$data ? 'Edit' : 'Tambah';
                                 </div>
                             </div>
 
-                            <div class="form-group">
+                            {{-- <div class="form-group">
                                 <label for="question_jpn">Pertanyaan Jepang</label>
                                 <textarea class="form-control" name="question_jpn" id="question_jpn" rows="4"
-                                    placeholder="question_jpn" required
+                                    placeholder="Question Japan" required
                                     value="">{{ old('question_jpn') ?? @$data->question_jpn }}</textarea>
 
                                 {!! $errors->first('question_jpn', '<label class="help-block error-validation">:message</label>') !!}
-                            </div>
+                            </div> --}}
 
-                            <div class="form-group">
+                            {{-- <div class="form-group">
                                 <label for="question_romanji">Pertanyaan Romaji</label>
                                 <textarea class="form-control" name="question_romanji" id="question_romanji" rows="3"
                                     placeholder="Question Romanji" required
                                     value="">{{ old('question_romanji') ?? @$data->question_romanji }}</textarea>
 
                                 {!! $errors->first('question_romanji', '<label class="help-block error-validation">:message</label>') !!}
-                            </div>
+                            </div> --}}
 
                             <div class="form-group">
-                                <label for="question_idn">Pertanyaan Indonesia</label>
+                                <label for="question_idn">Pertanyaan</label>
                                 <textarea class="form-control" name="question_idn" id="question_idn" rows="3"
-                                    placeholder="Question Indonesia" required
+                                    placeholder="Pertanyaan" required
                                     value="">{{ old('question_idn') ?? @$data->question_idn }}</textarea>
 
                                 {!! $errors->first('question_idn', '<label class="help-block error-validation">:message</label>') !!}
@@ -89,14 +89,14 @@ $title = @$data ? 'Edit' : 'Tambah';
                                                 </span>
                                             </div>
                                             <div class="card-body">
-                                                <div class="form-group">
+                                                {{-- <div class="form-group">
                                                     <textarea class="form-control" rows="3" name="answer[0][answer_jpn]"
                                                         placeholder="answer japan"
                                                         required>{{ old('answer[0][answer_jpn]') ?? @$answers[0]->answer_jpn }}</textarea>
-                                                </div>
+                                                </div> --}}
                                                 <div class="form-group">
                                                     <textarea class="form-control" rows="3" name="answer[0][answer_idn]"
-                                                        placeholder="answer indonesia"
+                                                        placeholder="Jawaban"
                                                         required>{{ old('answer[0][answer_idn]') ?? @$answers[0]->answer_idn }}</textarea>
                                                 </div>
                                             </div>
@@ -117,14 +117,14 @@ $title = @$data ? 'Edit' : 'Tambah';
                                                 </span>
                                             </div>
                                             <div class="card-body">
-                                                <div class="form-group">
+                                                {{-- <div class="form-group">
                                                     <textarea class="form-control" rows="3" name="answer[1][answer_jpn]"
                                                         placeholder="answer japan"
                                                         required>{{ old('answer[1][answer_jpn]') ?? @$answers[1]->answer_jpn }}</textarea>
-                                                </div>
+                                                </div> --}}
                                                 <div class="form-group">
                                                     <textarea class="form-control" rows="3" name="answer[1][answer_idn]"
-                                                        placeholder="answer indonesia"
+                                                        placeholder="Jawaban"
                                                         required>{{ old('answer[1][answer_idn]') ?? @$answers[1]->answer_idn }}</textarea>
                                                 </div>
                                             </div>
@@ -146,14 +146,14 @@ $title = @$data ? 'Edit' : 'Tambah';
                                                 </span>
                                             </div>
                                             <div class="card-body">
-                                                <div class="form-group">
+                                                {{-- <div class="form-group">
                                                     <textarea class="form-control" rows="3" name="answer[2][answer_jpn]"
                                                         placeholder="answer japan"
                                                         required>{{ old('answer[2][answer_jpn]') ?? @$answers[2]->answer_jpn }}</textarea>
-                                                </div>
+                                                </div> --}}
                                                 <div class="form-group">
                                                     <textarea class="form-control" rows="3" name="answer[2][answer_idn]"
-                                                        placeholder="answer indonesia"
+                                                        placeholder="Jawaban"
                                                         required>{{ old('answer[2][answer_idn]') ?? @$answers[2]->answer_idn }}</textarea>
                                                 </div>
                                             </div>
@@ -173,14 +173,14 @@ $title = @$data ? 'Edit' : 'Tambah';
                                                 </span>
                                             </div>
                                             <div class="card-body">
-                                                <div class="form-group">
+                                                {{-- <div class="form-group">
                                                     <textarea class="form-control" rows="3" name="answer[3][answer_jpn]"
                                                         placeholder="answer japan"
                                                         required>{{ old('answer[3][answer_jpn]') ?? @$answers[3]->answer_jpn }}</textarea>
-                                                </div>
+                                                </div> --}}
                                                 <div class="form-group">
                                                     <textarea class="form-control" rows="3" name="answer[3][answer_idn]"
-                                                        placeholder="answer indonesia"
+                                                        placeholder="Jawaban"
                                                         required>{{ old('answer[3][answer_idn]') ?? @$answers[3]->answer_idn }}</textarea>
                                                 </div>
                                             </div>
