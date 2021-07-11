@@ -40,7 +40,14 @@ class ParticleCourseQuestionController extends Controller
      */
     public function create()
     {
-        $courses = ParticleCourse::get();
+        // $courses = ParticleCourse::where('is_active', 1)->get();
+
+        $courses = ParticleCourse::select('particle_courses.id', 'particle_courses.title', 'particle_education_chapters.id as chp_id', 'particle_education_chapters.title as chapter_title')
+            ->join('particle_education_chapters', 'particle_education_chapters.id', '=', 'particle_courses.particle_education_chapter_id')
+            ->where('particle_courses.is_active', 1)
+            ->groupBy('chp_id', 'particle_courses.title', 'chapter_title','particle_courses.id')
+            ->get();
+
         $type = "new";
         return view('backend.particle.questions.form', compact('courses','type'));
     }
@@ -88,7 +95,13 @@ class ParticleCourseQuestionController extends Controller
         } else {
             $data = $this->model->findOrFail($id);
         }
-        $courses = ParticleCourse::get();
+
+        $courses = ParticleCourse::select('particle_courses.id', 'particle_courses.title', 'particle_education_chapters.id as chp_id', 'particle_education_chapters.title as chapter_title')
+            ->join('particle_education_chapters', 'particle_education_chapters.id', '=', 'particle_courses.particle_education_chapter_id')
+            ->where('particle_courses.is_active', 1)
+            ->groupBy('chp_id', 'particle_courses.title', 'chapter_title','particle_courses.id')
+            ->get();
+
         $answers = ParticleCourseAnswer::where('particle_course_question_id', $id)->orderBy('id','ASC')->get();
         $type = "edit";
         return view('backend.particle.questions.form', compact('data', 'courses','answers', 'type'));

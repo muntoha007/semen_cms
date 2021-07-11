@@ -26,8 +26,8 @@ class ParticleCourseQuestionRequest extends FormRequest
     {
         return [
             "question_jpn" => 'required',
-            "question_romanji" => 'required',
-            "question_idn" => 'required',
+            // "question_romanji" => 'required',
+            // "question_idn" => 'required',
             'particle_course_id' => 'required',
             "answer" => 'required',
         ];

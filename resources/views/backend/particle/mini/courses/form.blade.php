@@ -1,15 +1,15 @@
 @extends('layouts.master')
 @php
-$title = @$data ? 'Edit' : 'Add New';
+$title = @$data ? 'Edit' : 'Tambah';
 @endphp
-@section('title', 'Particle Mini Course ' . $title)
+@section('title', 'Particle Mini Test ' . $title)
 @section('content')
     <div class="content-wrapper">
         <div class="row">
             <div class="col-12 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">{{ $title }} Particle Mini Course</h4>
+                        <h4 class="card-title">{{ $title }} Particle Mini Test</h4>
                         <br>
                         <form class="forms-sample"
                             action="{{ @$data ? route('particle-mini-courses.update', $data->id) : route('particle-mini-courses.store') }}"

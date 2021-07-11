@@ -63,8 +63,9 @@ class ParticleCourseQuestionDatatable extends DataTable
                 'particle_course_questions.is_active',
                 'particle_course_questions.created_at',
                 'particle_course_questions.updated_at',
+                'particle_courses.title',
                 DB::raw('row_number() over () AS rownum'),
-            ]);
+            ])->join('particle_courses', 'particle_courses.id', '=', 'particle_course_questions.particle_course_id');
     }
 
     /**
@@ -107,10 +108,11 @@ class ParticleCourseQuestionDatatable extends DataTable
                 ->title('#')
                 ->searchable(false),
             // Column::make('code'),
-            Column::make('question_jpn')->title('Question Japan'),
+            Column::make('question_jpn')->title('Pertanyaan'),
+            Column::make('title')->title('Judul Test'),
             Column::computed('is_active')->title('Status'),
-            Column::make('created_at'),
-            Column::make('updated_at'),
+            // Column::make('created_at'),
+            // Column::make('updated_at'),
             Column::computed('action')
                 ->visible($hasAction)
                 ->exportable(false)

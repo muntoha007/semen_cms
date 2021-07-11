@@ -1,15 +1,15 @@
 @extends('layouts.master')
 @php
-$title = @$data ? 'Edit' : 'Add New';
+$title = @$data ? 'Edit' : 'Tambah';
 @endphp
-@section('title', 'Particle Mini ' . $title)
+@section('title', 'Particle Pertanyaan Mini ' . $title)
 @section('content')
     <div class="content-wrapper">
         <div class="row">
             <div class="col-12 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">{{ $title }} Particle Mini Question</h4>
+                        <h4 class="card-title">{{ $title }} Particle Pertanyaan Mini</h4>
                         <br>
                         <form class="forms-sample"
                             action="{{ @$data ? route('particle-mini-course-questions.update', $data->id) : route('particle-mini-course-questions.store') }}"
@@ -22,13 +22,13 @@ $title = @$data ? 'Edit' : 'Add New';
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="particle_mini_course_id">Pick Particle Mini Course</label>
+                                        <label for="particle_mini_course_id">Pilih Particle Mini Test</label>
                                         <select name="particle_mini_course_id" id="particle_mini_course_id" class="form-control" required>
-                                            <option value="">Select Particle Mini Course</option>
+                                            <option value="">Pilih Particle Mini Test</option>
                                             @foreach ($courses as $course)
                                                 <option value="{{ $course->id }}"
                                                     {{ $course->id == @$data->particle_mini_course_id ? 'selected' : '' }}>
-                                                    {{ $course->title }}</option>
+                                                    {{ $course->title }} | {{$course->chapter_title}}</option>
                                             @endforeach
                                         </select>
                                         {!! $errors->first('particle_mini_course_id', '<label class="help-block error-validation">:message</label>') !!}
@@ -51,15 +51,15 @@ $title = @$data ? 'Edit' : 'Add New';
                             </div>
 
                             <div class="form-group">
-                                <label for="question_jpn">Question Japan</label>
+                                <label for="question_jpn">Pertanyaan</label>
                                 <textarea class="form-control" name="question_jpn" id="question_jpn" rows="4"
-                                    placeholder="question japan" required
+                                    placeholder="Pertanyaan" required
                                     value="">{{ old('question_jpn') ?? @$data->question_jpn }}</textarea>
 
                                 {!! $errors->first('question_jpn', '<label class="help-block error-validation">:message</label>') !!}
                             </div>
 
-                            <div class="form-group">
+                            {{-- <div class="form-group">
                                 <label for="question_romanji">Question Romanji</label>
                                 <textarea class="form-control" name="question_romanji" id="question_romanji" rows="3"
                                     placeholder="Question Romanji" required
@@ -75,13 +75,13 @@ $title = @$data ? 'Edit' : 'Add New';
                                     value="">{{ old('question_idn') ?? @$data->question_idn }}</textarea>
 
                                 {!! $errors->first('question_idn', '<label class="help-block error-validation">:message</label>') !!}
-                            </div>
+                            </div> --}}
 
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <div class="card">
-                                            <div class="card-header info">Answer A
+                                            <div class="card-header info">Jawaban A
                                                 <span class="float-right">
                                                     <input type="checkbox" data-toggle="tooltip" data-placement="top"
                                                         title="Choose as answer" name="answer[0][is_true]" value="1"
@@ -91,10 +91,10 @@ $title = @$data ? 'Edit' : 'Add New';
                                             <div class="card-body">
                                                 <div class="form-group">
                                                     <textarea class="form-control" rows="3" name="answer[0][answer_jpn]"
-                                                        placeholder="answer japan"
+                                                        placeholder="Jawaban"
                                                         required>{{ old('answer[0][answer_jpn]') ?? @$answers[0]->answer_jpn }}</textarea>
                                                 </div>
-                                                <div class="form-group">
+                                                {{-- <div class="form-group">
                                                     <textarea class="form-control" rows="3" name="answer[0][answer_romanji]"
                                                         placeholder="answer romanji"
                                                         required>{{ old('answer[0][answer_romanji]') ?? @$answers[0]->answer_romanji }}</textarea>
@@ -103,7 +103,7 @@ $title = @$data ? 'Edit' : 'Add New';
                                                     <textarea class="form-control" rows="3" name="answer[0][answer_idn]"
                                                         placeholder="answer indonesia"
                                                         required>{{ old('answer[0][answer_idn]') ?? @$answers[0]->answer_idn }}</textarea>
-                                                </div>
+                                                </div> --}}
                                             </div>
                                         </div>
                                         <input id="answer[0][id]" name="answer[0][id]" type="hidden"
@@ -114,7 +114,7 @@ $title = @$data ? 'Edit' : 'Add New';
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <div class="card">
-                                            <div class="card-header info">Answer B
+                                            <div class="card-header info">Jawaban B
                                                 <span class="float-right">
                                                     <input type="checkbox" data-toggle="tooltip" data-placement="top"
                                                         title="Choose as answer" name="answer[1][is_true]" value="1"
@@ -124,10 +124,10 @@ $title = @$data ? 'Edit' : 'Add New';
                                             <div class="card-body">
                                                 <div class="form-group">
                                                     <textarea class="form-control" rows="3" name="answer[1][answer_jpn]"
-                                                        placeholder="answer japan"
+                                                        placeholder="Jawaban"
                                                         required>{{ old('answer[1][answer_jpn]') ?? @$answers[1]->answer_jpn }}</textarea>
                                                 </div>
-                                                <div class="form-group">
+                                                {{-- <div class="form-group">
                                                     <textarea class="form-control" rows="3" name="answer[1][answer_romanji]"
                                                         placeholder="answer romanji"
                                                         required>{{ old('answer[1][answer_romanji]') ?? @$answers[1]->answer_romanji }}</textarea>
@@ -136,7 +136,7 @@ $title = @$data ? 'Edit' : 'Add New';
                                                     <textarea class="form-control" rows="3" name="answer[1][answer_idn]"
                                                         placeholder="answer indonesia"
                                                         required>{{ old('answer[1][answer_idn]') ?? @$answers[1]->answer_idn }}</textarea>
-                                                </div>
+                                                </div> --}}
                                             </div>
                                         </div>
                                         <input id="answer[1][id]" name="answer[1][id]" type="hidden"
@@ -148,7 +148,7 @@ $title = @$data ? 'Edit' : 'Add New';
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <div class="card">
-                                            <div class="card-header info">Answer C
+                                            <div class="card-header info">Jawaban C
                                                 <span class="float-right">
                                                     <input type="checkbox" data-toggle="tooltip" data-placement="top"
                                                         title="Choose as answer" name="answer[2][is_true]" value="1"
@@ -158,10 +158,10 @@ $title = @$data ? 'Edit' : 'Add New';
                                             <div class="card-body">
                                                 <div class="form-group">
                                                     <textarea class="form-control" rows="3" name="answer[2][answer_jpn]"
-                                                        placeholder="answer japan"
+                                                        placeholder="Jawaban"
                                                         required>{{ old('answer[2][answer_jpn]') ?? @$answers[2]->answer_jpn }}</textarea>
                                                 </div>
-                                                <div class="form-group">
+                                                {{-- <div class="form-group">
                                                     <textarea class="form-control" rows="3" name="answer[2][answer_romanji]"
                                                         placeholder="answer romanji"
                                                         required>{{ old('answer[2][answer_romanji]') ?? @$answers[2]->answer_romanji }}</textarea>
@@ -170,7 +170,7 @@ $title = @$data ? 'Edit' : 'Add New';
                                                     <textarea class="form-control" rows="3" name="answer[2][answer_idn]"
                                                         placeholder="answer indonesia"
                                                         required>{{ old('answer[2][answer_idn]') ?? @$answers[2]->answer_idn }}</textarea>
-                                                </div>
+                                                </div> --}}
                                             </div>
                                         </div>
                                         <input id="answer[2][id]" name="answer[2][id]" type="hidden"
@@ -180,7 +180,7 @@ $title = @$data ? 'Edit' : 'Add New';
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <div class="card">
-                                            <div class="card-header info">AnswerD
+                                            <div class="card-header info">Jawaban D
                                                 <span class="float-right">
                                                     <input type="checkbox" data-toggle="tooltip" data-placement="top"
                                                         title="Choose as answer" name="answer[3][is_true]" value="1"
@@ -190,10 +190,10 @@ $title = @$data ? 'Edit' : 'Add New';
                                             <div class="card-body">
                                                 <div class="form-group">
                                                     <textarea class="form-control" rows="3" name="answer[3][answer_jpn]"
-                                                        placeholder="answer japan"
+                                                        placeholder="Jawaban"
                                                         required>{{ old('answer[3][answer_jpn]') ?? @$answers[3]->answer_jpn }}</textarea>
                                                 </div>
-                                                <div class="form-group">
+                                                {{-- <div class="form-group">
                                                     <textarea class="form-control" rows="3" name="answer[3][answer_romanji]"
                                                         placeholder="answer romanji"
                                                         required>{{ old('answer[3][answer_romanji]') ?? @$answers[3]->answer_romanji }}</textarea>
@@ -202,7 +202,7 @@ $title = @$data ? 'Edit' : 'Add New';
                                                     <textarea class="form-control" rows="3" name="answer[3][answer_idn]"
                                                         placeholder="answer indonesia"
                                                         required>{{ old('answer[3][answer_idn]') ?? @$answers[3]->answer_idn }}</textarea>
-                                                </div>
+                                                </div> --}}
                                             </div>
                                         </div>
                                         <input id="answer[3][id]" name="answer[3][id]" type="hidden"
