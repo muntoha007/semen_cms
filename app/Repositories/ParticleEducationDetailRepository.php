@@ -57,7 +57,9 @@ class ParticleEducationDetailRepository
         $detail = ParticleEducationDetail::find($id);
 
         if (isset($data['sentence_img'])) {
-            $response_img_del = $client->request('DELETE', '/api/v1/cdn/' . $detail->sentence_img);
+            if ($detail->sentence_img != "" || $detail->sentence_img != "") {
+                $response_img_del = $client->request('DELETE', '/api/v1/cdn/' . $detail->sentence_img);
+            }
 
             // for image
             $image = base64_encode(file_get_contents($data['sentence_img']));
