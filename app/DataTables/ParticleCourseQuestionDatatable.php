@@ -109,7 +109,7 @@ class ParticleCourseQuestionDatatable extends DataTable
                 ->searchable(false),
             // Column::make('code'),
             Column::make('question_jpn')->title('Pertanyaan'),
-            Column::make('title')->title('Judul Test'),
+            Column::make('title')->title('Judul Test')->searchable(false),
             Column::computed('is_active')->title('Status'),
             // Column::make('created_at'),
             // Column::make('updated_at'),

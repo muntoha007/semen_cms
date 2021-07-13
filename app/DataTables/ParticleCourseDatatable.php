@@ -109,7 +109,7 @@ class ParticleCourseDatatable extends DataTable
                 ->searchable(false),
             // Column::make('code'),
             Column::make('title'),
-            Column::make('chapter_title')->title('Bab/Chapter'),
+            Column::make('chapter_title')->title('Bab/Chapter')->searchable(false),
             Column::computed('is_active')->title('Status'),
             // Column::make('created_at'),
             // Column::make('updated_at'),

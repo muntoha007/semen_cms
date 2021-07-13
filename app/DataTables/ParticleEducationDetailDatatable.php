@@ -114,10 +114,10 @@ class ParticleEducationDetailDatatable extends DataTable
             // Column::make('code'),
             Column::make('sentence_jpn'),
             Column::make('sentence_romanji'),
-            Column::make('particle_education_title')->title('Particle Education'),
+            Column::make('particle_education_title')->title('Particle Education')->searchable(false),
             Column::computed('is_active')->title('Status'),
-            Column::make('created_at'),
-            Column::make('updated_at'),
+            // Column::make('created_at'),
+            // Column::make('updated_at'),
             Column::computed('action')
                 ->visible($hasAction)
                 ->exportable(false)

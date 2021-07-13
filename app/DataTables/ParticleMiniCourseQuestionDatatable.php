@@ -109,10 +109,11 @@ class ParticleMiniCourseQuestionDatatable extends DataTable
                 ->searchable(false),
             // Column::make('code'),
             Column::make('question_jpn')->title('Question Japan'),
-            Column::computed('title')->title('Judul Test'),
+            Column::computed('title')->title('Judul Test')->searchable(false),
             Column::computed('is_active')->title('Status'),
             // Column::make('created_at'),
             // Column::make('updated_at'),
+            // Column::make('title')->name('particle_mini_courses.title'),
             Column::computed('action')
                 ->visible($hasAction)
                 ->exportable(false)
