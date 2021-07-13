@@ -1,15 +1,15 @@
 @extends('layouts.master')
 @php
-$title = @$data ? 'Edit' : 'Add New';
+$title = @$data ? 'Edit' : 'Tambah';
 @endphp
-@section('title', 'Particle Education Detail' . $title)
+@section('title', 'Partikel Detail' . $title)
 @section('content')
     <div class="content-wrapper">
         <div class="row">
             <div class="col-12 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">{{ $title }} Particle Education Detail</h4>
+                        <h4 class="card-title">{{ $title }} Partikel Detail</h4>
                         <br>
                         <form class="forms-sample"
                             action="{{ @$data ? route('particle-education-details.update', $data->id) : route('particle-education-details.store') }}"
@@ -80,7 +80,7 @@ $title = @$data ? 'Edit' : 'Add New';
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group input-group">
-                                        <label for="exampleInputFile">Image</label>
+                                        <label for="exampleInputFile">Gambar</label>
                                         <input type="file"
                                             class="form-control {{ hasErrorField($errors, 'sentence_img') }} dropify"
                                             data-errors-position="outside" name="sentence_img"

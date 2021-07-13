@@ -112,9 +112,9 @@ class ParticleEducationDetailDatatable extends DataTable
                 ->title('#')
                 ->searchable(false),
             // Column::make('code'),
-            Column::make('sentence_jpn'),
-            Column::make('sentence_romanji'),
-            Column::make('particle_education_title')->title('Particle Education')->searchable(false),
+            Column::make('sentence_jpn')->title('Sentence Jepang'),
+            Column::make('sentence_romanji')->title('Sentence Romaji'),
+            Column::make('particle_education_title')->title('Partikel')->searchable(false),
             Column::computed('is_active')->title('Status'),
             // Column::make('created_at'),
             // Column::make('updated_at'),

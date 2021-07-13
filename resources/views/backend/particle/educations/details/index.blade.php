@@ -1,12 +1,12 @@
 @extends('layouts.master')
-@section('title', 'Particle Education List')
+@section('title', 'Daftar Partikel Detail')
 @section('content')
     <div class="content-wrapper">
         <div class="row">
             <div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title text-center table-title">List Particle Education</h4>
+                        <h4 class="card-title text-center table-title">Daftar Partikel Detail</h4>
                         @isPermitted('particle-education-details.create')
                         <div class="form-group">
                             <a href="{{ route('particle-education-details.create') }}" type="button" class="btn btn-outline-info btn-rounded btn-fw btn-sm">
