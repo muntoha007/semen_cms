@@ -94,7 +94,7 @@ $title = @$data ? 'Edit' : 'Add New';
                             </div>
 
                             <button type="submit" class="btn btn-info btn-fw btn-lg mr-2">Submit</button>
-                            <a href="{{ route('particle-educations.index') }}"
+                            <a href="{{ route('particle-education-details.index') }}"
                                 class="btn btn-secondary btn-fw btn-lg">Cancel</a>
                         </form>
                     </div>
