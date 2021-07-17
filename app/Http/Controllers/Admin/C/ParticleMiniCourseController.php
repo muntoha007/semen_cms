@@ -6,7 +6,7 @@ use App\DataTables\ParticleMiniCourseDatatable;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ParticleMiniCourseRequest;
 use App\Models\ParticleMiniCourse;
-use App\Models\ParticleEducation;
+use App\Models\ParticleEducationChapter;
 use App\Repositories\ParticleMiniCourseRepository;
 use Illuminate\Http\Request;
 
@@ -39,7 +39,7 @@ class ParticleMiniCourseController extends Controller
      */
     public function create()
     {
-        $educations = ParticleEducation::where('is_active', 1)->get();
+        $educations = ParticleEducationChapter::where('is_active', 1)->get();
         return view('backend.particle.mini.courses.form', compact('educations'));
     }
 
@@ -86,7 +86,7 @@ class ParticleMiniCourseController extends Controller
         } else {
             $data = $this->model->findOrFail($id);
         }
-        $educations = ParticleEducation::where('is_active', 1)->get();
+        $educations = ParticleEducationChapter::where('is_active', 1)->get();
         return view('backend.particle.mini.courses.form', compact('data', 'educations'));
     }
 

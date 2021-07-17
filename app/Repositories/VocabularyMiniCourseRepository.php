@@ -17,6 +17,7 @@ class VocabularyMiniCourseRepository
         $course->title = $data['title'];
         $course->vocabulary_chapter_id = $data['vocabulary_chapter_id'];
         $course->is_active = $data['is_active'];
+        $course->test_time = $data['test_time'];
         $course->save();
 
         return $course;
@@ -28,6 +29,7 @@ class VocabularyMiniCourseRepository
         $course->title = $data['title'];
         $course->vocabulary_chapter_id = $data['vocabulary_chapter_id'];
         $course->is_active = $data['is_active'];
+        $course->test_time = $data['test_time'];
         $course->update();
 
         return $course;

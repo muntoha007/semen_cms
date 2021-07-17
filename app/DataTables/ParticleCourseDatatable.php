@@ -60,6 +60,7 @@ class ParticleCourseDatatable extends DataTable
                 'particle_courses.id',
                 'particle_courses.code',
                 'particle_courses.title',
+                'particle_courses.test_time',
                 'particle_courses.is_active',
                 'particle_courses.created_at',
                 'particle_courses.updated_at',
@@ -108,7 +109,8 @@ class ParticleCourseDatatable extends DataTable
                 ->title('#')
                 ->searchable(false),
             // Column::make('code'),
-            Column::make('title'),
+            Column::make('title')->title('Judul'),
+            Column::make('test_time')->title('Waktu Test'),
             Column::make('chapter_title')->title('Bab/Chapter')->searchable(false),
             Column::computed('is_active')->title('Status'),
             // Column::make('created_at'),

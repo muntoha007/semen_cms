@@ -19,21 +19,29 @@ $title = @$data ? 'Edit' : 'Tambah';
                                 <input type="hidden" name="_method" value="put">
                             @endif
                             <div class="row">
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <div class="form-group">
-                                        <label for="title">Title</label>
+                                        <label for="title">Judul</label>
                                         <input type="text" class="form-control {{ hasErrorField($errors, 'title') }}"
                                             id="title" name="title" value="{{ old('title', @$data->title) }}"
-                                            placeholder="Title">
+                                            placeholder="Judul">
                                         {!! $errors->first('title', '<label class="help-block error-validation">:message</label>') !!}
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <div class="form-group">
-                                        <label for="particle_education_chapter_id">Education</label>
+                                        <label for="test_time">Waktu Test</label>
+                                        <input type="number" name="test_time" id="test_time" class="form-control"
+                                            value="{{ old('test_time') ?? @$data->test_time }}" required>
+                                        {!! $errors->first('test_time', '<label class="help-block error-validation">:message</label>') !!}
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="particle_education_chapter_id">Bab/Chapter</label>
                                         <select name="particle_education_chapter_id" id="particle_education_chapter_id" class="form-control"
                                             required>
-                                            <option value="">Select Education</option>
+                                            <option value="">Pilih Bab/Chapter</option>
                                             @foreach (@$educations as $edu)
                                                 <option value="{{ $edu->id }}"
                                                     {{ $edu->id == @$data->particle_education_chapter_id ? 'selected' : '' }}>
@@ -44,7 +52,7 @@ $title = @$data ? 'Edit' : 'Tambah';
 
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="is_active">Status</label>
                                         <select name="is_active" id="is_active" class="form-control">

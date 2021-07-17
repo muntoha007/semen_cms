@@ -16,7 +16,8 @@ class ParticleCourseRepository
         $course->code = Str::random(10);
         $course->title = $data['title'];
         $course->particle_education_chapter_id = $data['particle_education_chapter_id'];
-        $course->is_active = 1;
+        $course->is_active = $data['is_active'];
+        $course->test_time = $data['test_time'];
         $course->save();
 
         return $course;
@@ -28,6 +29,7 @@ class ParticleCourseRepository
         $course->title = $data['title'];
         $course->particle_education_chapter_id = $data['particle_education_chapter_id'];
         $course->is_active = $data['is_active'];
+        $course->test_time = $data['test_time'];
         $course->update();
 
         return $course;
