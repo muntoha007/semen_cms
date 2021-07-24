@@ -13,7 +13,7 @@ $title = @$data ? 'Edit' : 'Tambah';
                         <br>
                         <form class="forms-sample"
                             action="{{ @$data ? route('particle-education-details.update', $data->id) : route('particle-education-details.store') }}"
-                            method="POST" enctype="multipart/form-data">
+                            method="POST" enctype="multipart/form-data" novalidate>
                             @csrf
                             @if (@$data)
                                 <input type="hidden" name="_method" value="put">

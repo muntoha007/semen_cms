@@ -89,7 +89,7 @@ $title = @$data ? 'Edit' : 'Tambah';
                             </div>
 
                             <button type="submit" class="btn btn-info btn-fw btn-lg mr-2">Submit</button>
-                            <a href="{{ route('letter-categories.index') }}"
+                            <a href="{{ request()->route('letter_category_id') == 1 ? route('letter-hiragana-list')  : route('letter-katakana-list')  }}"
                                 class="btn btn-secondary btn-fw btn-lg">Cancel</a>
                         </form>
                     </div>
