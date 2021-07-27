@@ -2,14 +2,14 @@
 @php
 $title = @$data ? 'Edit' : 'Tambah';
 @endphp
-@section('title', 'Partikel Pertanyaan ' . $title)
+@section('title', 'Pertanyaan Partikel  ' . $title)
 @section('content')
     <div class="content-wrapper">
         <div class="row">
             <div class="col-12 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">{{ $title }} Partikel Pertanyaan</h4>
+                        <h4 class="card-title">{{ $title }} Pertanyaan Partikel </h4>
                         <br>
                         <form class="forms-sample"
                             action="{{ @$data ? route('particle-course-questions.update', $data->id) : route('particle-course-questions.store') }}"
@@ -51,7 +51,7 @@ $title = @$data ? 'Edit' : 'Tambah';
                             </div>
 
                             <div class="form-group">
-                                <label for="question_jpn">Pertanyaan</label>
+                                <label for="question_jpn">Pertanyaan Jepang</label>
                                 <textarea class="form-control" name="question_jpn" id="question_jpn" rows="4"
                                     placeholder="Pertanyaan" required
                                     value="">{{ old('question_jpn') ?? @$data->question_jpn }}</textarea>
@@ -59,8 +59,8 @@ $title = @$data ? 'Edit' : 'Tambah';
                                 {!! $errors->first('question_jpn', '<label class="help-block error-validation">:message</label>') !!}
                             </div>
 
-                            {{-- <div class="form-group">
-                                <label for="question_romanji">Question Romanji</label>
+                            <div class="form-group">
+                                <label for="question_romanji">Pertanyaan Romanji</label>
                                 <textarea class="form-control" name="question_romanji" id="question_romanji" rows="3"
                                     placeholder="Question Romanji" required
                                     value="">{{ old('question_romanji') ?? @$data->question_romanji }}</textarea>
@@ -69,13 +69,13 @@ $title = @$data ? 'Edit' : 'Tambah';
                             </div>
 
                             <div class="form-group">
-                                <label for="question_idn">Question Indonesia</label>
+                                <label for="question_idn">Pertanyaan Indonesia</label>
                                 <textarea class="form-control" name="question_idn" id="question_idn" rows="3"
                                     placeholder="Question Indonesia" required
                                     value="">{{ old('question_idn') ?? @$data->question_idn }}</textarea>
 
                                 {!! $errors->first('question_idn', '<label class="help-block error-validation">:message</label>') !!}
-                            </div> --}}
+                            </div>
 
                             <div class="row">
                                 <div class="col-md-6">
