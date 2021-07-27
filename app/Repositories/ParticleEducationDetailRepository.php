@@ -39,6 +39,7 @@ class ParticleEducationDetailRepository
         $detail->sentence_description = $data['sentence_description'];
         $detail->sentence_img = $img_url->data->path;
         $detail->particle_education_id = $data['particle_education_id'];
+        $detail->formula = $data['formula'];
         $detail->is_active = $data['is_active'];
         $detail->save();
 
@@ -80,6 +81,7 @@ class ParticleEducationDetailRepository
         $detail->sentence_idn = $data['sentence_idn'];
         $detail->sentence_description = $data['sentence_description'];
         $detail->particle_education_id = $data['particle_education_id'];
+        $detail->formula = $data['formula'];
         $detail->is_active = $data['is_active'];
         $detail->update();
 

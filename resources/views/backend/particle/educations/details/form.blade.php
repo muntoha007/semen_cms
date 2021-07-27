@@ -43,24 +43,34 @@ $title = @$data ? 'Edit' : 'Tambah';
                                             value="">{{ old('sentence_idn') ?? @$data->sentence_idn }}</textarea>
                                         {!! $errors->first('sentence_idn', '<label class="help-block error-validation">:message</label>') !!}
                                     </div>
+
+                                    <div class="form-group">
+                                        <label for="particle_education_id">Particle Education</label>
+                                        <select name="particle_education_id" id="particle_education_id" class="form-control"
+                                            required>
+                                            <option value="">Select Particle Education</option>
+                                            @foreach ($educations as $education)
+                                                <option value="{{ $education->id }}"
+                                                    {{ $education->id == @$data->particle_education_id ? 'selected' : '' }}>
+                                                    {{ $education->title }}</option>
+                                            @endforeach
+                                        </select>
+                                        {!! $errors->first('particle_education_id', '<label class="help-block error-validation">:message</label>') !!}
+                                    </div>
+
+
                                 </div>
                                 <div class="col-md-8">
                                     <div class="row">
-
-
                                         <div class="col-md-6">
+
                                             <div class="form-group">
-                                                <label for="particle_education_id">Particle Education</label>
-                                                <select name="particle_education_id" id="particle_education_id"
-                                                    class="form-control" required>
-                                                    <option value="">Select Particle Education</option>
-                                                    @foreach ($educations as $education)
-                                                        <option value="{{ $education->id }}"
-                                                            {{ $education->id == @$data->particle_education_id ? 'selected' : '' }}>
-                                                            {{ $education->title }}</option>
-                                                    @endforeach
-                                                </select>
-                                                {!! $errors->first('particle_education_id', '<label class="help-block error-validation">:message</label>') !!}
+                                                <label for="formula">Formula</label>
+                                                <textarea class="form-control" name="formula" id="formula" rows="4"
+                                                    placeholder="formula" required
+                                                    value="">{{ old('formula') ?? @$data->formula }}</textarea>
+
+                                                {!! $errors->first('formula', '<label class="help-block error-validation">:message</label>') !!}
                                             </div>
 
                                             <div class="form-group">
@@ -77,6 +87,7 @@ $title = @$data ? 'Edit' : 'Tambah';
                                             </div>
 
                                         </div>
+
                                         <div class="col-md-6">
                                             <div class="form-group input-group">
                                                 <label for="exampleInputFile">Gambar</label>
