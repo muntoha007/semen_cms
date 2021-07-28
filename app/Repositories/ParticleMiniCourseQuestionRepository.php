@@ -17,8 +17,8 @@ class ParticleMiniCourseQuestionRepository
 
         $question->code = Str::random(15);
         $question->question_jpn = $data['question_jpn'];
-        $question->question_romanji = isset($data['question_romanji']);
-        $question->question_idn = isset($data['question_idn']);
+        $question->question_romanji = @$data['question_romanji'];
+        $question->question_idn = @$data['question_idn'];
         $question->particle_mini_course_id = $data['particle_mini_course_id'];
         $question->is_active = $data["is_active"];
         $question->save();
@@ -51,8 +51,8 @@ class ParticleMiniCourseQuestionRepository
         $question = ParticleMiniCourseQuestion::find($id);
 
         $question->question_jpn = $data['question_jpn'];
-        $question->question_romanji = isset($data['question_romanji']);
-        $question->question_idn = isset($data['question_idn']);
+        $question->question_romanji = @$data['question_romanji'];
+        $question->question_idn = @$data['question_idn'];
         $question->particle_mini_course_id = $data['particle_mini_course_id'];
 
 

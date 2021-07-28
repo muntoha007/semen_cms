@@ -51,31 +51,31 @@ $title = @$data ? 'Edit' : 'Tambah';
                             </div>
 
                             <div class="form-group">
-                                <label for="question_jpn">Pertanyaan</label>
+                                <label for="question_jpn">Pertanyaan Jepang</label>
                                 <textarea class="form-control" name="question_jpn" id="question_jpn" rows="4"
-                                    placeholder="Pertanyaan" required
+                                    placeholder="Pertanyaan Jepang" required
                                     value="">{{ old('question_jpn') ?? @$data->question_jpn }}</textarea>
 
                                 {!! $errors->first('question_jpn', '<label class="help-block error-validation">:message</label>') !!}
                             </div>
 
-                            {{-- <div class="form-group">
-                                <label for="question_romanji">Question Romanji</label>
+                            <div class="form-group">
+                                <label for="question_romanji">Pertanyaan Romanji</label>
                                 <textarea class="form-control" name="question_romanji" id="question_romanji" rows="3"
-                                    placeholder="Question Romanji" required
+                                    placeholder="Pertanyaan Romanji" required
                                     value="">{{ old('question_romanji') ?? @$data->question_romanji }}</textarea>
 
                                 {!! $errors->first('question_romanji', '<label class="help-block error-validation">:message</label>') !!}
                             </div>
 
                             <div class="form-group">
-                                <label for="question_idn">Question Indonesia</label>
+                                <label for="question_idn">Pertanyaan Indonesia</label>
                                 <textarea class="form-control" name="question_idn" id="question_idn" rows="3"
-                                    placeholder="Question Indonesia" required
+                                    placeholder="Pertanyaan Indonesia" required
                                     value="">{{ old('question_idn') ?? @$data->question_idn }}</textarea>
 
                                 {!! $errors->first('question_idn', '<label class="help-block error-validation">:message</label>') !!}
-                            </div> --}}
+                            </div>
 
                             <div class="row">
                                 <div class="col-md-6">
