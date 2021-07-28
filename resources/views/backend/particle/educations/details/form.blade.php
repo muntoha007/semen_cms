@@ -13,7 +13,7 @@ $title = @$data ? 'Edit' : 'Tambah';
                         <br>
                         <form class="forms-sample"
                             action="{{ @$data ? route('particle-education-details.update', $data->id) : route('particle-education-details.store') }}"
-                            method="POST" enctype="multipart/form-data" novalidate>
+                            method="POST" enctype="multipart/form-data">
                             @csrf
                             @if (@$data)
                                 <input type="hidden" name="_method" value="put">
@@ -107,7 +107,6 @@ $title = @$data ? 'Edit' : 'Tambah';
                                                 <label for="sentence_description">Sentence Description</label>
                                                 <textarea class="form-control my-editor" name="sentence_description"
                                                     id="sentence_description" rows="4" placeholder="sentence Description"
-                                                    required
                                                     value="">{{ old('sentence_description') ?? @$data->sentence_description }}</textarea>
                                                 {!! $errors->first('sentence_description', '<label class="help-block error-validation">:message</label>') !!}
                                             </div>
