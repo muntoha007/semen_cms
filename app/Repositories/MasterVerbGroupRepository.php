@@ -17,7 +17,8 @@ class MasterVerbGroupRepository
         $groups->code = Str::random(10);
         $groups->name = $data['name'];
         $groups->master_verb_level_id = $data['master_verb_level_id'];
-        $groups->is_active = 1;
+        $groups->is_active = $data['is_active'];
+        $groups->parent_id = @$data['parent_id'];
         $groups->save();
 
         return $groups;
@@ -29,6 +30,7 @@ class MasterVerbGroupRepository
         $groups->name = $data['name'];
         $groups->master_verb_level_id = $data['master_verb_level_id'];
         $groups->is_active = $data['is_active'];
+        $groups->parent_id = @$data['parent_id'];
         $groups->update();
 
         return $groups;

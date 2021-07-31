@@ -20,7 +20,7 @@ class VocabularyCourseQuestionRepository
         $question->question_romanji = isset($data['question_romanji']);
         $question->question_idn = $data['question_idn'];
         $question->vocabulary_course_id = $data['vocabulary_course_id'];
-        $question->is_active = isset($value["is_active"]);
+        $question->is_active = $data["is_active"];
         $question->save();
 
         $qid = $question->id;
@@ -35,8 +35,8 @@ class VocabularyCourseQuestionRepository
             $answer->save();
         }
 
-        if ($data['is_active'] = 1) {
-            $course = VocabularyCourse::where('id', request('vocabulary_course_id'))->first();
+        if ($data['is_active'] == 1) {
+            $course = VocabularyCourse::where('id', $data['vocabulary_course_id'])->first();
             $course->question_count = $course->question_count + 1;
 
             $course->update();
@@ -52,12 +52,12 @@ class VocabularyCourseQuestionRepository
         $question->question_jpn = isset($data['question_jpn']);
         $question->question_romanji = isset($data['question_romanji']);
         $question->question_idn = $data['question_idn'];
-        $question->vocabulary_course_id = $data['vocabulary_course_id'];
+
 
 
         if ($question->is_active != $data['is_active']) {
-            if ($data['is_active'] = 1) {
-                $newcourse = VocabularyCourse::where('id', request('vocabulary_course_id'))->first();
+            if ($data['is_active'] == 1) {
+                $newcourse = VocabularyCourse::where('id', $question->vocabulary_course_id)->first();
                 $newcourse->question_count = $newcourse->question_count + 1;
 
                 $newcourse->update();
@@ -70,17 +70,20 @@ class VocabularyCourseQuestionRepository
         }
 
         if ($question->vocabulary_course_id != $data['vocabulary_course_id']) {
-            $oldcourse = VocabularyCourse::where('id', $question->vocabulary_course_id)->first();
-            $oldcourse->question_count = $oldcourse->question_count - 1;
+            if ($data['is_active'] == 1) {
+                $oldcourse = VocabularyCourse::where('id', $question->vocabulary_course_id)->first();
+                $oldcourse->question_count = $oldcourse->question_count - 1;
 
-            $oldcourse->update();
+                $oldcourse->update();
 
-            $newcourse = VocabularyCourse::where('id', request('vocabulary_course_id'))->first();
-            $newcourse->question_count = $newcourse->question_count + 1;
+                $newcourse = VocabularyCourse::where('id', $data['vocabulary_course_id'])->first();
+                $newcourse->question_count = $newcourse->question_count + 1;
 
-            $newcourse->update();
+                $newcourse->update();
+            }
         }
 
+        $question->vocabulary_course_id = $data['vocabulary_course_id'];
         $question->is_active = $data['is_active'];
 
         $question->update();

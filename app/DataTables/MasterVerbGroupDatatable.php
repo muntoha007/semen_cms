@@ -63,8 +63,9 @@ class MasterVerbGroupDatatable extends DataTable
                 'master_verb_groups.is_active',
                 'master_verb_groups.created_at',
                 'master_verb_groups.updated_at',
+                'g2.name as parent_name',
                 DB::raw('row_number() over () AS rownum'),
-            ]);
+            ])->leftJoin('master_verb_groups as g2', 'master_verb_groups.parent_id', '=', 'g2.id');
     }
 
     /**
@@ -109,6 +110,7 @@ class MasterVerbGroupDatatable extends DataTable
             // Column::make('code'),
             Column::make('name'),
             Column::make('is_active')->title('Status'),
+            Column::make('parent_name')->name('g2.name'),
             Column::make('created_at'),
             Column::make('updated_at'),
             Column::computed('action')

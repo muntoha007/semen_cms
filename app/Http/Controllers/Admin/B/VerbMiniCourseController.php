@@ -6,7 +6,7 @@ use App\DataTables\VerbMiniCourseDatatable;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\VerbMiniCourseRequest;
 use App\Http\Requests\verbRequest;
-use App\Models\MasterVerbWord;
+use App\Models\MasterVerbGroup;
 use App\Models\VerbMiniCourse;
 use App\Repositories\VerbMiniCourseRepository;
 use Illuminate\Http\Request;
@@ -40,8 +40,8 @@ class VerbMiniCourseController extends Controller
      */
     public function create()
     {
-        $words = MasterVerbWord::get();
-        return view('backend.verbs.mini.courses.form', compact('words'));
+        $groups = MasterVerbGroup::where('is_active', 1)->get();
+        return view('backend.verbs.mini.courses.form', compact('groups'));
     }
 
     /**
@@ -87,8 +87,8 @@ class VerbMiniCourseController extends Controller
         } else {
             $data = $this->model->findOrFail($id);
         }
-        $words = MasterVerbWord::get();
-        return view('backend.verbs.mini.courses.form', compact('data', 'words'));
+        $groups = MasterVerbGroup::where('is_active', 1)->get();
+        return view('backend.verbs.mini.courses.form', compact('data', 'groups'));
     }
 
     /**

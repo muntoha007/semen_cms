@@ -20,7 +20,7 @@ class VerbQuestionRepository
         $question->question_romanji = $data['question_romanji'];
         $question->question_idn = $data['question_idn'];
         $question->verb_course_id = $data['verb_course_id'];
-        $question->is_active = isset($value["is_true"]) ? 1 : 0;
+        $question->is_active = $data["is_active"];
         $question->save();
 
         $qid = $question->id;
@@ -35,10 +35,12 @@ class VerbQuestionRepository
             $answer->save();
         }
 
-        $course = VerbCourse::where('id', request('verb_course_id'))->first();
-        $course->question_count = $course->question_count+1;
+        if ($data['is_active'] == 1) {
+            $course = VerbCourse::where('id', $data['verb_course_id'])->first();
+            $course->question_count = $course->question_count + 1;
 
-        $course->update();
+            $course->update();
+        }
 
         return $question;
     }
@@ -50,21 +52,38 @@ class VerbQuestionRepository
         $question->question_jpn = $data['question_jpn'];
         $question->question_romanji = $data['question_romanji'];
         $question->question_idn = $data['question_idn'];
-        $question->verb_course_id = $data['verb_course_id'];
-        $question->is_active = $data['is_active'];
 
-        if ($question->verb_course_id != $data['verb_course_id']) {
-            $oldcourse = VerbCourse::where('id', $question->verb_course_id)->first();
-            $oldcourse->question_count = $oldcourse->question_count - 1;
 
-            $oldcourse->update();
+        if ($question->is_active != $data['is_active']) {
+            if ($data['is_active'] == 1) {
+                $newcourse = VerbCourse::where('id', $question->verb_course_id)->first();
+                $newcourse->question_count = $newcourse->question_count + 1;
 
-            $newcourse = VerbCourse::where('id', request('verb_course_id'))->first();
-            $newcourse->question_count = $newcourse->question_count + 1;
+                $newcourse->update();
+            } else {
+                $oldcourse = VerbCourse::where('id', $question->verb_course_id)->first();
+                $oldcourse->question_count = $oldcourse->question_count - 1;
 
-            $newcourse->update();
+                $oldcourse->update();
+            }
         }
 
+        if ($question->verb_course_id != $data['verb_course_id']) {
+            if ($data['is_active'] == 1) {
+                $oldcourse = VerbCourse::where('id', $question->verb_course_id)->first();
+                $oldcourse->question_count = $oldcourse->question_count - 1;
+
+                $oldcourse->update();
+
+                $newcourse = VerbCourse::where('id', $data['verb_course_id'])->first();
+                $newcourse->question_count = $newcourse->question_count + 1;
+
+                $newcourse->update();
+            }
+        }
+
+        $question->verb_course_id = $data['verb_course_id'];
+        $question->is_active = $data['is_active'];
         $question->update();
 
         foreach ($data['answer'] as $value) {

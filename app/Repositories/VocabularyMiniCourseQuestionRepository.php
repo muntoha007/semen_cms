@@ -54,11 +54,11 @@ class vocabularyMiniCourseQuestionRepository
         $question->question_jpn = isset($data['question_jpn']);
         $question->question_romanji = isset($data['question_romanji']);
         $question->question_idn = $data['question_idn'];
-        $question->vocabulary_mini_course_id = $data['vocabulary_mini_course_id'];
+
 
         if ($question->is_active != $data['is_active']) {
-            if ($data['is_active'] = 1) {
-                $newcourse = VocabularyMiniCourse::where('id', request('vocabulary_mini_course_id'))->first();
+            if ($data['is_active'] == 1) {
+                $newcourse = VocabularyMiniCourse::where('id', $question->vocabulary_mini_course_id)->first();
                 $newcourse->question_count = $newcourse->question_count + 1;
 
                 $newcourse->update();
@@ -71,17 +71,19 @@ class vocabularyMiniCourseQuestionRepository
         }
 
         if ($question->vocabulary_mini_course_id != $data['vocabulary_mini_course_id']) {
-            $oldcourse = VocabularyMiniCourse::where('id', $question->vocabulary_mini_course_id)->first();
-            $oldcourse->question_count = $oldcourse->question_count - 1;
+            if ($data['is_active'] == 1) {
+                $oldcourse = VocabularyMiniCourse::where('id', $question->vocabulary_mini_course_id)->first();
+                $oldcourse->question_count = $oldcourse->question_count - 1;
 
-            $oldcourse->update();
+                $oldcourse->update();
 
-            $newcourse = VocabularyMiniCourse::where('id', request('vocabulary_mini_course_id'))->first();
-            $newcourse->question_count = $newcourse->question_count + 1;
-
-            $newcourse->update();
+                $newcourse = VocabularyMiniCourse::where('id', $data['vocabulary_mini_course_id'])->first();
+                $newcourse->question_count = $newcourse->question_count + 1;
+                $newcourse->update();
+            }
         }
 
+        $question->vocabulary_mini_course_id = $data['vocabulary_mini_course_id'];
         $question->is_active = $data['is_active'];
 
 

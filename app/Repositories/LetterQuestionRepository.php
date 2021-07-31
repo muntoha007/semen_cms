@@ -19,7 +19,7 @@ class LetterQuestionRepository
         $question->code = Str::random(15);
         $question->question = $data['question'];
         $question->letter_course_id = $data['letter_course_id'];
-        $question->is_active = isset($value["is_active"]);
+        $question->is_active = $data["is_active"];
         $question->save();
 
         $qid = $question->id;
@@ -33,7 +33,7 @@ class LetterQuestionRepository
             $answer->save();
         }
 
-        if ($question->is_active = 1) {
+        if ($question->is_active == 1) {
             $course = LetterCourse::where('id', request('letter_course_id'))->first();
             $course->question_count = $course->question_count + 1;
 
@@ -48,12 +48,11 @@ class LetterQuestionRepository
 
         $question = LetterCourseQuestion::find($id);
         $question->question = $data['question'];
-        $question->letter_course_id = $data['letter_course_id'];
 
 
         if ($question->is_active != $data['is_active']) {
-            if ($data['is_active'] = 1) {
-                $newcourse = LetterCourse::where('id', request('letter_course_id'))->first();
+            if ($data['is_active'] == 1) {
+                $newcourse = LetterCourse::where('id', $question->letter_course_id)->first();
                 $newcourse->question_count = $newcourse->question_count + 1;
 
                 $newcourse->update();
@@ -66,18 +65,20 @@ class LetterQuestionRepository
         }
 
         if ($question->letter_course_id != $data['letter_course_id']) {
-            $oldcourse = LetterCourse::where('id', $question->letter_course_id)->first();
-            $oldcourse->question_count = $oldcourse->question_count - 1;
+            if ($data['is_active'] == 1) {
+                $oldcourse = LetterCourse::where('id', $question->letter_course_id)->first();
+                $oldcourse->question_count = $oldcourse->question_count - 1;
 
-            $oldcourse->update();
+                $oldcourse->update();
 
 
-            $newcourse = LetterCourse::where('id', request('letter_course_id'))->first();
-            $newcourse->question_count = $newcourse->question_count + 1;
+                $newcourse = LetterCourse::where('id', $data['letter_course_id'])->first();
+                $newcourse->question_count = $newcourse->question_count + 1;
 
-            $newcourse->update();
+                $newcourse->update();
+            }
         }
-
+        $question->letter_course_id = $data['letter_course_id'];
         $question->is_active = $data['is_active'];
 
         $question->update();

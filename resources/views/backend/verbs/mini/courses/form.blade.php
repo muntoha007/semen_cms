@@ -30,17 +30,17 @@ $title = @$data ? 'Edit' : 'Add New';
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="master_verb_word_id">Words</label>
-                                        <select name="master_verb_word_id" id="master_verb_word_id" class="form-control"
+                                        <label for="master_verb_group_id">Group</label>
+                                        <select name="master_verb_group_id" id="master_verb_group_id" class="form-control"
                                             required>
-                                            <option value="">Select Verb Words</option>
-                                            @foreach (@$words as $word)
-                                                <option value="{{ $word->id }}"
-                                                    {{ $word->id == @$data->master_verb_word_id ? 'selected' : '' }}>
-                                                    {{ $word->name }}</option>
+                                            <option value="">Select Verb Group</option>
+                                            @foreach (@$groups as $group)
+                                                <option value="{{ $group->id }}"
+                                                    {{ $group->id == @$data->master_verb_group_id ? 'selected' : '' }}>
+                                                    {{ $group->name }}</option>
                                             @endforeach
                                         </select>
-                                        {!! $errors->first('master_verb_word_id', '<label class="help-block error-validation">:message</label>') !!}
+                                        {!! $errors->first('master_verb_group_id', '<label class="help-block error-validation">:message</label>') !!}
 
                                     </div>
                                 </div>

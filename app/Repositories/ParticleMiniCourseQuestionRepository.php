@@ -36,7 +36,7 @@ class ParticleMiniCourseQuestionRepository
             $answer->save();
         }
 
-        if ($data["is_active"] = 1) {
+        if ($data["is_active"] == 1) {
             $course = ParticleMiniCourse::where('id', request('particle_mini_course_id'))->first();
             $course->question_count = $course->question_count + 1;
 
@@ -53,12 +53,11 @@ class ParticleMiniCourseQuestionRepository
         $question->question_jpn = $data['question_jpn'];
         $question->question_romanji = @$data['question_romanji'];
         $question->question_idn = @$data['question_idn'];
-        $question->particle_mini_course_id = $data['particle_mini_course_id'];
 
 
         if ($question->is_active != $data['is_active']) {
-            if ($data['is_active'] = 1) {
-                $newcourse = ParticleMiniCourse::where('id', request('particle_mini_course_id'))->first();
+            if ($data['is_active'] == 1) {
+                $newcourse = ParticleMiniCourse::where('id', $question->particle_mini_course_id)->first();
                 $newcourse->question_count = $newcourse->question_count + 1;
 
                 $newcourse->update();
@@ -71,17 +70,20 @@ class ParticleMiniCourseQuestionRepository
         }
 
         if ($question->particle_mini_course_id != $data['particle_mini_course_id']) {
-            $oldcourse = ParticleMiniCourse::where('id', $question->particle_mini_course_id)->first();
-            $oldcourse->question_count = $oldcourse->question_count - 1;
+            if ($data['is_active'] = 1) {
+                $oldcourse = ParticleMiniCourse::where('id', $question->particle_mini_course_id)->first();
+                $oldcourse->question_count = $oldcourse->question_count - 1;
 
-            $oldcourse->update();
+                $oldcourse->update();
 
-            $newcourse = ParticleMiniCourse::where('id', request('particle_mini_course_id'))->first();
-            $newcourse->question_count = $newcourse->question_count + 1;
+                $newcourse = ParticleMiniCourse::where('id', $data['particle_mini_course_id'])->first();
+                $newcourse->question_count = $newcourse->question_count + 1;
 
-            $newcourse->update();
+                $newcourse->update();
+            }
         }
 
+        $question->particle_mini_course_id = $data['particle_mini_course_id'];
         $question->is_active = $data['is_active'];
 
         $question->update();

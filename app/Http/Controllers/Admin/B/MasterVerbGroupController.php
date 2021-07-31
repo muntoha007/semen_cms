@@ -40,7 +40,9 @@ class MasterVerbGroupController extends Controller
     public function create()
     {
         $levels = MasterVerbLevel::where('is_active', 1)->get();
-        return view('backend.verbs.groups.form', compact('levels'));
+        $parents = MasterVerbGroup::whereNull('parent_id')->where('is_active', 1)->get();
+        // dd($parents);
+        return view('backend.verbs.groups.form', compact('levels', 'parents'));
     }
 
     /**
@@ -53,7 +55,7 @@ class MasterVerbGroupController extends Controller
     {
         $param = $request->all();
         $saveData = $this->repository->create($param);
-        flashDataAfterSave($saveData,$this->moduleName);
+        flashDataAfterSave($saveData, $this->moduleName);
 
         return redirect()->route($this->redirectAfterSave);
     }
@@ -77,16 +79,17 @@ class MasterVerbGroupController extends Controller
      */
     public function edit($id)
     {
-        if(isOnlyDataOwned()){
+        if (isOnlyDataOwned()) {
             $data = $this->model
-                ->where('created_by','=',user_info('id'))
-                ->where('id','=',$id)
+                ->where('created_by', '=', user_info('id'))
+                ->where('id', '=', $id)
                 ->firstOrFail();
         } else {
             $data = $this->model->findOrFail($id);
         }
         $levels = MasterVerbLevel::where('is_active', 1)->get();
-        return view('backend.verbs.groups.form',compact('data','levels'));
+        $parents = MasterVerbGroup::whereNull('parent_id')->where('id', '!=', $id)->where('is_active', 1)->get();
+        return view('backend.verbs.groups.form', compact('data', 'levels', 'parents'));
     }
 
     /**
@@ -99,8 +102,8 @@ class MasterVerbGroupController extends Controller
     public function update(Request $request, $id)
     {
         $param = $request->all();
-        $saveData = $this->repository->update($param,$id);
-        flashDataAfterSave($saveData,$this->moduleName);
+        $saveData = $this->repository->update($param, $id);
+        flashDataAfterSave($saveData, $this->moduleName);
 
         return redirect()->route($this->redirectAfterSave);
     }

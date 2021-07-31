@@ -114,7 +114,7 @@ class VocabularyCourseDatatable extends DataTable
             Column::computed('is_active')->title('Status'),
             // Column::make('created_at'),
             // Column::make('updated_at'),
-            Column::make('chapter'),
+            Column::make('chapter')->name('vocabulary_course_chapters.title'),
             Column::computed('action')
                 ->visible($hasAction)
                 ->exportable(false)

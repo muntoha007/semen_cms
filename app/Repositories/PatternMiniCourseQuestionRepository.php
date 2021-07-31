@@ -35,10 +35,12 @@ class PatternMiniCourseQuestionRepository
             $answer->save();
         }
 
-        $course = PatternMiniCourse::where('id', request('pattern_mini_course_id'))->first();
-        $course->question_count = $course->question_count + 1;
+        if ($data["is_active"] == 1) {
+            $course = PatternMiniCourse::where('id', $data['pattern_mini_course_id'])->first();
+            $course->question_count = $course->question_count + 1;
 
-        $course->update();
+            $course->update();
+        }
 
         return $question;
     }
@@ -50,21 +52,38 @@ class PatternMiniCourseQuestionRepository
         $question->question_jpn = $data['question_jpn'];
         $question->question_romanji = $data['question_romanji'];
         $question->question_idn = $data['question_idn'];
-        $question->pattern_mini_course_id = $data['pattern_mini_course_id'];
-        $question->is_active = $data['is_active'];
 
-        if ($question->pattern_mini_course_id != $data['pattern_mini_course_id']) {
-            $oldcourse = PatternMiniCourse::where('id', $question->pattern_mini_course_id)->first();
-            $oldcourse->question_count = $oldcourse->question_count - 1;
 
-            $oldcourse->update();
+        if ($question->is_active != $data['is_active']) {
+            if ($data['is_active'] == 1) {
+                $newcourse = PatternMiniCourse::where('id', $question->pattern_mini_course_id)->first();
+                $newcourse->question_count = $newcourse->question_count + 1;
 
-            $newcourse = PatternMiniCourse::where('id', request('pattern_mini_course_id'))->first();
-            $newcourse->question_count = $newcourse->question_count + 1;
+                $newcourse->update();
+            } else {
+                $oldcourse = PatternMiniCourse::where('id', $question->pattern_mini_course_id)->first();
+                $oldcourse->question_count = $oldcourse->question_count - 1;
 
-            $newcourse->update();
+                $oldcourse->update();
+            }
         }
 
+        if ($question->pattern_mini_course_id != $data['pattern_mini_course_id']) {
+            if ($data["is_active"] == 1) {
+                $oldcourse = PatternMiniCourse::where('id', $question->pattern_mini_course_id)->first();
+                $oldcourse->question_count = $oldcourse->question_count - 1;
+
+                $oldcourse->update();
+
+                $newcourse = PatternMiniCourse::where('id', $data['pattern_mini_course_id'])->first();
+                $newcourse->question_count = $newcourse->question_count + 1;
+
+                $newcourse->update();
+            }
+        }
+
+        $question->pattern_mini_course_id = $data['pattern_mini_course_id'];
+        $question->is_active = $data['is_active'];
         $question->update();
 
         foreach ($data['answer'] as $value) {
