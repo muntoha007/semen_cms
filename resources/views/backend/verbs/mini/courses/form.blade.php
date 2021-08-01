@@ -1,15 +1,15 @@
 @extends('layouts.master')
 @php
-$title = @$data ? 'Edit' : 'Add New';
+$title = @$data ? 'Edit' : 'Tambah';
 @endphp
-@section('title', 'Verb Mini Course ' . $title)
+@section('title', 'Kata Kerja Mini ' . $title)
 @section('content')
     <div class="content-wrapper">
         <div class="row">
             <div class="col-12 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">{{ $title }} Verb Mini Course</h4>
+                        <h4 class="card-title">{{ $title }} Kata Kerja Mini</h4>
                         <br>
                         <form class="forms-sample"
                             action="{{ @$data ? route('verb-mini-courses.update', $data->id) : route('verb-mini-courses.store') }}"
@@ -21,26 +21,26 @@ $title = @$data ? 'Edit' : 'Add New';
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="title">Title</label>
+                                        <label for="title">Judul</label>
                                         <input type="text" class="form-control {{ hasErrorField($errors, 'title') }}"
                                             id="title" name="title" value="{{ old('title', @$data->title) }}"
-                                            placeholder="Title">
+                                            placeholder="Judul">
                                         {!! $errors->first('title', '<label class="help-block error-validation">:message</label>') !!}
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="master_verb_group_id">Group</label>
-                                        <select name="master_verb_group_id" id="master_verb_group_id" class="form-control"
+                                        <label for="master_verb_level_id">Level</label>
+                                        <select name="master_verb_level_id" id="master_verb_level_id" class="form-control"
                                             required>
-                                            <option value="">Select Verb Group</option>
-                                            @foreach (@$groups as $group)
-                                                <option value="{{ $group->id }}"
-                                                    {{ $group->id == @$data->master_verb_group_id ? 'selected' : '' }}>
-                                                    {{ $group->name }}</option>
+                                            <option value="">Pilih Level Kata Kerja</option>
+                                            @foreach (@$levels as $level)
+                                                <option value="{{ $level->id }}"
+                                                    {{ $level->id == @$data->master_verb_level_id ? 'selected' : '' }}>
+                                                    {{ $level->name }}</option>
                                             @endforeach
                                         </select>
-                                        {!! $errors->first('master_verb_group_id', '<label class="help-block error-validation">:message</label>') !!}
+                                        {!! $errors->first('master_verb_level_id', '<label class="help-block error-validation">:message</label>') !!}
 
                                     </div>
                                 </div>

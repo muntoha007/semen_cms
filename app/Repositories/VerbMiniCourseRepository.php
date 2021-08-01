@@ -14,7 +14,7 @@ class VerbMiniCourseRepository
 
         $change->code = Str::random(15);
         $change->title = $data['title'];
-        $change->master_verb_word_id = $data['master_verb_word_id'];
+        $change->master_verb_level_id = $data['master_verb_level_id'];
         $change->is_active = $data["is_active"];
         $change->save();
 
@@ -26,7 +26,7 @@ class VerbMiniCourseRepository
         $change = VerbMiniCourse::find($id);
 
         $change->title = $data['title'];
-        $change->master_verb_word_id = $data['master_verb_word_id'];
+        $change->master_verb_level_id = $data['master_verb_level_id'];
         $change->is_active = $data['is_active'];
         $change->update();
 

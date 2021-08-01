@@ -63,8 +63,9 @@ class VerbMiniCourseDatatable extends DataTable
                 'verb_mini_courses.is_active',
                 'verb_mini_courses.created_at',
                 'verb_mini_courses.updated_at',
+                'master_verb_levels.name',
                 DB::raw('row_number() over () AS rownum'),
-            ]);
+            ])->join('master_verb_levels', 'verb_mini_courses.master_verb_level_id', '=', 'master_verb_levels.id');
     }
 
     /**
@@ -107,7 +108,8 @@ class VerbMiniCourseDatatable extends DataTable
                 ->title('#')
                 ->searchable(false),
             // Column::make('code'),
-            Column::make('title'),
+            Column::make('title')->title('Judul'),
+            Column::make('name')->name('master_verb_levels.name')->title('Level'),
             Column::computed('is_active')->title('Status'),
             Column::make('created_at'),
             Column::make('updated_at'),

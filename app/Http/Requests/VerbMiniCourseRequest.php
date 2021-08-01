@@ -26,7 +26,7 @@ class VerbMiniCourseRequest extends FormRequest
     {
         return [
             'title' => 'required|unique:verb_mini_courses,title',
-            'master_verb_word_id' => 'required',
+            'master_verb_level_id' => 'required',
         ];
     }
 
