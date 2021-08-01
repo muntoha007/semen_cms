@@ -43,7 +43,7 @@ class VocabularyMiniCourseQuestionController extends Controller
         $courses = VocabularyMiniCourse::select('vocabulary_mini_courses.*', 'vocabulary_chapters.id as chp_id', 'vocabulary_chapters.name')
             ->join('vocabulary_chapters', 'vocabulary_chapters.id', '=', 'vocabulary_mini_courses.vocabulary_chapter_id')
             ->where('vocabulary_mini_courses.is_active', 1)
-            ->groupBy('chp_id','name','vocabulary_mini_courses.id')
+            ->orderBy('title', 'ASC')
             ->get();
 
         $type = "new";
@@ -97,7 +97,7 @@ class VocabularyMiniCourseQuestionController extends Controller
         $courses = VocabularyMiniCourse::select('vocabulary_mini_courses.*', 'vocabulary_chapters.id as chp_id', 'vocabulary_chapters.name')
             ->join('vocabulary_chapters', 'vocabulary_chapters.id', '=', 'vocabulary_mini_courses.vocabulary_chapter_id')
             ->where('vocabulary_mini_courses.is_active', 1)
-            ->groupBy('chp_id','name','vocabulary_mini_courses.id')
+            ->orderBy('title', 'ASC')
             ->get();
 
         $answers = VocabularyMiniCourseAnswer::where('vocabulary_mini_course_question_id', $id)->orderBy('id', 'ASC')->get();
