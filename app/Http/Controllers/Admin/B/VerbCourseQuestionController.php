@@ -41,8 +41,15 @@ class VerbCourseQuestionController extends Controller
      */
     public function create()
     {
-        $courses = VerbCourse::get();
+        // $courses = VerbCourse::get();
+        $courses = VerbCourse::select('verb_courses.id', 'verb_courses.title', 'master_verb_levels.id as level_id', 'master_verb_levels.name as level_name')
+        ->join('master_verb_levels', 'master_verb_levels.id', '=', 'verb_courses.master_verb_level_id')
+        ->where('verb_courses.is_active', 1)
+        ->groupBy('level_id', 'verb_courses.title', 'level_name','verb_courses.id')
+        ->get();
+
         $type = "new";
+
         return view('backend.verbs.questions.form', compact('courses','type'));
     }
 
@@ -89,7 +96,13 @@ class VerbCourseQuestionController extends Controller
         } else {
             $data = $this->model->findOrFail($id);
         }
-        $courses = VerbCourse::get();
+        // $courses = VerbCourse::get();
+        $courses = VerbCourse::select('verb_courses.id', 'verb_courses.title', 'master_verb_levels.id as level_id', 'master_verb_levels.name as level_name')
+        ->join('master_verb_levels', 'master_verb_levels.id', '=', 'verb_courses.master_verb_level_id')
+        ->where('verb_courses.is_active', 1)
+        ->groupBy('level_id', 'verb_courses.title', 'level_name','verb_courses.id')
+        ->get();
+
         $answers = VerbCourseAnswer::where('verb_course_question_id', $id)->orderBy('id','ASC')->get();
         $type = "edit";
         return view('backend.verbs.questions.form', compact('data', 'courses','answers', 'type'));

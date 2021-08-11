@@ -41,7 +41,12 @@ class VerbMiniCourseQuestionController extends Controller
      */
     public function create()
     {
-        $courses = VerbMiniCourse::get();
+        // $courses = VerbMiniCourse::get();
+        $courses = VerbMiniCourse::select('verb_mini_courses.id', 'verb_mini_courses.title', 'master_verb_levels.id as level_id', 'master_verb_levels.name as level_name')
+            ->join('master_verb_levels', 'master_verb_levels.id', '=', 'verb_mini_courses.master_verb_level_id')
+            ->where('verb_mini_courses.is_active', 1)
+            ->groupBy('level_id', 'verb_mini_courses.title', 'level_name','verb_mini_courses.id')
+            ->get();
         $type = "new";
         return view('backend.verbs.mini.questions.form', compact('courses','type'));
     }
@@ -89,7 +94,12 @@ class VerbMiniCourseQuestionController extends Controller
         } else {
             $data = $this->model->findOrFail($id);
         }
-        $courses = VerbMiniCourse::get();
+        // $courses = VerbMiniCourse::get();
+        $courses = VerbMiniCourse::select('verb_mini_courses.id', 'verb_mini_courses.title', 'master_verb_levels.id as level_id', 'master_verb_levels.name as level_name')
+            ->join('master_verb_levels', 'master_verb_levels.id', '=', 'verb_mini_courses.master_verb_level_id')
+            ->where('verb_mini_courses.is_active', 1)
+            ->groupBy('level_id', 'verb_mini_courses.title', 'level_name','verb_mini_courses.id')
+            ->get();
         $answers = VerbMiniCourseAnswer::where('verb_mini_course_question_id', $id)->orderBy('id','ASC')->get();
         $type = "edit";
         return view('backend.verbs.mini.questions.form', compact('data', 'courses','answers', 'type'));

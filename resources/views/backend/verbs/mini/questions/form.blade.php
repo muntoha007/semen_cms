@@ -28,7 +28,7 @@ $title = @$data ? 'Edit' : 'Add New';
                                             @foreach ($courses as $course)
                                                 <option value="{{ $course->id }}"
                                                     {{ $course->id == @$data->verb_mini_course_id ? 'selected' : '' }}>
-                                                    {{ $course->title }}</option>
+                                                    {{ $course->title }} | {{$course->level_name}}</option>
                                             @endforeach
                                         </select>
                                         {!! $errors->first('verb_mini_course_id', '<label class="help-block error-validation">:message</label>') !!}
