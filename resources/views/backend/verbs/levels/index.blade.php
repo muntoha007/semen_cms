@@ -1,12 +1,12 @@
 @extends('layouts.master')
-@section('title', 'Verb Level List')
+@section('title', 'Daftar Level Kata Kerja')
 @section('content')
     <div class="content-wrapper">
         <div class="row">
             <div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title text-center table-title">List Verb Level</h4>
+                        <h4 class="card-title text-center table-title">Daftar Level Kata Kerja</h4>
                         @isPermitted('verb-levels.create')
                         <div class="form-group">
                             <a href="{{ route('verb-levels.create') }}" type="button" class="btn btn-outline-info btn-rounded btn-fw btn-sm">

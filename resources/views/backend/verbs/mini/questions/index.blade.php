@@ -1,12 +1,12 @@
 @extends('layouts.master')
-@section('title', 'Mini Question List')
+@section('title', 'Daftar Pertanyaan Mini')
 @section('content')
     <div class="content-wrapper">
         <div class="row">
             <div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title text-center table-title">List Mini Questions</h4>
+                        <h4 class="card-title text-center table-title">Daftar Pertanyaan Mini</h4>
                         @isPermitted('verb-mini-questions.create')
                         <div class="form-group">
                             <a href="{{ route('verb-mini-questions.create') }}" type="button" class="btn btn-outline-info btn-rounded btn-fw btn-sm">

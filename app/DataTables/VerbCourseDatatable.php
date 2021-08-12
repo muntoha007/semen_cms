@@ -63,6 +63,7 @@ class VerbCourseDatatable extends DataTable
                 'verb_courses.is_active',
                 'verb_courses.created_at',
                 'verb_courses.updated_at',
+                'verb_courses.test_time',
                 DB::raw('row_number() over () AS rownum'),
             ]);
     }
@@ -107,7 +108,8 @@ class VerbCourseDatatable extends DataTable
                 ->title('#')
                 ->searchable(false),
             // Column::make('code'),
-            Column::make('title'),
+            Column::make('title')->title('Judul'),
+            Column::make('test_time')->title('Waktu Test'),
             Column::computed('is_active')->title('Status'),
             Column::make('created_at'),
             Column::make('updated_at'),

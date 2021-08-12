@@ -63,8 +63,9 @@ class VerbQuestionDatatable extends DataTable
                 'verb_course_questions.is_active',
                 'verb_course_questions.created_at',
                 'verb_course_questions.updated_at',
+                'verb_courses.title',
                 DB::raw('row_number() over () AS rownum'),
-            ]);
+            ])->join('verb_courses', 'verb_courses.id', '=', 'verb_course_questions.verb_course_id');
     }
 
     /**
@@ -107,7 +108,8 @@ class VerbQuestionDatatable extends DataTable
                 ->title('#')
                 ->searchable(false),
             // Column::make('code'),
-            Column::make('question_jpn')->title('Question Japan'),
+            Column::make('question_jpn')->title('Pertanyaan Jepang'),
+            Column::make('title')->title('Test Kata Kerja')->name('verb_courses.title'),
             Column::computed('is_active')->title('Status'),
             Column::make('created_at'),
             Column::make('updated_at'),

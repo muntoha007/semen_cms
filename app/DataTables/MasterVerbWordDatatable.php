@@ -111,7 +111,7 @@ class MasterVerbWordDatatable extends DataTable
                 ->title('#')
                 ->searchable(false),
             // Column::make('code'),
-            Column::make('name'),
+            Column::make('name')->title('Judul'),
             Column::make('is_active')->title('Status'),
             Column::make('created_at'),
             Column::make('updated_at'),

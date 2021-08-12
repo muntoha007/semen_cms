@@ -1,12 +1,12 @@
 @extends('layouts.master')
-@section('title', 'Verb Changes List')
+@section('title', 'Daftar Perubahan Kata Kerja')
 @section('content')
     <div class="content-wrapper">
         <div class="row">
             <div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title text-center table-title">List Verb Changes</h4>
+                        <h4 class="card-title text-center table-title">Daftar Perubahan Kata Kerja</h4>
                         @isPermitted('verb-changes.create')
                         <div class="form-group">
                             <a href="{{ route('verb-changes.create') }}" type="button" class="btn btn-outline-info btn-rounded btn-fw btn-sm">

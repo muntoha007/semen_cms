@@ -229,12 +229,12 @@ return [
                 'additional_query' => '',
                 'icon' => 'mdi mdi-flag menu-icon',
             ],
-            // 'verb-course' => [
-            //     'title' => 'Test Kata Kerja',
-            //     'routeName' => 'verb-courses.index',
-            //     'additional_query' => '',
-            //     'icon' => 'mdi mdi-flag menu-icon',
-            // ],
+            'verb-course' => [
+                'title' => 'Test Kata Kerja',
+                'routeName' => 'verb-courses.index',
+                'additional_query' => '',
+                'icon' => 'mdi mdi-flag menu-icon',
+            ],
             'verb-question' => [
                 'title' => 'Daftar Pertanyaan',
                 'routeName' => 'verb-questions.index',

@@ -16,6 +16,7 @@ class VerbCourseRepository
         $change->title = $data['title'];
         $change->master_verb_level_id = $data['master_verb_level_id'];
         $change->is_active = $data["is_active"];
+        $change->test_time = $data["test_time"];
         $change->save();
 
         return $change;
@@ -28,6 +29,7 @@ class VerbCourseRepository
         $change->title = $data['title'];
         $change->master_verb_level_id = $data['master_verb_level_id'];
         $change->is_active = $data['is_active'];
+        $change->test_time = $data['test_time'];
         $change->update();
 
         return $change;

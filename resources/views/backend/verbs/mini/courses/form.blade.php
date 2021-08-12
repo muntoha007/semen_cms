@@ -19,7 +19,7 @@ $title = @$data ? 'Edit' : 'Tambah';
                                 <input type="hidden" name="_method" value="put">
                             @endif
                             <div class="row">
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="title">Judul</label>
                                         <input type="text" class="form-control {{ hasErrorField($errors, 'title') }}"
@@ -28,7 +28,15 @@ $title = @$data ? 'Edit' : 'Tambah';
                                         {!! $errors->first('title', '<label class="help-block error-validation">:message</label>') !!}
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="test_time">Waktu Test</label>
+                                        <input type="number" name="test_time" id="test_time" class="form-control"
+                                            value="{{ old('test_time') ?? @$data->test_time }}" required>
+                                        {!! $errors->first('test_time', '<label class="help-block error-validation">:message</label>') !!}
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="master_verb_level_id">Level</label>
                                         <select name="master_verb_level_id" id="master_verb_level_id" class="form-control"
@@ -44,7 +52,7 @@ $title = @$data ? 'Edit' : 'Tambah';
 
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="is_active">Status</label>
                                         <select name="is_active" id="is_active" class="form-control">

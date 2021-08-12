@@ -1,12 +1,12 @@
 @extends('layouts.master')
-@section('title', 'Verb Courses List')
+@section('title', 'Daftar Test kata Kerja')
 @section('content')
     <div class="content-wrapper">
         <div class="row">
             <div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title text-center table-title">List Verb Courses</h4>
+                        <h4 class="card-title text-center table-title">Daftar Test kata Kerja</h4>
                         @isPermitted('verb-courses.create')
                         <div class="form-group">
                             <a href="{{ route('verb-courses.create') }}" type="button" class="btn btn-outline-info btn-rounded btn-fw btn-sm">
