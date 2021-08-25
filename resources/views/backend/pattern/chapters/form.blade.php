@@ -1,15 +1,15 @@
 @extends('layouts.master')
 @php
-$title = @$data ? 'Edit' : 'Add New';
+$title = @$data ? 'Edit' : 'Tambah';
 @endphp
-@section('title', 'Pattern Chapter ' . $title)
+@section('title', 'Pola Bab ' . $title)
 @section('content')
     <div class="content-wrapper">
         <div class="row">
             <div class="col-12 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">{{ $title }} Pattern Chapter</h4>
+                        <h4 class="card-title">{{ $title }} Pola Bab</h4>
                         <br>
                         <form class="forms-sample"
                             action="{{ @$data ? route('pattern-chapters.update', $data->id) : route('pattern-chapters.store') }}"

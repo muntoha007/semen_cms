@@ -60,11 +60,13 @@ class PatternMiniCourseDatatable extends DataTable
                 'pattern_mini_courses.id',
                 'pattern_mini_courses.code',
                 'pattern_mini_courses.title',
+                'pattern_mini_courses.test_time',
                 'pattern_mini_courses.is_active',
                 'pattern_mini_courses.created_at',
                 'pattern_mini_courses.updated_at',
+                'master_groups.name',
                 DB::raw('row_number() over () AS rownum'),
-            ]);
+            ])->join('master_groups', 'master_groups.id', '=', 'pattern_mini_courses.master_group_id');
     }
 
     /**
@@ -107,10 +109,12 @@ class PatternMiniCourseDatatable extends DataTable
                 ->title('#')
                 ->searchable(false),
             // Column::make('code'),
-            Column::make('title'),
+            Column::make('title')->title('Judul'),
+            Column::make('test_time')->title('Waktu Tes'),
+            Column::make('name')->name('master_groups.name')->title('Grup'),
             Column::computed('is_active')->title('Status'),
-            Column::make('created_at'),
-            Column::make('updated_at'),
+            // Column::make('created_at'),
+            // Column::make('updated_at'),
             Column::computed('action')
                 ->visible($hasAction)
                 ->exportable(false)

@@ -1,15 +1,15 @@
 @extends('layouts.master')
-@section('title', 'Daftar Pola Mini Test')
+@section('title', 'Daftar Kanji Konten')
 @section('content')
     <div class="content-wrapper">
         <div class="row">
             <div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title text-center table-title">Daftar Pola Mini Tes</h4>
-                        @isPermitted('pattern-mini-courses.create')
+                        <h4 class="card-title text-center table-title">Daftar Kanji Konten</h4>
+                        @isPermitted('kanji-contents-create',request()->route('id'))
                         <div class="form-group">
-                            <a href="{{ route('pattern-mini-courses.create') }}" type="button" class="btn btn-outline-info btn-rounded btn-fw btn-sm">
+                            <a href="{{ route('kanji-contents-create',request()->route('id')) }}" type="button" class="btn btn-outline-info btn-rounded btn-fw btn-sm">
                                 <i class="mdi mdi-plus-circle btn-icon-prepend"></i> Tambah
                             </a>
                         </div>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\D;
 use App\DataTables\PatternMiniCourseDatatable;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PatternMiniCourseRequest;
+use App\Models\MasterGroup;
 use App\Models\PatternMiniCourse;
 use App\Models\patternEducation;
 use App\Models\PatternLesson;
@@ -40,8 +41,9 @@ class PatternMiniCourseController extends Controller
      */
     public function create()
     {
-        $lessons = PatternLesson::where('is_active', 1)->get();
-        return view('backend.pattern.mini.courses.form', compact('lessons'));
+        // $lessons = PatternLesson::where('is_active', 1)->get();
+        $groups = MasterGroup::where('is_active', 1)->get();
+        return view('backend.pattern.mini.courses.form', compact('groups'));
     }
 
     /**
@@ -87,8 +89,8 @@ class PatternMiniCourseController extends Controller
         } else {
             $data = $this->model->findOrFail($id);
         }
-        $lessons = PatternLesson::where('is_active', 1)->get();
-        return view('backend.pattern.mini.courses.form', compact('data','lessons'));
+        $groups = MasterGroup::where('is_active', 1)->get();
+        return view('backend.pattern.mini.courses.form', compact('data','groups'));
     }
 
     /**

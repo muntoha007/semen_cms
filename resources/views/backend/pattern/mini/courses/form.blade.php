@@ -1,15 +1,15 @@
 @extends('layouts.master')
 @php
-$title = @$data ? 'Edit' : 'Add New';
+$title = @$data ? 'Edit' : 'Tambah';
 @endphp
-@section('title', 'Pattern Mini Course ' . $title)
+@section('title', 'Pola Mini Test ' . $title)
 @section('content')
     <div class="content-wrapper">
         <div class="row">
             <div class="col-12 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">{{ $title }} Pattern Mini Course</h4>
+                        <h4 class="card-title">{{ $title }} Pola Mini Test</h4>
                         <br>
                         <form class="forms-sample"
                             action="{{ @$data ? route('pattern-mini-courses.update', $data->id) : route('pattern-mini-courses.store') }}"
@@ -19,9 +19,9 @@ $title = @$data ? 'Edit' : 'Add New';
                                 <input type="hidden" name="_method" value="put">
                             @endif
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-3">
                                     <div class="form-group">
-                                        <label for="title">Title</label>
+                                        <label for="title">Judul</label>
                                         <input type="text" class="form-control {{ hasErrorField($errors, 'title') }}"
                                             id="title" name="title" value="{{ old('title', @$data->title) }}"
                                             placeholder="Title">
@@ -30,17 +30,25 @@ $title = @$data ? 'Edit' : 'Add New';
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <label for="pattern_lesson_id">Pattern Lesson</label>
-                                        <select name="pattern_lesson_id" id="pattern_lesson_id" class="form-control"
+                                        <label for="test_time">Waktu Test</label>
+                                        <input type="number" name="test_time" id="test_time" class="form-control"
+                                            value="{{ old('test_time') ?? @$data->test_time }}" required>
+                                        {!! $errors->first('test_time', '<label class="help-block error-validation">:message</label>') !!}
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="master_group_id">Pilih Group</label>
+                                        <select name="master_group_id" id="master_group_id" class="form-control"
                                             required>
-                                            <option value="">Select Pattern Lesson</option>
-                                            @foreach (@$lessons as $lesson)
-                                                <option value="{{ $lesson->id }}"
-                                                    {{ $lesson->id == @$data->pattern_lesson_id ? 'selected' : '' }}>
-                                                    {{ $lesson->name }}</option>
+                                            <option value="">Select Group</option>
+                                            @foreach (@$groups as $group)
+                                                <option value="{{ $group->id }}"
+                                                    {{ $group->id == @$data->master_group_id ? 'selected' : '' }}>
+                                                    {{ $group->name }}</option>
                                             @endforeach
                                         </select>
-                                        {!! $errors->first('pattern_lesson_id', '<label class="help-block error-validation">:message</label>') !!}
+                                        {!! $errors->first('master_group_id', '<label class="help-block error-validation">:message</label>') !!}
 
                                     </div>
                                 </div>

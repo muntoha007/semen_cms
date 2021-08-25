@@ -17,6 +17,7 @@ class KanjiMiniCourseRepository
         $kanji->code = Str::random(10);
         $kanji->title = $data['title'];
         $kanji->kanji_chapter_id = $data['kanji_chapter_id'];
+        $kanji->test_time = $data['test_time'];
         $kanji->is_active = $data['is_active'];
         $kanji->save();
 
@@ -28,6 +29,7 @@ class KanjiMiniCourseRepository
         $kanji = KanjiMiniCourse::find($id);
         $kanji->title = $data['title'];
         $kanji->kanji_chapter_id = $data['kanji_chapter_id'];
+        $kanji->test_time = $data['test_time'];
         $kanji->is_active = $data['is_active'];
         $kanji->update();
 

@@ -35,7 +35,15 @@ class KanjiChapterDatatable extends DataTable
                 return view('partials.action-button')->with(
                     compact('edit_url')
                 );
-            });
+            })
+            ->addColumn('add detail', function ($data) {
+                // $edit_url = route('pattern-lessons.edit', $data->id);
+                $add_url = route('kanji-contents-index', $data->id);
+
+                return view('partials.action-button')->with(
+                    compact('add_url')
+                );
+            });;
     }
 
     /**
@@ -55,8 +63,9 @@ class KanjiChapterDatatable extends DataTable
                 'kanji_chapters.name',
                 'kanji_chapters.created_at',
                 'kanji_chapters.updated_at',
+                'master_groups.name as group_name',
                 DB::raw('row_number() over () AS rownum'),
-            ]);
+            ])->join('master_groups', 'master_groups.id', '=', 'kanji_chapters.master_group_id');
     }
 
     /**
@@ -100,13 +109,20 @@ class KanjiChapterDatatable extends DataTable
                 ->searchable(false),
             // Column::make('code'),
             Column::make('name'),
-            Column::make('created_at'),
-            Column::make('updated_at'),
+            Column::make('group_name')->name('master_groups.name')->title('Grup'),
+            // Column::make('created_at'),
+            // Column::make('updated_at'),
             Column::computed('action')
                 ->visible($hasAction)
                 ->exportable(false)
                 ->printable(true)
                 ->width(100)
+                ->addClass('text-center'),
+            Column::computed('add detail')->title('Tambah Kontent')
+                ->visible($hasAction)
+                ->exportable(false)
+                ->printable(true)
+                ->width(200)
                 ->addClass('text-center')
         ];
     }

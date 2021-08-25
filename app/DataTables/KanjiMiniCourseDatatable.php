@@ -60,11 +60,13 @@ class KanjiMiniCourseDatatable extends DataTable
                 'kanji_mini_courses.id',
                 'kanji_mini_courses.code',
                 'kanji_mini_courses.title',
+                'kanji_mini_courses.test_time',
                 'kanji_mini_courses.is_active',
                 'kanji_mini_courses.created_at',
                 'kanji_mini_courses.updated_at',
+                'kanji_chapters.name',
                 DB::raw('row_number() over () AS rownum'),
-            ]);
+            ])->join('kanji_chapters', 'kanji_chapters.id', '=', 'kanji_mini_courses.kanji_chapter_id');
     }
 
     /**
@@ -107,10 +109,12 @@ class KanjiMiniCourseDatatable extends DataTable
                 ->title('#')
                 ->searchable(false),
             // Column::make('code'),
-            Column::make('title'),
+            Column::make('title')->title('Judul'),
+            Column::make('test_time')->title('Waktu Tes'),
+            Column::make('name')->name('kanji_chapters.name')->title('Chapter'),
             Column::computed('is_active')->title('Status'),
-            Column::make('created_at'),
-            Column::make('updated_at'),
+            // Column::make('created_at'),
+            // Column::make('updated_at'),
             Column::computed('action')
                 ->visible($hasAction)
                 ->exportable(false)

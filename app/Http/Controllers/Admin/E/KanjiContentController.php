@@ -1,38 +1,37 @@
 <?php
 
-namespace App\Http\Controllers\Admin\D;
+namespace App\Http\Controllers\Admin\E;
 
-use App\DataTables\PatternLessonDetailDatatable;
+use App\DataTables\KanjiContentDatatable;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\PatternLessonDetailRequest;
-use App\Models\PatternLesson;
-use App\Models\PatternChapter;
-use App\Models\PatternLessonDetail;
-use App\Models\PatternLessonFormula;
-use App\Models\PatternLessonHighlight;
-use App\Repositories\PatternLessonDetailRepository;
+use App\Http\Requests\MasterGroupRequest;
+use App\Http\Requests\KanjiContentRequest;
+use App\Models\KanjiChapter;
+use App\Models\MasterGroup;
+use App\Models\KanjiContent;
+use App\Repositories\KanjiContentRepository;
 use Illuminate\Http\Request;
 
-class PatternLessonDetailController extends Controller
+class KanjiContentController extends Controller
 {
     protected $model, $repository;
     public function __construct()
     {
-        $this->model = new PatternLessonDetail();
-        $this->repository = new PatternLessonDetailRepository();
+        $this->model = new KanjiContent();
+        $this->repository = new KanjiContentRepository();
     }
 
-    protected $redirectAfterSave = 'lesson-detail-index';
-    protected $moduleName = 'Pattern Lesson Detail';
+    protected $redirectAfterSave = 'kanji-contents-index';
+    protected $moduleName = 'Kanji Content';
 
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(PatternLessonDetailDatatable $datatable, $did)
+    public function index(KanjiContentDatatable $datatable, $did)
     {
-        return $datatable->with('id', $did)->render('backend.pattern.lessons.details.index');
+        return $datatable->with('id', $did)->render('backend.kanji.contents.index');
     }
 
     /**
@@ -42,8 +41,9 @@ class PatternLessonDetailController extends Controller
      */
     public function create()
     {
-        $lessons = PatternLesson::where('is_active', 1)->get();
-        return view('backend.pattern.lessons.details.form', compact('lessons'));
+        $chapters = KanjiChapter::get();
+        $type = "new";
+        return view('backend.kanji.contents.form', compact('chapters', 'type'));
     }
 
     /**
@@ -52,13 +52,10 @@ class PatternLessonDetailController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(PatternLessonDetailRequest $request, $id)
+    public function store(KanjiContentRequest $request, $id)
     {
-        // foreach ($request['highlights'] as $key => $value) {
-        //     dd($value);
-        // }
-        dd($request);
         $param = $request->all();
+        // dd($param);
         $saveData = $this->repository->create($param);
         flashDataAfterSave($saveData, $this->moduleName);
 
@@ -87,16 +84,14 @@ class PatternLessonDetailController extends Controller
         if (isOnlyDataOwned()) {
             $data = $this->model
                 ->where('created_by', '=', user_info('id'))
-                ->where('id', '=', $did)
+                ->where('id', '=', $id)
                 ->firstOrFail();
         } else {
             $data = $this->model->findOrFail($did);
         }
-        // dd($did);
-        $chapters = PatternChapter::where('is_active', 1)->get();
-        $highlights = PatternLessonHighlight::where('pattern_lesson_detail_id', $did)->get();
-        $formulas = PatternLessonFormula::where('pattern_lesson_detail_id', $did)->get();
-        return view('backend.pattern.lessons.details.edit-form', compact('data', 'highlights', 'formulas'));
+        $chapters = KanjiChapter::get();
+        $type = "update";
+        return view('backend.kanji.contents.form', compact('data', 'chapters', 'type'));
     }
 
     /**
@@ -106,11 +101,11 @@ class PatternLessonDetailController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id, $did)
+    public function update(Request $request, $id)
     {
-
         $param = $request->all();
-        $saveData = $this->repository->update($param, $id, $did);
+
+        $saveData = $this->repository->update($param, $id);
         flashDataAfterSave($saveData, $this->moduleName);
 
         return redirect()->route($this->redirectAfterSave, $id);

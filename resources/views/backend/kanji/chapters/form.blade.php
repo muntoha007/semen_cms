@@ -27,7 +27,8 @@ $title = @$data ? 'Edit' : 'Add New';
                                             placeholder="Name">
                                         {!! $errors->first('name', '<label class="help-block error-validation">:message</label>') !!}
                                     </div>
-
+                                </div>
+                                <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="master_group_id">Master Group</label>
                                         <select name="master_group_id" id="master_group_id" class="form-control">
@@ -41,14 +42,14 @@ $title = @$data ? 'Edit' : 'Add New';
                                         {!! $errors->first('master_group_id', '<label class="help-block error-validation">:message</label>') !!}
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                {{-- <div class="col-md-6">
                                     <div class="form-group input-group">
                                         <label for="exampleInputFile2">Image</label>
                                         <input type="file" class="form-control {{ hasErrorField($errors,'image') }} dropify" data-errors-position="outside" name="image" data-default-file="{{ env('CLOUD_S3_URL') . @$data->image }}"
                                                data-height="200" data-max-file-size="2M" data-allowed-file-extensions="jpg jpeg png gif"  {{ ($type == 'new' ? 'required' : '') }}>
                                     </div>
                                     {!! $errors->first('image', '<label class="help-block error-validation">:message</label>') !!}
-                                </div>
+                                </div> --}}
                             </div>
 
                             <button type="submit" class="btn btn-info btn-fw btn-lg mr-2">Submit</button>

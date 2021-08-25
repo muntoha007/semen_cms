@@ -25,7 +25,7 @@ class KanjiMiniCourseRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required|unique:kanji_mini_courses,title',
+            'title' => 'required',
             'kanji_chapter_id' => 'required',
         ];
     }

@@ -25,8 +25,8 @@ class PatternMiniCourseRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required|unique:pattern_mini_courses,title',
-            'pattern_lesson_id' => 'required',
+            'title' => 'required',
+            'master_group_id' => 'required',
         ];
     }
 

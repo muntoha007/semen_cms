@@ -2,7 +2,7 @@
 
 namespace App\DataTables;
 
-use App\Models\PatternCourse;
+use App\Models\KanjiContent;
 use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
@@ -11,7 +11,7 @@ use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Html\Editor\Editor;
 // use DB;
 
-class PatternCourseDatatable extends DataTable
+class KanjiContentDatatable extends DataTable
 {
     /**
      * Build DataTable class.
@@ -37,7 +37,7 @@ class PatternCourseDatatable extends DataTable
                 return $data->updated_at->format('Y-m-d'); // human readable format
             })
             ->addColumn('action', function ($data) {
-                $edit_url = route('pattern-courses.edit', $data->id);
+                $edit_url = route('kanji-contents-edit', [$data->kanji_chapter_id, $data->id]);
 
                 return view('partials.action-button')->with(
                     compact('edit_url')
@@ -51,21 +51,24 @@ class PatternCourseDatatable extends DataTable
      * @param \App\Role $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(PatternCourse $model)
+    public function query(KanjiContent $model)
     {
+        // dd($this->id);
         // DB::statement(DB::raw('set @rownum=0'));
         return $model->newQuery()
             // ->where('slug','!=','super-admin')
             ->select([
-                'pattern_courses.id',
-                'pattern_courses.code',
-                'pattern_courses.title',
-                'pattern_courses.test_time',
-                'pattern_courses.is_active',
-                'pattern_courses.created_at',
-                'pattern_courses.updated_at',
+                'kanji_contents.id',
+                'kanji_contents.code',
+                'kanji_contents.name',
+                'kanji_contents.kanji_chapter_id',
+                'kanji_contents.created_at',
+                'kanji_contents.updated_at',
+                'kanji_chapters.name as chapter_name',
                 DB::raw('row_number() over () AS rownum'),
-            ]);
+            ])
+            ->join('kanji_chapters', 'kanji_chapters.id', '=', 'kanji_contents.kanji_chapter_id')
+            ->where('kanji_contents.kanji_chapter_id', '=', $this->id);;
     }
 
     /**
@@ -108,11 +111,10 @@ class PatternCourseDatatable extends DataTable
                 ->title('#')
                 ->searchable(false),
             // Column::make('code'),
-            Column::make('title')->title('Judul'),
-            Column::make('test_time')->title('Waktu Test'),
-            Column::computed('is_active')->title('Status'),
-            // Column::make('created_at'),
-            // Column::make('updated_at'),
+            Column::make('name'),
+            Column::make('chapter_name')->name('kanji_chapters.name')->title('Chapter'),
+            Column::make('created_at'),
+            Column::make('updated_at'),
             Column::computed('action')
                 ->visible($hasAction)
                 ->exportable(false)
@@ -129,6 +131,6 @@ class PatternCourseDatatable extends DataTable
      */
     protected function filename()
     {
-        return 'PatternCourse_' . date('YmdHis');
+        return 'KanjiContent_' . date('YmdHis');
     }
 }

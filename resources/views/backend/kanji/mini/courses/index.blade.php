@@ -1,12 +1,12 @@
 @extends('layouts.master')
-@section('title', 'Kanji Mini Courses List')
+@section('title', 'Daftar Level Mini kanji')
 @section('content')
     <div class="content-wrapper">
         <div class="row">
             <div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title text-center table-title">List Kanji Mini Courses</h4>
+                        <h4 class="card-title text-center table-title">Daftar Level Mini kanji</h4>
                         @isPermitted('kanji-mini-courses.create')
                         <div class="form-group">
                             <a href="{{ route('kanji-mini-courses.create') }}" type="button" class="btn btn-outline-info btn-rounded btn-fw btn-sm">

@@ -1,15 +1,15 @@
 @extends('layouts.master')
 @php
-$title = @$data ? 'Edit' : 'Add New';
+$title = @$data ? 'Edit' : 'Tambah';
 @endphp
-@section('title', 'Pattern Course ' . $title)
+@section('title', 'Pola Test ' . $title)
 @section('content')
     <div class="content-wrapper">
         <div class="row">
             <div class="col-12 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">{{ $title }} Pattern Course</h4>
+                        <h4 class="card-title">{{ $title }} Pola Test</h4>
                         <br>
                         <form class="forms-sample"
                             action="{{ @$data ? route('pattern-courses.update', $data->id) : route('pattern-courses.store') }}"
@@ -19,9 +19,9 @@ $title = @$data ? 'Edit' : 'Add New';
                                 <input type="hidden" name="_method" value="put">
                             @endif
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="title">Title</label>
+                                        <label for="title">Judul</label>
                                         <input type="text" class="form-control {{ hasErrorField($errors, 'title') }}"
                                             id="title" name="title" value="{{ old('title', @$data->title) }}"
                                             placeholder="Title">
@@ -44,7 +44,15 @@ $title = @$data ? 'Edit' : 'Add New';
 
                                     </div>
                                 </div> --}}
-                                <div class="col-md-6">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="test_time">Waktu Test</label>
+                                        <input type="number" name="test_time" id="test_time" class="form-control"
+                                            value="{{ old('test_time') ?? @$data->test_time }}" required>
+                                        {!! $errors->first('test_time', '<label class="help-block error-validation">:message</label>') !!}
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="is_active">Status</label>
                                         <select name="is_active" id="is_active" class="form-control">

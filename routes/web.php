@@ -110,6 +110,14 @@ Route::group(['middleware' => ['sentinelAuth','checkAccess'],'namespace' => 'Adm
     Route::resource('master-groups', 'E\MasterGroupController')->except('show');
 
     Route::resource('kanji-chapters', 'E\KanjiChapterController')->except('show');
+
+    Route::get('kanji-chapters/{id}/content-index', 'E\KanjiContentController@index')->name('kanji-contents-index');
+    Route::get('kanji-chapters/{id}/contents', 'E\KanjiContentController@create')->name('kanji-contents-create');
+    Route::post('kanji-chapters/{id}/contents', 'E\KanjiContentController@store')->name('kanji-contents-store');
+    Route::get('kanji-chapters/{id}/content-edit/{did}', 'E\KanjiContentController@edit')->name('kanji-contents-edit');
+    Route::put('kanji-chapters/{id}/content-edit/{did}', 'E\KanjiContentController@update')->name('kanji-contents-update');
+
+    // Route::resource('kanji-contents', 'E\KanjiContentController')->except('show');
     Route::resource('kanji-educations', 'E\KanjiEducationController')->except('show');
     Route::resource('kanji-samples', 'E\KanjiSampleController')->except('show');
     Route::resource('kanji-courses', 'E\KanjiCourseController')->except('show');

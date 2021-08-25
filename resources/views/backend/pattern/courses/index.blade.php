@@ -1,12 +1,12 @@
 @extends('layouts.master')
-@section('title', 'Pattern Courses List')
+@section('title', 'Daftar Pola Test')
 @section('content')
     <div class="content-wrapper">
         <div class="row">
             <div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title text-center table-title">List Pattern Courses</h4>
+                        <h4 class="card-title text-center table-title">Daftar Pola Test</h4>
                         @isPermitted('pattern-courses.create')
                         <div class="form-group">
                             <a href="{{ route('pattern-courses.create') }}" type="button" class="btn btn-outline-info btn-rounded btn-fw btn-sm">
