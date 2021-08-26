@@ -115,11 +115,11 @@ class VerbChangeDatatable extends DataTable
                 ->searchable(false),
             // Column::make('code'),
             Column::make('name')->title('Judul'),
-            Column::make('word_jpn')->title('Kata Jepang'),
-            Column::make('word_romanji')->title('Kata Romanji'),
+            // Column::make('word_jpn')->title('Kata Jepang'),
+            // Column::make('word_romanji')->title('Kata Romanji'),
             Column::make('is_active')->title('Status'),
-            Column::make('created_at'),
-            Column::make('updated_at'),
+            // Column::make('created_at'),
+            // Column::make('updated_at'),
             Column::computed('action')
                 ->visible($hasAction)
                 ->exportable(false)

@@ -112,7 +112,7 @@ class VocabularyCourseQuestionDatatable extends DataTable
             // Column::make('code'),
             Column::make('question_idn')->title('Pertanyaan'),
             // Column::make('question_romanji')->title('Pertanyaan Romaji'),
-            Column::make('title')->title('Level'),
+            Column::make('title')->title('Level')->name('vocabulary_courses.title'),
             Column::computed('is_active')->title('Status'),
             // Column::make('created_at'),
             // Column::make('updated_at'),

@@ -26,11 +26,11 @@ class VerbChangeRequest extends FormRequest
     {
         return [
             "name" => 'required',
-            "word_jpn" => 'required',
-            "word_romanji" => 'required',
-            "word_idn" => 'required',
+            // "word_jpn" => 'required',
+            // "word_romanji" => 'required',
+            // "word_idn" => 'required',
             "is_active" => 'required',
-            "word_romanji_highlight" => 'required',
+            // "word_romanji_highlight" => 'required',
             "master_verb_word_id" => 'required',
         ];
     }
