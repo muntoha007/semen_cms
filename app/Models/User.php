@@ -22,9 +22,8 @@ class User extends Model
                 'users.id as user_id',
                 'roles.id as role_id',
                 'users.email',
-                'users.user_image',
-                'users.first_name',
-                'users.last_name',
+                'users.full_name',
+                'users.username',
                 'roles.slug as role_slug',
                 'roles.name as role_name'
             ])
@@ -40,9 +39,8 @@ class User extends Model
                 'users.id as user_id',
                 'roles.id as role_id',
                 'users.email',
-                'users.user_image',
-                'users.first_name',
-                'users.last_name',
+                'users.full_name',
+                'users.username',
                 'roles.slug as role_slug',
                 'roles.name as role_name'
             ]);

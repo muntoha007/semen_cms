@@ -11,7 +11,7 @@
                             @if(@getSettings()->logo != '')
                                 <img src="{{ @get_file(getSettings()->logo,'original') }}" class="css-class" style="width:16vw">
                             @else
-                                {{ Html::image('images/logo-perapera-blue.jpg', 'logo', array('class' => 'css-class','style' => 'width:23vw')) }}
+                                {{-- {{ Html::image('images/logo-perapera-blue.jpg', 'logo', array('class' => 'css-class','style' => 'width:23vw')) }} --}}
                             @endif
                         </div>
                         {{-- <h4>Hello! let's get started</h4>

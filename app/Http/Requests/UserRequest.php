@@ -39,6 +39,8 @@ class UserRequest extends FormRequest
             'first_name' => 'required',
             'last_name' => 'required',
             'role' => 'required',
+            'hub' => 'required',
+            'username' => 'required',
         ];
 
         return $rules;

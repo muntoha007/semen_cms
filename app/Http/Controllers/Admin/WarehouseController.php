@@ -2,38 +2,35 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests\UserRequest;
-use App\Models\Role;
-use App\Models\User;
-use App\Repositories\UserRepository;
+use App\DataTables\WarehouseDatatable;
 use App\Http\Controllers\Controller;
-use App\DataTables\UserDatatable;
-use App\Models\Hub;
-use Sentinel;
+use App\Http\Requests\WarehouseRequest;
+use App\Models\Province;
+use App\Models\Regency;
+use App\Models\Warehouse;
+use App\Repositories\WarehouseRepository;
+use Illuminate\Http\Request;
 
-class UserController extends Controller
+class WarehouseController extends Controller
 {
-
     protected $model, $repository;
 
     public function __construct()
     {
-        $this->model = new User();
-        $this->repository = new UserRepository();
-        $this->role = new Role();
+        $this->model = new Warehouse();
+        $this->repository = new WarehouseRepository();
     }
 
-    protected $redirectAfterSave = 'user.index';
-    protected $moduleName = 'User';
-
+    protected $redirectAfterSave = 'warehouse.index';
+    protected $moduleName = 'Warehouse/Gudang';
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(UserDatatable $dataTable)
+    public function index(WarehouseDatatable $dataTable)
     {
-        return $dataTable->render('backend.user.index');
+        return $dataTable->render('backend.warehouse.index');
     }
 
     /**
@@ -43,9 +40,9 @@ class UserController extends Controller
      */
     public function create()
     {
-        $roles = $this->role->getRoles();
-        $hubs = Hub::get();
-        return view('backend.user.form',compact('roles','hubs'));
+        $provinces = Province::get();
+        $regencies = Regency::get();
+        return view('backend.warehouse.form', compact('provinces', 'regencies'));
     }
 
     /**
@@ -54,14 +51,14 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(UserRequest $request)
+    public function store(WarehouseRequest $request)
     {
+        //    dd($request);
         $param = $request->all();
-        $saveData = $this->repository->createNewUser($param);
-        flashDataAfterSave($saveData,$this->moduleName);
+        $saveData = $this->repository->create($param);
+        flashDataAfterSave($saveData, $this->moduleName);
 
         return redirect()->route($this->redirectAfterSave);
-
     }
 
     /**
@@ -83,16 +80,18 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $roles = $this->role->getRoles();
-        if(isOnlyDataOwned()){
-            $data = $this->model->getUserRole($id)
-                ->where('users.created_by','=',user_info('id'))
+        if (isOnlyDataOwned()) {
+            $data = $this->model
+                ->where('created_by', '=', user_info('id'))
+                ->where('id', '=', $id)
                 ->firstOrFail();
         } else {
-            $data = $this->model->getUserRole($id)->firstOrFail();
+            $data = $this->model->findOrFail($id);
         }
 
-        return view('backend.user.form', compact('data','roles'));
+        $provinces = Province::get();
+        $regencies = Regency::get();
+        return view('backend.warehouse.form', compact('data', 'provinces', 'regencies'));
     }
 
     /**
@@ -102,11 +101,11 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UserRequest $request, $id)
+    public function update(Request $request, $id)
     {
         $param = $request->all();
-        $saveData = $this->repository->updateUser($param, $id);
-        flashDataAfterSave($saveData,$this->moduleName);
+        $saveData = $this->repository->update($param, $id);
+        flashDataAfterSave($saveData, $this->moduleName);
 
         return redirect()->route($this->redirectAfterSave);
     }
@@ -119,6 +118,6 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        $this->repository->deleteUser($id);
+        $this->repository->delete($id);
     }
 }

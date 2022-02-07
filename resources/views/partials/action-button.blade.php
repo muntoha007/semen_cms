@@ -205,3 +205,18 @@
         <i class="material-icons">check</i>
     </a>
 @endif
+@if( isset( $assign )|| isset($dataid))
+    <a href="javascript:void(0)" id="assign" class="assign btn btn-primary btn-xs {!! empty( $assign ) ? 'disabled' : '' !!}" title="Assign Driver " data-id={{$dataid}} data-toggle="tooltip" data-original-title="Assign Driver" data-href="{!! empty( $assign ) ? 'javascript:void(0)' : $assign !!}" data-button="assign">
+        <i class="material-icons">directions_car</i>
+    </a>
+@endif
+@if( isset( $vehicle_driver )|| isset($vid))
+    <a href="javascript:void(0)" id="vehicle_driver" class="vehicle_driver btn btn-primary btn-xs {!! empty( $vehicle_driver ) ? 'disabled' : '' !!}" title="Assign Vehicle to Driver " data-id={{$vid}} data-toggle="tooltip" data-original-title="Assign Vehicle to Driver" data-href="{!! empty( $vehicle_driver ) ? 'javascript:void(0)' : $vehicle_driver !!}" data-button="vehicle_driver">
+        <i class="material-icons">people</i>
+    </a>
+@endif
+@if( isset( $delete_assign ) && checkPermissionAccessByUrl($delete_assign,'delete'))
+    <a href="javascript:void(0)" id="deleteAssign" class="deleteData btn btn-warning btn-xs {!! empty( $delete_assign ) ? 'disabled' : '' !!}" title="Delete Assign" data-toggle="tooltip" data-original-title="Delete Assign" data-href="{!! empty( $delete_assign ) ? 'javascript:void(0)' : $delete_assign !!}" data-button="delete">
+        <i class="material-icons">remove_circle</i>
+    </a>
+@endif

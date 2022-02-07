@@ -18,11 +18,13 @@ class UserRepository
 {
     public function createNewUser($data)
     {
+        // dd($data);
         if(@!$data['password']){
-            $data['password'] = Str::random(6);
+            $data['password'] = "admin123";
         }
 
         $credentials = [
+            'username' => $data['username'],
             'email' => $data['email'],
             'password' => $data['password'],
         ];
@@ -30,17 +32,21 @@ class UserRepository
         $clonePassword = $data['password'];
 
         $user = Sentinel::register($credentials);
-
+// dd($user);
         if(isset($data['role'])){
             Sentinel::findRoleBySlug($data['role'])->users()->attach(Sentinel::findById($user->id));
         }
         $activation = Activation::create($user);
+        // dd($data);
 
         $users = User::find($user->id);
         $users->email = $data['email'];
         $users->password = Hash::make($data['password']);
         $users->first_name = $data['first_name'];
         $users->last_name = $data['last_name'];
+        // $users->full_name = $data['first_name'] + $data['last_name'];
+        $users->username = $data['username'];
+        $users->hub_id = $data['hub'];
         if (!empty($data['user_image'])) {
             $uploadImage = upload_file($data['user_image'], 'uploads/users/');
             $users->user_image = $uploadImage['original'];
@@ -67,8 +73,9 @@ class UserRepository
         $user = User::find($id);
         $role = Role::where('slug','=', $data['role'])->first();
         $user->email = $data['email'];
-        $user->first_name = $data['first_name'];
-        $user->last_name = $data['last_name'];
+        $user->full_name = $data['full_name'];
+        $user->username = $data['username'];
+        $user->hub_id = $data['hub'];
 
         if (!empty($data['user_image'])) {
             @delete_file($user->user_image);

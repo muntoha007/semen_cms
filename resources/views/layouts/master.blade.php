@@ -261,7 +261,58 @@
             });
         });
 
-        $('[data-toggle="tooltip"]').tooltip()
+        $(document).on('click','.assign',function () {
+            let $this = $(this);
+            let did = $this.attr('data-id');
+            $('#delivery_id').remove()
+            $('.forms-sample').append('<input type="hidden" id="delivery_id" name="delivery_id" value="'+did+'">')
+            $('#assign-modal').modal("show");
+        });
+
+        $(document).on('click','.vehicle_driver',function () {
+            let $this = $(this);
+            let did = $this.attr('data-id');
+            $('#vehicle_id').remove()
+            $('.forms-sample').append('<input type="hidden" id="vehicle_id" name="vehicle_id" value="'+did+'">')
+            $('#assign-driver-modal').modal("show");
+        });
+
+        $(document).on('click','.deleteAssign',function () {
+            let $this = $(this);
+            let url = $this.attr('data-href');
+            let token = $('meta[name="csrf-token"]').attr('content');
+
+            let data = {
+                _token : token,
+                _method : 'DELETE'
+            };
+
+            $.confirm({
+                title: 'Confirmation!',
+                theme: 'material',
+                content: 'Are you sure to delete this data ?',
+                buttons: {
+                    confirm: function () {
+                        AjaxHandler.post(
+                            url,
+                            data,
+                            function () {
+                                toastr.success( 'success deleted' );
+
+                            },
+                            function () {
+                                toastr.error( 'failed delete' );
+                            }
+                        );
+                    },
+                    cancel: function () {
+
+                    }
+                }
+            });
+        });
+
+        $('[data-toggle="tooltip"]').tooltip();
     });
 </script>
 @yield('scripts')

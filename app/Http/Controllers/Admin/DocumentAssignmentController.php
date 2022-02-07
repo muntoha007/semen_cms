@@ -2,38 +2,33 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests\UserRequest;
-use App\Models\Role;
-use App\Models\User;
-use App\Repositories\UserRepository;
+use App\DataTables\DocumentAssignmentDatatable;
 use App\Http\Controllers\Controller;
-use App\DataTables\UserDatatable;
-use App\Models\Hub;
-use Sentinel;
+use App\Http\Requests\DocumentAssignmentRequest;
+use App\Models\DocumentAssignment;
+use App\Repositories\DocumentAssignmentRepository;
+use Illuminate\Http\Request;
 
-class UserController extends Controller
+class DocumentAssignmentController extends Controller
 {
-
     protected $model, $repository;
 
     public function __construct()
     {
-        $this->model = new User();
-        $this->repository = new UserRepository();
-        $this->role = new Role();
+        $this->model = new DocumentAssignment();
+        $this->repository = new DocumentAssignmentRepository();
     }
 
-    protected $redirectAfterSave = 'user.index';
-    protected $moduleName = 'User';
-
+    protected $redirectAfterSave = 'document-assignment.index';
+    protected $moduleName = 'DocumentAssignment';
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(UserDatatable $dataTable)
+    public function index(DocumentAssignmentDatatable $dataTable)
     {
-        return $dataTable->render('backend.user.index');
+        return $dataTable->render('backend.document-assignment.index');
     }
 
     /**
@@ -43,9 +38,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        $roles = $this->role->getRoles();
-        $hubs = Hub::get();
-        return view('backend.user.form',compact('roles','hubs'));
+        return view('backend.document-assignment.form');
     }
 
     /**
@@ -54,14 +47,14 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(UserRequest $request)
+    public function store(DocumentAssignmentRequest $request)
     {
+        //    dd($request);
         $param = $request->all();
-        $saveData = $this->repository->createNewUser($param);
-        flashDataAfterSave($saveData,$this->moduleName);
+        $saveData = $this->repository->create($param);
+        flashDataAfterSave($saveData, $this->moduleName);
 
         return redirect()->route($this->redirectAfterSave);
-
     }
 
     /**
@@ -83,16 +76,16 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $roles = $this->role->getRoles();
-        if(isOnlyDataOwned()){
-            $data = $this->model->getUserRole($id)
-                ->where('users.created_by','=',user_info('id'))
+        if (isOnlyDataOwned()) {
+            $data = $this->model
+                ->where('created_by', '=', user_info('id'))
+                ->where('id', '=', $id)
                 ->firstOrFail();
         } else {
-            $data = $this->model->getUserRole($id)->firstOrFail();
+            $data = $this->model->findOrFail($id);
         }
 
-        return view('backend.user.form', compact('data','roles'));
+        return view('backend.document-assignment.form', compact('data'));
     }
 
     /**
@@ -102,11 +95,11 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UserRequest $request, $id)
+    public function update(Request $request, $id)
     {
         $param = $request->all();
-        $saveData = $this->repository->updateUser($param, $id);
-        flashDataAfterSave($saveData,$this->moduleName);
+        $saveData = $this->repository->update($param, $id);
+        flashDataAfterSave($saveData, $this->moduleName);
 
         return redirect()->route($this->redirectAfterSave);
     }
@@ -119,6 +112,6 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        $this->repository->deleteUser($id);
+        $this->repository->delete($id);
     }
 }

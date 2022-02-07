@@ -62,8 +62,9 @@ if (! function_exists('get_currency')) {
 }
 
 if (! function_exists('create_date_from_format')) {
-    function create_date_from_format($text = '',$format = 'd-m-Y H:i') {
-        $date = \Carbon\Carbon::createFromFormat($format,$text);
+    function create_date_from_format() {
+        $date = \Carbon\Carbon::now();
+        $date= \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('Ymd');
 
         return $date;
     }
@@ -507,16 +508,18 @@ if (! function_exists('checkPermissionAccessRouteName')) {
     function checkPermissionAccessRouteName($middlewareName = 'checkAccess',$method = 'crud')
     {
         $collection = Route::getRoutes();
-
+// dd($collection);
         $routes = [];
 
         $arrayMethod = ['create','update','destroy','show','edit','store'];
 
         foreach($collection as $route) {
+            // dd($route)->getAction()['middleware'];
             $action = $route->getActionName();
             $uri = $route->uri;
             $routeName = $route->getName();
             $middlewareRouteName = @$route->getAction()['middleware'];
+            // dd($middlewareRouteName, $middlewareName);
             $routeActionMethod = $route->getActionMethod();
             $isInMiddlewareCheckAccess = in_array($middlewareName, @$middlewareRouteName);
             $parentRouteName = explodeByLastDelimiter($routeName);

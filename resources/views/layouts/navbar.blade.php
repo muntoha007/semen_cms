@@ -4,7 +4,7 @@
             @if(@getSettings()->logo != '')
                 <img src="{{ @get_file(@getSettings()->logo,'original') }}" class="css-class">
             @else
-                {{ Html::image('images/logo-perapera-blue.jpg', 'logo', array('class' => 'css-class')) }}
+                {{ Html::image('images/no-image.png', 'logo', array('class' => 'css-class')) }}
             @endif
         </a>
         <a class="navbar-brand brand-logo-mini" href="{{ route('dashboard') }}">
