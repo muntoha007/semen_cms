@@ -57,7 +57,6 @@ class DeliveryOrderController extends Controller
      */
     public function store(DeliveryOrderRequest $request)
     {
-        //    dd($request);
         $param = $request->all();
         $saveData = $this->repository->create($param);
         flashDataAfterSave($saveData, $this->moduleName);

@@ -30,7 +30,7 @@ $title = @$data ? 'Edit' : 'Tambah';
                                         {!! $errors->first('booking_code', '<label class="help-block error-validation">:message</label>') !!}
                                     </div>
                                     <div class="form-group">
-                                        <label for="number_reference">Nomor Ref</label>
+                                        <label for="number_reference">Do number</label>
                                         <input type="text"
                                             class="form-control {{ hasErrorField($errors, 'number_reference') }}"
                                             id="number_reference" name="number_reference"
@@ -215,6 +215,74 @@ $title = @$data ? 'Edit' : 'Tambah';
                 $('#pid' + button_id + '').remove();
             });
 
+            $(document).on('change','#do_file',function(event){
+                event.preventDefault();
+                $this = $(this);
+                getBase64(event);
+            });
+
+            function getBase64(event) {
+               var input = event.target;
+                if ('files' in input && input.files.length > 0) {
+                    let file = input.files[0];
+                    var reader = new FileReader();
+                    reader.readAsDataURL(file);
+                    reader.onload = function () {
+                        var base64result = reader.result.split(',')[1];
+                        sendFile(base64result);
+                        console.log(base64result);
+                    };
+                    reader.onerror = function (error) {
+                        console.log('Error: ', error);
+                    };
+                }
+            }
+
+            function sendFile(file){
+                var dataPayload = {
+                    'do_file' : file
+                };
+                $.ajax({
+                    headers: { 
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json' 
+                    },
+                    url: '{{env('API_CMS_BASE_URL')}}/extract-file',
+                    type: 'POST',
+                    dataType: 'json',
+                    beforeSend: function() {
+                        toastr.options.timeOut = 30000;
+                        toastr.options.extendedTimeOut = 60000;
+                        toastr.options.positionClass = "toast-top-center";
+                        toastr.info('Estrak dokumen sedang diproses, Silahkan tunggu ...');
+                    },
+                    data: JSON.stringify(dataPayload),
+                    success: function( data, status, xhr ) {
+                        console.log(data.data);
+                        if ( status === 'success' ) {
+                            mappingForm(data.data);
+                            toastr.clear();
+                        }
+                    },
+                    error: function( data, status ) {
+                        toastr.clear();
+                        toastr.options.timeOut = 30000;
+                        toastr.options.extendedTimeOut = 60000;
+                        toastr.options.positionClass = "toast-top-center";
+                        toastr.error(data.responseJSON.status_message);
+                    }
+                });
+            }
+
+            function mappingForm(data){
+                $('#booking_code').val(data.booking_code);
+                $('#store').val(data.store);
+                $('#distributor').val(data.distributor);
+                $('#booking_date').val(data.booking_date);
+                $('#expired_date').val(data.expired_date);
+                $('#quantity').val(data.quantity);
+                $('#number_reference').val(data.do_number);
+            }
 
         });
     </script>

@@ -14,6 +14,12 @@ class DeliveryOrderRepository
 {
     public function create($data)
     {
+
+        $pathLocation = null;
+        if(@$data['do_file']){
+            $pathLocation = $this->uploadFile($data);
+        }
+
         $ldate = date('Y-m-d H:i:s');
         $datebook =  date("Y-m-d H:i:s", strtotime($data['booking_date']));
         $dateexp =  date("Y-m-d H:i:s", strtotime($data['expired_date']));
@@ -47,6 +53,36 @@ class DeliveryOrderRepository
         }
 
         return $do;
+    }
+
+    public function sendUploadFFile($payload){
+        $pathLocation = null;
+        $client = new \GuzzleHttp\Client();
+        $url = env('API_CMS_BASE_URL')."/upload-file";
+        $response = $client->request('POST', $url, [
+            'headers' => [
+                'Content-Type' => 'application/json',
+                'Accept' => 'application/json',
+            ],
+            'json' => $payload
+        ]);
+        $jsonData = $response->getBody()->getContents();
+        $arraydata = (array)json_decode($jsonData);
+        if($arraydata['status_message'] == 'Success'){
+            $pathLocation = $arraydata['data']->file_name;
+        }
+
+        return $pathLocation;
+    }
+
+    public function uploadFile($data){
+        $fileExt = $data['do_file']->getClientOriginalExtension();
+        $file = base64_encode(file_get_contents($data['do_file']));
+        $payload = [];
+        $payload['file_type'] = $fileExt;
+        $payload['file'] = $file;
+
+        return $this->sendUploadFFile($payload);
     }
 
     public function update($data, $id)
