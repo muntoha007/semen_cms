@@ -141,7 +141,7 @@ $title = @$data ? 'Edit' : 'Tambah';
                                                 <label for="quantity">Jumlah</label>
                                                 <input type="number"
                                                     class="form-control {{ hasErrorField($errors, 'quantity') }}"
-                                                    id="quantity" name="products[0][quantity]" value="" placeholder="Jumlah"
+                                                    id="quantity" name="products[0][quantity]" value="{{ old('products[0][quantity]') }}" placeholder="Jumlah"
                                                     required>
                                                 {!! $errors->first('quantity', '<label class="help-block error-validation">:message</label>') !!}
                                             </div>
@@ -243,9 +243,10 @@ $title = @$data ? 'Edit' : 'Tambah';
                     'do_file' : file
                 };
                 $.ajax({
-                    headers: { 
+                    headers: {
                         'Accept': 'application/json',
-                        'Content-Type': 'application/json' 
+                        'Content-Type': 'application/json',
+                        'Access-Control-Allow-Origin': 'http://194.31.53.72:8021'
                     },
                     url: '{{env('API_CMS_BASE_URL')}}/extract-file',
                     type: 'POST',

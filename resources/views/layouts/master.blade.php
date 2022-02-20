@@ -277,6 +277,14 @@
             $('#assign-driver-modal').modal("show");
         });
 
+        $(document).on('click','.unpacking',function () {
+            let $this = $(this);
+            let did = $this.attr('data-id');
+            $('#assignment_id').remove()
+            $('.forms-sample').append('<input type="hidden" id="assignment_id" name="assignment_id" value="'+did+'">')
+            $('#unpacking-modal').modal("show");
+        });
+
         $(document).on('click','.deleteAssign',function () {
             let $this = $(this);
             let url = $this.attr('data-href');
@@ -290,7 +298,7 @@
             $.confirm({
                 title: 'Confirmation!',
                 theme: 'material',
-                content: 'Are you sure to delete this data ?',
+                content: 'Are you sure to create new DO this data ?',
                 buttons: {
                     confirm: function () {
                         AjaxHandler.post(
@@ -302,6 +310,41 @@
                             },
                             function () {
                                 toastr.error( 'failed delete' );
+                            }
+                        );
+                    },
+                    cancel: function () {
+
+                    }
+                }
+            });
+        });
+
+        $(document).on('click','.newdo',function () {
+            let $this = $(this);
+            let url = $this.attr('data-href');
+            let token = $('meta[name="csrf-token"]').attr('content');
+
+            let data = {
+                _token : token,
+                _method : 'POST'
+            };
+
+            $.confirm({
+                title: 'Confirmation!',
+                theme: 'material',
+                content: 'Are you sure to delete this data ?',
+                buttons: {
+                    confirm: function () {
+                        AjaxHandler.post(
+                            url,
+                            data,
+                            function () {
+                                toastr.success( 'success create' );
+
+                            },
+                            function () {
+                                toastr.error( 'failed create' );
                             }
                         );
                     },

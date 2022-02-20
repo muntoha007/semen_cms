@@ -5,7 +5,11 @@ namespace App\Repositories;
 use App\Models\Assignment;
 use App\Models\DeliveryOrder;
 use App\Models\DeliveryOrderDetail;
+use App\Models\DocumentAssignment;
 use App\Models\DriverVehicle;
+use App\Models\TrackingLog;
+use GuzzleHttp\Client;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use PhpParser\Node\Expr\Assign;
@@ -14,11 +18,12 @@ class DeliveryOrderRepository
 {
     public function create($data)
     {
-
         $pathLocation = null;
-        if(@$data['do_file']){
+        if (@$data['do_file']) {
             $pathLocation = $this->uploadFile($data);
         }
+
+        // dd($pathLocation);
 
         $ldate = date('Y-m-d H:i:s');
         $datebook =  date("Y-m-d H:i:s", strtotime($data['booking_date']));
@@ -27,7 +32,7 @@ class DeliveryOrderRepository
         $do = new DeliveryOrder();
         $do->booking_code = $data['booking_code'];
         $do->number_reference = $data['number_reference'];
-        $do->do_file = isset($data['do_file']);
+        $do->do_file = $pathLocation;
         $do->distributor = $data['distributor'];
         $do->store = $data['store'];
         $do->notes = $data['notes'];
@@ -55,10 +60,11 @@ class DeliveryOrderRepository
         return $do;
     }
 
-    public function sendUploadFFile($payload){
+    public function sendUploadFFile($payload)
+    {
         $pathLocation = null;
         $client = new \GuzzleHttp\Client();
-        $url = env('API_CMS_BASE_URL')."/upload-file";
+        $url = env('API_CMS_BASE_URL') . "/upload-file";
         $response = $client->request('POST', $url, [
             'headers' => [
                 'Content-Type' => 'application/json',
@@ -68,14 +74,15 @@ class DeliveryOrderRepository
         ]);
         $jsonData = $response->getBody()->getContents();
         $arraydata = (array)json_decode($jsonData);
-        if($arraydata['status_message'] == 'Success'){
+        if ($arraydata['status_message'] == 'Success') {
             $pathLocation = $arraydata['data']->file_name;
         }
 
         return $pathLocation;
     }
 
-    public function uploadFile($data){
+    public function uploadFile($data)
+    {
         $fileExt = $data['do_file']->getClientOriginalExtension();
         $file = base64_encode(file_get_contents($data['do_file']));
         $payload = [];
@@ -152,8 +159,8 @@ class DeliveryOrderRepository
     }
 
     // Assig Driver
-    public function assign($data){
-
+    public function assign($data)
+    {
         $do = DeliveryOrder::find($data['delivery_id']);
         $do->driver_id = $data['driver_id'];
         $do->status = "ASSIGNED";
@@ -166,16 +173,49 @@ class DeliveryOrderRepository
 
             $assign = new Assignment();
             $assign->driver_id = $data['driver_id'];
-            $assign->vehicle_id = $vehicleid;
+            $assign->vehicle_id = $vehicleid['vehicle_id'];
             $assign->delivery_order_id = $data['delivery_id'];
             $assign->status_id = 1;
             $assign->status_document = "PENDING";
+            $assign->status_handover = "PENDING";
             $assign->created_by = @user_info('username');
-            $assign->ticket_number = "TICKET-" +create_date_from_format()+"-"+$random;
+            $assign->ticket_number = "TICKET-" . create_date_from_format() . "-" . $random;
 
             $assign->save();
+
+            // if success create document assignment and logs
+            if ($assign) {
+                $docAssign = $this->createDocumentAssignment($assign->id, $do->do_file);
+                $logs = $this->createLogs($assign->id, $assign->status_id);
+            }
         }
 
         return $do;
+    }
+
+    // create default document assignment
+    public function createDocumentAssignment($assignID, $path)
+    {
+        $value = [
+            ['assignment_id' => $assignID, 'name' => 'Document Delivery Order', 'image' => $path, 'status' => 'UPLOAD', 'type' => 'DO', 'created_by' => @user_info('username'), 'status_handover' => 'PENDING'],
+            ['assignment_id' => $assignID, 'name' => 'Document SPJ', 'image' => null, 'status' => 'UNPROC', 'type' => 'SPJ', 'created_by' => @user_info('username'), 'status_handover' => 'PENDING'],
+            ['assignment_id' => $assignID, 'name' => 'Document DO Baru', 'image' => null, 'status' => 'UNPROC', 'type' => 'CP', 'created_by' => @user_info('username'), 'status_handover' => 'PENDING'],
+        ];
+
+        $docAssign = DB::table('document_assignments')->insert($value);
+    }
+
+    // create logs after update status
+    public function createLogs($assignID, $statusID)
+    {
+        $logs = new TrackingLog();
+        $logs->assignment_id = $assignID;
+        $logs->status_id = $statusID;
+        $logs->longitude = 0;
+        $logs->latitude = 0;
+        $logs->notes = "Assign to Driver by: " . @user_info('username');
+        $logs->created_by = @user_info('username');
+
+        $logs->save();
     }
 }

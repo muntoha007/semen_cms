@@ -42,6 +42,7 @@ class DeliveryOrderDatatable extends DataTable
                 $delete_url = route('delivery-order.destroy', $data->id);
                 $assign = route('assign', $data->id);
                 $dataid = $data->id;
+
                 if ($data->status == "CREATED") {
                     return view('partials.action-button')->with(
                         compact('edit_url','delete_url', 'assign', 'dataid')

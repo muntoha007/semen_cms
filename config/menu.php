@@ -36,10 +36,15 @@ return [
         'routeName' => 'delivery-order.index',
         'icon' => 'mdi mdi-send menu-icon',
     ],
-    'document-assignment' => [
-        'title' => 'Document Assignment',
-        'routeName' => 'document-assignment.index',
-        'icon' => 'mdi mdi-file-document menu-icon',
+    // 'document-assignment' => [
+    //     'title' => 'Document Assignment',
+    //     'routeName' => 'document-assignment.index',
+    //     'icon' => 'mdi mdi-file-document menu-icon',
+    // ],
+    'assignment' => [
+        'title' => 'Assignment',
+        'routeName' => 'assignment.index',
+        'icon' => 'mdi mdi-folder-move menu-icon',
     ],
     'master-setting' => [
         'title' => 'Master Setting',

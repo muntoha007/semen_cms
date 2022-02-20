@@ -166,6 +166,7 @@ return [
         Cartalyst\Sentinel\Laravel\SentinelServiceProvider::class,
         Yajra\DataTables\DataTablesServiceProvider::class,
 
+
         UniSharp\LaravelFilemanager\LaravelFilemanagerServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
 
@@ -181,6 +182,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+
 
     ],
 
@@ -239,6 +241,7 @@ return [
         'Sentinel'   => Cartalyst\Sentinel\Laravel\Facades\Sentinel::class,
 
         'Image' => Intervention\Image\Facades\Image::class,
+        // 'PDFViewer' =>
 
     ],
 

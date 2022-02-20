@@ -19,16 +19,19 @@ class DocumentAssignmentController extends Controller
         $this->repository = new DocumentAssignmentRepository();
     }
 
-    protected $redirectAfterSave = 'document-assignment.index';
+    protected $redirectAfterSave = 'documents.index';
     protected $moduleName = 'DocumentAssignment';
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(DocumentAssignmentDatatable $dataTable)
+    public function index(Request $request)
     {
-        return $dataTable->render('backend.document-assignment.index');
+        $assignID = $request->route('id');
+        $documents = DocumentAssignment::where('assignment_id', $assignID)->orderBy('id', 'ASC')->get()->toArray();
+        // dd($documents);
+        return view('backend.assignment.document.index', compact('documents'));
     }
 
     /**
@@ -38,7 +41,7 @@ class DocumentAssignmentController extends Controller
      */
     public function create()
     {
-        return view('backend.document-assignment.form');
+        // return view('backend.document-assignment.form');
     }
 
     /**
@@ -51,10 +54,10 @@ class DocumentAssignmentController extends Controller
     {
         //    dd($request);
         $param = $request->all();
-        $saveData = $this->repository->create($param);
+        $saveData = $this->repository->update($param);
         flashDataAfterSave($saveData, $this->moduleName);
 
-        return redirect()->route($this->redirectAfterSave);
+        return redirect()->route($this->redirectAfterSave, $param['assignment_id']);
     }
 
     /**
@@ -76,16 +79,16 @@ class DocumentAssignmentController extends Controller
      */
     public function edit($id)
     {
-        if (isOnlyDataOwned()) {
-            $data = $this->model
-                ->where('created_by', '=', user_info('id'))
-                ->where('id', '=', $id)
-                ->firstOrFail();
-        } else {
-            $data = $this->model->findOrFail($id);
-        }
+        // if (isOnlyDataOwned()) {
+        //     $data = $this->model
+        //         ->where('created_by', '=', user_info('id'))
+        //         ->where('id', '=', $id)
+        //         ->firstOrFail();
+        // } else {
+        //     $data = $this->model->findOrFail($id);
+        // }
 
-        return view('backend.document-assignment.form', compact('data'));
+        // return view('backend.document-assignment.form', compact('data'));
     }
 
     /**
@@ -97,11 +100,11 @@ class DocumentAssignmentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $param = $request->all();
-        $saveData = $this->repository->update($param, $id);
-        flashDataAfterSave($saveData, $this->moduleName);
+        // $param = $request->all();
+        // $saveData = $this->repository->update($param, $id);
+        // flashDataAfterSave($saveData, $this->moduleName);
 
-        return redirect()->route($this->redirectAfterSave);
+        // return redirect()->route($this->redirectAfterSave);
     }
 
     /**
@@ -112,6 +115,6 @@ class DocumentAssignmentController extends Controller
      */
     public function destroy($id)
     {
-        $this->repository->delete($id);
+        // $this->repository->delete($id);
     }
 }
